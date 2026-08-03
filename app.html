@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junglans Solutions — Precision Software Ecosystems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'canvas': '#F8F9FB',
+                        'surface': '#FFFFFF',
+                        'ink': '#08090c',
+                        'slate-soft': '#64748B',
+                        'border-soft': '#E2E8F0',
+                        'emerald-glow': '#10B981',
+                        'azure-glow': '#3B82F6',
+                        'violet-glow': '#8B5CF6',
+                        'amber-glow': '#F59E0B',
+                    },
+                    fontFamily: {
+                        'heading': ['"Space Grotesk"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                        'mono': ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FB;
+            color: #08090c;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.04em;
+        }
+
+        /* Precision Grid Background */
+        .bg-precision-grid {
+            background-image:
+                linear-gradient(rgba(8, 9, 12, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(8, 9, 12, 0.03) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02), 0 20px 40px -20px rgba(8, 9, 12, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Product Ecosystem Stage */
+        .ecosystem-stage {
+            position: relative;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -12px rgba(8, 9, 12, 0.1);
+            transition: box-shadow 0.5s ease;
+        }
+
+        .mockup-screen {
+            position: absolute;
+            inset: 0;
+            padding: 24px;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .mockup-screen.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Product Tab Button */
+        .product-tab {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .product-tab.active {
+            background: #FFFFFF;
+            border-color: #E2E8F0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .product-tab.active .tab-icon {
+            background: var(--accent-color);
+            color: #FFFFFF;
+            border-color: var(--accent-color);
+        }
+
+        .product-tab.active .tab-title {
+            color: #08090c;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Marquee */
+        .marquee {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .marquee-content {
+            flex-shrink: 0;
+            display: flex;
+            gap: 4rem;
+            animation: scroll 40s linear infinite;
+            padding-right: 4rem;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F8F9FB;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-precision-grid min-h-screen">
+
+    <!-- Header Navigation -->
+    <nav class="sticky top-0 z-50 bg-canvas/80 backdrop-blur-xl border-b border-border-soft px-6 md:px-12 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div
+                    class="w-9 h-9 bg-ink rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                    <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+                        <path d="M8 22 L12 10 L16 16 L20 8 L24 22" stroke="#10B981" stroke-width="3"
+                            stroke-linejoin="round" fill="none" />
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading font-bold text-lg leading-none tracking-tight">Junglans</span>
+                    <span class="font-mono text-[9px] text-slate-soft mt-1">SOLUTIONS</span>
+                </div>
+            </a>
+
+            <div
+                class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest text-slate-soft font-medium">
+                <a href="#ecosystem" class="hover:text-ink transition">Ecosystem</a>
+                <a href="#projects" class="hover:text-ink transition">Showcase</a>
+                <a href="#capabilities" class="hover:text-ink transition">Capabilities</a>
+                <a href="#enterprise" class="hover:text-ink transition">Enterprise</a>
+            </div>
+
+            <a href="#contact"
+                class="font-mono text-xs bg-ink text-white px-5 py-2.5 rounded-lg font-bold hover:bg-slate-soft transition flex items-center gap-2">
+                Contact Sales
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+        class="relative px-6 md:px-12 pt-20 pb-24 min-h-[70vh] flex items-center overflow-hidden border-b border-border-soft">
+        <div
+            class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-glow/10 rounded-full blur-[120px] pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <div
+                class="inline-flex items-center gap-2 font-mono text-xs text-ink bg-white border border-border-soft px-3 py-1.5 rounded-full mb-8 reveal shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-glow animate-pulse"></span>
+                A CONSORTIUM OF HIGH-PERFORMANCE SOFTWARE
+            </div>
+            <h1 class="font-heading text-6xl md:text-8xl font-bold leading-[0.9] tracking-tighter mb-8 reveal">
+                Architecting the <br>
+                <span class="bg-gradient-to-r from-emerald-glow to-azure-glow bg-clip-text text-transparent">future of
+                    software.</span>
+            </h1>
+            <p class="font-body text-xl text-slate-soft mb-10 max-w-2xl leading-relaxed reveal">
+                Junglans Solutions builds a suite of localized, secure, and deeply technical tools for developers and
+                enterprises. From local-first databases to cloud orchestration, we build the infrastructure for the next
+                decade.
+            </p>
+            <a href="#ecosystem"
+                class="font-mono text-sm bg-ink text-white px-6 py-4 rounded-xl font-bold hover:bg-slate-soft transition inline-flex items-center gap-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 reveal">
+                Explore the Suite
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="py-6 border-b border-border-soft bg-white/50 mb-24">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">ENTERPRISE GRADE</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">/</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">LOCAL-FIRST ARCHITECTURE</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">/</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">ZERO-TRUST SECURITY</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">/</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">AI-ACCELERATED</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">/</span>
+            </div>
+            <div class="marquee-content" aria-hidden="true">
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">ENTERPRISE GRADE</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">/</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">LOCAL-FIRST ARCHITECTURE</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">/</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">ZERO-TRUST SECURITY</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">/</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">AI-ACCELERATED</span>
+                <span class="font-heading text-2xl font-bold text-slate-soft/30">/</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Product Ecosystem (The Impressive Showcase) -->
+    <section id="ecosystem" class="relative max-w-7xl mx-auto px-6 md:px-12 py-12 mb-24">
+        <div class="mb-16 reveal flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div>
+                <div class="font-mono text-xs text-slate-soft mb-4">SEC_01 // THE_ECOSYSTEM</div>
+                <h2 class="font-heading text-5xl md:text-6xl font-bold tracking-tighter">A product for every <br>layer
+                    of the stack.</h2>
+            </div>
+            <p class="font-body text-lg text-slate-soft max-w-md">Explore our suite of specialized tools. Click a module
+                to see how it integrates into the enterprise stack.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+            <!-- Left Tab Nav -->
+            <div class="lg:col-span-4 flex flex-col gap-3 reveal">
+                <button class="product-tab active text-left p-5 rounded-xl flex items-center gap-4"
+                    data-tab="junglans-pm" data-color="#10B981" onclick="selectProduct('junglans-pm', '#10B981')">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center tab-icon transition-colors">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-heading text-lg tab-title text-slate-soft transition-colors">Junglans PM</div>
+                        <div class="font-mono text-[10px] text-slate-soft">DEVELOPER TOOLS</div>
+                    </div>
+                </button>
+
+                <button class="product-tab text-left p-5 rounded-xl flex items-center gap-4" data-tab="aether-flow"
+                    data-color="#3B82F6" onclick="selectProduct('aether-flow', '#3B82F6')">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center tab-icon transition-colors">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-heading text-lg tab-title text-slate-soft transition-colors">Aether Flow</div>
+                        <div class="font-mono text-[10px] text-slate-soft">DEVOPS AUTOMATION</div>
+                    </div>
+                </button>
+
+                <button class="product-tab text-left p-5 rounded-xl flex items-center gap-4" data-tab="nexus-db"
+                    data-color="#8B5CF6" onclick="selectProduct('nexus-db', '#8B5CF6')">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center tab-icon transition-colors">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-heading text-lg tab-title text-slate-soft transition-colors">Nexus DB</div>
+                        <div class="font-mono text-[10px] text-slate-soft">DATA INFRASTRUCTURE</div>
+                    </div>
+                </button>
+
+                <button class="product-tab text-left p-5 rounded-xl flex items-center gap-4" data-tab="sentinel"
+                    data-color="#F59E0B" onclick="selectProduct('sentinel', '#F59E0B')">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center tab-icon transition-colors">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-heading text-lg tab-title text-slate-soft transition-colors">Sentinel Watch
+                        </div>
+                        <div class="font-mono text-[10px] text-slate-soft">SECURITY & MONITORING</div>
+                    </div>
+                </button>
+
+                <!-- Description Block (Updates dynamically) -->
+                <div class="mt-6 p-6 glass-panel rounded-xl">
+                    <p id="product-description" class="font-body text-sm text-slate-soft leading-relaxed">
+                        A local-first desktop utility for cataloging, analyzing, and documenting software projects. Deep
+                        syntax scanning, automated architecture reports, and zero cloud dependency.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Content Area: The Dynamic Mockup -->
+            <div class="lg:col-span-8 reveal">
+                <div class="ecosystem-stage h-[600px]" id="ecosystem-stage">
+
+                    <!-- Mockup 1: Junglans PM (Code Scanner) -->
+                    <div class="mockup-screen active flex flex-col" id="junglans-pm">
+                        <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                            <span class="font-mono text-xs text-slate-500">SCANNER // auth-service</span>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono rounded">4832
+                                    FILES</span>
+                                <span
+                                    class="px-2 py-1 bg-emerald-glow/10 text-emerald-glow text-[10px] font-mono rounded">SCANNING</span>
+                            </div>
+                        </div>
+                        <div class="flex-1 grid grid-cols-2 gap-4 font-mono text-sm">
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 col-span-2">
+                                <div class="text-xs text-slate-400 mb-3">FILE_TREE</div>
+                                <div class="space-y-2 text-slate-700">
+                                    <div class="flex items-center gap-2"><span class="text-emerald-glow">▼</span> 📁 src
+                                    </div>
+                                    <div class="pl-4 space-y-1.5 text-xs">
+                                        <div class="flex justify-between hover:bg-white p-1 rounded">
+                                            <span>📄 Button.tsx</span>
+                                            <span class="text-emerald-glow">124 LOC</span>
+                                        </div>
+                                        <div class="flex justify-between hover:bg-white p-1 rounded">
+                                            <span>📄 Card.tsx</span>
+                                            <span class="text-amber-glow">[DUP]</span>
+                                        </div>
+                                        <div class="flex justify-between hover:bg-white p-1 rounded">
+                                            <span>📄 OldApi.ts</span>
+                                            <span class="text-red-500">[DEAD]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                <div class="text-xs text-slate-400 mb-2">DUPLICATES</div>
+                                <div class="text-3xl font-bold text-amber-glow">14</div>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                <div class="text-xs text-slate-400 mb-2">DEAD CODE</div>
+                                <div class="text-3xl font-bold text-red-500">8</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mockup 2: Aether Flow (CI/CD Pipeline) -->
+                    <div class="mockup-screen flex flex-col" id="aether-flow">
+                        <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                            <span class="font-mono text-xs text-slate-500">PIPELINE // prod-deploy</span>
+                            <span
+                                class="px-2 py-1 bg-azure-glow/10 text-azure-glow text-[10px] font-mono rounded">RUNNING</span>
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 bg-azure-glow/20 rounded flex items-center justify-center text-azure-glow font-bold">
+                                    1</div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between mb-1"><span class="font-mono text-sm">Build
+                                            Image</span><span class="font-mono text-xs text-emerald-glow">SUCCESS</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-100 rounded-full">
+                                        <div class="h-2 bg-azure-glow rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 bg-azure-glow/20 rounded flex items-center justify-center text-azure-glow font-bold">
+                                    2</div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between mb-1"><span class="font-mono text-sm">Run
+                                            Tests</span><span class="font-mono text-xs text-emerald-glow">SUCCESS</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-100 rounded-full">
+                                        <div class="h-2 bg-azure-glow rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 bg-azure-glow/20 rounded flex items-center justify-center text-azure-glow font-bold">
+                                    3</div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between mb-1"><span class="font-mono text-sm">Deploy
+                                            Edge</span><span
+                                            class="font-mono text-xs text-azure-glow animate-pulse">45%</span></div>
+                                    <div class="w-full h-2 bg-slate-100 rounded-full">
+                                        <div class="h-2 bg-azure-glow rounded-full animate-pulse" style="width: 45%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mockup 3: Nexus DB (Query Terminal) -->
+                    <div class="mockup-screen flex flex-col" id="nexus-db">
+                        <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                            <span class="font-mono text-xs text-slate-500">QUERY // crdt_sync</span>
+                            <span
+                                class="px-2 py-1 bg-violet-glow/10 text-violet-glow text-[10px] font-mono rounded">CONNECTED</span>
+                        </div>
+                        <div class="flex-1 grid grid-cols-3 gap-4">
+                            <div
+                                class="col-span-2 bg-slate-900 p-6 rounded-lg font-mono text-xs text-gray-300 flex flex-col">
+                                <div class="text-slate-500 mb-2">// EXECUTE</div>
+                                <div class="text-violet-glow">SELECT * FROM users</div>
+                                <div class="text-violet-glow">WHERE status = 'active'</div>
+                                <div class="text-slate-500 mt-4 mb-2">// RESULT (0.4ms)</div>
+                                <div class="text-emerald-glow">[ { id: 1, name: 'Admin' } ]</div>
+                            </div>
+                            <div class="flex flex-col gap-4">
+                                <div
+                                    class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex-1 flex flex-col justify-center">
+                                    <div class="text-xs text-slate-400 mb-1">READ SPEED</div>
+                                    <div class="text-2xl font-bold text-violet-glow">0.4ms</div>
+                                </div>
+                                <div
+                                    class="bg-slate-50 p-4 rounded-lg border border-slate-100 flex-1 flex flex-col justify-center">
+                                    <div class="text-xs text-slate-400 mb-1">CONFLICTS</div>
+                                    <div class="text-2xl font-bold text-emerald-glow">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mockup 4: Sentinel Watch (Security Monitor) -->
+                    <div class="mockup-screen flex flex-col" id="sentinel">
+                        <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                            <span class="font-mono text-xs text-slate-500">MONITOR // network_edge</span>
+                            <span class="px-2 py-1 bg-amber-glow/10 text-amber-glow text-[10px] font-mono rounded">1
+                                ALERT</span>
+                        </div>
+                        <div class="flex-1 grid grid-cols-2 gap-4">
+                            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg flex items-center gap-3">
+                                <div class="w-10 h-10 bg-red-100 rounded flex items-center justify-center text-red-500">
+                                    ⚠</div>
+                                <div>
+                                    <div class="font-bold text-sm text-red-600">SSL Expiring</div>
+                                    <div class="font-mono text-xs text-slate-500">auth.app.io (14d)</div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-amber-50 border-l-4 border-amber-glow p-4 rounded-r-lg flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 bg-amber-100 rounded flex items-center justify-center text-amber-glow">
+                                    ●</div>
+                                <div>
+                                    <div class="font-bold text-sm text-amber-600">Vulnerability</div>
+                                    <div class="font-mono text-xs text-slate-500">lodash@4.17.20</div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-emerald-50 border-l-4 border-emerald-glow p-4 rounded-r-lg flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 bg-emerald-100 rounded flex items-center justify-center text-emerald-glow">
+                                    ✓</div>
+                                <div>
+                                    <div class="font-bold text-sm text-emerald-600">Firewall Active</div>
+                                    <div class="font-mono text-xs text-slate-500">0 breaches</div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-slate-50 border-l-4 border-slate-300 p-4 rounded-r-lg flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 bg-slate-100 rounded flex items-center justify-center text-slate-500">
+                                    ⟳</div>
+                                <div>
+                                    <div class="font-bold text-sm text-slate-700">Auto-Patching</div>
+                                    <div class="font-mono text-xs text-slate-500">Node.js > 18.2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Showcase Section -->
+    <section id="projects" class="relative max-w-7xl mx-auto px-6 md:px-12 py-20 mb-24 border-t border-border-soft">
+        <div class="mb-12 reveal flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+                <div class="font-mono text-xs text-slate-soft mb-4">SEC_02 // PROJECT_SHOWCASE</div>
+                <h2 class="font-heading text-5xl md:text-6xl font-bold tracking-tighter">
+                    Explore our software <br>
+                    <span class="bg-gradient-to-r from-emerald-glow via-azure-glow to-violet-glow bg-clip-text text-transparent">project showcase.</span>
+                </h2>
+            </div>
+            <p class="font-body text-lg text-slate-soft max-w-md">
+                Click any project card to inspect its full feature details, capabilities, and functional highlights.
+            </p>
+        </div>
+
+        <!-- Category Filter Bar -->
+        <div class="flex flex-wrap items-center gap-2 mb-10 reveal font-mono text-xs">
+            <button onclick="filterShowcase('all')" class="showcase-filter-btn active px-4 py-2 rounded-lg bg-ink text-white font-medium border border-ink transition">
+                All Projects (11)
+            </button>
+            <button onclick="filterShowcase('ai-tools')" class="showcase-filter-btn px-4 py-2 rounded-lg bg-white text-slate-soft hover:text-ink font-medium border border-border-soft transition">
+                AI & Intelligence
+            </button>
+            <button onclick="filterShowcase('dev-tools')" class="showcase-filter-btn px-4 py-2 rounded-lg bg-white text-slate-soft hover:text-ink font-medium border border-border-soft transition">
+                Developer Utilities
+            </button>
+            <button onclick="filterShowcase('finance')" class="showcase-filter-btn px-4 py-2 rounded-lg bg-white text-slate-soft hover:text-ink font-medium border border-border-soft transition">
+                Finance & Sales
+            </button>
+            <button onclick="filterShowcase('productivity')" class="showcase-filter-btn px-4 py-2 rounded-lg bg-white text-slate-soft hover:text-ink font-medium border border-border-soft transition">
+                Productivity & Chat
+            </button>
+        </div>
+
+        <!-- Projects Showcase Grid -->
+        <div id="showcase-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+            <!-- Rendered dynamically by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Modal Overlay for Project Feature Detail -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 opacity-0 pointer-events-none transition-all duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-md" onclick="closeProjectModal()"></div>
+
+        <!-- Modal Card Container -->
+        <div class="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-2xl border border-border-soft shadow-2xl overflow-hidden flex flex-col transform scale-95 transition-all duration-300" id="project-modal-card">
+            
+            <!-- Modal Header -->
+            <div class="px-6 md:px-8 py-6 border-b border-border-soft flex items-center justify-between bg-slate-50/80 backdrop-blur-sm sticky top-0 z-10">
+                <div class="flex items-center gap-4">
+                    <div id="modal-project-icon" class="w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md">
+                        <!-- Icon SVG -->
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span id="modal-project-badge" class="font-mono text-[10px] font-bold px-2.5 py-0.5 rounded bg-slate-200 text-slate-700">BADGE</span>
+                            <span class="font-mono text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold">FEATURE DETAILS</span>
+                        </div>
+                        <h3 id="modal-project-name" class="font-heading text-2xl font-bold text-ink">Project Name</h3>
+                    </div>
+                </div>
+                <button onclick="closeProjectModal()" class="w-10 h-10 rounded-full bg-slate-200/60 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition focus:outline-none" title="Close (Esc)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Modal Content Scrollable Body -->
+            <div class="p-6 md:p-8 overflow-y-auto space-y-8 flex-1">
+                
+                <!-- Summary Banner -->
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-200/80">
+                    <div class="font-mono text-xs text-slate-400 mb-1">PROJECT OVERVIEW & PURPOSE</div>
+                    <p id="modal-project-summary" class="font-body text-base text-slate-700 leading-relaxed font-medium">
+                        Project summary details...
+                    </p>
+                </div>
+
+                <!-- Features Grid -->
+                <div>
+                    <div class="flex items-center justify-between mb-6 pb-2 border-b border-slate-100">
+                        <h4 class="font-heading text-xl font-bold text-ink flex items-center gap-2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Key Functional Features
+                        </h4>
+                        <span class="font-mono text-xs text-slate-400">PROJECT CAPABILITIES</span>
+                    </div>
+
+                    <div id="modal-project-features" class="grid md:grid-cols-2 gap-4">
+                        <!-- Feature Cards rendered by JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 md:px-8 py-4 border-t border-border-soft bg-slate-50/50 flex items-center justify-between">
+                <span class="font-mono text-xs text-slate-400">JUNGLANS SOLUTIONS // PROJECT SHOWCASE</span>
+                <button onclick="closeProjectModal()" class="font-mono text-xs bg-ink text-white px-6 py-2.5 rounded-lg font-bold hover:bg-slate-soft transition">
+                    Close Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Capabilities Bento Grid -->
+    <section id="capabilities" class="relative max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-border-soft">
+        <div class="mb-16 reveal text-center">
+            <div class="font-mono text-xs text-slate-soft mb-4">SEC_02 // CAPABILITIES</div>
+            <h2 class="font-heading text-5xl font-bold tracking-tighter">Engineered for scale.</h2>
+            <p class="font-body text-lg text-slate-soft mt-4 max-w-2xl mx-auto">A unified ecosystem built on core
+                principles of privacy, performance, and absolute control.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[250px]">
+            <!-- Large Feature -->
+            <div class="glass-panel rounded-2xl p-8 reveal md:col-span-2 md:row-span-2 flex flex-col justify-between">
+                <div>
+                    <div class="font-mono text-xs text-emerald-glow mb-4">01 // LOCAL-FIRST ARCHITECTURE</div>
+                    <h3 class="font-heading text-3xl font-bold mb-4">Your data never leaves your machine.</h3>
+                    <p class="font-body text-slate-soft max-w-lg">Every Junglans product operates primarily on-device.
+                        Cloud sync is optional and end-to-end encrypted. We believe performance and privacy are not
+                        mutually exclusive.</p>
+                </div>
+                <div class="font-mono text-xs text-slate-soft grid grid-cols-3 gap-4 mt-8">
+                    <div class="bg-white p-3 rounded-lg border border-border-soft">
+                        <div class="text-slate-soft mb-1">STORAGE</div>
+                        <div class="text-emerald-glow font-bold">ON-DEVICE</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-border-soft">
+                        <div class="text-slate-soft mb-1">NETWORK</div>
+                        <div class="text-emerald-glow font-bold">OPT-IN</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-border-soft">
+                        <div class="text-slate-soft mb-1">TELEMETRY</div>
+                        <div class="text-emerald-glow font-bold">ZERO</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Small Feature 1 -->
+            <div class="glass-panel rounded-2xl p-6 reveal flex flex-col justify-between">
+                <div>
+                    <div class="font-mono text-xs text-azure-glow mb-4">02 // PERFORMANCE</div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Sub-millisecond reads.</h3>
+                    <p class="font-body text-sm text-slate-soft">Native compiled binaries and WebAssembly ensure
+                        desktop-grade speed.</p>
+                </div>
+                <div class="text-4xl font-bold text-azure-glow font-mono">0.4ms</div>
+            </div>
+
+            <!-- Small Feature 2 -->
+            <div class="glass-panel rounded-2xl p-6 reveal flex flex-col justify-between">
+                <div>
+                    <div class="font-mono text-xs text-violet-glow mb-4">03 // AI INTEGRATION</div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Bring your own model.</h3>
+                    <p class="font-body text-sm text-slate-soft">Local LLM support or route to secure cloud endpoints.
+                    </p>
+                </div>
+                <div class="flex gap-2">
+                    <span
+                        class="text-[10px] font-mono bg-violet-glow/10 text-violet-glow px-2 py-1 rounded border border-violet-glow/20">LOCAL</span>
+                    <span
+                        class="text-[10px] font-mono bg-white text-slate-soft px-2 py-1 rounded border border-border-soft">CLOUD</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enterprise CTA -->
+    <section id="enterprise" class="relative max-w-5xl mx-auto px-6 md:px-12 py-32 text-center">
+        <div class="reveal">
+            <div class="font-mono text-xs text-slate-soft mb-6">SEC_03 // DEPLOYMENT</div>
+            <h2 class="font-heading text-6xl font-bold mb-8 tracking-tighter">
+                Build with <br>
+                <span class="bg-gradient-to-r from-emerald-glow to-azure-glow bg-clip-text text-transparent">Junglans
+                    Solutions.</span>
+            </h2>
+            <p class="font-body text-lg text-slate-soft mb-10 max-w-md mx-auto">Enterprise licenses, team onboarding,
+                and custom development available.</p>
+
+            <a href="#contact"
+                class="font-mono text-base bg-ink text-white px-10 py-5 rounded-xl font-bold hover:bg-slate-soft transition inline-flex items-center gap-3 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                Contact Sales
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative border-t border-border-soft mt-12 bg-white/50">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-12 grid md:grid-cols-4 gap-8">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 bg-ink rounded-lg flex items-center justify-center">
+                        <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+                            <path d="M8 22 L12 10 L16 16 L20 8 L24 22" stroke="#10B981" stroke-width="3"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </div>
+                    <span class="font-heading font-bold text-lg">Junglans Solutions</span>
+                </div>
+                <p class="font-body text-sm text-slate-soft max-w-xs">Architecting the future of local-first,
+                    high-performance software for enterprises and developers.</p>
+            </div>
+            <div>
+                <div class="font-mono text-xs text-slate-soft uppercase mb-4">Products</div>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-emerald-glow transition">Junglans PM</a></li>
+                    <li><a href="#" class="hover:text-emerald-glow transition">Aether Flow</a></li>
+                    <li><a href="#" class="hover:text-emerald-glow transition">Nexus DB</a></li>
+                    <li><a href="#" class="hover:text-emerald-glow transition">Sentinel Watch</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="font-mono text-xs text-slate-soft uppercase mb-4">Company</div>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-emerald-glow transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-emerald-glow transition">Security</a></li>
+                    <li><a href="#" class="hover:text-emerald-glow transition">Careers</a></li>
+                    <li><a href="#" class="hover:text-emerald-glow transition">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-border-soft py-6 text-center font-mono text-xs text-slate-soft">
+            © 2024 JUNGLANS_SOLUTIONS // ALL_RIGHTS_RESERVED
+        </div>
+    </footer>
+
+    <script>
+        // --- Scroll Reveal ---
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // --- Product Ecosystem Switcher ---
+        const descriptions = {
+            'junglans-pm': 'A local-first desktop utility for cataloging, analyzing, and documenting software projects. Deep syntax scanning, automated architecture reports, and zero cloud dependency.',
+            'aether-flow': 'Visualize, orchestrate, and monitor your CI/CD pipelines with zero-logic YAML. Drag-and-drop automation blocks, real-time log streaming, and instant rollback architecture.',
+            'nexus-db': 'An edge-native, encrypted database that syncs seamlessly across devices without a central server. Built for offline-first applications requiring military-grade security.',
+            'sentinel': 'Autonomous network monitoring, SSL tracking, and dependency vulnerability scanning. Sentinel runs locally and alerts you via native OS notifications before breaches happen.'
+        };
+
+        function selectProduct(tabId, accentColor) {
+            // Update Tabs
+            document.querySelectorAll('.product-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.tab === tabId) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Update Mockup Screens
+            document.querySelectorAll('.mockup-screen').forEach(screen => {
+                screen.classList.remove('active');
+                if (screen.id === tabId) {
+                    screen.classList.add('active');
+                }
+            });
+
+            // Update Description
+            document.getElementById('product-description').textContent = descriptions[tabId];
+
+            // Update Dynamic Glow on the Stage
+            const stage = document.getElementById('ecosystem-stage');
+            // Convert hex to rgba for box-shadow
+            const r = parseInt(accentColor.slice(1, 3), 16);
+            const g = parseInt(accentColor.slice(3, 5), 16);
+            const b = parseInt(accentColor.slice(5, 7), 16);
+            stage.style.boxShadow = `0 20px 50px -12px rgba(${r}, ${g}, ${b}, 0.15)`;
+        }
+
+        // --- Project Showcase Data (Feature-Focused, Architecture & Tech Stack Excluded) ---
+        const projectShowcaseData = [
+            {
+                id: "project-0",
+                name: "Junglans Project Manager",
+                badge: "Developer Utilities",
+                category: "dev-tools",
+                color: "#10B981",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>`,
+                summary: "A local-first desktop utility for cataloging, analyzing, and documenting software projects with deep scanning and health reports.",
+                highlights: ["Codebase Syntax & Health Scanning", "Local Activity & Progress Tracking", "Automated Documentation Exporter"],
+                features: [
+                    { title: "Deep Codebase Scanning", desc: "Instantly scans workspace repositories to calculate total files, lines of code, code duplication, and unused files." },
+                    { title: "Automated Health & Quality Reports", desc: "Generates comprehensive health scores, critical execution paths, and quality metrics across project folders." },
+                    { title: "Local Activity & Timeline Tracking", desc: "Tracks team contributions, revision milestones, and timeline progress completely on-device." },
+                    { title: "One-Click Documentation Exporter", desc: "Exports complete, beautifully structured Markdown documentation and project summaries automatically." },
+                    { title: "Global Workspace Search", desc: "Perform ultra-fast instant searches across code references, workspace notes, and historical logs." },
+                    { title: "Custom Project Templates", desc: "Save reusable project scaffolding templates and maintain rich project-level notes and checklists." }
+                ]
+            },
+            {
+                id: "project-1",
+                name: "Jung AI Version Control Sidecar",
+                badge: "Version Control & Attribution",
+                category: "dev-tools",
+                color: "#3B82F6",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`,
+                summary: "A sidecar system for AI-assisted development that permanently links prompts, execution plans, and token costs directly to code diffs.",
+                highlights: ["Full Diff & Prompt Attribution", "Token & Cost Audit Tracking", "Interactive History Dashboard"],
+                features: [
+                    { title: "Complete Diff Attribution", desc: "Captures and attributes human vs. AI contribution for every modified line of code in commits." },
+                    { title: "Prompt & Plan Lineage", desc: "Permanently links the original user instructions and AI agent plans directly to resulting code changes." },
+                    { title: "Token & Expenditure Auditing", desc: "Monitors real-time token usage, financial expenditure, and cost breakdown per feature branch." },
+                    { title: "Interactive Visual History", desc: "Browse full timeline history of past AI interactions, code evolutions, and session logs." },
+                    { title: "Automated Impact Reports", desc: "Generates developer velocity metrics, AI efficiency audits, and contribution summaries." },
+                    { title: "Seamless Background Sync", desc: "Runs quietly alongside existing development workflows without disrupting git commits or pushes." }
+                ]
+            },
+            {
+                id: "project-2",
+                name: "Junglans IDE",
+                badge: "AI Development Environment",
+                category: "ai-tools",
+                color: "#8B5CF6",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>`,
+                summary: "An AI-native integrated development environment featuring multi-agent task collaboration, smart context, and full code editing.",
+                highlights: ["Multi-Agent Orchestrator", "Smart Auto-Context Detection", "Interactive Code Change Tracker"],
+                features: [
+                    { title: "Multi-Agent Task Pipeline", desc: "Collaborative specialized AI agents (Understanding, Optimizer, Decomposer, Coder) tackle complex features." },
+                    { title: "Smart Auto-Context Engine", desc: "Automatically identifies and pulls relevant project files into memory without manual selection." },
+                    { title: "Dual Execution Modes", desc: "Choose between instant single-shot responses for quick answers or interactive step-by-step approval." },
+                    { title: "Integrated Multi-Session Shell", desc: "Built-in command terminal supporting multiple active tabs, auto-completion, and script execution." },
+                    { title: "Visual Code Diff Reviewer", desc: "Dedicated workspace for reviewing, accepting, or rejecting proposed AI code modifications line-by-line." },
+                    { title: "Semantic Code Memory", desc: "Long-term workspace memory allowing semantic concept search across massive codebases." }
+                ]
+            },
+            {
+                id: "project-3",
+                name: "JunglansChat",
+                badge: "Secure Communication",
+                category: "productivity",
+                color: "#EC4899",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`,
+                summary: "Real-time encrypted messaging platform built for enterprise team collaboration, secure audio/video calling, and AI summaries.",
+                highlights: ["End-to-End Encrypted Messaging", "HD Audio & Video Calling", "AI Meeting & Channel Summaries"],
+                features: [
+                    { title: "End-to-End Encrypted Chat", desc: "Zero-knowledge security protocol protecting all direct messages, group channels, and media transfers." },
+                    { title: "Crystal-Clear Video & Voice", desc: "High-definition real-time audio/video calls with instant screen sharing and noise cancellation." },
+                    { title: "Real-Time Presence & Streaming", desc: "Instant typing indicators, live member status, unread counters, and channel streaming updates." },
+                    { title: "AI Channel & Meeting Recaps", desc: "Automated AI summaries of long channel discussions, meeting key points, and assigned action items." },
+                    { title: "Encrypted Media Vault", desc: "Secure file vault with automated retention rules, file previews, and media expiration settings." },
+                    { title: "Enterprise Role Management", desc: "Granular administrative control over workspace permission, channel visibility, and compliance." }
+                ]
+            },
+            {
+                id: "project-5",
+                name: "TalkToDB",
+                badge: "Natural Language SQL Assistant",
+                category: "ai-tools",
+                color: "#F59E0B",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>`,
+                summary: "Voice and text AI assistant that converts natural language questions into database queries, interactive data charts, and spoken recaps.",
+                highlights: ["Natural Language SQL Generation", "Automated Data Visualizations", "Voice Command & Spoken Recaps"],
+                features: [
+                    { title: "Plain Language Data Querying", desc: "Ask complex data questions in plain English or voice commands and receive immediate accurate data tables." },
+                    { title: "Automated Data Charts", desc: "Automatically converts query output into interactive bar graphs, line charts, pie views, and summary cards." },
+                    { title: "Voice Interaction & Audio Recaps", desc: "Speak data inquiries and listen to natural spoken audio summaries of analytical findings." },
+                    { title: "Universal Database Connectivity", desc: "Connects securely to various relational databases and enterprise data sets with instant schema mapping." },
+                    { title: "Read-Only Query Guardrails", desc: "Strict security controls preventing accidental data modification, ensuring safe database exploratory access." },
+                    { title: "Exportable Analytical Reports", desc: "Export charts, raw data, and summary recaps into CSV spreadsheets, PDF reports, or presentation slides." }
+                ]
+            },
+            {
+                id: "project-6",
+                name: "Junglans AI Notes",
+                badge: "Knowledge Network & Notes",
+                category: "ai-tools",
+                color: "#06B6D4",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>`,
+                summary: "An AI-powered note-taking workspace that automatically extracts entities and relationships from plain text to build interactive knowledge graphs.",
+                highlights: ["Interactive Visual Knowledge Graph", "Automated Entity & Link Extraction", "Bi-directional Thought Linking"],
+                features: [
+                    { title: "Visual Knowledge Network Graph", desc: "Transforms written notes into an interactive node graph visualizing key concepts and connections." },
+                    { title: "Automated Entity Extraction", desc: "Intelligent background analysis identifies key entities, topics, and relationships across notes." },
+                    { title: "Bi-directional Thought Linking", desc: "Links related ideas and research items into fluid, interconnected knowledge networks." },
+                    { title: "Instant Semantic Workspace Search", desc: "Search across text content, visual graph nodes, extracted tags, and topic categories." },
+                    { title: "Distraction-Free Editor", desc: "Clean markdown editor with rich text support, custom tags, and dark theme customization." },
+                    { title: "Cross-Device Sync & Backups", desc: "Secure encrypted sync ensuring your notes and knowledge networks are accessible everywhere." }
+                ]
+            },
+            {
+                id: "project-7",
+                name: "Junglans Expense Tracker",
+                badge: "Enterprise Security & Finance",
+                category: "finance",
+                color: "#10B981",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`,
+                summary: "Production-hardened financial management suite featuring automated transaction extraction, hardened security, and auditing.",
+                highlights: ["Automated Bank SMS Parsing", "Multi-Layer Data Encryption", "Budgeting & Financial Auditing"],
+                features: [
+                    { title: "Automated SMS Transaction Parsing", desc: "Automatically captures bank SMS alerts to log income and expenditures without manual data entry." },
+                    { title: "Hardened Security Engine", desc: "Multi-layered cryptographic protection for user transactions, account numbers, and receipts." },
+                    { title: "Budget Controls & Limits", desc: "Set monthly spending limits per category with proactive threshold notifications and alerts." },
+                    { title: "Receipt Archival & Tagging", desc: "Scan and attach digital receipt photos with automatic OCR text detection and category tagging." },
+                    { title: "Automated Audit Reports", desc: "Generate compliance-ready financial audits, tax export summaries, and spending trend analysis." },
+                    { title: "Encrypted Cloud Sync", desc: "Secure multi-device sync with scheduled backup restoration and data export options." }
+                ]
+            },
+            {
+                id: "project-8",
+                name: "Junglans Leads",
+                badge: "Mobile Sales CRM",
+                category: "finance",
+                color: "#6366F1",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+                summary: "Mobile sales CRM built for field teams to import spreadsheets, track lead pipelines, and manage customer communications offline.",
+                highlights: ["Spreadsheet Import & Mapping", "Lead Status Pipeline Workflow", "One-Tap Dialing & Activity History"],
+                features: [
+                    { title: "Visual Spreadsheet Column Mapping", desc: "Import spreadsheet files and visually map columns to lead attributes with instant data verification." },
+                    { title: "Lead Status Pipeline", desc: "Track sales leads across status stages (Not Called, Called, Interested, Follow Up, Closed)." },
+                    { title: "One-Tap Dialing & Call Logs", desc: "Call leads directly from the app and immediately capture post-call outcome notes." },
+                    { title: "Activity Timeline & Note History", desc: "Complete historical timeline recording all call interactions, status updates, and sales notes." },
+                    { title: "Spreadsheet & Data Export", desc: "Export updated lead lists back into custom spreadsheet files or complete offline database backups." },
+                    { title: "Offline-First Mobile Access", desc: "Full operational access offline, allowing sales representatives to manage leads anywhere." }
+                ]
+            },
+            {
+                id: "project-9",
+                name: "Junglans Focus Calendar",
+                badge: "Productivity & Time Management",
+                category: "productivity",
+                color: "#84CC16",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`,
+                summary: "Cross-platform calendar and productivity suite combining month agendas, Kanban task management, and Pomodoro focus timers.",
+                highlights: ["Interactive Calendar & Agenda", "Kanban Board with Focus Timer", "Habit Streaks & Holiday Tracking"],
+                features: [
+                    { title: "Interactive Calendar & Daily Agenda", desc: "Month grid overview with daily agenda views and rapid double-tap event creation." },
+                    { title: "Kanban Task Management", desc: "Organize tasks into To-Do, In-Progress, and Completed columns with intuitive organization." },
+                    { title: "Pomodoro Focus Timer", desc: "Integrated focus timer with customizable work/rest intervals to boost productivity flow." },
+                    { title: "Daily Habit Streak Tracking", desc: "Gamified streak counters and daily habit badges to foster consistent productive routines." },
+                    { title: "Holiday & Special Event Badges", desc: "Built-in holiday observance calendars, custom event reminders, and scheduled notification alerts." },
+                    { title: "Priority & Duration Estimates", desc: "Assign priority levels, time estimates, and habit tags to tasks for optimized daily planning." }
+                ]
+            },
+            {
+                id: "project-10",
+                name: "BotForge",
+                badge: "SaaS Chatbot Builder",
+                category: "ai-tools",
+                color: "#F43F5E",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`,
+                summary: "SaaS chatbot building platform enabling businesses to create, customize, and embed AI agents on any website without coding.",
+                highlights: ["No-Code Flow Builder", "Knowledge Base Ingestion", "One-Line Website Embed"],
+                features: [
+                    { title: "No-Code Visual Bot Builder", desc: "Drag-and-drop conversational flow editor to design custom decision trees and response paths." },
+                    { title: "Custom Knowledge Ingestion", desc: "Ingest website URLs, documents, FAQs, and support articles to train custom chatbot brains." },
+                    { title: "One-Line Script Embedding", desc: "Instantly embed responsive chat widgets onto any web page or portal using a simple embed snippet." },
+                    { title: "Live Agent Hand-off", desc: "Seamless transition from AI chatbot to human support agents with a unified live agent inbox." },
+                    { title: "Conversation Analytics & Sentiment", desc: "Track chat volume, user engagement rates, resolution success, and customer sentiment analytics." },
+                    { title: "Custom Branding & Widget Styling", desc: "Full control over widget avatar icons, color palettes, welcome popups, and positioning." }
+                ]
+            },
+            {
+                id: "project-11",
+                name: "Junglans Offline Expense Tracker",
+                badge: "Offline Personal Finance",
+                category: "finance",
+                color: "#14B8A6",
+                icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`,
+                summary: "Lightweight offline personal expense tracker featuring simple/quantity calculation modes and claymorphism design aesthetics.",
+                highlights: ["Dual Calculation Modes", "Claymorphic Visual Design", "Segmented Period Analytics"],
+                features: [
+                    { title: "Dual Entry Modes (Simple & Quantity)", desc: "Log single transaction amounts or itemized purchases with live unit price × quantity total calculation." },
+                    { title: "Claymorphism Aesthetic UI", desc: "Modern visual interface featuring soft pastel elements, dual-shadow effects, and clean typography." },
+                    { title: "Custom Categories & Icons", desc: "Create custom spending categories complete with tailored icons, accent colors, and calculation rules." },
+                    { title: "Segmented Period Analytics", desc: "View financial breakdowns across Month, Year, and Lifetime intervals with instant progress cards." },
+                    { title: "Calendar Month Grid Overview", desc: "Tap any day on the calendar grid to immediately inspect or record expenses for that specific date." },
+                    { title: "100% Offline & Private", desc: "Complete local data isolation with zero cloud telemetry, logins, or external data sharing." }
+                ]
+            }
+        ];
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function renderShowcaseGrid(filterCategory = 'all') {
+            const container = document.getElementById('showcase-grid');
+            if (!container) return;
+
+            const filteredProjects = filterCategory === 'all' 
+                ? projectShowcaseData 
+                : projectShowcaseData.filter(p => p.category === filterCategory);
+
+            container.innerHTML = filteredProjects.map(project => `
+                <div class="glass-panel rounded-2xl p-6 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group cursor-pointer border border-border-soft hover:-translate-y-1"
+                     onclick="openProjectModal('${project.id}')">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-110" style="background-color: ${project.color}">
+                                ${project.icon}
+                            </div>
+                            <span class="font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                                ${escapeHtml(project.badge)}
+                            </span>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-ink mb-2 group-hover:text-emerald-600 transition-colors">
+                            ${escapeHtml(project.name)}
+                        </h3>
+                        <p class="font-body text-xs text-slate-soft leading-relaxed mb-4 line-clamp-2">
+                            ${escapeHtml(project.summary)}
+                        </p>
+                        <div class="space-y-1.5 mb-6">
+                            ${project.highlights.map(h => `
+                                <div class="flex items-center gap-2 font-mono text-[11px] text-slate-700">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                                    <span class="truncate">${escapeHtml(h)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-mono font-bold text-ink group-hover:text-emerald-600 transition-colors">
+                        <span>EXPLORE FEATURES</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transform group-hover:translate-x-1 transition-transform">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterShowcase(category) {
+            document.querySelectorAll('.showcase-filter-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-ink', 'text-white', 'border-ink');
+                btn.classList.add('bg-white', 'text-slate-soft', 'border-border-soft');
+            });
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active', 'bg-ink', 'text-white', 'border-ink');
+                event.currentTarget.classList.remove('bg-white', 'text-slate-soft', 'border-border-soft');
+            }
+            renderShowcaseGrid(category);
+        }
+
+        function openProjectModal(projectId) {
+            const project = projectShowcaseData.find(p => p.id === projectId);
+            if (!project) return;
+
+            document.getElementById('modal-project-name').textContent = project.name;
+            document.getElementById('modal-project-badge').textContent = project.badge.toUpperCase();
+            document.getElementById('modal-project-summary').textContent = project.summary;
+            
+            const iconContainer = document.getElementById('modal-project-icon');
+            iconContainer.style.backgroundColor = project.color;
+            iconContainer.innerHTML = project.icon;
+
+            const featuresContainer = document.getElementById('modal-project-features');
+            featuresContainer.innerHTML = project.features.map((feat, idx) => `
+                <div class="p-4 rounded-xl bg-white border border-slate-200/80 shadow-sm hover:border-slate-300 transition">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-600 font-mono text-xs font-bold flex items-center justify-center">${idx + 1}</span>
+                        <div class="font-heading font-bold text-slate-900">${escapeHtml(feat.title)}</div>
+                    </div>
+                    <p class="font-body text-sm text-slate-600 leading-relaxed">${escapeHtml(feat.desc)}</p>
+                </div>
+            `).join('');
+
+            const modal = document.getElementById('project-modal');
+            const modalCard = document.getElementById('project-modal-card');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalCard.classList.remove('scale-95');
+            modalCard.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            const modalCard = document.getElementById('project-modal-card');
+            if (!modal || !modalCard) return;
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalCard.classList.remove('scale-100');
+            modalCard.classList.add('scale-95');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeProjectModal();
+        });
+
+        // Initialize Showcase Grid on load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderShowcaseGrid('all');
+        });
+        if (document.readyState !== 'loading') {
+            renderShowcaseGrid('all');
+        }
+    </script>
+</body>
+
+</html>
