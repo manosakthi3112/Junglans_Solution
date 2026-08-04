@@ -69,20 +69,20 @@ export default function InteractiveTerminal() {
   };
 
   return (
-    <div className="glass-panel rounded-3xl p-6 md:p-8 bg-white border border-[#A7F3D0] shadow-xl my-12">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-[#E2E8F0]">
+    <div className="glass-panel rounded-3xl p-5 sm:p-8 bg-white border border-[#A7F3D0] shadow-xl my-10 sm:my-16">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6 pb-4 border-b border-[#E2E8F0]">
         <div>
           <div className="font-mono text-xs text-[#059669] font-bold uppercase tracking-widest">INTERACTIVE DEMO WIDGET</div>
-          <h3 className="font-heading text-2xl font-bold text-[#08090c] mt-1">Live Enterprise CLI Terminal Simulator</h3>
+          <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#08090c] mt-1">Live Enterprise CLI Terminal Simulator</h3>
         </div>
-        <div className="flex items-center gap-2 font-mono text-xs text-[#059669] bg-[#ECFDF5] px-3.5 py-1.5 rounded-full border border-[#A7F3D0]">
+        <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs text-[#059669] bg-[#ECFDF5] px-3.5 py-1.5 rounded-full border border-[#A7F3D0] w-fit">
           <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping"></span>
           <span className="font-bold">INTERACTIVE TERMINAL</span>
         </div>
       </div>
 
       {/* Preset Command Buttons */}
-      <div className="flex flex-wrap gap-2 mb-4 font-mono text-xs">
+      <div className="flex flex-wrap gap-2 mb-4 font-mono text-[11px] sm:text-xs">
         {[
           { key: 'scan', label: '▶ junglans scan' },
           { key: 'sidecar', label: '▶ junglans sidecar' },
@@ -93,7 +93,7 @@ export default function InteractiveTerminal() {
           <button
             key={cmd.key}
             onClick={() => runCommand(cmd.key)}
-            className={`px-3.5 py-2 rounded-xl font-bold border transition cursor-pointer ${
+            className={`px-3 py-2 rounded-xl font-bold border transition cursor-pointer ${
               activeCommand === cmd.key
                 ? 'bg-[#10B981] text-white border-transparent shadow-md'
                 : 'bg-[#F4FBF7] text-slate-700 border-[#A7F3D0] hover:bg-[#ECFDF5]'
@@ -105,20 +105,20 @@ export default function InteractiveTerminal() {
       </div>
 
       {/* Terminal Screen Container */}
-      <div className="bg-[#08090c] text-emerald-400 rounded-2xl p-6 font-mono text-xs shadow-2xl relative border border-slate-800 min-h-[220px]">
+      <div className="bg-[#08090c] text-emerald-400 rounded-2xl p-4 sm:p-6 font-mono text-xs shadow-2xl relative border border-slate-800 min-h-[220px] overflow-x-auto">
         {/* Terminal Header Dots */}
         <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-slate-500">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
             <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
             <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-            <span className="ml-2 text-[11px] text-slate-400 font-bold">bash - junglans-cli</span>
+            <span className="ml-2 text-[10px] sm:text-[11px] text-slate-400 font-bold truncate max-w-[140px] sm:max-w-none">bash - junglans-cli</span>
           </div>
-          <span className="text-[10px] text-slate-400 font-bold">OFFLINE MODE</span>
+          <span className="text-[10px] text-slate-400 font-bold">OFFLINE</span>
         </div>
 
         {/* Console Logs */}
-        <div className="space-y-1.5">
+        <div className="space-y-1.5 whitespace-pre-wrap break-all sm:break-normal">
           {isRunning ? (
             <div className="text-amber-400 animate-pulse">Executing command across 20 projects...</div>
           ) : (

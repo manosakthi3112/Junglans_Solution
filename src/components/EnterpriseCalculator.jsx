@@ -12,17 +12,17 @@ export default function EnterpriseCalculator() {
   const calculateRupees = (hoursSavedPerYear * 75).toLocaleString('en-IN');
 
   return (
-    <div className="glass-panel rounded-3xl p-8 md:p-12 bg-white border border-[#A7F3D0] shadow-xl my-16">
-      <div className="text-center max-w-3xl mx-auto mb-10">
+    <div className="glass-panel rounded-3xl p-6 sm:p-8 md:p-12 bg-white border border-[#A7F3D0] shadow-xl my-10 sm:my-16">
+      <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
         <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-widest">INTERACTIVE ENTERPRISE CALCULATOR</div>
-        <h2 className="font-heading text-4xl font-bold text-[#08090c] tracking-tight">Calculate Enterprise Productivity Savings</h2>
-        <p className="font-body text-base text-slate-600 mt-2">
+        <h2 className="font-heading text-2xl sm:text-4xl font-bold text-[#08090c] tracking-tight">Calculate Enterprise Productivity Savings</h2>
+        <p className="font-body text-xs sm:text-base text-slate-600 mt-2">
           See how deploying Junglans Solutions tools transforms enterprise productivity across 20 software applications.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-12 gap-8 items-center">
-        <div className="md:col-span-6 space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="lg:col-span-6 space-y-6">
           <div>
             <div className="flex justify-between font-mono text-xs font-bold text-slate-700 mb-2">
               <span>Workforce / Team Size:</span>
@@ -41,7 +41,7 @@ export default function EnterpriseCalculator() {
 
           <div>
             <div className="font-mono text-xs font-bold text-slate-700 mb-2">Select Software Bundle:</div>
-            <div className="grid grid-cols-2 gap-3 font-mono text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs">
               <button
                 onClick={() => setSelectedSuite('full-suite')}
                 className={`p-3 rounded-xl border text-center font-bold cursor-pointer transition ${
@@ -66,14 +66,14 @@ export default function EnterpriseCalculator() {
           </div>
         </div>
 
-        <div className="md:col-span-6 grid grid-cols-2 gap-4 font-mono">
-          <div className="p-6 bg-[#ECFDF5] rounded-2xl border border-[#A7F3D0] text-center">
+        <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono">
+          <div className="p-5 sm:p-6 bg-[#ECFDF5] rounded-2xl border border-[#A7F3D0] text-center">
             <div className="text-[10px] text-[#059669] font-bold uppercase mb-1">ANNUAL HOURS SAVED</div>
-            <div className="font-heading text-3xl font-bold text-[#08090c]">{hoursSavedPerYear.toLocaleString('en-IN')} hrs</div>
+            <div className="font-heading text-2xl sm:text-3xl font-bold text-[#08090c]">{hoursSavedPerYear.toLocaleString('en-IN')} hrs</div>
           </div>
-          <div className="p-6 bg-[#ECFDF5] rounded-2xl border border-[#A7F3D0] text-center">
+          <div className="p-5 sm:p-6 bg-[#ECFDF5] rounded-2xl border border-[#A7F3D0] text-center">
             <div className="text-[10px] text-[#059669] font-bold uppercase mb-1">ANNUAL VALUE GENERATED</div>
-            <div className="font-heading text-3xl font-bold text-[#10B981]">₹{calculateRupees}</div>
+            <div className="font-heading text-2xl sm:text-3xl font-bold text-[#10B981] break-all sm:break-normal">₹{calculateRupees}</div>
           </div>
         </div>
       </div>

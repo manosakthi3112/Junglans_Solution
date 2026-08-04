@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
+import OurTeamPage from './pages/OurTeamPage';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/team" element={<OurTeamPage />} />
           <Route path="/project/:id" element={<ProjectDetailPage />} />
         </Routes>
       </main>
