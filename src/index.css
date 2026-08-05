@@ -181,3 +181,15 @@ h1, h2, h3, h4, .font-heading {
 ::-webkit-scrollbar-thumb:hover {
   background: #10B981;
 }
+
+/* Utility to hide scrollbar while keeping scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

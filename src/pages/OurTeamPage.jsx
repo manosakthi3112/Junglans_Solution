@@ -19,12 +19,37 @@ export default function OurTeamPage() {
       bio: 'B.Tech AI & DS (GPA 8.8). Co-Founder at AscendiaEdu. Architected all 20 Junglans Solutions enterprise software repositories.',
       skills: ['AI Systems Architecture', 'Rust / C++', 'LLM Quantization', 'Zero-Trust Protocol'],
       email: 'manot6114@gmail.com',
-      phone: '+91 9361043465',
       ascendiaEduUrl: 'https://ascendiaedu.online',
       isFounder: true
     },
     {
       id: 'member-2',
+      name: 'Govindarajan Selvaraj',
+      role: 'ML Engineer',
+      department: 'ai',
+      badge: 'ML ENGINEER',
+      avatar: 'GS',
+      color: '#059669',
+      bio: 'B.Tech AI & Data Science graduate with expertise in machine learning, deep learning, computer vision, and robotics. Skilled in end-to-end model development with Python, PyTorch, and TensorFlow.',
+      skills: ['Python', 'PyTorch', 'TensorFlow', 'Computer Vision', 'NLP', 'Deep Learning'],
+      email: 'govindarajan1305@gmail.com',
+      linkedin: 'https://linkedin.com'
+    },
+    {
+      id: 'member-3',
+      name: 'Surya N',
+      role: 'Full Stack Developer',
+      department: 'engineering',
+      badge: 'FULL STACK',
+      avatar: 'SN',
+      color: '#10B981',
+      bio: 'B.Tech Information Technology graduate skilled in modern web development across MERN & PERN stacks. Hands-on experience building full-stack web applications using React, Node.js, Express, Next.js, and MongoDB.',
+      skills: ['React', 'Node.js', 'Express.js', 'TypeScript', 'MongoDB', 'Next.js'],
+      email: 'suryan2398@gmail.com',
+      linkedin: 'https://linkedin.com'
+    },
+    {
+      id: 'member-4',
       name: 'Dr. Aris Thorne',
       role: 'Head of Systems & Security Research',
       department: 'security',
@@ -37,7 +62,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-3',
+      id: 'member-5',
       name: 'Elena Rostova',
       role: 'Principal Multi-Agent AI Engineer',
       department: 'ai',
@@ -50,7 +75,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-4',
+      id: 'member-6',
       name: 'Karthik Subramanian',
       role: 'Lead Full-Stack Infrastructure Architect',
       department: 'engineering',
@@ -63,7 +88,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-5',
+      id: 'member-7',
       name: 'Sarah Chen',
       role: 'VP of Product & Developer Experience',
       department: 'product',
@@ -76,7 +101,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-6',
+      id: 'member-8',
       name: 'Vikram Mehta',
       role: 'Lead Data Infrastructure & NLP Engineer',
       department: 'ai',
@@ -113,7 +138,7 @@ export default function OurTeamPage() {
               <line x1="19" y1="12" x2="5" y2="12"></line>
               <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
-            Back to Home & 20 Products
+            Back to Home & Products
           </Link>
           <span className="font-mono text-[10px] sm:text-xs text-[#059669] bg-[#ECFDF5] px-3.5 py-1.5 rounded-full border border-[#A7F3D0] font-bold uppercase tracking-wider">
             JUNGLANS SOLUTIONS // OUR TEAM & LEADERSHIP
@@ -148,12 +173,12 @@ export default function OurTeamPage() {
         </div>
 
         {/* Filter Pills Navigation */}
-        <div className="mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <h2 className="font-heading text-3xl font-bold text-[#08090c]">
             Core Team & Specialists
           </h2>
 
-          <div className="flex overflow-x-auto max-w-full pb-2 sm:pb-0 no-scrollbar gap-2 font-mono text-xs">
+          <div className="flex flex-wrap items-center gap-2 max-w-full font-mono text-xs">
             {[
               { id: 'all', label: 'All Team Members' },
               { id: 'leadership', label: 'Leadership' },
@@ -291,7 +316,7 @@ export default function OurTeamPage() {
                 to="/"
                 className="font-mono text-xs sm:text-sm bg-white text-[#08090c] border border-[#A7F3D0] px-8 py-4 rounded-xl font-bold hover:bg-[#ECFDF5] transition"
               >
-                Explore 20 Product Portfolio
+                Explore Product Portfolio
               </Link>
             </div>
           </div>

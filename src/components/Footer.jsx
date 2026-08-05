@@ -17,11 +17,11 @@ export default function Footer() {
             <span className="font-heading font-bold text-xl sm:text-2xl text-[#08090c]">Junglans Solutions</span>
           </div>
           <p className="font-body text-xs sm:text-sm text-slate-600 max-w-sm leading-relaxed mb-6">
-            Architecting the future of local-first, high-performance enterprise software solutions. 20 specialized tools designed for zero telemetry, military-grade privacy, and sub-millisecond execution.
+            Architecting the future of local-first, high-performance enterprise software solutions. Specialized tools designed for zero telemetry, military-grade privacy, and sub-millisecond execution.
           </p>
           <div className="flex items-center gap-3 font-mono text-[11px] sm:text-xs text-[#059669]">
             <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
-            <span className="font-bold">20 ACTIVE ENTERPRISE PRODUCTS DEPLOYED</span>
+            <span className="font-bold">ACTIVE ENTERPRISE PRODUCTS DEPLOYED</span>
           </div>
         </div>
 
@@ -49,7 +49,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-[#A7F3D0]/40 py-6 sm:py-8 text-center font-mono text-[10px] sm:text-xs text-slate-500 bg-[#ECFDF5]/50 px-4">
-        © 2026 JUNGLANS_SOLUTIONS // ALL_RIGHTS_RESERVED // 20_PRODUCT_PORTFOLIO
+        © 2026 JUNGLANS_SOLUTIONS // ALL_RIGHTS_RESERVED // PRODUCT_PORTFOLIO
       </div>
     </footer>
   );

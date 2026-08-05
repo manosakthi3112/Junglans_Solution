@@ -38,7 +38,7 @@ export default function Navbar() {
               Junglans
             </span>
             <span className="font-mono text-[8px] sm:text-[9.5px] text-[#059669] mt-1 tracking-widest uppercase font-semibold">
-              SOLUTIONS // 20 PORTFOLIO
+              SOLUTIONS // PORTFOLIO
             </span>
           </div>
         </Link>
@@ -120,7 +120,7 @@ export default function Navbar() {
                 Showcase
                 <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
               </span>
-              <span className="text-[10px] text-[#059669]">20 Projects</span>
+              <span className="text-[10px] text-[#059669]">Projects</span>
             </button>
 
             <Link

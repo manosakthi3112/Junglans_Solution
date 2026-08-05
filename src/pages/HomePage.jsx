@@ -61,7 +61,7 @@ export default function HomePage() {
             <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse-ring flex-shrink-0"></span>
             <span className="tracking-widest uppercase font-bold text-[#059669]">JUNGLANS SOLUTIONS // ENTERPRISE SOFTWARE CONSORTIUM</span>
             <span className="px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#10B981] font-bold font-mono text-[10px] border border-[#A7F3D0]">
-              20 PROJECTS
+              PROJECTS
             </span>
           </div>
           
@@ -73,7 +73,7 @@ export default function HomePage() {
           </h1>
 
           <p className="font-body text-base sm:text-xl text-slate-600 mb-8 sm:mb-10 max-w-2xl leading-relaxed">
-            Junglans Solutions develops 20 specialized tools and applications for global engineering organizations. High-performance compiled binaries, zero cloud telemetry, and total privacy guarantees.
+            Junglans Solutions develops specialized tools and applications for global engineering organizations. High-performance compiled binaries, zero cloud telemetry, and total privacy guarantees.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -99,7 +99,7 @@ export default function HomePage() {
               href="#showcase"
               className="font-mono text-xs sm:text-sm bg-white text-[#08090c] border border-[#A7F3D0] px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold hover:bg-[#ECFDF5] transition inline-flex items-center justify-center gap-3 shadow-sm hover:-translate-y-1 duration-300"
             >
-              All 20 Projects Catalog
+              All Projects Catalog
             </a>
           </div>
         </div>
@@ -110,13 +110,13 @@ export default function HomePage() {
         <div className="marquee">
           <div className="marquee-content font-heading text-lg sm:text-2xl font-bold text-[#059669]/30 tracking-wider">
             <span>JUNGLANS SOLUTIONS</span> <span>/</span>
-            <span>20 ENTERPRISE PRODUCTS</span> <span>/</span>
+            <span>ENTERPRISE PRODUCTS</span> <span>/</span>
             <span>LOCAL-FIRST ARCHITECTURE</span> <span>/</span>
             <span>ZERO-TRUST SECURITY</span> <span>/</span>
           </div>
           <div className="marquee-content font-heading text-lg sm:text-2xl font-bold text-[#059669]/30 tracking-wider" aria-hidden="true">
             <span>JUNGLANS SOLUTIONS</span> <span>/</span>
-            <span>20 ENTERPRISE PRODUCTS</span> <span>/</span>
+            <span>ENTERPRISE PRODUCTS</span> <span>/</span>
             <span>LOCAL-FIRST ARCHITECTURE</span> <span>/</span>
             <span>ZERO-TRUST SECURITY</span> <span>/</span>
           </div>
@@ -418,10 +418,10 @@ export default function HomePage() {
         <div className="mb-10 sm:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="font-mono text-xs text-[#059669] mb-3 sm:mb-4 font-bold uppercase tracking-widest">
-              SEC_02 // COMPLETE_PORTFOLIO_SHOWCASE (20 PROJECTS)
+              SEC_02 // COMPLETE_PORTFOLIO_SHOWCASE
             </div>
             <h2 className="font-heading text-3xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[#08090c]">
-              Explore all 20 enterprise <br className="hidden sm:inline" />
+              Explore all enterprise <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
                 software applications.
               </span>
@@ -436,13 +436,13 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-8 sm:mb-10">
           
           {/* Category Pill Buttons */}
-          <div className="flex overflow-x-auto pb-2 sm:pb-0 max-w-full no-scrollbar sm:flex-wrap items-center gap-2 font-mono text-xs">
+          <div className="flex flex-wrap items-center gap-2 max-w-full font-mono text-xs">
             {[
-              { id: 'all', label: `All (20)` },
-              { id: 'ai-tools', label: `AI & Intelligence (${projectsData.filter(p=>p.category==='ai-tools').length})` },
-              { id: 'dev-tools', label: `Dev Tools (${projectsData.filter(p=>p.category==='dev-tools').length})` },
-              { id: 'finance', label: `Finance (${projectsData.filter(p=>p.category==='finance').length})` },
-              { id: 'productivity', label: `Productivity (${projectsData.filter(p=>p.category==='productivity').length})` },
+              { id: 'all', label: 'All Projects' },
+              { id: 'ai-tools', label: 'AI & Intelligence' },
+              { id: 'dev-tools', label: 'Dev Tools' },
+              { id: 'finance', label: 'Finance' },
+              { id: 'productivity', label: 'Productivity' },
             ].map((cat) => (
               <button
                 key={cat.id}
