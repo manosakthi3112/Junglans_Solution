@@ -3,166 +3,167 @@ import React, { useState } from 'react';
 export default function FounderSpotlight() {
   const [expanded, setExpanded] = useState(false);
 
+  const founders = [
+    {
+      id: 'manosakthi',
+      name: 'Manosakthi Thiyagarajan',
+      role: 'Founder & Lead AI Architect',
+      badge: 'FOUNDER',
+      avatar: 'MT',
+      color: '#10B981',
+      gpa: 'GPA 8.8',
+      summary: 'Architect of local-first enterprise software suites, zero-trust security protocols, and LLM quantization engines.',
+      bioDetail: 'B.Tech in Artificial Intelligence & Data Science from P.A. College of Engineering and Technology. Co-Founder at AscendiaEdu. Has architected local-first software repositories spanning developer tooling, version control attribution, AI workspaces, encrypted communications, and natural language data infrastructure.',
+      skills: ['AI Systems Architecture', 'Rust / C++', 'LLM Quantization', 'Zero-Trust Protocol'],
+      email: 'manot6114@gmail.com',
+      ascendiaEduUrl: 'https://ascendiaedu.online',
+      githubUrl: 'https://github.com/manot6114',
+      linkedinUrl: 'https://linkedin.com'
+    },
+    {
+      id: 'srikanish',
+      name: 'Sri Kanish P',
+      role: 'Co-Founder & ROS Developer',
+      badge: 'CO-FOUNDER',
+      avatar: 'SK',
+      color: '#059669',
+      gpa: 'Diploma in ROS',
+      summary: 'Specialist in robotic software nodes (ROS1/ROS2), hardware automation, and intelligent sensor control systems.',
+      bioDetail: 'B.Tech in Artificial Intelligence & Data Science with Diploma in ROS from iHub School of Learning. Experienced in developing robotic software nodes, sensor data integration for real-time responsiveness, robotic arm control, and hardware-software simulation.',
+      skills: ['ROS1 / ROS2', 'Robotics & Automation', 'Python / C++', 'Sensor Integration', 'Hardware Automation'],
+      email: 'kanishpatrick@gmail.com',
+      linkedinUrl: 'https://www.linkedin.com/in/srikanish-parthiban-56a783368/'
+    }
+  ];
+
   return (
     <div id="founder" className="glass-panel rounded-3xl p-5 sm:p-7 bg-white border border-[#A7F3D0] shadow-xl my-6 sm:my-10 relative overflow-hidden transition-all duration-300">
       
-      {/* Background Subtle Mint Glow Radial */}
-      <div className="absolute -top-24 -right-24 w-72 sm:w-80 h-72 sm:h-80 bg-[#10B981]/10 rounded-full blur-[90px] pointer-events-none"></div>
+      {/* Background Glow */}
+      <div className="absolute -top-24 -right-24 w-72 sm:w-96 h-72 sm:h-96 bg-[#10B981]/10 rounded-full blur-[90px] pointer-events-none"></div>
 
-      {/* Main Compact Identity & Highlight Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-10">
-        <div className="flex items-center gap-4">
-          {/* Avatar Icon */}
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-[#10B981] via-[#059669] to-[#047857] text-white flex items-center justify-center font-heading text-xl sm:text-2xl font-bold shadow-md shadow-emerald-500/20 flex-shrink-0">
-            MT
+      {/* Header Banner */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100 relative z-10">
+        <div>
+          <div className="flex items-center gap-2 font-mono text-[10px] sm:text-xs text-[#059669] font-bold uppercase tracking-widest">
+            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping flex-shrink-0"></span>
+            EXECUTIVE LEADERSHIP SPOTLIGHT
           </div>
-          <div>
-            <div className="flex items-center gap-2 font-mono text-[10px] sm:text-xs text-[#059669] font-bold uppercase tracking-widest">
-              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping flex-shrink-0"></span>
-              FOUNDER & LEAD ARCHITECT
-            </div>
-            <h2 className="font-heading text-xl sm:text-3xl font-bold text-[#08090c] tracking-tight">
-              Manosakthi Thiyagarajan
-            </h2>
-            <div className="flex flex-wrap items-center gap-2 mt-1 font-mono text-xs text-slate-600">
-              <span>Co-Founder at <a href="https://ascendiaedu.online" target="_blank" rel="noreferrer" className="text-[#10B981] font-bold hover:underline">AscendiaEdu ↗</a></span>
-              <span className="text-slate-300">•</span>
-              <span className="bg-[#ECFDF5] text-[#059669] px-2.5 py-0.5 rounded-full border border-[#A7F3D0] font-bold text-[11px]">B.Tech AI & DS (GPA 8.8)</span>
-            </div>
-          </div>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#08090c] tracking-tight mt-1">
+            Founders & Executive Leadership
+          </h2>
         </div>
-
-        {/* Quick Action Profile Buttons */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 font-mono text-xs">
-          <a
-            href="https://ascendiaedu.online"
-            target="_blank"
-            rel="noreferrer"
-            className="px-4 py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white font-bold transition shadow-md shadow-emerald-500/15 flex items-center gap-1.5"
-          >
-            🎓 AscendiaEdu ↗
-          </a>
-          <a
-            href="https://github.com/manot6114"
-            target="_blank"
-            rel="noreferrer"
-            className="px-3.5 py-2.5 rounded-xl bg-[#F4FBF7] text-[#08090c] border border-slate-200 font-bold hover:bg-[#10B981] hover:text-white transition"
-          >
-            🐙 GitHub
-          </a>
-          <a
-            href="mailto:manot6114@gmail.com"
-            className="px-3.5 py-2.5 rounded-xl bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] font-bold hover:bg-[#10B981] hover:text-white transition"
-          >
-            ✉ Email
-          </a>
-        </div>
+        <span className="font-mono text-xs text-[#059669] bg-[#ECFDF5] px-3.5 py-1.5 rounded-full border border-[#A7F3D0] font-bold w-fit">
+          JUNGLANS SOLUTIONS
+        </span>
       </div>
 
-      {/* Main Highlight Metrics Bar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5 pt-5 border-t border-slate-100 font-mono text-xs relative z-10">
-        <div className="p-3 bg-[#ECFDF5]/80 rounded-xl border border-[#A7F3D0]">
-          <div className="text-[10px] text-[#059669] font-bold uppercase">FOUNDER ROLE</div>
-          <div className="font-bold text-[#08090c]">Junglans Solutions</div>
-          <div className="text-[10px] text-slate-500">Local-First Software Architect</div>
-        </div>
+      {/* Founder Cards Grid (2 Columns: Manosakthi & Sri Kanish) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 relative z-10">
+        {founders.map((founder) => (
+          <div
+            key={founder.id}
+            className="p-6 rounded-2xl bg-white border border-[#A7F3D0] shadow-md hover:border-[#10B981] transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div>
+              {/* Header Badge & Initial Avatar */}
+              <div className="flex items-center justify-between mb-4">
+                <div
+                  className="w-14 h-14 rounded-2xl text-white font-heading font-bold text-xl flex items-center justify-center shadow-md transform group-hover:scale-105 transition-transform"
+                  style={{ backgroundColor: founder.color }}
+                >
+                  {founder.avatar}
+                </div>
+                <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0]">
+                  {founder.badge}
+                </span>
+              </div>
 
-        <a
-          href="https://ascendiaedu.online"
-          target="_blank"
-          rel="noreferrer"
-          className="p-3 bg-[#ECFDF5]/80 rounded-xl border border-[#A7F3D0] hover:border-[#10B981] transition group"
-        >
-          <div className="text-[10px] text-[#059669] font-bold uppercase">EDTECH VENTURE</div>
-          <div className="font-bold text-[#08090c] group-hover:text-[#10B981]">Co-Founder @ AscendiaEdu</div>
-          <div className="text-[10px] text-[#10B981] font-bold">ascendiaedu.online ↗</div>
-        </a>
+              {/* Founder Name & Role */}
+              <h3 className="font-heading text-xl font-bold text-[#08090c] group-hover:text-[#10B981] transition-colors">
+                {founder.name}
+              </h3>
+              <div className="font-mono text-xs text-[#059669] font-bold mt-1 mb-3">
+                {founder.role}
+              </div>
 
-        <div className="p-3 bg-[#ECFDF5]/80 rounded-xl border border-[#A7F3D0]">
-          <div className="text-[10px] text-[#059669] font-bold uppercase">ACADEMIC BACKGROUND</div>
-          <div className="font-bold text-[#08090c]">GPA 8.8 // B.Tech AI & DS</div>
-          <div className="text-[10px] text-slate-500">P.A. College of Engg. & Tech</div>
-        </div>
+              {/* Summary */}
+              <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                {founder.summary}
+              </p>
+
+              {/* Inline Detailed Bio when expanded */}
+              {expanded && (
+                <div className="mt-4 pt-4 border-t border-[#A7F3D0]/60 animate-fade-in-up font-body text-xs text-slate-700 leading-relaxed space-y-3">
+                  <p className="bg-[#ECFDF5]/70 p-3.5 rounded-xl border border-[#A7F3D0]">
+                    {founder.bioDetail}
+                  </p>
+                  <div>
+                    <div className="font-mono text-[10px] text-slate-400 font-bold uppercase mb-1.5">KEY SPECIALIZATIONS:</div>
+                    <div className="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                      {founder.skills.map((skill, sIdx) => (
+                        <span key={sIdx} className="px-2.5 py-1 bg-white border border-[#A7F3D0] text-[#059669] rounded-lg font-medium">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Highlight Pill */}
+              <div className="mt-3 mb-4">
+                <span className="font-mono text-[11px] bg-[#F4FBF7] text-[#059669] px-3 py-1 rounded-lg border border-[#A7F3D0] font-bold inline-block">
+                  🎓 {founder.gpa}
+                </span>
+              </div>
+            </div>
+
+            {/* Quick Action Links */}
+            <div className="pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-xs font-bold text-[#059669]">
+              <a
+                href={`mailto:${founder.email}`}
+                className="hover:text-[#10B981] transition flex items-center gap-1.5"
+              >
+                ✉ Email
+              </a>
+
+              {founder.ascendiaEduUrl ? (
+                <a
+                  href={founder.ascendiaEduUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[#10B981] hover:underline"
+                >
+                  AscendiaEdu ↗
+                </a>
+              ) : (
+                <a
+                  href={founder.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-slate-500 hover:text-[#10B981] transition"
+                >
+                  LinkedIn ↗
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
 
-      {/* Toggle Expand / See More Button */}
-      <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-xs relative z-10">
+      {/* Expand Toggle Button */}
+      <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-xs relative z-10">
         <span className="text-slate-500 text-[11px] font-semibold">
-          {expanded ? 'Full Executive & Internship Breakdown' : 'Click below to read full research & background bio'}
+          {expanded ? 'Full Background & Research Specifications' : 'Click to view complete academic & research details'}
         </span>
         <button
           onClick={() => setExpanded(!expanded)}
-          className="px-4 py-2 rounded-xl bg-[#ECFDF5] hover:bg-[#10B981] text-[#059669] hover:text-white border border-[#A7F3D0] font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm"
+          className="px-4 py-2.5 rounded-xl bg-[#ECFDF5] hover:bg-[#10B981] text-[#059669] hover:text-white border border-[#A7F3D0] font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm"
         >
-          {expanded ? (
-            <>
-              Show Less ↑
-            </>
-          ) : (
-            <>
-              See More / Full Bio ↓
-            </>
-          )}
+          {expanded ? 'Show Less ↑' : 'See Detailed Research Bio ↓'}
         </button>
       </div>
-
-      {/* Collapsible Expanded Bio & Industry Breakdown */}
-      {expanded && (
-        <div className="mt-6 pt-6 border-t border-[#A7F3D0] animate-fade-in-up space-y-6 relative z-10">
-          
-          {/* Executive Summary */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-[#ECFDF5] to-white border border-[#A7F3D0]">
-            <div className="font-mono text-xs text-[#059669] font-bold uppercase tracking-wider mb-2">
-              EXECUTIVE & TECHNICAL SUMMARY
-            </div>
-            <p className="font-body text-sm text-slate-700 leading-relaxed mb-3">
-              <strong className="text-[#08090c]">Manosakthi Thiyagarajan</strong> is the Founder and Lead AI Architect behind <strong className="text-[#059669]">Junglans Solutions</strong> and Co-Founder at <strong className="text-[#059669]">AscendiaEdu</strong>. With a B.Tech in AI & Data Science (GPA: 8.8), he has architected local-first software repositories spanning developer tooling, version control attribution, AI workspaces, encrypted communications, and natural language data infrastructure.
-            </p>
-            <p className="font-body text-xs text-slate-600 leading-relaxed">
-              At AscendiaEdu, he drives AI-powered educational innovation while simultaneously leading product architecture across Junglans Solutions' technical suites.
-            </p>
-          </div>
-
-          {/* Domain Experience & Industry Internships Breakdown */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 font-mono text-xs">
-            <div className="p-4 bg-white rounded-2xl border border-[#A7F3D0]">
-              <div className="font-bold text-[#08090c] text-sm">Robotics & AI</div>
-              <div className="text-slate-500 text-[11px] mt-0.5">iHub School of Learning</div>
-              <div className="text-[#059669] font-bold mt-2 text-[11px]">ROS & Embedded Vision</div>
-            </div>
-            <div className="p-4 bg-white rounded-2xl border border-[#A7F3D0]">
-              <div className="font-bold text-[#08090c] text-sm">Data Science</div>
-              <div className="text-slate-500 text-[11px] mt-0.5">Neha Solutions</div>
-              <div className="text-[#059669] font-bold mt-2 text-[11px]">Pipelines & Forecasting</div>
-            </div>
-            <div className="p-4 bg-white rounded-2xl border border-[#A7F3D0]">
-              <div className="font-bold text-[#08090c] text-sm">Machine Learning</div>
-              <div className="text-slate-500 text-[11px] mt-0.5">Live Stream Tech</div>
-              <div className="text-[#059669] font-bold mt-2 text-[11px]">CNN & LSTM Models</div>
-            </div>
-          </div>
-
-          {/* Social Links Footer */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 font-mono text-xs text-slate-500 border-t border-slate-100">
-            <div className="flex gap-4">
-              <a href="https://ascendiaedu.online" target="_blank" rel="noreferrer" className="text-[#059669] font-bold hover:underline">
-                AscendiaEdu ↗
-              </a>
-              <a href="https://github.com/manot6114" target="_blank" rel="noreferrer" className="hover:text-[#10B981]">
-                GitHub ↗
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-[#10B981]">
-                LinkedIn ↗
-              </a>
-              <a href="mailto:manot6114@gmail.com" className="hover:text-[#10B981]">
-                Email ↗
-              </a>
-            </div>
-            <span className="text-[10px]">POLLACHI, TAMIL NADU</span>
-          </div>
-
-        </div>
-      )}
 
     </div>
   );

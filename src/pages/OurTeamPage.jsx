@@ -16,7 +16,7 @@ export default function OurTeamPage() {
       badge: 'FOUNDER',
       avatar: 'MT',
       color: '#10B981',
-      bio: 'B.Tech AI & DS (GPA 8.8). Co-Founder at AscendiaEdu. Architected all 20 Junglans Solutions enterprise software repositories.',
+      bio: 'B.Tech AI & DS (GPA 8.8). Co-Founder at AscendiaEdu. Architected local-first enterprise software repositories for Junglans Solutions.',
       skills: ['AI Systems Architecture', 'Rust / C++', 'LLM Quantization', 'Zero-Trust Protocol'],
       email: 'manot6114@gmail.com',
       ascendiaEduUrl: 'https://ascendiaedu.online',
@@ -24,6 +24,35 @@ export default function OurTeamPage() {
     },
     {
       id: 'member-2',
+      name: 'Sri Kanish P',
+      role: 'Co-Founder & ROS Developer',
+      department: 'leadership',
+      badge: 'CO-FOUNDER',
+      avatar: 'SK',
+      color: '#059669',
+      bio: 'Co-Founder of Junglans Solutions & ROS Developer. B.Tech AI & DS with Diploma in ROS from iHub School of Learning. Hands-on experience developing robotic software nodes (ROS1/ROS2), hardware automation, and sensor control.',
+      skills: ['ROS1 / ROS2', 'Robotics & Automation', 'Python / C++', 'Machine Learning', 'Sensor Control', 'Hardware Integration'],
+      email: 'kanishpatrick@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/srikanish-parthiban-56a783368/',
+      isFounder: true
+    },
+    {
+      id: 'member-3',
+      name: 'Yashika P',
+      role: 'Founder @ AscendiaEdu & Lead DevOps Engineer',
+      department: 'leadership',
+      badge: 'FOUNDER @ ASCENDIA',
+      avatar: 'YP',
+      color: '#10B981',
+      bio: 'Founder at AscendiaEdu & Lead DevOps Engineer. B.Tech AI & DS (CGPA 9.2). Junior DevOps Engineer Trainee (Mr Intelligence Inc). Specialist in building CI/CD pipelines, Docker, Terraform cloud automation, and data analytics.',
+      skills: ['DevOps', 'CI/CD Pipelines', 'Docker', 'Terraform', 'Python / Go', 'Cloud Automation'],
+      email: 'yashikayash193@gmail.com',
+      linkedin: 'https://linkedin.com/in/yashikap21',
+      ascendiaEduUrl: 'https://ascendiaedu.online',
+      isFounder: true
+    },
+    {
+      id: 'member-4',
       name: 'Govindarajan Selvaraj',
       role: 'ML Engineer',
       department: 'ai',
@@ -36,7 +65,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-3',
+      id: 'member-5',
       name: 'Surya N',
       role: 'Full Stack Developer',
       department: 'engineering',
@@ -49,7 +78,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-4',
+      id: 'member-6',
       name: 'Dr. Aris Thorne',
       role: 'Head of Systems & Security Research',
       department: 'security',
@@ -62,7 +91,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-5',
+      id: 'member-7',
       name: 'Elena Rostova',
       role: 'Principal Multi-Agent AI Engineer',
       department: 'ai',
@@ -75,7 +104,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-6',
+      id: 'member-8',
       name: 'Karthik Subramanian',
       role: 'Lead Full-Stack Infrastructure Architect',
       department: 'engineering',
@@ -88,7 +117,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-7',
+      id: 'member-9',
       name: 'Sarah Chen',
       role: 'VP of Product & Developer Experience',
       department: 'product',
@@ -101,7 +130,7 @@ export default function OurTeamPage() {
       linkedin: 'https://linkedin.com'
     },
     {
-      id: 'member-8',
+      id: 'member-10',
       name: 'Vikram Mehta',
       role: 'Lead Data Infrastructure & NLP Engineer',
       department: 'ai',
