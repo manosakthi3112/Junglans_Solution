@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FounderSpotlight from '../components/FounderSpotlight';
 
 export default function OurTeamPage() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [contactModalOpen, setContactModalOpen] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Team Members Data - User can easily update, add, or edit these team profiles
   const teamMembers = [

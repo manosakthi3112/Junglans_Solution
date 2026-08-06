@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function SecurityComplianceSection() {
   const [activeBadgeIndex, setActiveBadgeIndex] = useState(0);
@@ -62,16 +63,25 @@ export default function SecurityComplianceSection() {
       </div>
 
       {/* Active Detail Display */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0] text-center max-w-2xl mx-auto">
+      <div className="p-5 sm:p-6 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0] text-center max-w-2xl mx-auto mb-6">
         <div className="font-mono text-xs text-[#059669] font-bold mb-1 uppercase tracking-wider">
           {complianceBadges[activeBadgeIndex].tag} DETAILS
         </div>
         <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#08090c] mb-2">
           {complianceBadges[activeBadgeIndex].title}
         </h3>
-        <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed">
+        <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
           {complianceBadges[activeBadgeIndex].desc}
         </p>
+      </div>
+
+      <div className="text-center">
+        <Link
+          to="/security"
+          className="inline-flex items-center gap-2 font-mono text-xs bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-6 py-3 rounded-xl font-bold hover:bg-[#10B981] hover:text-white transition shadow-sm"
+        >
+          Explore Complete Enterprise Security Documentation Page ↗
+        </Link>
       </div>
     </div>
   );

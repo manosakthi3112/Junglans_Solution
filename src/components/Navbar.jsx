@@ -19,6 +19,7 @@ export default function Navbar() {
   };
 
   const isTeamPage = location.pathname === '/team';
+  const isSecurityPage = location.pathname === '/security';
 
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-[#A7F3D0]/60 px-4 sm:px-6 md:px-12 py-3 shadow-sm">
@@ -44,7 +45,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-7 font-mono text-xs uppercase tracking-widest text-slate-600 font-medium">
+        <div className="hidden lg:flex items-center gap-6 font-mono text-xs uppercase tracking-widest text-slate-600 font-medium">
           <button onClick={() => handleNavClick('ecosystem')} className="hover:text-[#10B981] transition cursor-pointer">Ecosystem</button>
           <button onClick={() => handleNavClick('showcase')} className="hover:text-[#10B981] transition cursor-pointer flex items-center gap-1.5">
             Showcase
@@ -52,11 +53,21 @@ export default function Navbar() {
           </button>
           <Link
             to="/team"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className={`transition cursor-pointer font-bold ${
               isTeamPage ? 'text-[#10B981] underline underline-offset-4' : 'hover:text-[#10B981] text-[#059669]'
             }`}
           >
             Our Team
+          </Link>
+          <Link
+            to="/security"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className={`transition cursor-pointer font-bold ${
+              isSecurityPage ? 'text-[#10B981] underline underline-offset-4' : 'hover:text-[#10B981] text-[#059669]'
+            }`}
+          >
+            Security
           </Link>
           <button onClick={() => handleNavClick('founder')} className="hover:text-[#10B981] transition cursor-pointer font-bold text-[#059669]">Founder</button>
           <button onClick={() => handleNavClick('capabilities')} className="hover:text-[#10B981] transition cursor-pointer">Capabilities</button>
@@ -125,13 +136,30 @@ export default function Navbar() {
 
             <Link
               to="/team"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className={`text-left px-4 py-3 rounded-xl font-bold transition flex items-center justify-between ${
                 isTeamPage ? 'bg-[#ECFDF5] text-[#10B981] border border-[#A7F3D0]' : 'hover:bg-[#ECFDF5] hover:text-[#10B981] text-[#059669]'
               }`}
             >
               <span>Our Team</span>
               <span className="text-[10px] bg-[#10B981] text-white px-2 py-0.5 rounded font-bold">NEXT PAGE</span>
+            </Link>
+
+            <Link
+              to="/security"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`text-left px-4 py-3 rounded-xl font-bold transition flex items-center justify-between ${
+                isSecurityPage ? 'bg-[#ECFDF5] text-[#10B981] border border-[#A7F3D0]' : 'hover:bg-[#ECFDF5] hover:text-[#10B981] text-[#059669]'
+              }`}
+            >
+              <span>Enterprise Security</span>
+              <span className="text-[10px] bg-[#059669] text-white px-2 py-0.5 rounded font-bold">ZERO-TRUST</span>
             </Link>
 
             <button

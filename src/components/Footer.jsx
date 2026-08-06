@@ -40,8 +40,8 @@ export default function Footer() {
           <div className="font-mono text-xs text-[#059669] uppercase tracking-widest mb-4 font-bold">Company & Navigation</div>
           <ul className="space-y-2.5 text-xs sm:text-sm font-medium">
             <li><Link to="/team" className="text-[#10B981] font-bold hover:underline">Our Team Page ↗</Link></li>
+            <li><Link to="/security" className="text-slate-600 hover:text-[#10B981] transition font-bold">Enterprise Security Page ↗</Link></li>
             <li><Link to="/" className="text-slate-600 hover:text-[#10B981] transition">Home Portfolio</Link></li>
-            <li><a href="#security" className="text-slate-600 hover:text-[#10B981] transition">Enterprise Security</a></li>
             <li><a href="#founder" className="text-slate-600 hover:text-[#10B981] transition">Founder Spotlight</a></li>
             <li><a href="#enterprise" className="text-slate-600 hover:text-[#10B981] transition">Contact Sales</a></li>
           </ul>

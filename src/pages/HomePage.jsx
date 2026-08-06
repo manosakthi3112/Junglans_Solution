@@ -558,24 +558,26 @@ export default function HomePage() {
 
       {/* Section 3: Capabilities Bento Grid */}
       <section id="capabilities" className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-20 border-t border-[#A7F3D0]/60">
-        <div className="mb-12 sm:mb-16 text-center">
-          <div className="font-mono text-xs text-[#059669] mb-3 sm:mb-4 font-bold uppercase tracking-widest">SEC_03 // CAPABILITIES</div>
-          <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tighter text-[#08090c]">Engineered for enterprise scale.</h2>
+        <div className="mb-10 sm:mb-14 text-center">
+          <div className="font-mono text-xs text-[#059669] mb-3 sm:mb-4 font-bold uppercase tracking-widest">SEC_03 // CORE CAPABILITIES & ENGINEERING</div>
+          <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tighter text-[#08090c]">Engineered for enterprise scale & robotics.</h2>
           <p className="font-body text-base sm:text-lg text-slate-600 mt-3 sm:mt-4 max-w-2xl mx-auto">
-            A unified 20-product ecosystem built on core principles of privacy, performance, and total control.
+            A unified 20-product ecosystem built on core principles of privacy, performance, multi-agent AI, ROS robotics, and zero-trust security.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-auto md:auto-rows-[250px]">
-          <div className="glass-panel rounded-3xl p-6 sm:p-8 md:col-span-2 md:row-span-2 flex flex-col justify-between bg-white border border-[#A7F3D0]">
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Card 01: Local-First Architecture */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 md:col-span-2 flex flex-col justify-between bg-white border border-[#A7F3D0] shadow-md hover:border-[#10B981] transition-all">
             <div>
-              <div className="font-mono text-xs text-[#059669] mb-3 font-bold">01 // LOCAL-FIRST ARCHITECTURE</div>
+              <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-wider">01 // LOCAL-FIRST ARCHITECTURE</div>
               <h3 className="font-heading text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-[#08090c]">Your data stays strictly under your control.</h3>
               <p className="font-body text-sm sm:text-base text-slate-600 max-w-lg leading-relaxed">
                 Every product in the 20-application Junglans portfolio operates on-device by default. Cloud sync is optional, end-to-end encrypted, and zero-telemetry guaranteed.
               </p>
             </div>
-            <div className="font-mono text-xs text-slate-600 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
+            <div className="font-mono text-xs text-slate-600 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-6">
               <div className="bg-[#ECFDF5] p-3.5 sm:p-4 rounded-2xl border border-[#A7F3D0]">
                 <div className="text-slate-500 mb-1 text-[10px]">STORAGE</div>
                 <div className="text-[#059669] font-bold text-xs sm:text-sm">ON-DEVICE</div>
@@ -591,24 +593,54 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="glass-panel rounded-3xl p-6 flex flex-col justify-between bg-white border border-[#A7F3D0]">
+          {/* Card 02: Performance */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between bg-white border border-[#A7F3D0] shadow-md hover:border-[#10B981] transition-all">
             <div>
-              <div className="font-mono text-xs text-[#10B981] mb-3 font-bold">02 // PERFORMANCE</div>
+              <div className="font-mono text-xs text-[#10B981] mb-3 font-bold uppercase tracking-wider">02 // PERFORMANCE ENGINE</div>
               <h3 className="font-heading text-xl font-bold mb-2 text-[#08090c]">Sub-millisecond query execution.</h3>
-              <p className="font-body text-xs sm:text-sm text-slate-600">Native compilation and optimized algorithms ensure instant responsiveness.</p>
+              <p className="font-body text-xs sm:text-sm text-slate-600">Native Rust/C++ compilation and optimized memory layouts ensure instant responsiveness.</p>
             </div>
-            <div className="text-3xl sm:text-4xl font-bold text-[#10B981] font-mono mt-4">0.4ms</div>
+            <div className="text-3xl sm:text-4xl font-bold text-[#10B981] font-mono mt-6">0.4ms</div>
           </div>
 
-          <div className="glass-panel rounded-3xl p-6 flex flex-col justify-between bg-white border border-[#A7F3D0]">
+          {/* Card 03: ROS Robotics & Hardware */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between bg-white border border-[#A7F3D0] shadow-md hover:border-[#10B981] transition-all">
             <div>
-              <div className="font-mono text-xs text-[#059669] mb-3 font-bold">03 // AI INTEGRATION</div>
-              <h3 className="font-heading text-xl font-bold mb-2 text-[#08090c]">Flexible model options.</h3>
-              <p className="font-body text-xs sm:text-sm text-slate-600">Local model execution or secure enterprise cloud routing.</p>
+              <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-wider">03 // ROS & ROBOTICS NODES</div>
+              <h3 className="font-heading text-xl font-bold mb-2 text-[#08090c]">ROS1 / ROS2 Hardware Control.</h3>
+              <p className="font-body text-xs sm:text-sm text-slate-600">Robotic software nodes, sensor telemetry, and hardware automation systems led by Co-Founder Sri Kanish P.</p>
             </div>
-            <div className="flex gap-2 mt-4">
-              <span className="text-[10px] font-mono bg-[#ECFDF5] text-[#059669] px-3 py-1 rounded-full border border-[#A7F3D0] font-bold">LOCAL</span>
-              <span className="text-[10px] font-mono bg-white text-slate-600 px-3 py-1 rounded-full border border-slate-200 font-bold">CLOUD</span>
+            <div className="flex flex-wrap gap-1.5 mt-4 font-mono text-[10px]">
+              <span className="bg-[#ECFDF5] text-[#059669] px-2.5 py-1 rounded border border-[#A7F3D0] font-bold">ROS1 / ROS2</span>
+              <span className="bg-[#ECFDF5] text-[#059669] px-2.5 py-1 rounded border border-[#A7F3D0] font-bold">HARDWARE</span>
+            </div>
+          </div>
+
+          {/* Card 04: DevOps & CI/CD Pipelines */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between bg-white border border-[#A7F3D0] shadow-md hover:border-[#10B981] transition-all">
+            <div>
+              <div className="font-mono text-xs text-[#10B981] mb-3 font-bold uppercase tracking-wider">04 // DEVOPS & CI/CD AUTOMATION</div>
+              <h3 className="font-heading text-xl font-bold mb-2 text-[#08090c]">Docker & Terraform Cloud Automation.</h3>
+              <p className="font-body text-xs sm:text-sm text-slate-600">Zero-downtime deployment pipelines, containerization, and infrastructure-as-code led by Yashika P.</p>
+            </div>
+            <div className="flex flex-wrap gap-1.5 mt-4 font-mono text-[10px]">
+              <span className="bg-[#ECFDF5] text-[#10B981] px-2.5 py-1 rounded border border-[#A7F3D0] font-bold">DOCKER</span>
+              <span className="bg-[#ECFDF5] text-[#10B981] px-2.5 py-1 rounded border border-[#A7F3D0] font-bold">TERRAFORM</span>
+            </div>
+          </div>
+
+          {/* Card 05: Zero-Trust Security */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between bg-white border border-[#A7F3D0] shadow-md hover:border-[#10B981] transition-all">
+            <div>
+              <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-wider">05 // ZERO-TRUST SECURITY</div>
+              <h3 className="font-heading text-xl font-bold mb-2 text-[#08090c]">Air-Gapped & SOC 2 Type II Ready.</h3>
+              <p className="font-body text-xs sm:text-sm text-slate-600 mb-3">AES-256-GCM encryption, memory-safe execution, and full regulatory compliance.</p>
+              <Link to="/security" className="font-mono text-xs text-[#10B981] font-bold hover:underline flex items-center gap-1">
+                Explore Enterprise Security Page ↗
+              </Link>
+            </div>
+            <div className="flex gap-2 mt-4 font-mono text-[10px]">
+              <span className="bg-[#10B981] text-white px-3 py-1 rounded-full font-bold">SOC 2 AUDITED</span>
             </div>
           </div>
         </div>

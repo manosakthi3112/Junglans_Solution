@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUNGLANS — Tech, Science & Business Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF;
+            --paper: #F4F7F0;
+            --fg: #000000;
+            --accent-1: #B2FF59; /* Vibrant Light Green */
+            --accent-2: #CFFD9A; /* Pale Light Green */
+            --grid-line: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        .display-font {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+
+        /* Schematic Grid Background */
+        .schematic-bg {
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .noise::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Hard Shadows & Borders for Maximalist Brutalism */
+        .b-border { border: 2px solid var(--fg); }
+        .thick-border { border: 4px solid var(--fg); }
+        .hard-shadow { box-shadow: 6px 6px 0px var(--fg); }
+        .hard-shadow-lg { box-shadow: 10px 10px 0px var(--accent-1); }
+
+        /* Hover Interactions */
+        .tech-hover {
+            transition: all 0.15s ease;
+        }
+        .tech-hover:hover {
+            background-color: var(--accent-1);
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px var(--fg);
+        }
+
+        /* SVG Animations */
+        .draw-in {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear forwards;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .pulse-node {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .marquee {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            white-space: nowrap;
+        }
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Dense Information Layout */
+        .overlap-card {
+            transition: transform 0.2s ease;
+        }
+        .overlap-card:hover {
+            transform: translate(-5px, -5px);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="noise schematic-bg">
+
+    <!-- TOP DATA TICKER -->
+    <div class="bg-black text-[#B2FF59] py-2 overflow-hidden border-b-[4px] border-black">
+        <div class="marquee text-sm font-bold">
+            <span class="mx-6">SYS_STATUS: ONLINE</span>
+            <span class="mx-6">ACTIVE_NODES: 4,204</span>
+            <span class="mx-6">INCUBATOR_PROJECTS: 12</span>
+            <span class="mx-6">FIELDS: [BIOTECH, AI, WEB, MATERIAL_SCIENCE]</span>
+            <span class="mx-6">SYS_STATUS: ONLINE</span>
+            <span class="mx-6">ACTIVE_NODES: 4,204</span>
+            <span class="mx-6">INCUBATOR_PROJECTS: 12</span>
+            <span class="mx-6">FIELDS: [BIOTECH, AI, WEB, MATERIAL_SCIENCE]</span>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="border-b-[4px] border-black flex justify-between items-center p-4 bg-white sticky top-0 z-50">
+        <div class="display-font text-3xl flex items-center gap-3">
+            <!-- Custom SVG Logo -->
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 2L30 16L16 30L2 16L16 2Z" stroke="black" stroke-width="3"/>
+                <path d="M16 8L24 16L16 24L8 16L16 8Z" fill="#B2FF59" stroke="black" stroke-width="3"/>
+                <circle cx="16" cy="16" r="2" fill="black"/>
+            </svg>
+            JUNGLANS
+        </div>
+        <div class="hidden md:flex gap-2 text-sm font-bold uppercase">
+            <a href="#" class="b-border px-4 py-2 tech-hover bg-white">[ Learn ]</a>
+            <a href="#" class="b-border px-4 py-2 tech-hover bg-white">[ Collaborate ]</a>
+            <a href="#" class="b-border px-4 py-2 tech-hover bg-white">[ Incubator ]</a>
+            <a href="#" class="b-border px-4 py-2 tech-hover bg-black text-[#B2FF59]">[ Join Ecosystem ]</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION: THE ECOSYSTEM MAP -->
+    <section class="relative p-8 md:p-16 min-h-[90vh] overflow-hidden border-b-[4px] border-black">
+        
+        <!-- Massive Background SVG: Circuit Vine -->
+        <svg class="absolute top-0 right-0 w-full h-full opacity-10 z-0" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="draw-in" d="M800 0H0V800" stroke="black" stroke-width="2"/>
+            <path class="draw-in" d="M400 0C400 200 600 300 600 500C600 700 400 800 400 800" stroke="black" stroke-width="4" />
+            <path d="M200 200C300 250 350 350 250 450C150 550 250 650 250 650" stroke="#B2FF59" stroke-width="8" />
+            <circle cx="600" cy="500" r="12" fill="black" class="pulse-node"/>
+            <circle cx="250" cy="450" r="8" fill="black" class="pulse-node"/>
+            <rect x="380" y="380" width="40" height="40" stroke="black" stroke-width="4" />
+            <path d="M100 700L150 650L200 700L150 750Z" stroke="black" stroke-width="4" />
+        </svg>
+
+        <div class="relative z-10 grid grid-cols-12 gap-8">
+            
+            <!-- Left Side: Huge Text -->
+            <div class="col-span-12 lg:col-span-8">
+                <div class="flex items-center gap-4 mb-4 text-sm font-bold uppercase border-2 border-black inline-block px-2 py-1 bg-[#B2FF59] hard-shadow">
+                    <span class="w-2 h-2 bg-black rounded-full pulse-node"></span>
+                    Ecosystem v2.4.0
+                </div>
+                
+                <h1 class="display-font text-[12vw] lg:text-[9vw] leading-[0.85] text-black">
+                    LEARN.<br>
+                    <span class="bg-[#B2FF59] px-4 inline-block rotate-[-1deg] hard-shadow">BUILD.</span><br>
+                    <span class="text-black opacity-20">SPAWN.</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl font-bold max-w-xl mt-8 border-l-4 border-black pl-4">
+                    Junglans is a dense, overgrown collective of technologists, scientists, and builders. We share knowledge, cross-pollinate ideas, and incubate real businesses from the undergrowth.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <button class="bg-black text-white px-8 py-4 font-bold text-lg tech-hover border-2 border-black hard-shadow">
+                        ENTER THE CONSERVATORY →
+                    </button>
+                    <button class="bg-white text-black px-8 py-4 font-bold text-lg tech-hover border-2 border-black">
+                        READ THE MANIFESTO
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Side: Floating Data Node Cards -->
+            <div class="col-span-12 lg:col-span-4 relative h-full flex flex-col justify-center gap-6 mt-12 lg:mt-0">
+                
+                <!-- Custom SVG: DNA Strand -->
+                <div class="bg-white thick-border hard-shadow p-6 rotate-[2deg] overlap-card">
+                    <svg width="100%" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4">
+                        <path d="M10 30C50 0 50 60 90 30C130 0 130 60 170 30C180 20 190 30 190 30" stroke="black" stroke-width="4"/>
+                        <path d="M10 30C50 60 50 0 90 30C130 60 130 0 170 30C180 40 190 30 190 30" stroke="black" stroke-width="4"/>
+                        <circle cx="50" cy="15" r="5" fill="#B2FF59" stroke="black" stroke-width="2"/>
+                        <circle cx="50" cy="45" r="5" fill="#B2FF59" stroke="black" stroke-width="2"/>
+                        <circle cx="130" cy="15" r="5" fill="#B2FF59" stroke="black" stroke-width="2"/>
+                        <circle cx="130" cy="45" r="5" fill="#B2FF59" stroke="black" stroke-width="2"/>
+                    </svg>
+                    <h3 class="display-font text-2xl">BIO-TECH NODE</h3>
+                    <p class="text-sm mt-2 font-bold">Genetic data analysis & wetware hacking.</p>
+                </div>
+
+                <!-- Custom SVG: Neural Network -->
+                <div class="bg-[#B2FF59] thick-border hard-shadow p-6 rotate-[-2deg] overlap-card">
+                    <svg width="100%" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4">
+                        <circle cx="20" cy="30" r="8" stroke="black" stroke-width="3" fill="white"/>
+                        <circle cx="100" cy="10" r="8" stroke="black" stroke-width="3" fill="white"/>
+                        <circle cx="100" cy="50" r="8" stroke="black" stroke-width="3" fill="white"/>
+                        <circle cx="180" cy="30" r="8" stroke="black" stroke-width="3" fill="black"/>
+                        <line x1="28" y1="30" x2="92" y2="10" stroke="black" stroke-width="2"/>
+                        <line x1="28" y1="30" x2="92" y2="50" stroke="black" stroke-width="2"/>
+                        <line x1="108" y1="10" x2="172" y2="30" stroke="black" stroke-width="2"/>
+                        <line x1="108" y1="50" x2="172" y2="30" stroke="black" stroke-width="2"/>
+                    </svg>
+                    <h3 class="display-font text-2xl">AI &amp; M.L. NODE</h3>
+                    <p class="text-sm mt-2 font-bold">Swarm intelligence & generative models.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- THE INTERSECTION GRID: TECH MEETS SCIENCE -->
+    <section class="bg-[#F4F7F0] p-8 md:p-16 border-b-[4px] border-black relative">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+            <h2 class="display-font text-6xl md:text-8xl leading-none">
+                FIELDS OF<br>
+                <span class="text-black bg-[#B2FF59] px-2">STUDY</span>
+            </h2>
+            <p class="text-sm font-bold max-w-xs border-l-2 border-black pl-4">
+                We don't believe in silos. Pick a discipline, learn the fundamentals, and intersect it with another to create something wild.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-0 border-[4px] border-black hard-shadow-lg bg-white">
+            
+            <!-- Field 1 -->
+            <div class="border-r-[4px] border-b-[4px] border-black p-6 tech-hover relative group">
+                <span class="absolute top-2 right-2 text-xs font-bold opacity-30">01</span>
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                    <rect x="6" y="6" width="36" height="36" stroke="black" stroke-width="4"/>
+                    <rect x="16" y="16" width="16" height="16" fill="#B2FF59" stroke="black" stroke-width="4"/>
+                </svg>
+                <h3 class="display-font text-3xl mb-2">DEEP TECH</h3>
+                <p class="text-sm font-bold opacity-80">Hardware, IoT, Robotics, Semiconductor design.</p>
+            </div>
+
+            <!-- Field 2 -->
+            <div class="md:border-r-[4px] border-b-[4px] border-black p-6 tech-hover relative group bg-[#B2FF59]">
+                <span class="absolute top-2 right-2 text-xs font-bold opacity-30">02</span>
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                    <path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="black" stroke-width="4"/>
+                    <path d="M24 14L34 24L24 34L14 24L24 14Z" fill="black"/>
+                </svg>
+                <h3 class="display-font text-3xl mb-2">LIFE SCIENCES</h3>
+                <p class="text-sm font-bold opacity-80">Genomics, Bioinformatics, Synthetic Biology.</p>
+            </div>
+
+            <!-- Field 3 -->
+            <div class="border-r-[4px] md:border-b-[4px] border-black p-6 tech-hover relative group">
+                <span class="absolute top-2 right-2 text-xs font-bold opacity-30">03</span>
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                    <line x1="4" y1="44" x2="44" y2="4" stroke="black" stroke-width="4"/>
+                    <line x1="4" y1="4" x2="44" y2="44" stroke="black" stroke-width="4"/>
+                    <rect x="18" y="18" width="12" height="12" fill="#B2FF59" stroke="black" stroke-width="4"/>
+                </svg>
+                <h3 class="display-font text-3xl mb-2">SOFTWARE</h3>
+                <p class="text-sm font-bold opacity-80">Web3, Distributed Systems, Core Infrastructure.</p>
+            </div>
+
+            <!-- Field 4 -->
+            <div class="md:border-b-[4px] border-black p-6 tech-hover relative group">
+                <span class="absolute top-2 right-2 text-xs font-bold opacity-30">04</span>
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                    <circle cx="24" cy="24" r="20" stroke="black" stroke-width="4"/>
+                    <ellipse cx="24" cy="24" rx="10" ry="20" stroke="black" stroke-width="4"/>
+                    <line x1="4" y1="24" x2="44" y2="24" stroke="black" stroke-width="4"/>
+                </svg>
+                <h3 class="display-font text-3xl mb-2">PHYSICS</h3>
+                <p class="text-sm font-bold opacity-80">Quantum computing, Optics, Material Science.</p>
+            </div>
+
+            <!-- Intersection Banner -->
+            <div class="col-span-2 md:col-span-4 border-t-[4px] border-black p-6 flex flex-col md:flex-row items-center justify-between bg-black text-[#B2FF59]">
+                <h3 class="display-font text-3xl md:text-5xl">THE INTERSECTION</h3>
+                <p class="text-sm md:text-lg font-bold text-center md:text-right max-w-md mt-4 md:mt-0">
+                    // Where Bio-Tech meets AI. Where Software meets Material Science. That's where Junglans plants seeds.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INCUBATOR: FROM COMMUNITY TO BUSINESS -->
+    <section class="bg-white p-8 md:p-16 border-b-[4px] border-black relative overflow-hidden">
+        
+        <!-- Background Tech Pattern SVG -->
+        <svg class="absolute top-0 left-0 w-full h-full opacity-[0.03] z-0" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="100" height="100" fill="url(#grid)"/>
+        </svg>
+
+        <div class="relative z-10">
+            <h2 class="display-font text-6xl md:text-8xl leading-none mb-12">
+                THE<br>
+                <span class="bg-black text-[#B2FF59] px-4 py-2 inline-block rotate-[-2deg]">INCUBATOR</span>
+            </h2>
+
+            <div class="grid grid-cols-12 gap-6">
+                
+                <!-- Process Explanation (Left) -->
+                <div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+                    <div class="b-border p-6 bg-[#F4F7F0] tech-hover">
+                        <h4 class="display-font text-2xl text-[#123A12]">01. LEARN</h4>
+                        <p class="text-sm font-bold mt-2">Access open-source courses, labs, and peer-to-peer mentorship inside the community.</p>
+                    </div>
+                    <div class="b-border p-6 bg-[#B2FF59] tech-hover">
+                        <h4 class="display-font text-2xl">02. COLLABORATE</h4>
+                        <p class="text-sm font-bold mt-2">Form pods. Find a biologist, a dev, and a designer. Build a working prototype.</p>
+                    </div>
+                    <div class="b-border p-6 bg-black text-white tech-hover">
+                        <h4 class="display-font text-2xl text-[#B2FF59]">03. SPAWN</h4>
+                        <p class="text-sm font-bold mt-2">Junglans provides seed funding, legal, and network to turn your prototype into a business.</p>
+                    </div>
+                </div>
+
+                <!-- Spawned Products (Right) -->
+                <div class="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Product 1 -->
+                    <div class="col-span-1 md:col-span-2 b-border p-6 hard-shadow bg-white flex flex-col md:flex-row gap-6 tech-hover">
+                        <div class="flex-1">
+                            <span class="text-xs font-bold bg-[#B2FF59] px-2 py-1 border-2 border-black">SEED: ACTIVE</span>
+                            <h3 class="display-font text-4xl mt-4">NEURO-VINE</h3>
+                            <p class="text-sm font-bold mt-2">BCI (Brain-Computer Interface) platform for controlling synthetic ecosystems via thought. Spawned by AI & Bio nodes.</p>
+                        </div>
+                        <!-- Custom Complex SVG -->
+                        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                            <circle cx="60" cy="60" r="50" stroke="black" stroke-width="4" fill="#F4F7F0"/>
+                            <path d="M30 60C30 40 40 30 60 30C80 30 90 40 90 60" stroke="#B2FF59" stroke-width="8"/>
+                            <path d="M30 60C30 80 40 90 60 90C80 90 90 80 90 60" stroke="black" stroke-width="8"/>
+                            <circle cx="60" cy="60" r="10" fill="black"/>
+                            <line x1="60" y1="10" x2="60" y2="30" stroke="black" stroke-width="4"/>
+                            <line x1="60" y1="90" x2="60" y2="110" stroke="black" stroke-width="4"/>
+                            <line x1="10" y1="60" x2="30" y2="60" stroke="black" stroke-width="4"/>
+                            <line x1="90" y1="60" x2="110" y2="60" stroke="black" stroke-width="4"/>
+                        </svg>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="b-border p-6 hard-shadow bg-[#F4F7F0] tech-hover flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold bg-black text-[#B2FF59] px-2 py-1 border-2 border-black">SEED: GROWING</span>
+                            <h3 class="display-font text-3xl mt-4">QUANTUM-ROOT</h3>
+                            <p class="text-sm font-bold mt-2">Encryption protocol using quantum entanglement for decentralized mesh networks.</p>
+                        </div>
+                        <svg width="100%" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="mt-4">
+                            <circle cx="40" cy="40" r="15" stroke="black" stroke-width="4" fill="#B2FF59"/>
+                            <circle cx="100" cy="40" r="15" stroke="black" stroke-width="4" fill="white"/>
+                            <circle cx="160" cy="40" r="15" stroke="black" stroke-width="4" fill="#B2FF59"/>
+                            <line x1="55" y1="40" x2="85" y2="40" stroke="black" stroke-width="4" stroke-dasharray="4 4"/>
+                            <line x1="115" y1="40" x2="145" y2="40" stroke="black" stroke-width="4" stroke-dasharray="4 4"/>
+                        </svg>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="b-border p-6 hard-shadow bg-white tech-hover flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold bg-[#B2FF59] px-2 py-1 border-2 border-black">SEED: SHIPPED</span>
+                            <h3 class="display-font text-3xl mt-4">SYNTH-LEAF</h3>
+                            <p class="text-sm font-bold mt-2">Programmable photosynthetic material for urban carbon capture.</p>
+                        </div>
+                        <svg width="100%" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="mt-4">
+                            <path d="M20 60C20 20 60 20 100 60C140 20 180 20 180 60" stroke="black" stroke-width="4" fill="#B2FF59"/>
+                            <line x1="20" y1="60" x2="180" y2="60" stroke="black" stroke-width="4"/>
+                            <rect x="90" y="60" width="20" height="15" fill="black"/>
+                        </svg>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / JOIN -->
+    <footer class="bg-[#B2FF59] border-t-[4px] border-black p-8 md:p-16 relative">
+        
+        <div class="absolute top-0 right-0 opacity-10">
+             <!-- Massive decorative SVG molecule -->
+             <svg width="400" height="400" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="100" y1="100" x2="150" y2="50" stroke="black" stroke-width="4"/>
+                <line x1="100" y1="100" x2="50" y2="50" stroke="black" stroke-width="4"/>
+                <line x1="100" y1="100" x2="150" y2="150" stroke="black" stroke-width="4"/>
+                <line x1="100" y1="100" x2="50" y2="150" stroke="black" stroke-width="4"/>
+                <circle cx="100" cy="100" r="20" fill="black"/>
+                <circle cx="150" cy="50" r="15" fill="black"/>
+                <circle cx="50" cy="50" r="15" fill="black"/>
+                <circle cx="150" cy="150" r="15" fill="black"/>
+                <circle cx="50" cy="150" r="15" fill="black"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 grid md:grid-cols-2 gap-8 mb-12">
+            <div>
+                <h2 class="display-font text-6xl md:text-8xl leading-none">
+                    PLANT<br>YOUR SEED.
+                </h2>
+            </div>
+            <div class="flex flex-col justify-end">
+                <p class="text-lg font-bold mb-4 max-w-md">No degrees required. Just curiosity, rigor, and a desire to build the future. Apply to the Junglans Ecosystem.</p>
+                <form class="flex border-[4px] border-black bg-white hard-shadow">
+                    <input type="email" placeholder="your@email.com" class="bg-transparent px-4 py-3 w-full focus:outline-none text-black font-bold text-lg">
+                    <button class="bg-black text-[#B2FF59] px-6 py-3 font-bold text-lg border-l-[4px] border-black hover:bg-[#F4F7F0] hover:text-black transition-colors">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="relative z-10 border-t-[4px] border-black pt-4 flex flex-col md:flex-row justify-between text-sm font-bold">
+            <p>// JUNGLANS COMMUNITY EST. 2024</p>
+            <div class="flex gap-4 mt-2 md:mt-0">
+                <span>GITHUB</span>
+                <span>ARXIV</span>
+                <span>DISCORD</span>
+            </div>
+            <p>SYS_STATUS: [GROWING]</p>
+        </div>
+    </footer>
+
+</body>
+</html>
