@@ -20,6 +20,7 @@ export default function Navbar() {
 
   const isTeamPage = location.pathname === '/team';
   const isSecurityPage = location.pathname === '/security';
+  const isBlogsPage = location.pathname.startsWith('/blog');
 
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-[#A7F3D0]/60 px-4 sm:px-6 md:px-12 py-3 shadow-sm">
@@ -51,6 +52,15 @@ export default function Navbar() {
             Showcase
             <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
           </button>
+          <Link
+            to="/blogs"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className={`transition cursor-pointer font-bold ${
+              isBlogsPage ? 'text-[#10B981] underline underline-offset-4' : 'hover:text-[#10B981] text-[#059669]'
+            }`}
+          >
+            Blogs
+          </Link>
           <Link
             to="/team"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

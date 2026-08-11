@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { projectsData } from '../data/projectsData';
+import { blogsData } from '../data/blogsData';
 import InteractiveTerminal from '../components/InteractiveTerminal';
 import ProductComparisonMatrix from '../components/ProductComparisonMatrix';
 import SecurityComplianceSection from '../components/SecurityComplianceSection';
@@ -655,6 +656,68 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
         <EnterpriseCalculator />
       </div>
+
+      {/* ENGINEERING & AI RESEARCH BLOGS HIGHLIGHT */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12">
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <div className="font-mono text-xs text-[#059669] uppercase tracking-widest font-bold mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+              JUNGLANS RESEARCH // KNOWLEDGE BASE
+            </div>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#08090c] tracking-tight">
+              Engineering & AI Research Blogs
+            </h2>
+          </div>
+          <Link
+            to="/blogs"
+            className="font-mono text-xs bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-5 py-2.5 rounded-xl font-bold hover:bg-[#10B981] hover:text-white transition flex items-center gap-2 shadow-sm"
+          >
+            Explore All 10 Technical Articles ↗
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {blogsData.slice(0, 3).map((blog) => (
+            <Link
+              key={blog.id}
+              to={`/blog/${blog.slug}`}
+              className="bg-white border border-[#A7F3D0] rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="font-mono text-[10px] bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-2 py-0.5 rounded font-bold truncate">
+                    {blog.category}
+                  </span>
+                  <span className="font-mono text-[10px] text-slate-400">
+                    {blog.readTime}
+                  </span>
+                </div>
+                <h3 className="font-heading font-bold text-lg text-[#08090c] group-hover:text-[#10B981] transition-colors mb-2 line-clamp-2">
+                  {blog.title}
+                </h3>
+                <p className="font-body text-slate-600 text-xs leading-relaxed mb-4 line-clamp-2">
+                  {blog.summary}
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={blog.author.avatar}
+                    alt={blog.author.name}
+                    className="w-6 h-6 rounded-full object-cover border border-[#A7F3D0]"
+                  />
+                  <span className="font-heading font-bold text-xs text-slate-700">{blog.author.name}</span>
+                </div>
+                <span className="font-mono text-xs text-[#059669] font-bold group-hover:text-[#10B981]">
+                  Read ↗
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* FOUNDER & LEAD ARCHITECT SPOTLIGHT */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
