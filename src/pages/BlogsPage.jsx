@@ -48,7 +48,7 @@ export default function BlogsPage() {
             <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse-ring flex-shrink-0"></span>
             <span className="tracking-widest uppercase font-bold text-[#059669]">JUNGLANS RESEARCH // AI & ENGINEERING BLOGS</span>
             <span className="px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#10B981] font-bold font-mono text-[10px] border border-[#A7F3D0]">
-              10 ARTICLES
+              {blogsData.length} TECHNICAL ARTICLES
             </span>
           </div>
 

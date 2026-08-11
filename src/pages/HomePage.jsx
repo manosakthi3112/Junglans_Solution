@@ -673,7 +673,7 @@ export default function HomePage() {
             to="/blogs"
             className="font-mono text-xs bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-5 py-2.5 rounded-xl font-bold hover:bg-[#10B981] hover:text-white transition flex items-center gap-2 shadow-sm"
           >
-            Explore All 10 Technical Articles ↗
+            Explore All {blogsData.length} Technical Articles ↗
           </Link>
         </div>
 

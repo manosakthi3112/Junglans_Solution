@@ -2,6 +2,134 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { blogsData } from '../data/blogsData';
 
+// LaTeX Math Converter to human-readable mathematical symbols
+function convertLatexToReadableMath(latexStr) {
+  if (!latexStr) return '';
+  let str = latexStr.trim();
+
+  // 1. Text command \text{something} -> something
+  str = str.replace(/\\text\{([^}]+)\}/g, '$1');
+
+  // 2. Fractions \frac{num}{den} -> (num) / (den)
+  // Repeat to handle potential nested fractions
+  for (let i = 0; i < 3; i++) {
+    str = str.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '($1) / ($2)');
+  }
+
+  // 3. Summations, Products, Integrals
+  str = str.replace(/\\sum_\{([^}]+)\}\^\{([^}]+)\}/g, '∑ ($1 to $2)');
+  str = str.replace(/\\sum_\{([^}]+)\}/g, '∑ ($1)');
+  str = str.replace(/\\sum/g, '∑');
+
+  str = str.replace(/\\prod_\{([^}]+)\}\^\{([^}]+)\}/g, '∏ ($1 to $2)');
+  str = str.replace(/\\prod_\{([^}]+)\}/g, '∏ ($1)');
+  str = str.replace(/\\prod/g, '∏');
+
+  // 4. Functions & Exponential
+  str = str.replace(/\\exp\\left\((.*?)\\right\)/g, 'exp($1)');
+  str = str.replace(/\\exp/g, 'exp');
+  str = str.replace(/\\log_2/g, 'log₂');
+  str = str.replace(/\\log/g, 'log');
+  str = str.replace(/\\softmax/g, 'softmax');
+  str = str.replace(/\\sqrt\{([^}]+)\}/g, '√($1)');
+  str = str.replace(/\\sqrt/g, '√');
+
+  // 5. Relations and Symbols
+  str = str.replace(/\\in/g, '∈');
+  str = str.replace(/\\notin/g, '∉');
+  str = str.replace(/\\approx/g, '≈');
+  str = str.replace(/\\propto/g, '∝');
+  str = str.replace(/\\times/g, '×');
+  str = str.replace(/\\cdot/g, '·');
+  str = str.replace(/\\le/g, '≤');
+  str = str.replace(/\\ge/g, '≥');
+  str = str.replace(/\\ll/g, '≪');
+  str = str.replace(/\\gg/g, '≫');
+  str = str.replace(/\\neq/g, '≠');
+  str = str.replace(/\\infty/g, '∞');
+  str = str.replace(/\\rightarrow/g, '→');
+  str = str.replace(/\\longrightarrow/g, '⟶');
+  str = str.replace(/\\dots/g, '...');
+  str = str.replace(/\\cap/g, '∩');
+  str = str.replace(/\\cup/g, '∪');
+
+  // 6. Greek letters
+  str = str.replace(/\\alpha/g, 'α');
+  str = str.replace(/\\beta/g, 'β');
+  str = str.replace(/\\gamma/g, 'γ');
+  str = str.replace(/\\delta/g, 'δ');
+  str = str.replace(/\\epsilon/g, 'ε');
+  str = str.replace(/\\theta/g, 'θ');
+  str = str.replace(/\\sigma/g, 'σ');
+  str = str.replace(/\\pi/g, 'π');
+  str = str.replace(/\\lambda/g, 'λ');
+  str = str.replace(/\\mu/g, 'μ');
+  str = str.replace(/\\rho/g, 'ρ');
+  str = str.replace(/\\tau/g, 'τ');
+  str = str.replace(/\\phi/g, 'ϕ');
+  str = str.replace(/\\omega/g, 'ω');
+  str = str.replace(/\\Theta/g, 'Θ');
+  str = str.replace(/\\Sigma/g, 'Σ');
+  str = str.replace(/\\mathbb\{E\}/g, 'E');
+
+  // 7. Accents & Special Notation
+  str = str.replace(/\\hat\{y\}/g, 'ŷ');
+  str = str.replace(/\\bar\{y\}/g, 'ȳ');
+  str = str.replace(/\\Delta W/g, 'ΔW');
+
+  // 8. Convert subscripts and superscripts
+  const subMap = {
+    '0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉',
+    'i':'ᵢ','j':'ⱼ','k':'ₖ','m':'ₘ','n':'ₙ','p':'ₚ','r':'ᵣ','s':'ₛ','t':'ₜ','x':'ₓ','y':'ᵧ'
+  };
+  const superMap = {
+    '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹',
+    'n':'ⁿ','T':'ᵀ'
+  };
+
+  str = str.replace(/_([0-9a-z])/g, (m, p1) => subMap[p1] || `_${p1}`);
+  str = str.replace(/\^([0-9a-zA-Z])/g, (m, p1) => superMap[p1] || `^${p1}`);
+
+  // Cleanup stray brackets or backslashes
+  str = str.replace(/\\/g, '');
+  str = str.replace(/[\{\}]/g, '');
+  str = str.replace(/\s+/g, ' ').trim();
+
+  return str;
+}
+
+// Inline markdown & LaTeX renderer
+function renderFormattedInline(text) {
+  if (!text) return '';
+
+  // 1. Process math display block $$ formula $$
+  let processed = text.replace(/\$\$(.*?)\$\$/g, (match, formula) => {
+    const cleanMath = convertLatexToReadableMath(formula);
+    return `<div class="my-4 p-4 rounded-xl bg-[#08090c] text-emerald-300 font-mono text-sm sm:text-base border-2 border-[#10B981] shadow-lg flex flex-col items-center justify-center gap-1 overflow-x-auto text-center">
+      <span class="text-[10px] uppercase font-bold tracking-widest text-[#10B981]/80 font-mono">MATHEMATICAL FORMULA</span>
+      <span class="font-bold tracking-wide text-white text-base sm:text-lg">${cleanMath}</span>
+    </div>`;
+  });
+
+  // 2. Process inline math $ formula $
+  processed = processed.replace(/\$(.*?)\$/g, (match, formula) => {
+    const cleanMath = convertLatexToReadableMath(formula);
+    return `<span class="font-mono text-xs sm:text-sm px-2 py-0.5 bg-[#ECFDF5] text-[#047857] rounded-md border border-[#A7F3D0] font-bold shadow-xs mx-0.5 inline-block">${cleanMath}</span>`;
+  });
+
+  // 3. Process **bold**
+  processed = processed.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#08090c]">$1</strong>');
+
+  // 4. Process `inline code`
+  processed = processed.replace(/`(.*?)`/g, '<code class="font-mono text-xs bg-[#ECFDF5] text-[#059669] px-1.5 py-0.5 rounded border border-[#A7F3D0]">$1</code>');
+
+  return processed;
+}
+
+function slugify(text) {
+  return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+}
+
 // Custom Markdown Renderer Component
 function MarkdownContent({ content }) {
   const [copiedCodeIndex, setCopiedCodeIndex] = useState(null);
@@ -12,7 +140,6 @@ function MarkdownContent({ content }) {
     setTimeout(() => setCopiedCodeIndex(null), 2000);
   };
 
-  // Helper to parse blocks
   const lines = content.trim().split('\n');
   const elements = [];
   let currentCodeBlock = null;
@@ -39,7 +166,7 @@ function MarkdownContent({ content }) {
               </span>
               <button
                 onClick={() => copyToClipboard(codeText, codeIdx)}
-                className="hover:text-emerald-400 transition cursor-pointer flex items-center gap-1.5 bg-slate-800/60 px-2.5 py-1 rounded-md border border-slate-700/50"
+                className="hover:text-emerald-400 transition cursor-pointer flex items-center gap-1.5 bg-slate-800/60 px-2.5 py-1 rounded-md border border-slate-700/50 font-mono text-xs"
               >
                 {copiedCodeIndex === codeIdx ? (
                   <>
@@ -204,24 +331,6 @@ function MarkdownContent({ content }) {
   });
 
   return <div className="markdown-content">{elements}</div>;
-}
-
-// Inline markdown formatting helper (bold, code, math formulas)
-function renderFormattedInline(text) {
-  if (!text) return '';
-  return text
-    // Replace **bold**
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#08090c]">$1</strong>')
-    // Replace `inline code`
-    .replace(/`(.*?)`/g, '<code class="font-mono text-xs bg-[#ECFDF5] text-[#059669] px-1.5 py-0.5 rounded border border-[#A7F3D0]">$1</code>')
-    // Math latex display block $$ formula $$
-    .replace(/\$\$(.*?)\$\$/g, '<div class="my-3 py-2 px-4 bg-slate-900 text-emerald-400 font-mono text-xs sm:text-sm rounded-xl border border-slate-800 text-center shadow-inner overflow-x-auto">$$ $1 $$</div>')
-    // Math latex inline $ formula $
-    .replace(/\$(.*?)\$/g, '<span class="font-mono text-xs px-1.5 py-0.5 bg-slate-900 text-emerald-300 rounded font-semibold">$1</span>');
-}
-
-function slugify(text) {
-  return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
 }
 
 export default function BlogDetailPage() {

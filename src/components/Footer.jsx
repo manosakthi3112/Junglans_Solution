@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { blogsData } from '../data/blogsData';
 
 export default function Footer() {
   return (
@@ -39,7 +40,7 @@ export default function Footer() {
         <div>
           <div className="font-mono text-xs text-[#059669] uppercase tracking-widest mb-4 font-bold">Company & Navigation</div>
           <ul className="space-y-2.5 text-xs sm:text-sm font-medium">
-            <li><Link to="/blogs" className="text-[#10B981] font-bold hover:underline">Engineering Blogs (10) ↗</Link></li>
+            <li><Link to="/blogs" className="text-[#10B981] font-bold hover:underline">Engineering Blogs ({blogsData.length || 15}) ↗</Link></li>
             <li><Link to="/team" className="text-slate-600 hover:text-[#10B981] transition font-bold">Our Team Page ↗</Link></li>
             <li><Link to="/security" className="text-slate-600 hover:text-[#10B981] transition font-bold">Enterprise Security Page ↗</Link></li>
             <li><Link to="/" className="text-slate-600 hover:text-[#10B981] transition">Home Portfolio</Link></li>

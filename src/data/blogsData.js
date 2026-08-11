@@ -1,927 +1,867 @@
+// Real Junglans Solutions Team Authors
+const AUTHORS = {
+  MANOSAKTHI: {
+    name: "Manosakthi Thiyagarajan",
+    role: "Founder & Lead AI Architect",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80"
+  },
+  SRI_KANISH: {
+    name: "Sri Kanish P",
+    role: "Co-Founder & ROS Developer",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80"
+  },
+  YASHIKA: {
+    name: "Yashika P",
+    role: "Founder @ AscendiaEdu & Lead DevOps Engineer",
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=250&q=80"
+  },
+  GOVINDARAJAN: {
+    name: "Govindarajan Selvaraj",
+    role: "ML Engineer",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80"
+  },
+  SURYA: {
+    name: "Surya N",
+    role: "Full Stack Developer",
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=250&q=80"
+  }
+};
+
 export const blogsData = [
   {
     id: "blog-1",
-    slug: "traditional-ml-classification-metrics",
-    title: "Mastering Classification Metrics: Precision, Recall, F1-Score & ROC-AUC Demystified",
-    subtitle: "A deep dive into confusion matrices, trade-offs between Type I and Type II errors, and selecting optimal metrics for imbalanced datasets.",
+    slug: "classification-metrics-guide",
+    title: "Traditional ML Classification Metrics: Confusion Matrix, Accuracy, Precision, Recall & F1-Score",
+    subtitle: "A deep dive into confusion matrices, Type I and Type II errors, accuracy paradox on imbalanced data, and harmonic mean F-beta formulations.",
     category: "Machine Learning Foundations",
     publishDate: "August 10, 2026",
-    readTime: "8 min read",
-    author: {
-      name: "Dr. Aris Thorne",
-      role: "Head of AI Research",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["Machine Learning", "Classification", "Evaluation Metrics", "Python", "Data Science"],
+    readTime: "9 min read",
+    author: AUTHORS.MANOSAKTHI,
+    tags: ["Machine Learning", "Classification", "Confusion Matrix", "Precision", "Recall", "F1 Score"],
     featured: true,
-    summary: "Classification metrics almost all derive from the confusion matrix. Learn how Accuracy, Precision, Recall, F1-Score, and ROC-AUC behave under real-world data distributions.",
+    summary: "Classification metrics almost all derive from the confusion matrix. Learn how Accuracy, Precision, Recall, and F1-Score behave under real-world data distributions.",
     content: `
 # Traditional ML Evaluation Metrics — Foundations Guide
 
-Evaluating classical machine learning classification models requires a firm understanding of the trade-offs between precision and recall, how class imbalance distorts accuracy, and how threshold-agnostic curves like ROC-AUC operate.
+This document covers the metrics used to evaluate classical machine learning models, organized as classification, regression, and computer vision metrics.
+
+\`\`\`
+Traditional ML
+├── Classification  → Accuracy, Precision, Recall, F1, ROC-AUC
+├── Regression       → MAE, MSE, RMSE, R²
+└── Computer Vision  → IoU, Dice, mAP
+\`\`\`
 
 ---
 
-## 1. The Confusion Matrix
+## 1. Classification Metrics
 
-For any binary classifier predicting "positive" vs "negative", predictions fall into four quadrants:
+Classification metrics almost all derive from the **confusion matrix**, so start there.
+
+### 1.1 The Confusion Matrix
+
+For a binary classifier predicting "positive" vs "negative":
 
 | | Predicted Positive | Predicted Negative |
 |---|---|---|
-| **Actual Positive** | **True Positive (TP)** | **False Negative (FN)** |
-| **Actual Negative** | **False Positive (FP)** | **True Negative (TN)** |
+| **Actual Positive** | True Positive (TP) | False Negative (FN) |
+| **Actual Negative** | False Positive (FP) | True Negative (TN) |
 
-### Key Definitions:
-* **True Positive (TP)** — Model correctly predicted positive (e.g., correctly detected spam).
-* **True Negative (TN)** — Model correctly predicted negative (e.g., correctly identified clean email).
-* **False Positive (FP - Type I Error)** — Model predicted positive when actual was negative (e.g., false alarm).
-* **False Negative (FN - Type II Error)** — Model predicted negative when actual was positive (e.g., missed detection).
+- **TP** — model correctly predicted positive
+- **TN** — model correctly predicted negative
+- **FP** ("Type I error") — model predicted positive, actually negative
+- **FN** ("Type II error") — model predicted negative, actually positive
 
----
+Example dataset: 100 emails, 20 are spam (positive class). A spam filter predicts 25 as spam; 18 of those are truly spam.
+- TP = 18, FP = 7, FN = 2, TN = 73
 
-## 2. Fundamental Metrics Breakdown
+### 1.2 Accuracy
 
-### 2.1 Accuracy
-The fraction of total predictions that were correct:
+**Definition:** Fraction of total predictions that were correct.
 
 $$\\text{Accuracy} = \\frac{TP + TN}{TP + TN + FP + FN}$$
 
-> **When to use:** Strictly balanced datasets.  
-> **When to avoid:** Imbalanced datasets. A fraud detector with a 1% fraud rate gets 99% accuracy by simply predicting "no fraud" for every transaction—rendering accuracy useless.
+Example: (18 + 73) / 100 = **0.91 (91%)**
 
-### 2.2 Precision
-Of everything predicted positive, how many were actually positive?
+**When to use:** Balanced classes only. **When to avoid:** Imbalanced datasets — e.g., a fraud detector with 1% fraud rate gets 99% accuracy by predicting "not fraud" every time, which is useless.
+
+\`\`\`python
+from sklearn.metrics import accuracy_score
+accuracy_score(y_true, y_pred)
+\`\`\`
+
+### 1.3 Precision
+
+**Definition:** Of everything predicted positive, how much was actually positive. Answers: "When the model says yes, how often is it right?"
 
 $$\\text{Precision} = \\frac{TP}{TP + FP}$$
 
-* **Prioritize when:** False positives are costly. Example: Spam filtering (you don't want legitimate emails sent to spam) or invasive medical follow-ups.
+Example: 18 / (18 + 7) = **0.72 (72%)**
 
-### 2.3 Recall (Sensitivity / True Positive Rate)
-Of all actual positive cases in the dataset, how many did the model catch?
+**When to prioritize:** False positives are costly. E.g., spam filter (don't want real emails marked spam), or a medical test that triggers invasive follow-up procedures on a false alarm.
+
+\`\`\`python
+from sklearn.metrics import precision_score
+precision_score(y_true, y_pred)
+\`\`\`
+
+### 1.4 Recall (Sensitivity / True Positive Rate)
+
+**Definition:** Of everything that was actually positive, how much did the model catch. Answers: "Of all real positives, how many did we find?"
 
 $$\\text{Recall} = \\frac{TP}{TP + FN}$$
 
-* **Prioritize when:** False negatives are catastrophic. Example: Cancer detection, security threat detection, or critical hardware failure warnings.
+Example: 18 / (18 + 2) = **0.90 (90%)**
 
-### 2.4 F1-Score & F-Beta
-The harmonic mean of precision and recall, penalizing extreme imbalances:
+**When to prioritize:** False negatives are costly. E.g., cancer screening, fraud detection, security threat detection — missing a real case is worse than a false alarm.
+
+\`\`\`python
+from sklearn.metrics import recall_score
+recall_score(y_true, y_pred)
+\`\`\`
+
+### 1.5 F1 Score
+
+**Definition:** Harmonic mean of precision and recall — a single number that balances both. Harmonic mean (not arithmetic) punishes large imbalances between the two.
 
 $$F_1 = 2 \\times \\frac{\\text{Precision} \\times \\text{Recall}}{\\text{Precision} + \\text{Recall}}$$
 
-For cases where recall is $\\beta$ times more important than precision, use the general **$F_\\beta$** formula:
+Example: 2 × (0.72 × 0.90) / (0.72 + 0.90) = **0.80**
+
+**When to use:** You need one summary metric and both false positives and false negatives matter, especially on imbalanced data. There is also a general **F-beta score** where $\\beta$ weights recall $\\beta$ times as important as precision:
 
 $$F_\\beta = (1 + \\beta^2) \\times \\frac{\\text{Precision} \\times \\text{Recall}}{(\\beta^2 \\times \\text{Precision}) + \\text{Recall}}$$
 
----
-
-## 3. ROC-AUC vs PR-AUC
-
-The **Receiver Operating Characteristic (ROC)** curve plots True Positive Rate vs False Positive Rate across all decision thresholds from $0.0$ to $1.0$.
-
-* **AUC = 1.0:** Perfect classifier.
-* **AUC = 0.5:** Random guessing baseline.
-* **PR-AUC (Precision-Recall AUC):** Highly recommended over ROC-AUC for severely imbalanced datasets, as ROC-AUC can present an overly optimistic view when the negative class dominates.
-
----
-
-## 4. Python Implementation
-
 \`\`\`python
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
-
-# Compute foundational classification metrics
-accuracy  = accuracy_score(y_true, y_pred)
-precision = precision_score(y_true, y_pred)
-recall    = recall_score(y_true, y_pred)
-f1        = f1_score(y_true, y_pred)
-
-# ROC-AUC requires predicted probabilities rather than hard binary labels
-roc_auc   = roc_auc_score(y_true, y_pred_proba)
-
-print(f"F1 Score: {f1:.4f} | ROC-AUC: {roc_auc:.4f}")
+from sklearn.metrics import f1_score
+f1_score(y_true, y_pred)
 \`\`\`
-
-## Key Takeaways
-1. Never rely on **Accuracy** alone on real-world imbalanced data.
-2. Select **Precision** when false alarms are expensive, and **Recall** when missing a target is unacceptable.
-3. Use **PR-AUC** instead of **ROC-AUC** when dealing with severe class imbalance (e.g. rare disease or fraud detection).
 `
   },
   {
     id: "blog-2",
-    slug: "traditional-ml-regression-vision-metrics",
-    title: "Evaluating Regression & Computer Vision Models: MAE, RMSE, R², IoU & mAP",
-    subtitle: "A practical guide to continuous output metrics and spatial overlap metrics in bounding box detection and image segmentation.",
+    slug: "roc-auc-multiclass-metrics",
+    title: "ROC-AUC Curves, PR-AUC, and Multi-Class Evaluation Metrics",
+    subtitle: "Understanding decision threshold curves, Area Under Curve interpretation, PR-AUC vs ROC-AUC on imbalanced datasets, and Macro vs Micro averaging.",
     category: "Machine Learning Foundations",
-    publishDate: "August 08, 2026",
-    readTime: "7 min read",
-    author: {
-      name: "Elena Rostova",
-      role: "Senior Computer Vision Engineer",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["Regression", "Computer Vision", "IoU", "mAP", "Metrics", "Python"],
+    publishDate: "August 09, 2026",
+    readTime: "8 min read",
+    author: AUTHORS.GOVINDARAJAN,
+    tags: ["ROC-AUC", "PR-AUC", "Multi-Class", "Machine Learning", "Model Evaluation"],
     featured: false,
-    summary: "From continuous price forecasting to object detection bounding boxes, understand how MAE, RMSE, R², Intersection over Union (IoU), and mAP accurately evaluate model accuracy.",
+    summary: "Explore threshold-agnostic ROC curves, probability ranking, Precision-Recall AUC for rare classes, and multi-class macro, micro, and weighted averaging techniques.",
+    content: `
+# ROC-AUC Curves & Multi-Class Evaluation Guide
+
+---
+
+## 1. ROC-AUC
+
+**ROC (Receiver Operating Characteristic) curve** plots:
+- X-axis: False Positive Rate = FP / (FP + TN)
+- Y-axis: True Positive Rate (Recall) = TP / (TP + FN)
+
+...at every possible classification threshold (0.0 to 1.0), instead of just one fixed threshold.
+
+**AUC (Area Under the Curve)** condenses the curve into one number from 0 to 1:
+- **1.0** = perfect classifier
+- **0.5** = random guessing (diagonal line)
+- **< 0.5** = worse than random (model is inverted)
+
+**Interpretation:** AUC is the probability that the model ranks a random positive example higher than a random negative example.
+
+**When to use:** Comparing models independent of a chosen threshold, or when you'll tune the threshold later. **Caution:** Can be misleading on heavily imbalanced datasets — use **PR-AUC** (Precision-Recall AUC) instead in that case, since it doesn't reward performance on the (huge) negative class the way ROC-AUC can.
+
+\`\`\`python
+from sklearn.metrics import roc_auc_score
+roc_auc_score(y_true, y_pred_proba)  # needs probabilities, not hard labels
+\`\`\`
+
+---
+
+## 2. Multi-class Extensions
+
+Precision/Recall/F1 don't have one obvious definition beyond two classes, so they're computed per-class and averaged:
+- **Macro average** — average metric across classes, unweighted (treats rare and common classes equally)
+- **Micro average** — aggregate TP/FP/FN across all classes first, then compute (dominated by common classes)
+- **Weighted average** — average weighted by class support (frequency)
+
+\`\`\`python
+from sklearn.metrics import classification_report
+print(classification_report(y_true, y_pred, target_names=['Class A', 'Class B', 'Class C']))
+\`\`\`
+`
+  },
+  {
+    id: "blog-3",
+    slug: "regression-computer-vision-metrics",
+    title: "Regression & Computer Vision Metrics: MAE, MSE, RMSE, R², IoU, Dice & mAP",
+    subtitle: "Evaluating continuous numeric targets and spatial bounding box predictions in detection and segmentation tasks.",
+    category: "Machine Learning Foundations",
+    publishDate: "August 07, 2026",
+    readTime: "9 min read",
+    author: AUTHORS.GOVINDARAJAN,
+    tags: ["Regression", "Computer Vision", "MAE", "RMSE", "IoU", "mAP", "Dice"],
+    featured: false,
+    summary: "A practical guide to continuous error metrics (MAE, MSE, RMSE, R²) and computer vision spatial metrics (Intersection over Union, Dice Coefficient, mAP).",
     content: `
 # Regression & Computer Vision Metrics — Foundations Guide
-
-Continuous numeric targets and spatial bounding box predictions require distinct mathematical metrics. This guide details regression error measurements alongside computer vision evaluation standards.
 
 ---
 
 ## 1. Regression Metrics
 
-Used when predicting continuous target variables (e.g., real estate pricing, temperature, asset values).
+Used when the target is a continuous number (price, temperature, demand, etc.).
 
 ### 1.1 MAE — Mean Absolute Error
-Average magnitude of error, in the original units of the target variable:
 
 $$\\text{MAE} = \\frac{1}{n} \\sum_{i=1}^{n} |y_i - \\hat{y}_i|$$
 
-* **Characteristics:** Linear penalty. A $100 error contributes exactly 10x more than a $10 error. Robust to extreme outliers.
+**Interpretation:** Average magnitude of error, in the same units as the target. Treats all errors linearly — a $10 error counts as exactly 10x a $1 error.
 
-### 1.2 MSE & RMSE — Mean Squared Error & Root Mean Squared Error
-Squaring error values places disproportionate penalty on large deviations:
+**When to use:** You want an easily interpretable "average miss," and don't want a few big outliers to dominate the score.
 
-$$\\text{MSE} = \\frac{1}{n} \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2, \\quad \\text{RMSE} = \\sqrt{\\text{MSE}}$$
+\`\`\`python
+from sklearn.metrics import mean_absolute_error
+mean_absolute_error(y_true, y_pred)
+\`\`\`
 
-* **When to use RMSE:** When large errors are unacceptable in practice and you need units matching the original target variable.
+### 1.2 MSE — Mean Squared Error
 
-### 1.3 $R^2$ — Coefficient of Determination
-Measures the proportion of variance explained by the model compared to a simple mean baseline:
+$$\\text{MSE} = \\frac{1}{n} \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2$$
+
+**Interpretation:** Average of squared errors. Squaring penalizes large errors much more than small ones.
+
+**When to use:** Large errors are disproportionately bad in your application or as a training loss function.
+
+### 1.3 RMSE — Root Mean Squared Error
+
+$$\\text{RMSE} = \\sqrt{\\text{MSE}}$$
+
+**Interpretation:** Same "penalize big errors more" behavior as MSE, but back in the original units, making it directly comparable to MAE.
+
+### 1.4 R² — Coefficient of Determination
 
 $$R^2 = 1 - \\frac{\\sum (y_i - \\hat{y}_i)^2}{\\sum (y_i - \\bar{y})^2}$$
 
-* **$R^2 = 1.0$:** Perfect predictions.
-* **$R^2 = 0.0$:** Model performs no better than predicting the dataset mean.
+**Adjusted R²** penalizes for feature count when comparing models:
+
+$$\\text{Adjusted } R^2 = 1 - \\left[ (1 - R^2) \\times \\frac{n - 1}{n - k - 1} \\right]$$
+
+### 1.5 Quick Comparison Table
+
+| Metric | Penalizes outliers? | Units | Best for |
+|---|---|---|---|
+| MAE | No (linear) | Same as target | Robust, interpretable average error |
+| MSE | Yes (quadratic) | Target² | Training loss, punishing big misses |
+| RMSE | Yes (quadratic) | Same as target | Interpretable version of MSE |
+| R² | Depends on residuals | Unitless (0–1 typically) | "% of variance explained," model comparison |
 
 ---
 
 ## 2. Computer Vision Metrics
 
-### 2.1 IoU — Intersection over Union (Jaccard Index)
-Measures bounding box or segmentation mask overlap accuracy:
+### 2.1 IoU — Intersection over Union
 
-$$\\text{IoU} = \\frac{\\text{Area of Overlap}}{\\text{Area of Union}} = \\frac{\\text{Area}(B_p \\cap B_g)}{\\text{Area}(B_p \\cup B_g)}$$
+$$\\text{IoU} = \\frac{\\text{Area of Overlap}}{\\text{Area of Union}}$$
 
-| IoU Score | Interpretation |
-|---|---|
-| $< 0.50$ | Poor detection / misalignment |
-| $\\ge 0.50$ | Acceptable detection threshold |
-| $\\ge 0.75$ | Strict detection accuracy |
-| $\\ge 0.90$ | High-precision segmentation |
+### 2.2 Dice Coefficient (F1 for pixels)
 
-### 2.2 Mean Average Precision (mAP)
-The gold-standard evaluation metric for object detectors (YOLO, Faster R-CNN):
+$$\\text{Dice} = \\frac{2 \\times |A \\cap B|}{|A| + |B|}$$
 
-1. For each object class, compute Precision-Recall curves by varying confidence thresholds.
-2. Calculate **Average Precision (AP)** as the area under the PR curve.
-3. Compute **mAP** across all classes:
+### 2.3 mAP — mean Average Precision
 
-$$\\text{mAP} = \\frac{1}{C} \\sum_{c=1}^{C} \\text{AP}_c$$
-
-Common benchmarks include **mAP@50** (IoU threshold = 0.50) and **mAP@[.50:.95]** (averaged across IoU thresholds from 0.50 to 0.95 in steps of 0.05).
-
----
-
-## 3. Code Reference
-
-\`\`\`python
-import numpy as np
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-
-# Regression metrics evaluation
-mae = mean_absolute_error(y_true, y_pred)
-rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-r2 = r2_score(y_true, y_pred)
-
-def compute_iou(boxA, boxB):
-    # Determine intersection rectangle coordinates
-    xA = max(boxA[0], boxB[0])
-    yA = max(boxA[1], boxB[1])
-    xB = min(boxA[2], boxB[2])
-    yB = min(boxA[3], boxB[3])
-    
-    interArea = max(0, xB - xA) * max(0, yB - yA)
-    boxAArea = (boxA[2] - boxA[0]) * (boxA[3] - boxA[1])
-    boxBArea = (boxB[2] - boxB[0]) * (boxB[3] - boxB[1])
-    
-    return interArea / float(boxAArea + boxBArea - interArea)
-\`\`\`
-
-## Key Takeaways
-1. Use **MAE** for interpretable average error; use **RMSE** when large outlier errors are dangerous.
-2. **IoU** measures exact spatial overlap for detection and segmentation tasks.
-3. **mAP** combines detection confidence and spatial accuracy into a unified metric.
-`
-  },
-  {
-    id: "blog-3",
-    slug: "llm-language-quality-metrics",
-    title: "Automated LLM Evaluation: Demystifying Perplexity, BLEU, ROUGE, and BERTScore",
-    subtitle: "Measuring fluency, n-gram overlap, and semantic similarity in generated text outputs without human raters.",
-    category: "LLM Evaluation & Benchmarking",
-    publishDate: "August 05, 2026",
-    readTime: "9 min read",
-    author: {
-      name: "Marcus Vance",
-      role: "Lead NLP Specialist",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["LLM", "BLEU", "ROUGE", "BERTScore", "Perplexity", "NLP"],
-    featured: true,
-    summary: "How do we automatically measure LLM response quality? Explore language model perplexity, surface-level n-gram overlap (BLEU/ROUGE), and deep embedding semantic alignment (BERTScore).",
-    content: `
-# LLM Language Quality Metrics — Foundations Guide
-
-Evaluating Large Language Model outputs requires automated metrics that operate at scale. We categorize quality metrics into probability-based perplexity, surface-level lexical matching, and neural semantic similarity.
-
----
-
-## 1. Perplexity (PPL)
-
-Perplexity measures how "surprised" a language model is when observing a sequence of text. It is the exponentiated average negative log-likelihood of the target tokens:
-
-$$\\text{Perplexity} = \\exp\\left( -\\frac{1}{N} \\sum_{i=1}^{N} \\log P(w_i \\mid w_1, w_2, \\dots, w_{i-1}) \\right)$$
-
-* **Lower Perplexity = Higher Fluency:** A perplexity of 20 implies the model is as uncertain as choosing uniformly among 20 vocabulary tokens at each step.
-* **Limitation:** Perplexity measures domain fluency and likelihood, **not** factual accuracy or helpfulness.
-
----
-
-## 2. BLEU — Bilingual Evaluation Understudy
-
-Originally built for machine translation, **BLEU** measures modified $n$-gram precision against one or more human reference translations, scaled by a **Brevity Penalty (BP)**:
-
-$$\\text{BLEU} = \\text{BP} \\times \\exp\\left( \\sum_{n=1}^{N} w_n \\log p_n \\right)$$
-
-* **Precision-Oriented:** Penalizes generating extra words not found in the reference text.
-* **Drawback:** Strictly penalizes paraphrasing. Synonyms like "automobile" vs "car" score zero n-gram match.
-
----
-
-## 3. ROUGE — Recall-Oriented Understudy for Gisting Evaluation
-
-The counterpart to BLEU, **ROUGE** is recall-oriented and widely applied in text summarization:
-
-* **ROUGE-1 / ROUGE-2:** Unigram and bigram overlap between candidate and reference.
-* **ROUGE-L:** Longest Common Subsequence (LCS) overlap, preserving sentence structure and word order while allowing gaps.
-
-$$\\text{ROUGE-N (Recall)} = \\frac{\\text{Matching } n\\text{-grams}}{\\text{Total } n\\text{-grams in Reference}}$$
-
----
-
-## 4. BERTScore — Semantic Similarity
-
-Instead of exact string matching, **BERTScore** leverages contextual embeddings (e.g. RoBERTa, DeBERTa) to calculate pairwise cosine similarity between candidate and reference tokens.
-
-$$\\text{BERTScore}_{F1} = 2 \\times \\frac{P_{\\text{BERT}} \\times R_{\\text{BERT}}}{P_{\\text{BERT}} + R_{\\text{BERT}}}$$
-
-### Metric Comparison Matrix
-
-| Metric | Level | Paraphrase Sensitive? | Ideal Use Case |
-|---|---|---|---|
-| **Perplexity** | Token Probabilities | N/A (Self-supervised) | Pretraining & Model Fit |
-| **BLEU** | Exact n-gram Precision | Yes (Penalizes) | Translation / Exact QA |
-| **ROUGE** | Exact n-gram Recall | Yes (Penalizes) | Document Summarization |
-| **BERTScore** | Semantic Embeddings | No (Rewards synonyms) | Open-ended Generation |
-
----
-
-## 5. Python Evaluation Example
-
-\`\`\`python
-# SacreBLEU and ROUGE Score Execution
-from sacrebleu import corpus_bleu
-from rouge_score import rouge_scorer
-from bert_score import score as bert_score
-
-references = ["The quick brown fox jumps over the lazy dog."]
-candidates = ["A fast brown fox leaps over a lazy dog."]
-
-# 1. ROUGE
-scorer = rouge_scorer.RougeScorer(['rouge1', 'rougeL'], use_stemmer=True)
-rouge_res = scorer.score(references[0], candidates[0])
-
-# 2. BERTScore
-P, R, F1 = bert_score(candidates, references, lang="en")
-
-print(f"ROUGE-L F1: {rouge_res['rougeL'].fmeasure:.4f}")
-print(f"BERTScore F1: {F1.mean().item():.4f}")
-\`\`\`
-
-## Key Takeaways
-1. **BLEU** and **ROUGE** are fast surface-level lexical matchers, ideal when reference answers are fixed.
-2. **BERTScore** evaluates true semantic meaning, making it far superior for modern chat and reasoning LLMs.
-3. Use **Perplexity** to track model fit during fine-tuning or domain adaptation.
+Used in object detection benchmarks (mAP@0.5, mAP@0.5:0.95). Mean of AP across all classes.
 `
   },
   {
     id: "blog-4",
-    slug: "llm-reasoning-g-eval-judge",
-    title: "Modern AI Evaluation: LLM-as-a-Judge, G-Eval & Production Monitoring",
-    subtitle: "Evaluating open-ended intelligence with GPT-4 judges, custom rubrics, G-Eval, and measuring real-time inference latency.",
+    slug: "llm-language-quality-metrics",
+    title: "LLM Language Quality Metrics: Perplexity, BLEU, ROUGE & BERTScore Deep Dive",
+    subtitle: "Automated measurement of fluency, n-gram precision, recall in summarization, and neural semantic similarity without human raters.",
     category: "LLM Evaluation & Benchmarking",
-    publishDate: "August 02, 2026",
-    readTime: "10 min read",
-    author: {
-      name: "Dr. Aris Thorne",
-      role: "Head of AI Research",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["LLM-as-a-Judge", "G-Eval", "Faithfulness", "TTFT", "Benchmarking", "Latency"],
-    featured: false,
-    summary: "Discover how top AI labs replace human raters with LLM-as-a-Judge frameworks like G-Eval, while monitoring production metrics like Time To First Token (TTFT) and token throughput.",
+    publishDate: "August 05, 2026",
+    readTime: "9 min read",
+    author: AUTHORS.SURYA,
+    tags: ["LLM", "Perplexity", "BLEU", "ROUGE", "BERTScore", "NLP"],
+    featured: true,
+    summary: "How do we automatically measure LLM response quality? Explore probability perplexity, exact string overlap (BLEU/ROUGE), and BERTScore semantic alignment.",
     content: `
-# Modern AI Evaluation: LLM-as-a-Judge & Production Monitoring
-
-As language models undertake complex reasoning, traditional string matching fails. Modern LLM evaluation relies on model-based judges, structured scoring rubrics (G-Eval), and real-time operational inference tracking.
-
----
-
-## 1. The LLM-as-a-Judge Paradigm
-
-Instead of relying on human labelers, a frontier model (such as GPT-4o or Claude 3.5 Sonnet) evaluates candidate model outputs against custom rubrics.
-
-### Evaluation Modes:
-1. **Single-Answer Grading:** Ranks a single response on a scale (e.g. 1 to 5) for correctness, relevance, and tone.
-2. **Pairwise Comparison (Arena Style):** Compares Model A and Model B responses to determine a winner, controlling for position bias and verbosity bias.
-
----
-
-## 2. G-Eval Framework
-
-**G-Eval** introduces chain-of-thought (CoT) reasoning to LLM judging. It generates evaluation steps automatically before calculating a weighted score across token probabilities:
+# LLM Evaluation Metrics — Language Quality
 
 \`\`\`
-[Criteria & Rubric Prompt] 
-       ↓
-[Generate Evaluation Steps (CoT)]
-       ↓
-[Score Output via Token Log Probabilities]
+LLM Language Quality
+├── Perplexity  → Next-token probability surprise
+├── BLEU        → N-gram precision & Brevity penalty
+├── ROUGE       → N-gram recall & Longest Common Subsequence
+└── BERTScore   → Contextual embedding cosine similarity
 \`\`\`
 
-$$\\text{Score} = \\sum_{s=1}^{5} s \\times P(\\text{score} = s)$$
-
-This probabilistic weighting yields continuous, fine-grained quality scores rather than discrete integer jumps.
-
 ---
 
-## 3. Core Reasoning & Quality Dimensions
+## 1. Perplexity
 
-* **Correctness:** Are factual claims in the output true compared to reference truths?
-* **Faithfulness:** Does the response strictly contain claims supported by the provided context (eliminating hallucination)?
-* **Relevance:** Does the response directly address the user query without extraneous drift?
+**Definition:** How "surprised" a language model is by a sequence of text.
 
----
+$$\\text{Perplexity} = \\exp\\left( -\\frac{1}{N} \\sum_{i=1}^{N} \\log P(\\text{token}_i \\mid \\text{previous tokens}) \\right)$$
 
-## 4. Production & Inference Metrics
+- Lower perplexity = better fit to data distribution.
+- A well-trained model on natural English sits in ~10–30 perplexity range.
 
-Deploying LLMs at scale requires monitoring physical serving metrics:
+\`\`\`python
+import torch
+import torch.nn.functional as F
 
-| Metric | Definition | Importance |
-|---|---|---|
-| **TTFT (Time To First Token)** | Milliseconds elapsed before emitting token #1 | Dictates perceived UI responsiveness |
-| **TPOT (Time Per Output Token)** | Average milliseconds per streaming token | Controls streaming readability |
-| **Throughput (Tokens/sec)** | Total tokens generated per second per GPU | Determines server hardware utilization |
-| **VRAM Footprint** | Memory consumed by KV Cache + Model Weights | Limits maximum batch size |
-
----
-
-## 5. Implementation Prompt Template
-
-\`\`\`markdown
-You are an expert impartial judge evaluating an AI response.
-
-[INSTRUCTION]
-Evaluate the Candidate Answer based on the Ground Truth Reference for Correctness (1-5).
-
-[RUBRIC]
-Score 1: Completely incorrect or irrelevant.
-Score 3: Partially correct, misses critical detail.
-Score 5: Fully correct, concise, and perfectly accurate.
-
-[USER QUERY]: {query}
-[GROUND TRUTH]: {reference}
-[CANDIDATE RESPONSE]: {response}
-
-Provide your step-by-step reasoning, followed by "FINAL SCORE: [number]".
+def perplexity(logits, target_ids):
+    log_probs = F.log_softmax(logits, dim=-1)
+    token_log_probs = log_probs.gather(1, target_ids.unsqueeze(1)).squeeze(1)
+    return torch.exp(-token_log_probs.mean())
 \`\`\`
 
-## Key Takeaways
-1. **LLM-as-a-Judge** achieves >85% correlation with human preference when given explicit scoring rubrics.
-2. Use **G-Eval** with log-probability weighting to reduce judge score variance.
-3. Balance output quality with operational metrics like **TTFT** and **VRAM** efficiency.
+---
+
+## 2. BLEU (Bilingual Evaluation Understudy)
+
+Measures **n-gram precision** with brevity penalty:
+
+$$\\text{BLEU} = \\text{BP} \\times \\exp\\left( \\sum_{n=1}^{N} w_n \\log p_n \\right)$$
+
+Precision-oriented, penalizes extra words. Weak for open-ended chat where paraphrasing is common.
+
+---
+
+## 3. ROUGE (Recall-Oriented Understudy for Gisting Evaluation)
+
+Counterpart to BLEU, recall-oriented for summarization:
+- **ROUGE-1** — unigram overlap
+- **ROUGE-2** — bigram overlap
+- **ROUGE-L** — Longest Common Subsequence overlap
+
+$$\\text{ROUGE-N (Recall)} = \\frac{\\text{matching } n\\text{-grams}}{\\text{n-grams in reference}}$$
+
+---
+
+## 4. BERTScore
+
+Embeds candidate and reference using pretrained models (e.g. BERT/DeBERTa) and calculates **semantic similarity** via cosine distance.
+
+| Metric | Compares | Sensitive to paraphrase? | Typical use |
+|---|---|---|---|
+| Perplexity | Model probabilities | N/A | Pretraining fit |
+| BLEU | Exact n-gram precision | Yes (penalizes) | Translation |
+| ROUGE | Exact n-gram recall | Yes (penalizes) | Summarization |
+| BERTScore | Semantic embeddings | No (rewards) | QA, Chat |
 `
   },
   {
     id: "blog-5",
-    slug: "classical-ml-models-handbook",
-    title: "The Definitive ML Models Handbook: From Linear Regression to Gradient Boosted Trees",
-    subtitle: "An architectural deep dive into supervised learning, distance metrics, tree splitting logic, and ensemble algorithms.",
-    category: "Model Architectures",
-    publishDate: "July 28, 2026",
-    readTime: "11 min read",
-    author: {
-      name: "Vikram Sethi",
-      role: "Principal ML Infrastructure Architect",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["Machine Learning", "Random Forest", "XGBoost", "LightGBM", "CatBoost", "Algorithms"],
+    slug: "llm-reasoning-g-eval-judge",
+    title: "Modern LLM Reasoning Evaluation: LLM-as-a-Judge, G-Eval, Correctness & Hallucinations",
+    subtitle: "Replacing human labelers with frontier LLM judges, chain-of-thought rubrics, G-Eval log-probability weighting, and hallucination metrics.",
+    category: "LLM Evaluation & Benchmarking",
+    publishDate: "August 03, 2026",
+    readTime: "10 min read",
+    author: AUTHORS.MANOSAKTHI,
+    tags: ["LLM-as-a-Judge", "G-Eval", "Faithfulness", "Hallucination", "Benchmarking"],
     featured: false,
-    summary: "From linear models to ensemble powerhouses like XGBoost, LightGBM, and CatBoost—understand the inner mechanics, hyperparameters, and trade-offs of classic ML algorithms.",
+    summary: "Discover how top AI labs replace human raters with LLM-as-a-Judge frameworks like G-Eval, evaluating correctness, relevance, and hallucination rates.",
     content: `
-# Machine Learning Models — Foundations Reference
-
-Choosing the right ML architecture requires understanding data geometry, linearity, and split criteria. This reference covers fundamental supervised algorithms through modern gradient boosted trees.
+# LLM Reasoning & Quality Metrics
 
 ---
 
-## 1. Linear & Regularized Models
+## 1. Accuracy & Correctness
 
-Linear models construct hyperplanes to predict continuous values or classify boundaries:
-
-$$\\hat{y} = w_1 x_1 + w_2 x_2 + \\dots + w_n x_n + b$$
-
-### Regularization Variants:
-* **Ridge ($L_2$ Regularization):** Adds penalty $\\alpha \\sum w_i^2$. Shrinks weights smoothly toward zero; retains all features.
-* **Lasso ($L_1$ Regularization):** Adds penalty $\\alpha \\sum |w_i|$. Forces uninformative feature weights to *exact zero*, performing automated feature selection.
-* **ElasticNet:** Combines $L_1$ and $L_2$ penalties for correlated feature subsets.
+- **Accuracy:** Fraction of outputs matching ground truth in benchmark suites (MMLU, GSM8K, HumanEval).
+- **Correctness:** Whether factual claims in open-ended responses are true, judged via rubrics or LLM judges.
 
 ---
 
-## 2. Tree-Based Models & Split Criteria
+## 2. Relevance, Faithfulness & Hallucination
 
-Decision trees partition feature space into orthogonal hyperrectangles using impurity metrics:
+- **Relevance:** Does the response address what was asked without wandering off-topic?
+- **Faithfulness:** Is the response strictly consistent with the provided source context?
+- **Hallucination:** Rate of fabricated content generated with confidence:
+  - **Intrinsic hallucination:** Direct contradiction of source.
+  - **Extrinsic hallucination:** Unverifiable information added.
 
-### 2.1 Split Impurity Metrics
-* **Gini Impurity (Classification):**
-
-$$G = 1 - \\sum_{k=1}^{K} p_k^2$$
-
-* **Entropy (Information Gain):**
-
-$$H = - \\sum_{k=1}^{K} p_k \\log_2(p_k)$$
+$$\\text{Hallucination Rate} = \\frac{\\text{# claims not supported}}{\\text{# total claims}}$$
 
 ---
 
-## 3. Ensemble Architecture Comparison
+## 3. Practical Evaluation Methods
 
-\`\`\`
-Ensembling Strategies
-├── Bagging (Bootstrap Aggregating) → Reduces Variance → Random Forest
-└── Boosting (Sequential Error Correction) → Reduces Bias → XGBoost, LightGBM, CatBoost
-\`\`\`
+1. **Human Evaluation:** Gold standard, slow, expensive.
+2. **LLM-as-a-Judge:** Frontier model prompted with query, response, and scoring rubric.
+3. **G-Eval Framework:** Generates evaluation steps (CoT) and calculates continuous score via token log-probabilities:
 
-### Ensemble Framework Comparison
-
-| Algorithm | Base Estimator | Splitting Strategy | Key Advantage |
-|---|---|---|---|
-| **Random Forest** | Independent Trees | Random feature subset | Zero hyperparameter tuning needed; hard to overfit |
-| **XGBoost** | Sequential Gradient Trees | Pre-sorted exact / approx | Highly accurate, handles missing data |
-| **LightGBM** | Leaf-wise (best-first) | Histogram-based splits | 10x faster training on massive tabular data |
-| **CatBoost** | Symmetric (balanced) | Target Statistics encoding | Superior out-of-the-box handling of categorical features |
-
----
-
-## 4. Scikit-Learn / XGBoost Code Snippet
-
-\`\`\`python
-import xgboost as xgb
-from sklearn.ensemble import RandomForestClassifier
-
-# 1. Random Forest Classifier
-rf_model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42)
-rf_model.fit(X_train, y_train)
-
-# 2. XGBoost Classifier
-xgb_model = xgb.XGBClassifier(
-    n_estimators=200,
-    learning_rate=0.05,
-    max_depth=6,
-    subsample=0.8,
-    colsample_bytree=0.8
-)
-xgb_model.fit(X_train, y_train)
-\`\`\`
-
-## Key Takeaways
-1. **Linear models** serve as interpretable baselines with minimal computational overhead.
-2. **Random Forest** reduces model variance via bagging; **Gradient Boosting** reduces bias sequentially.
-3. Choose **LightGBM** for massive datasets and **CatBoost** when dealing with high-cardinality categorical variables.
+$$\\text{Score} = \\sum_{s=1}^{5} s \\times P(\\text{score} = s)$$
 `
   },
   {
     id: "blog-6",
-    slug: "deep-learning-transformers-guide",
-    title: "Deep Learning & Transformer Architecture Handbook: Neural Nets, CNNs, RNNs, and Attention",
-    subtitle: "From multi-layer perceptrons to convolutional filters, recurrent memory units, and multi-head self-attention mechanisms.",
-    category: "Model Architectures",
-    publishDate: "July 22, 2026",
-    readTime: "12 min read",
-    author: {
-      name: "Dr. Aris Thorne",
-      role: "Head of AI Research",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["Deep Learning", "Transformers", "CNN", "RNN", "Attention", "PyTorch"],
-    featured: true,
-    summary: "Trace neural network evolution from MLPs and Convolutional/Recurrent architectures to the unified Transformer mechanism that powers today's generative AI models.",
+    slug: "llm-rag-production-inference-metrics",
+    title: "RAG Evaluation Frameworks & LLM Serving Metrics: TTFT, Throughput, Latency & VRAM Sizing",
+    subtitle: "RAGAS triad metrics alongside operational serving parameters: Time To First Token, decode speed, throughput trade-offs, and VRAM memory math.",
+    category: "LLM Evaluation & Benchmarking",
+    publishDate: "August 01, 2026",
+    readTime: "10 min read",
+    author: AUTHORS.YASHIKA,
+    tags: ["RAG Metrics", "TTFT", "Tokens/sec", "Latency", "Throughput", "VRAM", "DevOps"],
+    featured: false,
+    summary: "A practical operational guide covering RAG metrics (Context Precision, Recall, Groundedness) and physical serving metrics (TTFT, VRAM sizing, Throughput).",
     content: `
-# Deep Learning & Transformer Architecture Handbook
-
-Deep learning has transitioned from domain-specific neural architectures (CNNs for vision, RNNs for sequences) toward unified Attention-based Transformers. This handbook details their foundational mechanics.
+# RAG Evaluation & Production Serving Metrics
 
 ---
 
-## 1. Multi-Layer Perceptrons (MLP)
+## 1. RAG-Specific Metrics (RAGAS / TruLens)
 
-The foundational feed-forward architecture mapping inputs through hidden layers using non-linear activations (ReLU, GELU, Swish):
-
-$$h = \\sigma(W x + b)$$
-
-\`\`\`
-Input Layer → [ Weight Matrix W₁ + Bias b₁ ] → Activation σ() → Hidden Layer → Output
-\`\`\`
-
----
-
-## 2. Convolutional Neural Networks (CNN)
-
-Designed for spatial grids (images, audio spectrograms), CNNs apply weight-sharing parameter kernels across local receptive fields.
-
-* **Convolution Operation:** Applies spatial dot products to capture edges, textures, and complex features.
-* **Translation Invariance:** Pooling layers (Max/Average) downsample feature maps while retaining dominant spatial activations.
-
----
-
-## 3. Recurrent Neural Networks (RNN & LSTM)
-
-Processes sequential data by maintaining a hidden state vector $h_t$ over time steps $t$:
-
-$$h_t = \\tanh(W_{hh} h_{t-1} + W_{xh} x_t + b)$$
-
-* **The Vanishing Gradient Problem:** Standard RNNs lose early sequence memory across long sequences.
-* **LSTM (Long Short-Term Memory):** Solves vanishing gradients using dedicated **Forget, Input, and Output Gates** alongside a persistent Cell State $C_t$.
-
----
-
-## 4. The Transformer Mechanism
-
-Introduced in *Attention Is All You Need* (Vaswani et al.), Transformers replace sequential recurrence with parallelizable **Scaled Dot-Product Attention**:
-
-$$\\text{Attention}(Q, K, V) = \\text{softmax}\\left( \\frac{Q K^T}{\\sqrt{d_k}} \\right) V$$
-
-\`\`\`
-Query (Q)  ──┐
-Key (K)    ──┼──> [ Q · Kᵀ / √dₖ ] ──> [ Softmax ] ──> [ × V ] ──> Attention Output
-Value (V)  ──┘
-\`\`\`
-
-### Architectural Breakthroughs:
-1. **Multi-Head Attention:** Runs $h$ parallel attention projections, allowing the network to jointly attend to syntactic, semantic, and positional relationships.
-2. **Positional Encoding:** Injects sequence order information via sinusoidal waves or Rotary Embeddings (RoPE).
-3. **Encoder-Decoder vs Decoder-Only:** Encoders (BERT) process bidirectional context; Decoder-only models (GPT/LLaMA) use causal masking to generate text autoregressively.
-
----
-
-## 5. PyTorch Self-Attention Implementation
+| Metric | Evaluates | Failure mode caught |
+|---|---|---|
+| **Context Precision** | Retriever | Noise / irrelevant retrieved chunks |
+| **Context Recall** | Retriever | Missing necessary information |
+| **Groundedness** | Generator | Model hallucinating beyond context |
+| **Answer Relevancy** | Generator | Answering a different question |
 
 \`\`\`python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
+from ragas import evaluate
+from ragas.metrics import context_precision, context_recall, faithfulness, answer_relevancy
 
-class ScaledDotProductAttention(nn.Module):
-    def __init__(self, d_k):
-        super().__init__()
-        self.scale = 1.0 / (d_k ** 0.5)
-
-    def forward(self, Q, K, V, mask=None):
-        # Q, K, V dimensions: [batch_size, n_heads, seq_len, d_k]
-        scores = torch.matmul(Q, K.transpose(-2, -1)) * self.scale
-        
-        if mask is not None:
-            scores = scores.masked_fill(mask == 0, -1e9)
-            
-        attn_weights = F.softmax(scores, dim=-1)
-        output = torch.matmul(attn_weights, V)
-        return output, attn_weights
+results = evaluate(dataset, metrics=[context_precision, context_recall, faithfulness, answer_relevancy])
 \`\`\`
 
-## Key Takeaways
-1. **CNNs** process spatial grid structures through local receptive field parameter sharing.
-2. **LSTMs** introduced gated memory channels to mitigate vanishing gradients in sequential sequences.
-3. **Transformers** eliminate sequential compute bottlenecks, enabling massive parallel pretraining.
+---
+
+## 2. Deployment & Inference Serving Metrics
+
+### 2.1 TTFT — Time To First Token
+Latency from request start to token #1 output. Measures user-perceived responsiveness.
+
+### 2.2 Tokens/sec & Latency
+Rate of output token generation during decode phase. p50/p90/p99 latency percentiles.
+
+### 2.3 Throughput
+Total tokens processed per unit time across concurrent requests:
+
+$$\\text{Throughput} = \\frac{\\text{total tokens across all requests}}{\\text{time}}$$
+
+### 2.4 VRAM Sizing Formula
+GPU memory footprint for model weights:
+
+$$\\text{VRAM Weight Size} \\approx \\text{Parameters} \\times \\text{Bytes per Parameter}$$
+
+- FP32: 4 bytes/param
+- FP16/BF16: 2 bytes/param (7B model ≈ 14 GB)
+- INT8: 1 byte/param (7B model ≈ 7 GB)
+- INT4: 0.5 bytes/param (7B model ≈ 3.5 GB)
 `
   },
   {
     id: "blog-7",
-    slug: "building-llms-architecture-tokenization",
-    title: "Building Large Language Models from Scratch: Tokenization, RoPE, and Pretraining Pipelines",
-    subtitle: "An end-to-end guide on tokenizer construction, modern Transformer blocks, parameter scaling laws, and pretraining data curation.",
-    category: "LLM Engineering",
-    publishDate: "July 18, 2026",
-    readTime: "11 min read",
-    author: {
-      name: "Marcus Vance",
-      role: "Lead NLP Specialist",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["LLM", "Pretraining", "Tokenization", "RoPE", "Transformer", "Chinchilla"],
+    slug: "linear-knn-naive-bayes-models",
+    title: "Linear Models, Regularization (Ridge/Lasso/ElasticNet), KNN Distance & Naive Bayes",
+    subtitle: "Foundational machine learning models: OLS linear regression, logistic classification, L1/L2 penalties, KNN lazy learning, and Naive Bayes.",
+    category: "Model Architectures",
+    publishDate: "July 29, 2026",
+    readTime: "9 min read",
+    author: AUTHORS.GOVINDARAJAN,
+    tags: ["Linear Models", "Logistic Regression", "Ridge", "Lasso", "KNN", "Naive Bayes"],
     featured: false,
-    summary: "Uncover how LLMs are engineered from the ground up: Byte-Pair Encoding, Rotary Position Embeddings (RoPE), SwiGLU activations, RMSNorm, and Chinchilla optimal compute scaling.",
+    summary: "Explore linear hyperplanes, sigmoid logistic log-loss, L1 Lasso feature selection, L2 Ridge shrinkage, KNN distance metrics, and Naive Bayes independence assumptions.",
     content: `
-# Building LLMs & Defining Parameters — Foundations Guide
-
-At its core, a Large Language Model is a Transformer trained to predict the next token across massive text corpora. This guide details tokenizer engineering, architectural refinements, and scaling laws.
-
----
-
-## 1. Tokenization Engineering
-
-Text must be tokenized into numerical IDs. Modern models use **Byte-Pair Encoding (BPE)** or **SentencePiece** to balance vocabulary size ($32\\text{K} - 128\\text{K}$) against sequence length.
-
-Example tokenization of \`"unbelievable"\`:
-
-$$\\text{"unbelievable"} \\longrightarrow [\\text{"un"}, \\text{"believ"}, \\text{"able"}]$$
-
-* **Vocabulary Trade-off:** Larger vocabularies shorten sequence length, saving attention compute, but increase the parameter footprint of the embedding lookup table ($V \\times d_{\\text{model}}$).
-
----
-
-## 2. Modern Decoder Architecture Refinements
-
-Modern open-weights models (LLaMA 3, Mistral, Qwen) modify the classic Transformer block for stability and speed:
+# Classical Machine Learning — Linear, Distance & Probabilistic Models
 
 \`\`\`
-  x ──> [ RMSNorm ] ──> [ Grouped Query Attention (GQA) ] ──(+) ──> Output
-  │                                                            ▲
-  └────────────────────────────────────────────────────────────┘
-  x ──> [ RMSNorm ] ──> [ SwiGLU Feed-Forward Network ] ─────(+)
+ML Model Families
+├── Linear Models          → Linear Regression, Logistic Regression, Ridge, Lasso, ElasticNet
+├── Distance-Based        → K-Nearest Neighbors (KNN)
+└── Probabilistic          → Naive Bayes (Gaussian, Multinomial, Bernoulli)
 \`\`\`
-
-### Key Architectural Refinements:
-1. **RMSNorm (Root Mean Square Normalization):** Replaces full LayerNorm by skipping mean-centering, reducing memory bandwidth usage:
-
-$$\\text{RMSNorm}(x) = \\frac{x}{\\sqrt{\\frac{1}{d} \\sum_{i=1}^d x_i^2 + \\epsilon}} \\odot \\gamma$$
-
-2. **SwiGLU Activation:** Replaces standard ReLU/GELU in the MLP layer with a gated Swish activation for improved capacity:
-
-$$\\text{SwiGLU}(x) = (x W_1) \\otimes \\text{Swish}(x W_2)$$
-
-3. **RoPE (Rotary Position Embeddings):** Rotates query and key vectors in 2D planes based on sequence index, enabling length generalization:
-
-$$R_{\\Theta, m}^d q_m = \\begin{pmatrix} \\cos m\\theta & -\\sin m\\theta \\\\ \\sin m\\theta & \\cos m\\theta \\end{pmatrix} \\begin{pmatrix} q_1 \\\\ q_2 \\end{pmatrix}$$
 
 ---
 
-## 3. Compute Budget & Chinchilla Scaling Laws
+## 1. Linear Models
 
-Hoffmann et al. (Chinchilla) established optimal trade-offs between model parameter count ($N$) and training tokens ($D$):
+### 1.1 Linear Regression
 
-$$\\text{Compute Budget (FLOPs)} \\approx 6 N D$$
+$$\\hat{y} = w_1 x_1 + w_2 x_2 + \\dots + w_n x_n + b$$
 
-* **Chinchilla Rule of Thumb:** For optimal compute efficiency, train on roughly **20 tokens per parameter** (e.g. a 7B model requires at least 140 Billion tokens, though inference-heavy models like LLaMA 3 train on 15+ Trillion tokens).
+Learns weights by minimizing MSE via Normal Equation or Gradient Descent.
+
+### 1.2 Logistic Regression
+
+$$P(y=1) = \\frac{1}{1 + e^{-(w \\cdot x + b)}}$$
+
+Classification model minimizing cross-entropy log-loss.
+
+### 1.3 Regularization
+
+- **Ridge (L2):** $\\text{Loss} = \\text{MSE} + \\alpha \\sum w_i^2$ (shrinks weights smoothly).
+- **Lasso (L1):** $\\text{Loss} = \\text{MSE} + \\alpha \\sum |w_i|$ (forces uninformative weights to exact zero).
+- **ElasticNet:** Combines L1 and L2 penalties.
 
 ---
 
-## 4. Minimal Next-Token Loss Loop
+## 2. Distance-Based: KNN
 
-\`\`\`python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
+Lazy learner predicting majority class or average of K closest training neighbors. Requires feature standardization.
 
-# Next-token prediction loss computation
-def compute_pretraining_loss(logits, target_ids):
-    # logits shape: [batch_size, seq_len, vocab_size]
-    # target_ids shape: [batch_size, seq_len]
-    shift_logits = logits[..., :-1, :].contiguous()
-    shift_labels = target_ids[..., 1:].contiguous()
-    
-    loss = F.cross_entropy(
-        shift_logits.view(-1, shift_logits.size(-1)), 
-        shift_labels.view(-1)
-    )
-    return loss
-\`\`\`
+---
 
-## Key Takeaways
-1. **RMSNorm** and **SwiGLU** improve training speed and numerical stability over original 2017 Transformer layers.
-2. **RoPE** rotates relative vector positions, outperforming absolute learned positional embeddings.
-3. Compute scaling requires balancing parameter size $N$ with total token volume $D$ ($6ND$ FLOPs).
+## 3. Probabilistic: Naive Bayes
+
+Applies Bayes' Theorem assuming feature conditional independence:
+
+$$P(\\text{class} \\mid \\text{features}) \\propto P(\\text{class}) \\times \\prod P(\\text{feature}_i \\mid \\text{class})$$
+
+Variants: GaussianNB, MultinomialNB, BernoulliNB. Extremely fast text baseline.
 `
   },
   {
     id: "blog-8",
-    slug: "llm-fine-tuning-lora-hyperparameters",
-    title: "LLM Fine-Tuning & Generation Control: SFT, RLHF, DPO, LoRA, and Inference Hyperparameters",
-    subtitle: "Mastering model alignment techniques alongside runtime decoding parameters like Temperature, Top-P, Top-K, and Repetition Penalties.",
-    category: "LLM Engineering",
-    publishDate: "July 12, 2026",
-    readTime: "10 min read",
-    author: {
-      name: "Elena Rostova",
-      role: "Senior Computer Vision Engineer",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["Fine-Tuning", "LoRA", "DPO", "RLHF", "Hyperparameters", "Quantization"],
-    featured: false,
-    summary: "From post-training alignment (SFT, DPO, RLHF) to parameter-efficient fine-tuning with LoRA/QLoRA and inference decoding control (Temperature, Top-P, Top-K).",
+    slug: "tree-models-ensemble-gradient-boosting",
+    title: "Tree-Based Architectures & Ensembles: Decision Trees, Random Forests, XGBoost, LightGBM & CatBoost",
+    subtitle: "Impurity splitting criteria (Gini, Entropy), bagging variance reduction, and sequential gradient boosting algorithms.",
+    category: "Model Architectures",
+    publishDate: "July 26, 2026",
+    readTime: "11 min read",
+    author: AUTHORS.GOVINDARAJAN,
+    tags: ["Decision Trees", "Random Forest", "XGBoost", "LightGBM", "CatBoost", "Ensembles"],
+    featured: true,
+    summary: "Master decision tree split criteria (Gini vs Entropy), Random Forest bagging, and gradient boosted powerhouses like XGBoost, LightGBM, and CatBoost.",
     content: `
-# Post-Training Alignment & Decoding Control
-
-Pretrained base models predict raw text continuations. Transforming them into helpful AI assistants requires Supervised Fine-Tuning (SFT), alignment optimization (DPO/RLHF), and precise generation sampling parameters.
+# Tree-Based Models & Ensemble Frameworks
 
 ---
 
-## 1. Post-Training Alignment Stages
+## 1. Decision Trees
+
+Splits feature space recursively based on split criteria:
+- **Gini Impurity:** $G = 1 - \\sum p_k^2$
+- **Entropy:** $H = - \\sum p_k \\log_2(p_k)$
+
+Key hyperparameters: \`max_depth\`, \`min_samples_split\`, \`min_samples_leaf\`.
+
+---
+
+## 2. Bagging: Random Forest
+
+Ensemble of independent decision trees trained on bootstrap samples with random feature selection. Reduces model variance without increasing bias.
+
+---
+
+## 3. Gradient Boosting Frameworks
+
+Sequential trees fitting negative gradients of the loss function:
+
+| Model | Split Strategy | Key Strength |
+|---|---|---|
+| **XGBoost** | Pre-sorted exact / approx splits | Robust, accurate, handles missing data |
+| **LightGBM** | Histogram leaf-wise (best-first) | 10x faster training on massive datasets |
+| **CatBoost** | Symmetric balanced trees | Superior out-of-the-box categorical feature handling |
+
+\`\`\`python
+import xgboost as xgb
+model = xgb.XGBClassifier(n_estimators=200, learning_rate=0.05, max_depth=6).fit(X_train, y_train)
+\`\`\`
+`
+  },
+  {
+    id: "blog-9",
+    slug: "svm-clustering-dim-reduction-time-series",
+    title: "SVMs, Clustering (K-Means/DBSCAN), Dimensionality Reduction (PCA/t-SNE/UMAP) & Time Series",
+    subtitle: "Margin maximization, kernel tricks, unsupervised clustering, manifold visualization, and temporal autoregression.",
+    category: "Model Architectures",
+    publishDate: "July 24, 2026",
+    readTime: "10 min read",
+    author: AUTHORS.SRI_KANISH,
+    tags: ["SVM", "K-Means", "DBSCAN", "PCA", "t-SNE", "UMAP", "Time Series"],
+    featured: false,
+    summary: "Explore SVM maximum margin boundaries, unsupervised clustering (K-Means, DBSCAN), dimensionality reduction (PCA, t-SNE, UMAP), and time series models.",
+    content: `
+# SVMs, Unsupervised Learning & Time Series Reference
+
+---
+
+## 1. Support Vector Machines (SVM)
+
+Finds the optimal decision boundary (hyperplane) maximizing margin distance between classes. Kernel trick (RBF, Polynomial) projects data into higher dimensions for non-linear boundaries.
+
+---
+
+## 2. Unsupervised Clustering
+
+- **K-Means:** Partitions data into K clusters minimizing within-cluster variance. Sensitive to centroid initialization (K-Means++).
+- **DBSCAN:** Density-based clustering finding arbitrary shaped clusters without specifying K; identifies noise points.
+- **Hierarchical Clustering:** Agglomerative bottom-up tree merging.
+
+---
+
+## 3. Dimensionality Reduction
+
+- **PCA (Principal Component Analysis):** Linear orthogonal projection maximizing feature variance.
+- **t-SNE & UMAP:** Non-linear manifold learning preserving local neighborhood structures for high-dimensional data visualization.
+
+---
+
+## 4. Time Series Models
+
+- **ARIMA (AutoRegressive Integrated Moving Average):** Classical linear modeling capturing autoregression (p), differencing (d), and moving average (q).
+- **Prophet:** Additive model decomposing trend, seasonality, and holiday effects.
+`
+  },
+  {
+    id: "blog-10",
+    slug: "building-llms-architecture-tokenization",
+    title: "Building Large Language Models: Tokenization (BPE/WordPiece), RoPE Embeddings, Self-Attention & Transformer Blocks",
+    subtitle: "The inner mechanics of modern decoder-only language models: tokenizers, rotary embeddings, QKV attention math, RMSNorm, and SwiGLU.",
+    category: "LLM Engineering",
+    publishDate: "July 20, 2026",
+    readTime: "11 min read",
+    author: AUTHORS.MANOSAKTHI,
+    tags: ["LLM", "Tokenization", "RoPE", "Self-Attention", "Transformer", "RMSNorm", "SwiGLU"],
+    featured: true,
+    summary: "Uncover how LLMs are engineered: Byte-Pair Encoding, Rotary Position Embeddings (RoPE), Self-Attention QKV matrices, RMSNorm, and SwiGLU activations.",
+    content: `
+# Building LLMs & Defining Parameters — Foundations Guide
+
+At its core, an LLM is a **Transformer neural network** trained to predict the next token in a sequence, given all previous tokens.
 
 \`\`\`
-Base Model ──> [ Supervised Fine-Tuning (SFT) ] ──> [ Alignment: DPO / RLHF ] ──> Chat Assistant
+Text → Tokenizer → Token IDs → Embeddings → Transformer Blocks (×N) → Output Probabilities → Sampled Token
 \`\`\`
 
-1. **Supervised Fine-Tuning (SFT):** Fine-tunes the base model on curated instruction-response pairs ($\\{x, y\\}$).
-2. **RLHF (Reinforcement Learning from Human Feedback):** Uses a Reward Model and PPO optimization to align outputs with human preferences.
-3. **DPO (Direct Preference Optimization):** Directly optimizes the policy model using binary preference pairs (Chosen $y_w$ vs Rejected $y_l$), eliminating the complex PPO reward model training phase:
+---
+
+## 1. Tokenization
+
+Splits text into subword units using **BPE (Byte-Pair Encoding)**, **WordPiece**, or **SentencePiece**.
+- Example: \`"unbelievable"\` → \`["un", "believ", "able"]\`.
+- \`vocab_size\`: 32K–128K+ tokens in modern models.
+
+---
+
+## 2. Embeddings & Positional Information (RoPE)
+
+Token IDs map to vectors of shape \`[vocab_size, d_model]\`. Position is injected via:
+- **RoPE (Rotary Position Embedding):** Rotates query/key vectors based on sequence position, generalizing to long sequences better than absolute embeddings.
+
+---
+
+## 3. Self-Attention Mechanism
+
+For every token, computes Query (Q), Key (K), and Value (V) vectors:
+
+$$\\text{Attention}(Q, K, V) = \\text{softmax}\\left( \\frac{Q K^T}{\\sqrt{d_k}} \\right) V$$
+
+- **Multi-Head Attention:** Runs parallel attention heads attending to different syntactic/semantic relationships.
+- **Causal Masking:** Enforces autoregressive token generation by masking future positions.
+
+---
+
+## 4. The Transformer Block
+
+Stacked layers containing:
+- **RMSNorm:** Faster normalization skipping mean-centering.
+- **SwiGLU FFN:** Gated Swish feed-forward network storing parameter knowledge capacity.
+
+$$\\text{RMSNorm}(x) = \\frac{x}{\\sqrt{\\frac{1}{d} \\sum_{i=1}^d x_i^2 + \\epsilon}} \\odot \\gamma$$
+`
+  },
+  {
+    id: "blog-11",
+    slug: "llm-pretraining-alignment-tuning",
+    title: "The End-to-End LLM Pipeline: Pretraining, SFT, RLHF, DPO & LoRA/QLoRA Fine-Tuning",
+    subtitle: "Parameter scaling laws (Chinchilla 20 tokens/param), dataset deduplication, instruction tuning, direct preference alignment, and PEFT adapters.",
+    category: "LLM Engineering",
+    publishDate: "July 16, 2026",
+    readTime: "11 min read",
+    author: AUTHORS.YASHIKA,
+    tags: ["Pretraining", "SFT", "RLHF", "DPO", "LoRA", "QLoRA", "Fine-Tuning"],
+    featured: false,
+    summary: "From pretraining FLOP scaling laws ($6ND$) to Supervised Fine-Tuning (SFT), DPO alignment, and parameter-efficient fine-tuning with LoRA & 4-bit QLoRA.",
+    content: `
+# The Full LLM Pipeline & Alignment Guide
+
+---
+
+## 1. Pretraining & Scaling Laws
+
+- **Compute Budget Math:** $\\text{FLOPs} \\approx 6 N D$ (where $N$ = parameters, $D$ = tokens).
+- **Chinchilla Scaling:** Optimal training ratio is ~20 tokens per parameter.
+
+---
+
+## 2. Supervised Fine-Tuning (SFT) & Alignment (RLHF / DPO)
+
+1. **SFT:** Fine-tunes pretrained base models on instruction-response pairs.
+2. **RLHF vs DPO:** Direct Preference Optimization (DPO) optimizes preference policy directly without PPO reward models:
 
 $$\\mathcal{L}_{DPO} = - \\mathbb{E}_{(x, y_w, y_l)} \\left[ \\log \\sigma \\left( \\beta \\log \\frac{\\pi_\\theta(y_w|x)}{\\pi_{\\text{ref}}(y_w|x)} - \\beta \\log \\frac{\\pi_\\theta(y_l|x)}{\\pi_{\\text{ref}}(y_l|x)} \\right) \\right]$$
 
 ---
 
-## 2. Parameter-Efficient Fine-Tuning (LoRA & QLoRA)
+## 3. Parameter-Efficient Fine-Tuning (LoRA & QLoRA)
 
-Fine-tuning all weights of a 70B model requires massive VRAM. **LoRA (Low-Rank Adaptation)** freezes base model weights $W_0 \\in \\mathbb{R}^{d \\times k}$ and injects trainable rank-decomposition matrices $A$ and $B$:
+**LoRA** freezes base weights $W_0$ and injects low-rank trainable decomposition matrices $A$ and $B$:
 
-$$W = W_0 + \\Delta W = W_0 + \\frac{\\alpha}{r} (B \\times A)$$
+$$W = W_0 + \\frac{\\alpha}{r} (B \\times A)$$
 
-where $r \\ll \\min(d, k)$ (e.g. rank $r = 8$ or $16$).
-
-\`\`\`
-Original frozen weights W₀ (d × k)  +  Matrix B (d × r) × Matrix A (r × k)
-\`\`\`
-
-* **QLoRA:** Quantizes base weights to 4-bit NormalFloat (NF4) while maintaining 16-bit LoRA adapter gradients, enabling fine-tuning of 70B models on a single 48GB GPU.
-
----
-
-## 3. Inference Hyperparameter Tuning
-
-Controlling generation behavior during output sampling:
-
-| Hyperparameter | Mechanics | Recommended Setting |
-|---|---|---|
-| **Temperature ($T$)** | Divides logits prior to Softmax: $P(w_i) = \\frac{\\exp(z_i / T)}{\\sum \\exp(z_j / T)}$ | $0.0$ for Code/Math; $0.7$ for Creative Writing |
-| **Top-P (Nucleus)** | Samples from smallest cumulative probability mass $P$ | $0.90$ to drop low-probability tail tokens |
-| **Top-K** | Truncates vocabulary sampling to top $K$ candidates | $40 - 50$ |
-| **Repetition Penalty** | Penalizes logits of previously generated tokens | $1.05 - 1.15$ |
-
----
-
-## 4. Python LoRA Configuration via PEFT
+**QLoRA** quantizes base model weights to 4-bit NormalFloat (NF4) while maintaining 16-bit LoRA gradients.
 
 \`\`\`python
 from peft import LoraConfig, get_peft_model
-from transformers import AutoModelForCausalLM
-
-model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B")
-
-# Configure Low-Rank Adaptation (LoRA)
-peft_config = LoraConfig(
-    r=16,
-    lora_alpha=32,
-    target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],
-    lora_dropout=0.05,
-    bias="none",
-    task_type="CAUSAL_LM"
-)
-
+peft_config = LoraConfig(r=16, lora_alpha=32, target_modules=["q_proj", "v_proj"])
 lora_model = get_peft_model(model, peft_config)
-lora_model.print_trainable_parameters()
-# Output: trainable params: 6,815,744 || all params: 8,037,077,504 || trainable%: 0.0848%
 \`\`\`
-
-## Key Takeaways
-1. **DPO** simplifies RLHF alignment by optimizing preference loss directly without a separate reward network.
-2. **LoRA** reduces trainable parameters by >99%, allowing cost-effective model adaptation.
-3. Keep **Temperature = 0** for deterministic code/data extraction and **0.7+** for creative conversational agents.
 `
   },
   {
-    id: "blog-9",
-    slug: "rag-architecture-chunking-embeddings",
-    title: "Retrieval-Augmented Generation (RAG) Deep Dive: Document Parsing, Chunking & Vector DBs",
-    subtitle: "Building robust enterprise RAG pipelines: chunking strategies, dense vector embeddings, and ANN index selection.",
-    category: "RAG & Knowledge Retrieval",
-    publishDate: "July 05, 2026",
-    readTime: "10 min read",
-    author: {
-      name: "Vikram Sethi",
-      role: "Principal ML Infrastructure Architect",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["RAG", "Chunking", "Vector DB", "Embeddings", "HNSW", "ANN"],
-    featured: true,
-    summary: "A complete structural breakdown of RAG indexing pipelines: PDF layout parsing, fixed vs semantic chunking, dense vector similarity, and HNSW/IVF indexing in modern Vector DBs.",
+    id: "blog-12",
+    slug: "llm-inference-hyperparameters-sampling",
+    title: "LLM Inference Hyperparameters: Temperature, Top-P Nucleus, Top-K, Repetition Penalty & Context Windows",
+    subtitle: "Controlling text generation probability distributions, logits scaling, nucleus sampling, stop sequences, and context length extension.",
+    category: "LLM Engineering",
+    publishDate: "July 14, 2026",
+    readTime: "9 min read",
+    author: AUTHORS.SURYA,
+    tags: ["Hyperparameters", "Temperature", "Top-P", "Top-K", "Inference", "Sampling"],
+    featured: false,
+    summary: "Master decoding parameters: Temperature logits scaling, Top-P nucleus sampling, Top-K truncation, Repetition Penalties, and system prompt engineering.",
     content: `
-# RAG (Retrieval-Augmented Generation) — Foundations to Advanced
-
-LLM knowledge is frozen at training cutoff. RAG converts an LLM from a "closed-book" test-taker into an "open-book" system by retrieving relevant context from external knowledge bases.
+# LLM Inference & Sampling Hyperparameters
 
 ---
 
-## 1. End-to-End RAG Architecture
+## 1. Sampling Parameters
+
+### 1.1 Temperature
+Scales logits prior to Softmax:
+
+$$P(w_i) = \\frac{\\exp(z_i / T)}{\\sum \\exp(z_j / T)}$$
+
+- **$T \\rightarrow 0$:** Greedy decoding (deterministic math/code).
+- **$T = 0.7 - 1.0$:** Creative text generation.
+
+### 1.2 Top-P (Nucleus Sampling)
+Samples from the smallest set of top tokens whose cumulative probability exceeds $P$ (e.g. $P = 0.90$).
+
+### 1.3 Top-K & Repetition Penalty
+- **Top-K:** Limits candidate pool to fixed $K$ highest probability tokens.
+- **Repetition Penalty:** Penalizes logits of previously generated tokens (1.05–1.15).
+
+---
+
+## 2. Context Window & System Prompts
+
+- **Max Tokens:** Upper bound on output generation length.
+- **Stop Sequences:** Custom string triggers ending generation immediately.
+- **System Prompts:** Highest priority instructions guiding model role and boundaries.
+`
+  },
+  {
+    id: "blog-13",
+    slug: "rag-foundations-parsing-chunking",
+    title: "Retrieval-Augmented Generation (RAG) Foundations: Document Layout Parsing & Chunking Strategies",
+    subtitle: "Converting raw document sources into structured text, fixed vs semantic chunking strategies, and small-to-big parent retrieval.",
+    category: "RAG & Knowledge Retrieval",
+    publishDate: "July 08, 2026",
+    readTime: "10 min read",
+    author: AUTHORS.GOVINDARAJAN,
+    tags: ["RAG", "Chunking", "Document Parsing", "Semantic Chunking", "Indexing"],
+    featured: false,
+    summary: "A deep dive into document ingestion: PDF layout structure parsing, fixed-size vs semantic chunking, and small-to-big parent document retrieval.",
+    content: `
+# RAG Foundations — Document Parsing & Chunking
 
 \`\`\`
-[ Indexing Pipeline ]
-Documents ──> Parser ──> Chunking ──> Embedding Model ──> Vector Store (HNSW / IVF)
-
-[ Query Runtime Pipeline ]
-User Query ──> Embed Query ──> Vector Search ──> Top-K Context ──> Prompt Construction ──> LLM Output
+Indexing Pipeline
+Raw Docs → Parsing → Chunking → Embeddings → Vector Database
 \`\`\`
 
 ---
 
-## 2. Document Chunking Strategies
+## 1. Why RAG Exists
 
-Chunking breaks long documents into dense semantic units. Selecting the appropriate chunking strategy determines retrieval precision:
-
-### 2.1 Chunking Taxonomy
-* **Fixed-Size Chunking:** Splits text every $N$ characters/tokens with overlap (e.g. 500 tokens with 50 token overlap). Simple, but can cut sentences mid-thought.
-* **Recursive Character Chunking:** Splits along hierarchical boundaries (paragraphs $\\rightarrow$ sentences $\\rightarrow$ words).
-* **Semantic Chunking:** Computes sentence-level embedding vectors and splits text whenever cosine similarity between adjacent sentences drops significantly.
-* **Small-to-Big (Parent Document) Retrieval:** Searches small chunks (100 tokens) for high-precision vector matches, but retrieves the parent section (1,000 tokens) for LLM generation context.
+LLM knowledge is frozen at training cutoff. RAG retrieves relevant information from external data stores at query time, turning the LLM into an open-book exam taker.
 
 ---
 
-## 3. Vector Databases & ANN Indexing
+## 2. Chunking Taxonomy
 
-Brute-force nearest-neighbor vector search ($O(N)$) fails at scale. Vector databases use **Approximate Nearest Neighbor (ANN)** indexing:
-
-| Index Type | Mechanics | Trade-Offs |
-|---|---|---|
-| **HNSW (Hierarchical Navigable Small World)** | Multi-layer proximity graph | Blazing fast retrieval ($O(\\log N)$), high RAM memory consumption |
-| **IVF (Inverted File Index)** | Partitions vector space into Voronoi cells | Lower RAM consumption, requires periodic index training |
-| **PQ (Product Quantization)** | Compresses high-dimensional vectors to byte codes | Severe memory reduction (80%+), slight recall precision loss |
-
----
-
-## 4. Python RAG Indexing Pipeline
+- **Fixed-Size Chunking:** Splits every $N$ tokens with overlap (e.g. 500 tokens with 50 overlap).
+- **Recursive Chunking:** Splits along hierarchical structural separators (paragraphs → sentences → words).
+- **Semantic Chunking:** Starts a new chunk whenever sentence embedding cosine similarity drops.
+- **Small-to-Big Retrieval:** Searches small chunks (100 tokens) for vector precision, but passes the parent section (1,000 tokens) to the LLM for context.
 
 \`\`\`python
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from sentence_transformers import SentenceTransformer
-import numpy as np
-
-# 1. Text Chunking
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500,
-    chunk_overlap=50,
-    separators=["\n\n", "\n", " ", ""]
-)
-chunks = text_splitter.split_text(raw_document_text)
-
-# 2. Embedding Generation
-model = SentenceTransformer('all-MiniLM-L6-v2')
-embeddings = model.encode(chunks, show_progress_bar=True)
-
-print(f"Generated {len(chunks)} chunks with shape {embeddings.shape}")
+splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+chunks = splitter.split_text(document_text)
 \`\`\`
-
-## Key Takeaways
-1. Use **Small-to-Big Retrieval** to pair high-precision search with comprehensive context generation.
-2. Choose **HNSW** for sub-millisecond retrieval latency when RAM budget permits.
-3. Always include overlap in fixed chunking to preserve information across boundary splits.
 `
   },
   {
-    id: "blog-10",
-    slug: "advanced-rag-reranking-triad",
-    title: "Advanced RAG Architectures: Hybrid Search, Re-Ranking, HyDE & The RAG Triad",
-    subtitle: "Optimizing retrieval performance with hybrid BM25 dense search, cross-encoder re-rankers, and the RAG Triad evaluation metrics.",
+    id: "blog-14",
+    slug: "rag-embeddings-vector-databases-indexing",
+    title: "Dense Vector Embeddings & Vector Store Indexing: HNSW, IVF & Product Quantization",
+    subtitle: "Contrastive embedding models, asymmetric search, Approximate Nearest Neighbor (ANN) indexing, HNSW graphs, and vector compression.",
+    category: "RAG & Knowledge Retrieval",
+    publishDate: "July 04, 2026",
+    readTime: "10 min read",
+    author: AUTHORS.YASHIKA,
+    tags: ["Embeddings", "Vector DB", "HNSW", "IVF", "Product Quantization", "ANN Search"],
+    featured: false,
+    summary: "Understand dense vector embeddings, contrastive training, ANN search indexing (HNSW graphs, IVF Voronoi cells), and Product Quantization (PQ).",
+    content: `
+# Dense Embeddings & Vector Database Indexing
+
+---
+
+## 1. Embedding Models
+
+Dense numeric vectors representing semantic meaning. Trained via contrastive learning to bring related query-passage pairs closer in vector space.
+
+- **Asymmetric Search:** Query is short ("what is RAG?"), passage is long (500 tokens).
+
+---
+
+## 2. Vector DBs & ANN Indexing
+
+Brute-force $O(N)$ comparison fails at scale. Vector databases use **Approximate Nearest Neighbor (ANN)** indexing:
+
+| Index Type | Mechanics | Trade-Off |
+|---|---|---|
+| **HNSW (Hierarchical Navigable Small World)** | Multi-layer proximity graph | Sub-millisecond $O(\\log N)$ search, high RAM usage |
+| **IVF (Inverted File Index)** | Partitions vector space into Voronoi cells | Lower memory consumption, requires index training |
+| **PQ (Product Quantization)** | Vector byte compression | 80%+ memory savings, slight recall drop |
+
+Distance metrics: Cosine Similarity, Dot Product, Euclidean ($L_2$) Distance.
+`
+  },
+  {
+    id: "blog-15",
+    slug: "advanced-rag-reranking-hyde-triad",
+    title: "Advanced RAG Architectures: Hybrid Search (BM25+Dense), Cross-Encoder Re-Ranking, HyDE & The RAG Triad",
+    subtitle: "Production RAG optimization: Reciprocal Rank Fusion (RRF), Cross-Encoder self-attention re-rankers, HyDE, and the RAG Triad evaluation.",
     category: "RAG & Knowledge Retrieval",
     publishDate: "July 01, 2026",
     readTime: "11 min read",
-    author: {
-      name: "Dr. Aris Thorne",
-      role: "Head of AI Research",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80"
-    },
-    tags: ["Advanced RAG", "Re-Ranking", "Hybrid Search", "HyDE", "RAG Triad", "BM25"],
-    featured: false,
-    summary: "Take RAG systems to production grade: combine BM25 keyword matching with dense vectors, re-rank with Cross-Encoders, leverage HyDE, and measure with the RAG Triad.",
+    author: AUTHORS.MANOSAKTHI,
+    tags: ["Advanced RAG", "Hybrid Search", "BM25", "Re-Ranking", "HyDE", "RAG Triad"],
+    featured: true,
+    summary: "Production-grade RAG: combine sparse BM25 with dense vectors via RRF, re-rank with Cross-Encoders, leverage HyDE, and evaluate using the RAG Triad.",
     content: `
 # Advanced RAG Architectures & Evaluation
 
-Basic vector retrieval often fails when users query exact model numbers, acronyms, or complex multi-part questions. Production-grade RAG leverages hybrid search, cross-encoder re-ranking, and formal evaluation frameworks.
+Basic vector retrieval often fails when users query exact model numbers, acronyms, or complex questions. Production RAG relies on hybrid search, re-ranking, and formal evaluation frameworks.
 
 ---
 
 ## 1. Hybrid Search & Reciprocal Rank Fusion (RRF)
 
-Dense vector search captures semantic concepts but misses exact keyword hits (e.g. Part IDs, serial numbers). Hybrid search combines sparse BM25 keyword retrieval with dense vector search using **Reciprocal Rank Fusion (RRF)**:
+Combines sparse BM25 keyword matching with dense vector search:
 
 $$\\text{RRF Score}(d \\in D) = \\sum_{m \\in M} \\frac{1}{k + r_m(d)}$$
 
@@ -937,75 +877,28 @@ User Query ──┬──> [ Dense Vector Retrieval (HNSW) ] ──> Rank List 
 
 ## 2. Cross-Encoder Re-Ranking
 
-Bi-encoder embedding models compute query and document vectors independently to enable fast ANN search. However, a **Cross-Encoder** feeds the query and candidate chunk *jointly* through full self-attention layers:
-
-\`\`\`
-[ Bi-Encoder (Fast ANN Search) ] ──> Retrieves Top 50 Candidate Chunks
-                                              ↓
-[ Cross-Encoder (Full Attention) ] ──> Re-ranks & Filters to Top 5 Chunks for Prompt
-\`\`\`
-
-Re-ranking the top 50 candidates down to 5 dramatically improves retrieval precision without sacrificing throughput.
+Bi-encoders generate query and document vectors independently. A **Cross-Encoder** processes the query and candidate chunk jointly through full self-attention, re-ranking top 50 candidates down to top 5.
 
 ---
 
-## 3. HyDE — Hypothetical Document Embeddings
+## 3. HyDE (Hypothetical Document Embeddings)
 
-When user queries are short or abstract, HyDE prompts an LLM to generate a hypothetical answer first. The hypothetical answer is then embedded and used to search the vector database:
-
-$$\\text{Query} \\longrightarrow \\text{LLM (Hypothetical Answer)} \\longrightarrow \\text{Embedding} \\longrightarrow \\text{Vector DB}$$
-
-Since answers look semantically closer to document chunks than short questions, HyDE significantly boosts retrieval recall.
+Prompts an LLM to generate a hypothetical answer first, embeds the answer, and searches the vector store for matching document chunks.
 
 ---
 
 ## 4. The RAG Triad Evaluation Framework
 
-Evaluating RAG performance without ground truth references relies on the **RAG Triad**:
-
-\`\`\`
-                  [ Query ]
-                 /         \
-   Context Precision       Answer Relevancy
-               /             \
-    [ Context ] ── Faithfulness ──> [ Response ]
-\`\`\`
-
-1. **Context Relevance (Precision):** Is the retrieved context actually relevant to the query?
-2. **Groundedness (Faithfulness):** Is the generated response strictly derived from the retrieved context?
-3. **Answer Relevance:** Does the generated response directly answer the user's initial query?
-
----
-
-## 5. Re-Ranking Python Implementation
+- **Context Precision:** Fraction of retrieved chunks relevant to query.
+- **Context Recall:** Fraction of necessary facts present in context.
+- **Groundedness (Faithfulness):** Fraction of claims in answer supported by context.
+- **Answer Relevancy:** How directly the output answers the user query.
 
 \`\`\`python
 from sentence_transformers import CrossEncoder
-
-# Initialize Cross-Encoder model
 reranker = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
-
-query = "What is the maximum context length of LLaMA 3?"
-retrieved_chunks = [
-    "LLaMA 3 comes in 8B and 70B parameter sizes.",
-    "Meta's LLaMA 3 supports a native context window of 8,192 tokens.",
-    "Fine-tuning LLaMA 3 requires LoRA adapters or full SFT."
-]
-
-# Pair query with each candidate chunk
-pairs = [[query, chunk] for chunk in retrieved_chunks]
-scores = reranker.predict(pairs)
-
-# Sort chunks by cross-encoder relevance score
-ranked_results = sorted(zip(scores, retrieved_chunks), reverse=True)
-for score, chunk in ranked_results:
-    print(f"Score: {score:.4f} | Content: {chunk}")
+scores = reranker.predict([[query, chunk] for chunk in candidate_chunks])
 \`\`\`
-
-## Key Takeaways
-1. **Hybrid Search (BM25 + Dense)** guarantees both keyword precision and semantic coverage.
-2. **Cross-Encoders** re-rank candidate chunks using full attention, boosting relevance quality.
-3. Monitor system stability using the **RAG Triad**: Context Relevance, Groundedness, and Answer Relevance.
 `
   }
 ];
