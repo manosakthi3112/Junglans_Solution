@@ -36,7 +36,24 @@ export const projectsData = [
         "Ensure enterprise compliance with local-first security guarantees.",
         "Streamline technical onboarding with automated documentation."
       ]
-    }
+    },
+    seoKeywords: "codebase intelligence tool, repository health scanner, local code documentation generator, offline codebase analysis tool",
+    howItWorks: [
+      { step: "Point the scanner at your workspace repository or monorepo.", desc: "Junglans Project Manager indexes files, line counts, duplicate fragments, and unreferenced assets entirely on-device." },
+      { step: "Health scores and quality metrics are computed locally.", desc: "Repository health scores, critical execution paths, and quality improvement candidates are calculated with zero cloud telemetry." },
+      { step: "Export standardized documentation and reports.", desc: "Generate beautifully formatted Markdown documentation, team onboarding guides, and audit reports in one click." }
+    ],
+    useCases: [
+      { title: "Monorepo Audits for Engineering Leads", desc: "Give tech leads instant visibility into duplicate code, dead assets, and module health across massive repositories." },
+      { title: "Automated Team Onboarding", desc: "Generate standardized project documentation and architecture notes so new engineers ramp up in days instead of weeks." },
+      { title: "Compliance & Quality Reporting", desc: "Produce verifiable code quality reports for enterprise security reviews without sending a single line of code to external servers." }
+    ],
+    faq: [
+      { q: "What is Junglans Project Manager?", a: "Junglans Project Manager is a local-first desktop utility for cataloging, scanning, analyzing, and documenting software repositories with zero cloud telemetry." },
+      { q: "Does Junglans Project Manager upload code to the cloud?", a: "No. Every scan, analysis, and report runs 100% on-device. No code, metrics, or logs ever leave your machine." },
+      { q: "What repository types does it support?", a: "It works with any local workspace directory, including monorepos, and analyzes syntax, line counts, duplicate fragments, and unreferenced assets." },
+      { q: "Can it generate project documentation automatically?", a: "Yes. It exports standardized Markdown reports, onboarding guides, and architectural documentation in a single click." }
+    ]
   },
   {
     id: "project-1",
@@ -73,7 +90,24 @@ export const projectsData = [
         "Granular token cost management across engineering teams.",
         "Instant clarity on why and how AI code changes were produced."
       ]
-    }
+    },
+    seoKeywords: "AI code attribution tool, AI generated code audit, git AI lineage tracking, token cost monitoring, AI code provenance",
+    howItWorks: [
+      { step: "Install the zero-friction git sidecar hook.", desc: "The sidecar runs quietly alongside standard version control workflows without slowing developer velocity." },
+      { step: "AI prompts, plans, and costs are linked to commits.", desc: "Every AI-generated change is permanently attributed to its originating prompt, agent plan, and token spend." },
+      { step: "Audit, analyze, and report from the dashboard.", desc: "Browse the visual history timeline and generate executive analytics on productivity, ROI, and code churn." }
+    ],
+    useCases: [
+      { title: "Enterprise IP & Compliance Audits", desc: "Prove exactly which lines of code came from AI, who approved them, and what prompt produced them." },
+      { title: "Token Budget Governance", desc: "Track real-time token consumption and financial costs per developer, team, or feature branch." },
+      { title: "AI ROI Reporting for Executives", desc: "Generate executive analytics on AI tool ROI, developer productivity, and quality trends automatically." }
+    ],
+    faq: [
+      { q: "What is Jung AI Version Control Sidecar?", a: "It is a sidecar system for AI-assisted development that permanently links human prompts, agent plans, and token costs directly to code diffs." },
+      { q: "Does it work with existing git workflows?", a: "Yes. It runs as a zero-friction git sidecar hook alongside standard version control without slowing down developers." },
+      { q: "How does token cost tracking work?", a: "It records real-time token consumption and financial cost per developer, team, or feature branch, viewable in an interactive dashboard." },
+      { q: "Is the attribution data permanent?", a: "Yes. Attribution, prompt lineage, and audit logs are retained permanently for compliance and review." }
+    ]
   },
   {
     id: "project-2",
@@ -110,7 +144,24 @@ export const projectsData = [
         "Zero manual file context management required.",
         "Complete human approval control over every code change."
       ]
-    }
+    },
+    seoKeywords: "multi-agent AI IDE, AI native development environment, agent orchestrated coding, AI code review IDE, AI pair programming tool",
+    howItWorks: [
+      { step: "Describe the task in plain language.", desc: "The Understanding agent parses the requirement scope while Smart Auto-Context pulls relevant workspace files automatically." },
+      { step: "Specialized agents plan and execute.", desc: "Decomposer, Optimizer, and Coder agents split the task, audit performance paths, and generate verified patches." },
+      { step: "Review and approve every change.", desc: "Inspect live diffs in the visual reviewer and approve or reject AI modifications line-by-line before they land." }
+    ],
+    useCases: [
+      { title: "Enterprise Feature Delivery", desc: "Teams ship features up to 5x faster with a 4-stage multi-agent pipeline that understands repository context." },
+      { title: "Safe AI Onboarding for Regulated Teams", desc: "Dual execution modes and human approval gates keep AI assistance controlled and reviewable." },
+      { title: "Semantic Code Memory Across Repos", desc: "Long-term project memory enables instant semantic context retrieval across large enterprise repositories." }
+    ],
+    faq: [
+      { q: "What is Junglans IDE?", a: "Junglans IDE is an AI-native integrated development environment featuring collaborative multi-agent task pipelines, smart auto-context, and review workflows." },
+      { q: "How do the multi-agent pipelines work?", a: "Four specialized agents — Understanding, Decomposer, Optimizer, and Coder — break down and execute complex software tasks collaboratively." },
+      { q: "Can humans control AI-generated code?", a: "Yes. The Visual Code Diff Reviewer lets you accept or reject AI modifications line-by-line before execution." },
+      { q: "Is Junglans IDE local-first?", a: "Yes. It runs on-device with semantic code memory, multi-session terminals, and zero mandatory cloud telemetry." }
+    ]
   },
   {
     id: "project-3",
@@ -147,7 +198,24 @@ export const projectsData = [
         "Save hours with automated channel and call recaps.",
         "Seamless unified messaging, file sharing, and video calling."
       ]
-    }
+    },
+    seoKeywords: "encrypted enterprise chat, end to end encrypted messaging app, secure team communication, AI meeting summarizer, zero knowledge encryption chat",
+    howItWorks: [
+      { step: "Create a workspace and invite your team.", desc: "Granular roles and channel governance give administrators full control over visibility and compliance." },
+      { step: "Message, call, and share with zero-knowledge encryption.", desc: "Direct messages, team channels, document transfers, and 4K HD calls are protected end-to-end." },
+      { step: "Get automated AI recaps of every discussion.", desc: "AI summaries capture channel decisions, meeting key points, and assigned action items automatically." }
+    ],
+    useCases: [
+      { title: "Distributed Global Organizations", desc: "Keep confidential communications strictly private across time zones with encrypted messaging and calls." },
+      { title: "Regulated & Security-Conscious Teams", desc: "Zero-knowledge encryption and immutable governance satisfy strict enterprise compliance standards." },
+      { title: "Meetings Without Manual Notes", desc: "AI channel and meeting recaps save hours of manual note-taking for fast-moving teams." }
+    ],
+    faq: [
+      { q: "Is JunglansChat end-to-end encrypted?", a: "Yes. JunglansChat uses a zero-knowledge security protocol protecting messages, team channels, and document transfers end-to-end." },
+      { q: "Does JunglansChat support video calls?", a: "Yes. It provides high-definition 4K audio and video conferencing with screen sharing, participant controls, and noise suppression." },
+      { q: "How do AI meeting recaps work?", a: "AI automatically summarizes long channel discussions and meetings into key points, decisions, and assigned action items." },
+      { q: "Can JunglansChat run air-gapped?", a: "JunglansChat is designed for zero-telemetry enterprise deployment with governance controls suitable for air-gapped environments." }
+    ]
   },
   {
     id: "project-5",
@@ -184,7 +252,24 @@ export const projectsData = [
         "Zero SQL experience required for business users.",
         "Enterprise-grade security with read-only execution guardrails."
       ]
-    }
+    },
+    seoKeywords: "natural language SQL tool, talk to database AI, text to SQL generator, voice query database, NL2SQL assistant",
+    howItWorks: [
+      { step: "Ask your question in plain English or by voice.", desc: "Type or speak business questions naturally — no SQL knowledge or query syntax required." },
+      { step: "TalkToDB generates and safely executes the query.", desc: "Read-only query guardrails enforce strict safety, preventing any accidental data modification." },
+      { step: "See charts, tables, and spoken recaps instantly.", desc: "Results convert automatically into interactive visualizations and natural spoken summaries." }
+    ],
+    useCases: [
+      { title: "Executives & Product Managers", desc: "Query enterprise databases directly in plain language and get instant answers without waiting on the data team." },
+      { title: "Analysts Seeking Fast Answers", desc: "Convert complex analytical questions into charts, tables, and executive reports in seconds." },
+      { title: "Hands-Free Operations Teams", desc: "Use voice commands and spoken recaps for eyes-free data intelligence during operations." }
+    ],
+    faq: [
+      { q: "What is TalkToDB?", a: "TalkToDB is a voice and text AI assistant that converts natural language questions into database queries, interactive charts, and spoken recaps." },
+      { q: "Which databases does TalkToDB support?", a: "It connects securely across enterprise relational databases and data warehouses with instant schema discovery." },
+      { q: "Can TalkToDB accidentally modify data?", a: "No. Read-only query guardrails enforce strict safety controls preventing accidental data modification or unauthorized mutation." },
+      { q: "Do users need to know SQL?", a: "No. Business users can query data in plain language while analysts can export full SQL, charts, and reports." }
+    ]
   },
   {
     id: "project-6",
@@ -220,7 +305,24 @@ export const projectsData = [
         "Accelerate research and knowledge synthesis.",
         "Maintain absolute privacy with encrypted storage."
       ]
-    }
+    },
+    seoKeywords: "AI knowledge graph notes, visual note taking app, entity extraction notes, connected note workspace, personal knowledge management AI",
+    howItWorks: [
+      { step: "Write naturally in the distraction-free editor.", desc: "Take notes in markdown with rich formatting, custom tags, and keyboard shortcuts." },
+      { step: "AI extracts entities and relationships automatically.", desc: "Background analysis identifies key concepts, people, topics, and links as you write." },
+      { step: "Explore your interactive knowledge network.", desc: "Navigate the visual node graph, use semantic search, and surface hidden connections instantly." }
+    ],
+    useCases: [
+      { title: "Researchers & Analysts", desc: "Synthesize scattered research into an interconnected knowledge graph that reveals hidden connections." },
+      { title: "Knowledge Teams", desc: "Build a shared organizational brain with automated entity extraction and semantic search." },
+      { title: "Privacy-First Note Takers", desc: "Maintain absolute privacy with encrypted storage, sync, and local-first operation." }
+    ],
+    faq: [
+      { q: "What is Junglans AI Notes?", a: "It is an AI-powered note-taking workspace that automatically extracts entities and relationships from plain text to build interactive knowledge graphs." },
+      { q: "How does the knowledge graph work?", a: "Written notes are transformed into an interactive node graph visualizing key concepts, topics, and connections across projects." },
+      { q: "Is my data private?", a: "Yes. Notes use secure encrypted sync and can operate fully offline with zero telemetry." },
+      { q: "Does it support markdown?", a: "Yes. The editor supports markdown, rich text formatting, custom tags, keyboard shortcuts, and theme customization." }
+    ]
   },
   {
     id: "project-7",
@@ -256,7 +358,24 @@ export const projectsData = [
         "Total audit readiness for tax and accounting compliance.",
         "Hardened encryption protecting sensitive corporate spend."
       ]
-    }
+    },
+    seoKeywords: "expense tracker with bank SMS parsing, enterprise expense management, automated expense auditing, secure expense tracking app",
+    howItWorks: [
+      { step: "Connect bank SMS alerts to the tracker.", desc: "Transactions are parsed automatically from bank SMS notifications with zero manual entry." },
+      { step: "Categorize, budget, and set spend alerts.", desc: "Monthly limits per category trigger proactive threshold notifications and warnings." },
+      { step: "Generate audit-ready financial reports.", desc: "Export compliance-ready audits, tax summaries, and spending trend analytics on demand." }
+    ],
+    useCases: [
+      { title: "Finance & Accounting Teams", desc: "Automate transaction capture and generate compliance-ready audits with hardened encryption." },
+      { title: "Security-Conscious SMEs", desc: "Track corporate spend with multi-layer encryption and complete audit trails." },
+      { title: "Freelancers & Small Businesses", desc: "Skip manual entry entirely with automated bank SMS parsing and instant categorization." }
+    ],
+    faq: [
+      { q: "What is Junglans Expense Tracker?", a: "It is a production-hardened financial management suite featuring automated bank transaction extraction, multi-layer encryption, and audit controls." },
+      { q: "How does SMS parsing work?", a: "Bank SMS alerts are automatically captured and parsed to log income and expenditures instantly without manual data entry." },
+      { q: "Is the data encrypted?", a: "Yes. Transactions, account numbers, receipts, and sensitive financial records are protected with multi-layer cryptographic controls." },
+      { q: "Can it produce audit reports?", a: "Yes. It generates compliance-ready financial audits, tax export summaries, and spending trend analytics." }
+    ]
   },
   {
     id: "project-8",
@@ -292,7 +411,24 @@ export const projectsData = [
         "Maintain 100% productivity even without internet connectivity.",
         "Complete visibility into sales activities and lead conversion."
       ]
-    }
+    },
+    seoKeywords: "offline field sales CRM, mobile lead management app, spreadsheet CRM import, sales pipeline tracker mobile",
+    howItWorks: [
+      { step: "Import leads from spreadsheets.", desc: "Visually map spreadsheet columns to lead attributes with instant data verification." },
+      { step: "Move leads through your pipeline.", desc: "Track leads across custom stages — Not Called, Called, Interested, Follow Up, Closed — with one-tap dialing." },
+      { step: "Export updated lists and full backups.", desc: "Export updated lead spreadsheets or complete offline database backups anytime." }
+    ],
+    useCases: [
+      { title: "Field Sales Teams", desc: "Manage hundreds of leads on the road with 100% offline operation and one-tap dialing." },
+      { title: "SME Sales Departments", desc: "Convert spreadsheet leads into a structured pipeline without complex CRM onboarding." },
+      { title: "Event & Expo Lead Capture", desc: "Import thousands of event leads in seconds and follow up systematically with activity history." }
+    ],
+    faq: [
+      { q: "What is Junglans Leads?", a: "It is a mobile sales CRM built for field teams to import spreadsheets, track lead pipelines, and manage customer communications offline." },
+      { q: "Does Junglans Leads work offline?", a: "Yes. It is 100% offline-first, allowing sales representatives to manage leads anywhere without connection drops." },
+      { q: "Which import formats are supported?", a: "Leads can be imported from Excel and CSV files with visual column mapping and instant verification." },
+      { q: "Can I export my data?", a: "Yes. You can export updated lead lists back into spreadsheet files or complete offline database backups." }
+    ]
   },
   {
     id: "project-9",
@@ -328,7 +464,24 @@ export const projectsData = [
         "Build long-term habits with gamified streak tracking.",
         "Never miss important deadlines or team milestones."
       ]
-    }
+    },
+    seoKeywords: "calendar with pomodoro timer, kanban calendar app, focus planner, habit streak tracker, cross platform productivity suite",
+    howItWorks: [
+      { step: "Plan your month and schedule events.", desc: "Use the interactive month grid, daily agendas, and rapid double-tap event creation." },
+      { step: "Organize work on the Kanban board.", desc: "Drag tasks across To-Do, In-Progress, and Completed columns with priority and time badges." },
+      { step: "Focus with the Pomodoro timer and track streaks.", desc: "Run customizable focus sessions and build daily habits with gamified streaks." }
+    ],
+    useCases: [
+      { title: "Deep Work Planning", desc: "Combine monthly planning, Kanban task organization, and Pomodoro sessions into one flow." },
+      { title: "Team Milestone Tracking", desc: "Track deadlines, holidays, and event reminders with local push notifications." },
+      { title: "Habit Building", desc: "Maintain consistent productive routines with gamified streak counters and badges." }
+    ],
+    faq: [
+      { q: "What is Junglans Focus Calendar?", a: "It is a cross-platform calendar and productivity suite combining month agendas, Kanban task management, and Pomodoro focus timers." },
+      { q: "Does it include a Pomodoro timer?", a: "Yes. An integrated focus timer supports customizable work and rest intervals to boost productivity flow." },
+      { q: "Can I manage tasks on a Kanban board?", a: "Yes. Tasks can be organized into To-Do, In-Progress, and Completed columns with drag-and-drop workflow." },
+      { q: "Does it track habits?", a: "Yes. Gamified streak counters and daily habit badges help build consistent productive routines." }
+    ]
   },
   {
     id: "project-10",
@@ -364,7 +517,24 @@ export const projectsData = [
         "Ingest custom website and document knowledge seamlessly.",
         "Maintain brand alignment with fully customizable widgets."
       ]
-    }
+    },
+    seoKeywords: "no-code AI chatbot builder, custom chatbot for website, knowledge base chatbot, embed chatbot no code",
+    howItWorks: [
+      { step: "Ingest your knowledge sources.", desc: "Upload website URLs, product documentation, FAQs, and support articles to train your chatbot." },
+      { step: "Design conversational flows visually.", desc: "Drag-and-drop decision trees, logic paths, and response templates in the no-code builder." },
+      { step: "Embed and hand off to humans.", desc: "Paste a one-line script to embed the widget and route complex cases to live agents." }
+    ],
+    useCases: [
+      { title: "Customer Support Automation", desc: "Resolve routine tickets automatically and reduce support volumes by up to 70%." },
+      { title: "Sales & Lead Qualification Bots", desc: "Engage website visitors instantly and qualify leads before human handoff." },
+      { title: "Internal Knowledge Assistants", desc: "Build employee-facing bots trained on internal docs, FAQs, and policies." }
+    ],
+    faq: [
+      { q: "What is BotForge?", a: "BotForge is an enterprise no-code AI chatbot building platform for creating, customizing, and embedding AI agents on any website without coding." },
+      { q: "What knowledge sources can it ingest?", a: "Website URLs, product documentation, FAQs, and support articles can be ingested to train personalized chatbot models." },
+      { q: "Do I need to write code to embed it?", a: "No. A one-line script tag embeds a responsive chat widget on any web page or customer portal." },
+      { q: "Can it hand off to human agents?", a: "Yes. Conversations transition seamlessly from AI chatbot to live human support agents with a unified inbox." }
+    ]
   },
   {
     id: "project-11",
@@ -400,7 +570,24 @@ export const projectsData = [
         "Zero account creation or server connections required.",
         "Tactile claymorphic UI designed for quick daily interactions."
       ]
-    }
+    },
+    seoKeywords: "offline expense tracker, private expense manager, quantity price calculator app, personal finance app offline, claymorphic finance app",
+    howItWorks: [
+      { step: "Log an expense in simple or quantity mode.", desc: "Enter single amounts or itemized purchases with live unit price × quantity calculation." },
+      { step: "Categorize with custom icons and rules.", desc: "Create tailored spending categories with icons, accent colors, and calculation rules." },
+      { step: "Review segmented analytics.", desc: "Inspect Month, Year, and Lifetime breakdowns with instant progress cards and calendar views." }
+    ],
+    useCases: [
+      { title: "Personal Budgeting", desc: "Track daily spending privately with zero account creation and zero cloud dependency." },
+      { title: "Grocery & Inventory Logging", desc: "Log itemized purchases with automatic unit price × quantity calculation." },
+      { title: "Privacy-First Users", desc: "Maintain absolute data isolation with no logins, telemetry, or external sharing." }
+    ],
+    faq: [
+      { q: "What is Junglans Offline Expense Tracker?", a: "It is a lightweight offline personal expense tracker featuring simple and quantity calculation modes with claymorphism design." },
+      { q: "Does it need internet or an account?", a: "No. It is 100% offline with zero cloud telemetry, logins, or external data sharing." },
+      { q: "What is quantity mode?", a: "Quantity mode logs itemized purchases with live unit price × quantity total calculation — ideal for groceries and inventory." },
+      { q: "What analytics does it provide?", a: "Segmented Month, Year, and Lifetime breakdowns with instant progress cards and a calendar month grid overview." }
+    ]
   },
   {
     id: "project-12",
@@ -436,7 +623,24 @@ export const projectsData = [
         "Inspect memory state mutations step by step.",
         "Accelerate technical interview preparation and algorithm reviews."
       ]
-    }
+    },
+    seoKeywords: "code execution visualizer, call stack visualizer, algorithm complexity calculator, DSA practice tool, line by line code debugger",
+    howItWorks: [
+      { step: "Load code in one of 7 languages.", desc: "Select from supported languages with zero external compilation delays." },
+      { step: "Step through execution line-by-line.", desc: "Watch active line highlighting, variable memory states, and call stack pushes in real time." },
+      { step: "Analyze complexity and export traces.", desc: "Get automatic Big-O time and space complexity plus exportable visual traces." }
+    ],
+    useCases: [
+      { title: "DSA Interview Preparation", desc: "Master recursion, trees, and sorting with step-by-step execution and memory inspection." },
+      { title: "Computer Science Education", desc: "Teach algorithms visually with animated call stacks and complexity analysis." },
+      { title: "Code Reviews & Presentations", desc: "Export execution traces and call stack animations for reviews and tutorials." }
+    ],
+    faq: [
+      { q: "What is JunglasNCode?", a: "It is an interactive browser visualization engine showing line-by-line code execution, variable memory states, call stack expansion, and algorithmic complexity." },
+      { q: "Which languages are supported?", a: "It supports step-by-step tracing across 7 major programming languages with zero external compilation delays." },
+      { q: "Can it calculate Big-O complexity?", a: "Yes. Time and space complexity are computed automatically for executed functions and loops." },
+      { q: "Can I export traces?", a: "Yes. Execution traces and call stack animations can be exported for presentations, tutorials, and code reviews." }
+    ]
   },
   {
     id: "project-13",
@@ -472,7 +676,24 @@ export const projectsData = [
         "Save hours of manual video scanning and editing.",
         "Achieve consistent 4K visual quality across all media stills."
       ]
-    }
+    },
+    seoKeywords: "AI video thumbnail selector, automatic frame selection, best video frame picker, computer vision thumbnail tool",
+    howItWorks: [
+      { step: "Feed in a video file.", desc: "Multi-gigabyte videos are processed in bulk with hardware-accelerated frame extraction." },
+      { step: "Frames are scored across 13 dimensions.", desc: "Face quality, rule-of-thirds composition, sharpness, lighting, motion, and saliency are all evaluated." },
+      { step: "Export top-K cinematic stills.", desc: "De-duplicated, color-graded JPG and PNG stills are exported with zero compression artifacts." }
+    ],
+    useCases: [
+      { title: "Content Teams", desc: "Generate thumbnail-perfect stills for YouTube, streaming, and marketing collateral automatically." },
+      { title: "Filmmakers & Editors", desc: "Find the most striking cinematic stills from hours of footage in minutes." },
+      { title: "Social Media Operations", desc: "Batch-process video libraries and export engaging, consistent cover images." }
+    ],
+    faq: [
+      { q: "What is Cinematic AI Engine?", a: "It is a multi-stage computer-vision AI pipeline that automatically extracts, scores, de-duplicates, and exports the highest-quality cinematic stills from video files." },
+      { q: "How are frames scored?", a: "Frames are evaluated across 13 dimensions including face quality, rule-of-thirds composition, sharpness, lighting balance, motion, and saliency." },
+      { q: "Does it handle 4K video?", a: "Yes. It processes multi-gigabyte video files in bulk with hardware-accelerated extraction and exports 4K-ready stills." },
+      { q: "Can it remove duplicate frames?", a: "Yes. Smart shot deduplication filters near-identical frames and enforces temporal scene variety." }
+    ]
   },
   {
     id: "project-14",
@@ -508,7 +729,24 @@ export const projectsData = [
         "Seamless human-in-the-loop approval before publication.",
         "Dual aspect-ratio rendering for landscape and short-form video channels."
       ]
-    }
+    },
+    seoKeywords: "automated video generator, AI voiceover video maker, script to video AI, educational video automation, AI subtitle generator",
+    howItWorks: [
+      { step: "Enter a topic.", desc: "The AI scriptwriter converts topics into structured educational scripts with scene-by-scene descriptions." },
+      { step: "Voiceover, scenes, and subtitles are generated.", desc: "Neural TTS voiceovers, dynamic imagery, Ken Burns effects, and animated subtitles are synthesized automatically." },
+      { step: "Approve and render in dual formats.", desc: "Drafts route to team channels for one-tap approval, then render in 16:9 and 9:16 simultaneously." }
+    ],
+    useCases: [
+      { title: "Educational Content Teams", desc: "Publish daily lesson videos with automated scriptwriting, voiceovers, and subtitles." },
+      { title: "Marketing Teams", desc: "Produce broadcast-ready product and explainer videos without a production crew." },
+      { title: "Social Media Automation", desc: "Render 16:9 and 9:16 versions for YouTube, Shorts, and Reels in one pass." }
+    ],
+    faq: [
+      { q: "What is Automated Video Generator?", a: "It is an automated video generation pipeline that writes scripts, generates AI voiceovers, synthesizes visual scenes, adds subtitles, and renders publish-ready videos." },
+      { q: "Does it support multiple languages?", a: "Yes. Neural voiceover synthesis generates natural human-like voiceovers across multiple languages." },
+      { q: "What output formats are supported?", a: "Videos render simultaneously in widescreen 16:9 and vertical 9:16 social media formats." },
+      { q: "Can humans review before publishing?", a: "Yes. Generated drafts route to team channels for one-tap approval before automated publishing." }
+    ]
   },
   {
     id: "project-15",
@@ -544,7 +782,24 @@ export const projectsData = [
         "Zero ad interruptions or privacy tracking.",
         "Smooth 60 FPS visual performance and haptic controls."
       ]
-    }
+    },
+    seoKeywords: "offline game collection, ad free strategy games, mobile puzzle game suite, offline arcade games, tactile mobile games",
+    howItWorks: [
+      { step: "Pick a game from the 7-classic collection.", desc: "Choose from 2048, Tetris, Sudoku, Chess, Ludo, Tic-Tac-Toe, and Memory Match." },
+      { step: "Play solo or pass-and-play.", desc: "Face intelligent AI bot levels or play locally with friends — no internet needed." },
+      { step: "Beat records and keep them forever.", desc: "High scores, move histories, and achievements persist locally with zero network dependency." }
+    ],
+    useCases: [
+      { title: "Offline Travel & Commutes", desc: "Enjoy seven classic games anywhere with 100% offline playability." },
+      { title: "Ad-Free Family Entertainment", desc: "Play without ad interruptions, tracking, or account sign-ins." },
+      { title: "Casual Strategy Fans", desc: "Sharpen strategy skills against intelligent AI bots or friends." }
+    ],
+    faq: [
+      { q: "What is Junglans Arcade?", a: "It is an offline mobile game suite featuring seven classic strategy and puzzle games with high-score tracking, tactile feedback, and theme customization." },
+      { q: "Which games are included?", a: "2048, Tetris, Sudoku, Chess, Ludo, Tic-Tac-Toe, and Memory Match in a single unified app." },
+      { q: "Does it show ads or track users?", a: "No. There are zero ad banners, no user tracking, and no external account sign-ins." },
+      { q: "Can I play against others?", a: "Yes. Play solo against intelligent bot levels or pass-and-play locally with friends." }
+    ]
   },
   {
     id: "project-16",
@@ -580,7 +835,24 @@ export const projectsData = [
         "Never lose edit history with automated revision versioning.",
         "Perform instant searches across thousands of local notes."
       ]
-    }
+    },
+    seoKeywords: "biometric secure notes app, offline notes with encryption, note version history, secure note taking app, markdown notes biometric lock",
+    howItWorks: [
+      { step: "Lock your workspace with biometrics.", desc: "Sensitive notes and folders are protected behind fingerprint and face authentication." },
+      { step: "Edit in markdown or rich text with versioning.", desc: "Every revision is tracked automatically, allowing instant comparison and one-click rollback." },
+      { step: "Search and summarize on-device.", desc: "Sub-millisecond full-text search and on-device note summarization keep everything local." }
+    ],
+    useCases: [
+      { title: "Executives & Managers", desc: "Protect confidential documents and meeting notes behind biometric locks." },
+      { title: "Researchers", desc: "Never lose edit history with automated versioning and instant full-text search." },
+      { title: "Privacy-Critical Teams", desc: "Keep all notes on-device with no cloud server calls and full import/export control." }
+    ],
+    faq: [
+      { q: "What is Junglans Secure Notes?", a: "It is an offline-first notes application with Markdown and rich-text editing, biometric lock, versioning history, folder tagging, and instant full-text search." },
+      { q: "How does the biometric lock work?", a: "Sensitive notes and confidential documents are locked behind device fingerprint and face authentication." },
+      { q: "Can I recover previous versions?", a: "Yes. Revision history is tracked for every edit with instant comparison and one-click rollback." },
+      { q: "Is any data sent to the cloud?", a: "No. It is fully offline with local storage isolation, on-device summarization, and zero server calls." }
+    ]
   },
   {
     id: "project-17",
@@ -616,7 +888,24 @@ export const projectsData = [
         "Automated creation of broadcast-ready financial videos.",
         "Risk-managed position sizing suggestions for portfolio managers."
       ]
-    }
+    },
+    seoKeywords: "AI stock market forecasting tool, financial video generator, market sentiment analysis, stock prediction AI, animated financial reports",
+    howItWorks: [
+      { step: "Mine news, sentiment, and technical data.", desc: "Financial news headlines, social sentiment velocity, earnings transcripts, and technical indicators are fused automatically." },
+      { step: "Generate multi-horizon signals.", desc: "Risk-managed Buy, Sell, and Hold forecasts are produced across 1-day, 5-day, and 21-day horizons." },
+      { step: "Render animated report videos.", desc: "Forecasts convert into broadcast-ready animated videos in 16:9 and 9:16 formats." }
+    ],
+    useCases: [
+      { title: "Traders & Analysts", desc: "Get daily multi-horizon market signals backed by sentiment and macro analytics." },
+      { title: "Financial Content Creators", desc: "Automate broadcast-ready animated report videos for terminals and social channels." },
+      { title: "Portfolio Managers", desc: "Apply risk-managed position sizing and stop-loss suggestions based on historical volatility." }
+    ],
+    faq: [
+      { q: "What is Stock Video Intelligence?", a: "It is an end-to-end AI pipeline fusing news sentiment, technical indicators, and macro data to predict stock signals and render animated report videos." },
+      { q: "What forecast horizons does it provide?", a: "Risk-managed Buy, Sell, and Hold predictions across 1-day, 5-day, and 21-day horizons." },
+      { q: "What data sources does it use?", a: "Financial news headlines, social sentiment velocity, earnings transcripts, RSI, MACD, Bollinger Bands, and macroeconomic shifts." },
+      { q: "Does it create videos automatically?", a: "Yes. Market forecasts are converted automatically into broadcast-ready animated report videos in 16:9 and 9:16." }
+    ]
   },
   {
     id: "project-18",
@@ -652,7 +941,24 @@ export const projectsData = [
         "Side-by-side algorithm hyperparameter comparison.",
         "Zero server overhead—runs entirely in-browser."
       ]
-    }
+    },
+    seoKeywords: "machine learning visualizer, ML algorithm learning tool, decision boundary visualizer, neural network visualization, ML sandbox browser",
+    howItWorks: [
+      { step: "Pick an algorithm and dataset.", desc: "Choose from 22 engines including Neural Networks, SVMs, Random Forests, K-Means, Q-Learning, and DBSCAN." },
+      { step: "Tune hyperparameters live.", desc: "Adjust learning rates, regularizations, tree depths, and activation functions during training." },
+      { step: "Watch convergence and export results.", desc: "Observe decision boundary heatmaps update each epoch and export high-res canvases and metric tables." }
+    ],
+    useCases: [
+      { title: "ML Education & Courses", desc: "Teach how algorithms learn with real-time decision boundary visualizations." },
+      { title: "Hyperparameter Experiments", desc: "Compare two algorithm configurations side-by-side on convergence and loss." },
+      { title: "Data Science Prototyping", desc: "Import custom CSV datasets and sanity-check models instantly in-browser." }
+    ],
+    faq: [
+      { q: "What is Junglans ML Visualizer?", a: "It is a real-time browser sandbox for visualizing 22 machine learning and reinforcement learning algorithms learning step-by-step with live decision boundaries." },
+      { q: "Which algorithms are included?", a: "Neural Networks, SVMs, Decision Trees, Random Forests, K-Means, Q-Learning, DBSCAN, and more across 22 engines." },
+      { q: "Does it run in the browser?", a: "Yes. It runs entirely in-browser with zero server overhead." },
+      { q: "Can I use my own data?", a: "Yes. Import custom CSV datasets or generate non-linear synthetic 2D datasets." }
+    ]
   },
   {
     id: "project-19",
@@ -688,7 +994,24 @@ export const projectsData = [
         "Automated content moderation and safety panic button.",
         "Zero message retention after session disconnects."
       ]
-    }
+    },
+    seoKeywords: "anonymous chat app, encrypted stranger chat, private messaging no data retention, anonymous messenger, stranger chat platform",
+    howItWorks: [
+      { step: "Match instantly with encrypted profiles.", desc: "Users are paired anonymously based on language preferences, shared interests, and activity status." },
+      { step: "Chat with karma, badges, and safety controls.", desc: "Earn karma, unlock badges, and rely on automated moderation plus an SOS panic button." },
+      { step: "Disconnect with zero retention.", desc: "All messages and media are purged automatically when conversations terminate." }
+    ],
+    useCases: [
+      { title: "Anonymous Communities", desc: "Hold spontaneous global conversations with zero personal data exposure." },
+      { title: "Safe Stranger Chat", desc: "Rely on automated content moderation and one-tap blocking for safer interactions." },
+      { title: "Zero-Footprint Messaging", desc: "Use self-destructing photos and session purging for absolute privacy." }
+    ],
+    faq: [
+      { q: "What is Junglans Anonymous Chat?", a: "It is an anonymous, encrypted stranger-chat platform with instant matching, interest filters, karma and badge scoring, and safety moderation." },
+      { q: "Is it really anonymous?", a: "Yes. Users are paired without personal data exposure and all chat data is purged upon session termination." },
+      { q: "How does safety moderation work?", a: "Automated text and image safety filters detect policy violations and enable one-tap blocking plus an SOS panic button." },
+      { q: "Is anything retained?", a: "No. There is a zero data retention guarantee — messages and media are purged automatically when conversations end." }
+    ]
   },
   {
     id: "project-20",
@@ -724,6 +1047,23 @@ export const projectsData = [
         "Automated rider dispatch reduces delivery wait times.",
         "Complete administrative control over menus, orders, and sales."
       ]
-    }
+    },
+    seoKeywords: "food delivery platform, restaurant ordering app, real time delivery tracking, food delivery dispatch software, hyperlocal delivery ecosystem",
+    howItWorks: [
+      { step: "Customers place orders on the menu app.", desc: "A persisted cart with encrypted checkout gives instant order confirmations." },
+      { step: "Admins manage menus; the dispatch engine assigns riders.", desc: "Orders are routed automatically to nearby riders based on proximity and load." },
+      { step: "Everyone tracks delivery in real time.", desc: "Bi-directional WebSocket streaming provides live order status and rider tracking with push alerts." }
+    ],
+    useCases: [
+      { title: "Local Restaurants", desc: "Manage menus, availability, add-ons, and pricing live while accepting digital orders." },
+      { title: "Delivery Fleets", desc: "Automate rider dispatch and reduce wait times with smart proximity assignment." },
+      { title: "Hyper-Local Ordering", desc: "Connect customers, admins, and riders in one real-time food ordering ecosystem." }
+    ],
+    faq: [
+      { q: "What is Pollachi Express?", a: "It is a complete real-time food ordering and logistics platform connecting Customers, Restaurant Admins, and Delivery Riders with live WebSocket tracking." },
+      { q: "Who are the three roles?", a: "Customers order from menus, Admins manage kitchens and menus, and Riders receive dispatched orders and routes." },
+      { q: "How does rider dispatch work?", a: "A smart dispatch engine assigns incoming orders to nearby riders based on proximity and active order load." },
+      { q: "Is tracking real time?", a: "Yes. Bi-directional WebSocket streaming provides live order status updates and real-time delivery rider tracking." }
+    ]
   }
 ];

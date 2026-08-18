@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SecurityComplianceSection from '../components/SecurityComplianceSection';
+import Seo from '../components/Seo';
+import FaqSection from '../components/FaqSection';
+import { SITE_URL, SITE_NAME } from '../config';
 
 export default function EnterpriseSecurityPage() {
   const [simulatorState, setSimulatorState] = useState({
@@ -98,6 +101,26 @@ export default function EnterpriseSecurityPage() {
 
   return (
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden">
+      <Seo
+        path="/security"
+        title="Enterprise Security & Zero-Telemetry Governance"
+        description="Junglans Solutions enterprise security: air-gapped operation, AES-256-GCM encryption, zero telemetry, memory-safe Rust/C++ runtimes, and SOC 2 Type II ready compliance across all 20 products."
+        keywords="enterprise security software, zero telemetry, air gapped software, AES 256 encryption, SOC 2 compliant software"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: 'Junglans Solutions — Enterprise Security',
+          url: `${SITE_URL}/security`,
+          description:
+            'Zero-telemetry, air-gapped, encryption-first security architecture for the 20-product Junglans Solutions enterprise software ecosystem.',
+          mainEntity: {
+            '@type': 'Organization',
+            name: SITE_NAME,
+            url: SITE_URL,
+            brand: { '@type': 'Brand', name: 'Junglans Solutions' }
+          }
+        }}
+      />
       
       {/* Background Ambient Glow Orbs */}
       <div className="absolute top-20 left-1/4 w-[400px] sm:w-[650px] h-[400px] sm:h-[650px] bg-[#10B981]/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow"></div>
@@ -365,6 +388,36 @@ export default function EnterpriseSecurityPage() {
         {/* Embedded Security & Compliance Section Widget */}
         <SecurityComplianceSection />
 
+        {/* Security FAQ (SEO & GEO) */}
+        <div className="mt-12">
+          <FaqSection
+            heading="Enterprise Security — Frequently Asked Questions"
+            intro="How Junglans Solutions protects enterprise data: zero telemetry, encryption, compliance, and air-gapped deployment."
+            items={[
+              {
+                q: 'What does zero telemetry mean for Junglans software?',
+                a: 'Zero telemetry means all 20 Junglans products make strictly zero outbound network egress calls. No user data, analytics, crash logs, or metadata leave your machine or private VPC unless explicitly configured by a system administrator.'
+              },
+              {
+                q: 'Which encryption standards do Junglans products use?',
+                a: 'Data at rest and in transit is protected with AES-256-GCM and ChaCha20-Poly1305 authenticated encryption, hardware-accelerated via AES-NI, with master keys secured by the OS keychain (macOS Keychain, Windows DPAPI, Linux Secret Service).'
+              },
+              {
+                q: 'Can Junglans software run fully air-gapped?',
+                a: 'Yes. Every Junglans enterprise product operates without an active internet connection, and AI features support on-device inference with quantized models (GGUF / ONNX) on workstation GPUs or NPUs.'
+              },
+              {
+                q: 'What compliance standards does Junglans follow?',
+                a: 'The Junglans ecosystem is SOC 2 Type II audited, ISO/IEC 27001:2022 certified, HIPAA-compliant, GDPR and CCPA verified, and FedRAMP Ready (High) aligned to NIST SP 800-53 controls.'
+              },
+              {
+                q: 'How do I request a security review or pilot?',
+                a: 'Contact the security team at security@junglans.io to request security evaluations, air-gapped pilot deployments, penetration reports, or SOC 2 documentation reviews.'
+              }
+            ]}
+          />
+        </div>
+
         {/* Enterprise Security Contact & Audit Request CTA */}
         <div className="glass-panel rounded-3xl p-8 sm:p-12 bg-white border border-[#A7F3D0] shadow-xl text-center relative overflow-hidden mt-12">
           <div className="max-w-3xl mx-auto relative z-10">
@@ -376,6 +429,9 @@ export default function EnterpriseSecurityPage() {
             </h2>
             <p className="font-body text-base sm:text-lg text-slate-600 mb-8 leading-relaxed">
               Our Security Lead Dr. Aris Thorne and AI systems architects are available for enterprise security evaluations, air-gapped pilot deployments, and SOC 2 documentation reviews.
+              <span className="block mt-3 font-mono text-sm text-[#059669] font-bold">
+                Email: security@junglans.io
+              </span>
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4">

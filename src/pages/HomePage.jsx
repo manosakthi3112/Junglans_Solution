@@ -7,6 +7,9 @@ import ProductComparisonMatrix from '../components/ProductComparisonMatrix';
 import SecurityComplianceSection from '../components/SecurityComplianceSection';
 import EnterpriseCalculator from '../components/EnterpriseCalculator';
 import FounderSpotlight from '../components/FounderSpotlight';
+import Seo from '../components/Seo';
+import FaqSection from '../components/FaqSection';
+import { SITE_URL, SITE_NAME } from '../config';
 
 export default function HomePage() {
   const location = useLocation();
@@ -49,6 +52,75 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden">
+      <Seo
+        path="/"
+        jsonLd={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Junglans Solutions',
+            url: SITE_URL,
+            email: 'enterprise@junglans.io',
+            description:
+              'Junglans Solutions builds high-performance, secure, local-first enterprise software, AI developer tools, and productivity applications for global organizations.',
+            foundingDate: '2024',
+            knowsAbout: [
+              'Local-first enterprise software',
+              'AI developer tools',
+              'Zero-telemetry architecture',
+              'Multi-agent AI systems',
+              'End-to-end encrypted communication',
+              'Natural language SQL',
+              'ROS robotics'
+            ]
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Junglans Solutions',
+            url: SITE_URL,
+            description:
+              'Junglans Solutions — 20 local-first enterprise software products for engineering organizations.',
+            publisher: { '@type': 'Organization', name: 'Junglans Solutions', url: SITE_URL }
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: 'What is Junglans Solutions?',
+                acceptedAnswer: { '@type': 'Answer', text: 'Junglans Solutions is a software company building a 20-product ecosystem of local-first enterprise applications — AI developer tools, encrypted communication, data infrastructure, finance, and productivity software engineered for privacy, performance, and zero cloud telemetry.' }
+              },
+              {
+                '@type': 'Question',
+                name: 'Are Junglans products cloud-based?',
+                acceptedAnswer: { '@type': 'Answer', text: 'No. Every Junglans product operates on-device by default with a local-first architecture. Cloud sync is optional, end-to-end encrypted, and never includes telemetry or logging.' }
+              },
+              {
+                '@type': 'Question',
+                name: 'Is JunglansChat end-to-end encrypted?',
+                acceptedAnswer: { '@type': 'Answer', text: 'Yes. JunglansChat uses a zero-knowledge security protocol that encrypts direct messages, team channels, document transfers, and video calls end-to-end.' }
+              },
+              {
+                '@type': 'Question',
+                name: 'What is TalkToDB?',
+                acceptedAnswer: { '@type': 'Answer', text: 'TalkToDB is a natural language SQL assistant that lets anyone query enterprise databases with plain English or voice commands, converting questions into SQL, charts, and spoken recaps automatically.' }
+              },
+              {
+                '@type': 'Question',
+                name: 'How does local-first architecture work?',
+                acceptedAnswer: { '@type': 'Answer', text: 'Local-first means all processing, storage, and analysis happens on the user\'s device. Compiled Rust and C++ binaries execute natively with zero latency and zero mandatory network calls, keeping sensitive data under your control.' }
+              },
+              {
+                '@type': 'Question',
+                name: 'Do you offer enterprise licensing in India?',
+                acceptedAnswer: { '@type': 'Answer', text: 'Yes. Junglans Solutions provides enterprise licensing for all 20 products, team onboarding, and custom feature integrations for organizations globally, including India. Contact enterprise@junglans.io for a pilot.' }
+              }
+            ]
+          }
+        ]}
+      />
       
       {/* Dynamic Animated Ambient Glow Spheres */}
       <div className="absolute top-20 left-1/4 w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-[#10B981]/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow"></div>
@@ -71,9 +143,9 @@ export default function HomePage() {
           
           {/* Main Hero Headline */}
           <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.08] sm:leading-[0.95] md:leading-[0.92] tracking-tight sm:tracking-tighter mb-4 sm:mb-6 text-[#08090c]">
-            Architecting the <br className="hidden min-[480px]:inline" />
+            Junglans Solutions — <br className="hidden min-[480px]:inline" />
             <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
-              future of software.
+              architecting the future of enterprise software.
             </span>
           </h1>
 
@@ -147,6 +219,61 @@ export default function HomePage() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* About / Company Intro Section (SEO & GEO) */}
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start">
+          <div>
+            <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-widest">WHO WE ARE // ABOUT JUNGLANS</div>
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-[#08090c] mb-5">
+              A local-first enterprise software company built for privacy and performance.
+            </h2>
+            <div className="font-body text-sm sm:text-base text-slate-600 leading-relaxed space-y-4 max-w-2xl">
+              <p>
+                Junglans Solutions is a software development company designing high-performance enterprise software
+                ecosystems for global engineering organizations and developers. Our portfolio spans 20 products across
+                AI developer tools, secure communication, data infrastructure, finance, and productivity.
+              </p>
+              <p>
+                Every Junglans application is built on a local-first architecture: native compiled binaries in Rust and
+                C++, zero cloud telemetry, and total privacy guarantees. Cloud sync — when present — is optional,
+                end-to-end encrypted, and auditable. We specialize in multi-agent AI systems, natural language data
+                access, end-to-end encrypted communication, and ROS robotics software.
+              </p>
+              <p>
+                From enterprise codebase intelligence with Junglans Project Manager to natural language database
+                querying with TalkToDB, our products are engineered for compliance-ready, air-gapped, and
+                zero-trust deployments.
+              </p>
+            </div>
+          </div>
+
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 bg-white border border-[#A7F3D0] shadow-md">
+            <div className="font-mono text-xs text-[#059669] mb-4 font-bold uppercase tracking-widest">WHY ENTERPRISES CHOOSE US</div>
+            <div className="space-y-4 font-body text-sm text-slate-700">
+              <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
+                <h3 className="font-heading font-bold text-[#08090c] mb-1">Local-First Architecture</h3>
+                <p className="text-xs sm:text-sm">All 20 applications operate on-device by default — your data stays strictly under your control.</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
+                <h3 className="font-heading font-bold text-[#08090c] mb-1">Zero-Telemetry Guarantee</h3>
+                <p className="text-xs sm:text-sm">No cloud logging, no user tracking, no silent data collection — verified and auditable.</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
+                <h3 className="font-heading font-bold text-[#08090c] mb-1">Enterprise-Grade Security</h3>
+                <p className="text-xs sm:text-sm">AES-256-GCM encryption, memory-safe compiled runtimes, and SOC 2 Type II ready compliance posture.</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
+                <h3 className="font-heading font-bold text-[#08090c] mb-1">AI-Native Engineering</h3>
+                <p className="text-xs sm:text-sm">Multi-agent AI pipelines, natural language SQL, and local LLM inference built into the ecosystem.</p>
+              </div>
+            </div>
+            <p className="font-mono text-xs text-slate-500 mt-6 pt-4 border-t border-[#A7F3D0]">
+              Enterprise licensing and custom integrations available for all 20 products. Contact us at enterprise@junglans.io
+            </p>
+          </div>
         </div>
       </section>
 
@@ -767,6 +894,22 @@ export default function HomePage() {
       {/* FOUNDER & LEAD ARCHITECT SPOTLIGHT */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
         <FounderSpotlight />
+      </div>
+
+      {/* FAQ Section (SEO & GEO) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+        <FaqSection
+          heading="Junglans Solutions — Frequently Asked Questions"
+          intro="Answers to the most common questions about Junglans Solutions, our local-first architecture, enterprise products, and deployment options."
+          items={[
+            { q: 'What is Junglans Solutions?', a: 'Junglans Solutions is a software company building a 20-product ecosystem of local-first enterprise applications — AI developer tools, encrypted communication, data infrastructure, finance, and productivity software engineered for privacy, performance, and zero cloud telemetry.' },
+            { q: 'Are Junglans products cloud-based?', a: 'No. Every Junglans product operates on-device by default with a local-first architecture. Cloud sync is optional, end-to-end encrypted, and never includes telemetry or logging.' },
+            { q: 'Is JunglansChat end-to-end encrypted?', a: 'Yes. JunglansChat uses a zero-knowledge security protocol that encrypts direct messages, team channels, document transfers, and video calls end-to-end.' },
+            { q: 'What is TalkToDB?', a: 'TalkToDB is a natural language SQL assistant that lets anyone query enterprise databases with plain English or voice commands, converting questions into SQL, charts, and spoken recaps automatically.' },
+            { q: 'How does local-first architecture work?', a: 'Local-first means all processing, storage, and analysis happens on the user\'s device. Compiled Rust and C++ binaries execute natively with zero latency and zero mandatory network calls, keeping sensitive data under your control.' },
+            { q: 'Do you offer enterprise licensing in India?', a: 'Yes. Junglans Solutions provides enterprise licensing for all 20 products, team onboarding, and custom feature integrations for organizations globally, including India. Contact enterprise@junglans.io for a pilot.' }
+          ]}
+        />
       </div>
 
       {/* Enterprise Deployment CTA (SEC_04) */}

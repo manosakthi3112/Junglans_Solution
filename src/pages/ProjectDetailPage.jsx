@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { projectsData } from '../data/projectsData';
+import Seo from '../components/Seo';
+import FaqSection from '../components/FaqSection';
+import { SITE_URL, SITE_NAME } from '../config';
 
 export default function ProjectDetailPage() {
   const { id } = useParams();
@@ -40,6 +43,46 @@ export default function ProjectDetailPage() {
 
   return (
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid py-8 sm:py-12 px-4 sm:px-6 md:px-12 relative overflow-hidden">
+      <Seo
+        title={`${project.name} — ${project.tagline}`}
+        description={`${project.summary} ${project.name} by ${SITE_NAME}: ${project.promotions.valueProposition}`.slice(0, 158)}
+        path={`/project/${project.id}`}
+        type="softwareApplication"
+        keywords={project.seoKeywords}
+        jsonLd={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: project.name,
+            applicationCategory: 'BusinessApplication',
+            operatingSystem: 'Windows, macOS, Linux, Android, iOS, Web',
+            description: project.summary,
+            url: `${SITE_URL}/project/${project.id}`,
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR', description: 'Enterprise licensing — contact sales' },
+            publisher: { '@type': 'Organization', name: 'Junglans Solutions', url: SITE_URL },
+            featureList: project.features.map((f) => f.title),
+            keywords: project.seoKeywords
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+              { '@type': 'ListItem', position: 2, name: 'Portfolio', item: `${SITE_URL}/#showcase` },
+              { '@type': 'ListItem', position: 3, name: project.name, item: `${SITE_URL}/project/${project.id}` }
+            ]
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: project.faq.map((f) => ({
+              '@type': 'Question',
+              name: f.q,
+              acceptedAnswer: { '@type': 'Answer', text: f.a }
+            }))
+          }
+        ]}
+      />
       
       {/* Dynamic Brand Ambient Halo */}
       <div
@@ -50,7 +93,14 @@ export default function ProjectDetailPage() {
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Navigation Breadcrumb */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#A7F3D0]/60">
+        <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#A7F3D0]/60">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-600">
+            <Link to="/" className="hover:text-[#10B981] transition font-bold">Home</Link>
+            <span className="text-[#A7F3D0]">/</span>
+            <Link to="/#showcase" className="hover:text-[#10B981] transition font-bold">Portfolio</Link>
+            <span className="text-[#A7F3D0]">/</span>
+            <span className="text-[#059669] font-bold truncate max-w-[180px] sm:max-w-none">{project.name}</span>
+          </div>
           <button
             onClick={() => navigate(-1)}
             className="font-mono text-xs text-slate-600 hover:text-[#10B981] transition flex items-center gap-2 font-bold cursor-pointer"
@@ -65,7 +115,7 @@ export default function ProjectDetailPage() {
           <span className="font-mono text-[10px] text-[#059669] bg-[#ECFDF5] px-3 py-1 rounded-full border border-[#A7F3D0] font-bold uppercase tracking-wider">
             Dedicated Product Showcase Page
           </span>
-        </div>
+        </nav>
 
         {/* Hero Section of Dedicated Product Page */}
         <div className="glass-panel rounded-3xl p-5 sm:p-8 md:p-12 mb-6 sm:mb-12 bg-white border border-[#A7F3D0] shadow-xl relative overflow-hidden">
@@ -115,6 +165,32 @@ export default function ProjectDetailPage() {
             </div>
           </div>
         </div>
+
+        {/* What Is This Product? (SEO & GEO) */}
+        <section className="glass-panel rounded-3xl p-6 sm:p-8 md:p-10 mb-10 sm:mb-12 bg-white border border-[#A7F3D0] shadow-md">
+          <div className="font-mono text-xs text-[#059669] mb-2 font-bold uppercase tracking-widest">PRODUCT OVERVIEW</div>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#08090c] mb-4">
+            What is {project.name}?
+          </h2>
+          <p className="font-body text-sm sm:text-base text-slate-700 leading-relaxed max-w-4xl mb-4">
+            {project.name} is {project.summary.charAt(0).toLowerCase() + project.summary.slice(1)} Designed by {SITE_NAME},
+            it {project.promotions.valueProposition.charAt(0).toLowerCase() + project.promotions.valueProposition.slice(1)}
+          </p>
+          <p className="font-body text-sm sm:text-base text-slate-600 leading-relaxed max-w-4xl mb-6">
+            {project.name} is built for enterprises that need {project.seoKeywords.split(',')[0]} — with a
+            local-first architecture, zero cloud telemetry, and compliance-ready security baked into every workflow.
+          </p>
+          <div className="flex flex-wrap gap-2 font-mono text-[10px] sm:text-xs">
+            {project.seoKeywords.split(',').slice(0, 4).map((kw) => (
+              <span key={kw} className="bg-[#ECFDF5] text-[#059669] px-3 py-1.5 rounded-full border border-[#A7F3D0] font-bold">
+                {kw.trim()}
+              </span>
+            ))}
+          </div>
+          <p className="font-mono text-xs text-slate-500 mt-6 pt-4 border-t border-[#A7F3D0]">
+            Enterprise licensing available — request a pilot at enterprise@junglans.io
+          </p>
+        </section>
 
         {/* Enterprise Metrics Banner */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-10 sm:mb-12">
@@ -247,6 +323,40 @@ export default function ProjectDetailPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* How It Works + Use Cases (SEO & GEO) */}
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 mb-10 sm:mb-12">
+          <section className="glass-panel rounded-3xl p-6 sm:p-8 bg-white border border-[#A7F3D0] shadow-md">
+            <div className="font-mono text-xs text-[#059669] mb-2 font-bold uppercase tracking-widest">HOW IT WORKS</div>
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#08090c] mb-6">How {project.name} works</h2>
+            <div className="space-y-4">
+              {project.howItWorks.map((step, idx) => (
+                <div key={idx} className="flex gap-4">
+                  <div className="w-10 h-10 rounded-2xl bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] font-mono text-sm font-bold flex items-center justify-center flex-shrink-0">
+                    {idx + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-heading font-bold text-sm sm:text-base text-[#08090c] mb-1">{step.step}</h3>
+                    <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="glass-panel rounded-3xl p-6 sm:p-8 bg-white border border-[#A7F3D0] shadow-md">
+            <div className="font-mono text-xs text-[#059669] mb-2 font-bold uppercase tracking-widest">USE CASES</div>
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#08090c] mb-6">Who uses {project.name}</h2>
+            <div className="space-y-4">
+              {project.useCases.map((useCase, idx) => (
+                <div key={idx} className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
+                  <h3 className="font-heading font-bold text-sm sm:text-base text-[#08090c] mb-1">{useCase.title}</h3>
+                  <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed">{useCase.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
 
         {/* Interactive Feature Simulator Widget */}
@@ -429,6 +539,34 @@ export default function ProjectDetailPage() {
             </p>
           </div>
         </div>
+
+        {/* FAQ Section (SEO & GEO) */}
+        <FaqSection
+          heading={`${project.name} — Frequently Asked Questions`}
+          intro={`Common questions about ${project.name}, its capabilities, security, and how it fits into the Junglans enterprise ecosystem.`}
+          items={project.faq}
+        />
+
+        {/* Comparison Paragraph (SEO & GEO) */}
+        <section className="glass-panel rounded-3xl p-6 sm:p-8 md:p-10 mb-10 sm:mb-12 bg-white border border-[#A7F3D0] shadow-md">
+          <div className="font-mono text-xs text-[#059669] mb-2 font-bold uppercase tracking-widest">HOW WE COMPARE</div>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#08090c] mb-4">
+            {project.name} vs traditional enterprise software
+          </h2>
+          <div className="font-body text-sm sm:text-base text-slate-600 leading-relaxed space-y-4 max-w-4xl">
+            <p>
+              Unlike typical SaaS products that depend on cloud servers and constant connectivity, {project.name} runs
+              on-device with a local-first architecture. There is no mandatory telemetry, no silent data collection, and
+              no vendor lock-in on your most sensitive information.
+            </p>
+            <p>
+              {project.name} is part of the 20-product Junglans ecosystem, which means it shares the same engineering
+              standards across the portfolio: compiled Rust and C++ binaries, AES-256-GCM encryption, memory-safe
+              execution, and SOC 2 Type II ready compliance. Teams that need air-gapped, zero-trust deployments get the
+              same capabilities they would expect from a cloud suite — without the cloud.
+            </p>
+          </div>
+        </section>
 
         {/* Bottom Call to Action */}
         <div className="text-center py-8 sm:py-12 border-t border-[#A7F3D0]/60">

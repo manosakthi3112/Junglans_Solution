@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FounderSpotlight from '../components/FounderSpotlight';
+import Seo from '../components/Seo';
+import { SITE_URL } from '../config';
 
 export default function OurTeamPage() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -167,6 +169,29 @@ export default function OurTeamPage() {
 
         {/* Page Hero Header */}
         <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-16 animate-fade-in-up">
+          <Seo
+            path="/team"
+            title="Our Team — Engineers Behind Junglans Solutions"
+            description="Meet the Junglans Solutions team: AI architects, ROS robotics developers, ML engineers, and full-stack engineers building local-first enterprise software with zero cloud telemetry."
+            keywords="Junglans team, software engineers India, AI architect, ROS developer, enterprise software team"
+            jsonLd={{
+              '@context': 'https://schema.org',
+              '@type': 'AboutPage',
+              name: 'Junglans Solutions — Our Team',
+              url: `${SITE_URL}/team`,
+              description:
+                'The Junglans Solutions team of AI architects, ROS robotics developers, ML engineers, and full-stack engineers.',
+              mainEntity: teamMembers
+                .filter((m) => m.isFounder)
+                .map((m) => ({
+                  '@type': 'Person',
+                  name: m.name,
+                  jobTitle: m.role,
+                  email: m.email,
+                  worksFor: { '@type': 'Organization', name: 'Junglans Solutions', url: SITE_URL }
+                }))
+            }}
+          />
           <div className="inline-flex items-center gap-2 sm:gap-2.5 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm">
             <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981] animate-pulse-ring"></span>
             <span className="tracking-wider sm:tracking-widest uppercase font-bold text-[#059669]">PEOPLE & INNOVATION</span>

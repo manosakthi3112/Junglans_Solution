@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { blogsData } from '../data/blogsData';
+import Seo from '../components/Seo';
 
 export default function BlogsPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,6 +37,21 @@ export default function BlogsPage() {
 
   return (
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden pb-24">
+      <Seo
+        path="/blogs"
+        title="Engineering & AI Research Blog — ML, LLM & RAG Guides"
+        description="Deep-dive engineering guides and AI research from Junglans Solutions: machine learning metrics, LLM evaluation, transformer architectures, parameter tuning, and production RAG systems."
+        keywords="machine learning blog, LLM evaluation guide, transformer architecture explained, RAG architecture, AI engineering research"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Junglans Research — Engineering & AI Blog',
+          url: 'https://junglans.in/blogs',
+          description:
+            'In-depth technical guides covering machine learning metrics, LLM evaluation, transformer mechanics, parameter tuning, and production RAG architecture.',
+          publisher: { '@type': 'Organization', name: 'Junglans Solutions', url: 'https://junglans.in' }
+        }}
+      />
       {/* Dynamic Animated Ambient Glow Spheres */}
       <div className="absolute top-20 left-1/3 w-[500px] h-[500px] bg-[#10B981]/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow"></div>
       <div className="absolute top-[600px] right-1/4 w-[450px] h-[450px] bg-[#34D399]/15 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '2.5s' }}></div>

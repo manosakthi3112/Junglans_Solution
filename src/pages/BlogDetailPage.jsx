@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { blogsData } from '../data/blogsData';
+import Seo from '../components/Seo';
+import { SITE_URL } from '../config';
 
 // LaTeX Math Converter to human-readable mathematical symbols
 function convertLatexToReadableMath(latexStr) {
@@ -252,9 +254,9 @@ function MarkdownContent({ content }) {
       const text = line.replace('# ', '');
       const id = slugify(text);
       elements.push(
-        <h1 id={id} key={`h1-${idx}`} className="font-heading text-3xl sm:text-4xl font-bold text-[#08090c] mt-10 mb-5 scroll-mt-24 pb-2 border-b border-[#A7F3D0]">
+        <h2 id={id} key={`h1-${idx}`} className="font-heading text-3xl sm:text-4xl font-bold text-[#08090c] mt-10 mb-5 scroll-mt-24 pb-2 border-b border-[#A7F3D0]">
           {text}
-        </h1>
+        </h2>
       );
       return;
     }
@@ -263,10 +265,10 @@ function MarkdownContent({ content }) {
       const text = line.replace('## ', '');
       const id = slugify(text);
       elements.push(
-        <h2 id={id} key={`h2-${idx}`} className="font-heading text-2xl sm:text-3xl font-bold text-[#08090c] mt-8 mb-4 scroll-mt-24 flex items-center gap-2">
+        <h3 id={id} key={`h2-${idx}`} className="font-heading text-2xl sm:text-3xl font-bold text-[#08090c] mt-8 mb-4 scroll-mt-24 flex items-center gap-2">
           <span className="text-[#10B981] font-mono text-xl">#</span>
           {text}
-        </h2>
+        </h3>
       );
       return;
     }
@@ -275,9 +277,9 @@ function MarkdownContent({ content }) {
       const text = line.replace('### ', '');
       const id = slugify(text);
       elements.push(
-        <h3 id={id} key={`h3-${idx}`} className="font-heading text-xl sm:text-2xl font-bold text-[#08090c] mt-6 mb-3 scroll-mt-24">
+        <h4 id={id} key={`h3-${idx}`} className="font-heading text-xl sm:text-2xl font-bold text-[#08090c] mt-6 mb-3 scroll-mt-24">
           {text}
-        </h3>
+        </h4>
       );
       return;
     }
@@ -369,16 +371,29 @@ export default function BlogDetailPage() {
     .filter((b) => b.id !== blog.id && (b.category === blog.category || b.author.name === blog.author.name))
     .slice(0, 3);
 
+  // Key topics covered — first three ## headings (GEO extraction source)
+  const keyTopics = [];
+  const contentLines = blog.content.split('\n');
+  contentLines.forEach((line) => {
+    if (line.startsWith('## ') && keyTopics.length < 3) {
+      keyTopics.push(line.replace('## ', '').replace(/^\d+\.\s*/, '').trim());
+    }
+  });
+
   // Parse Headings for Table of Contents
   const headings = [];
   const lines = blog.content.split('\n');
   lines.forEach((line) => {
-    if (line.startsWith('## ')) {
-      const title = line.replace('## ', '');
+    if (line.startsWith('# ')) {
+      if (headings.length === 0) return;
+      const title = line.replace('# ', '');
       headings.push({ title, level: 2, id: slugify(title) });
+    } else if (line.startsWith('## ')) {
+      const title = line.replace('## ', '');
+      headings.push({ title, level: 3, id: slugify(title) });
     } else if (line.startsWith('### ')) {
       const title = line.replace('### ', '');
-      headings.push({ title, level: 3, id: slugify(title) });
+      headings.push({ title, level: 4, id: slugify(title) });
     }
   });
 
@@ -390,6 +405,36 @@ export default function BlogDetailPage() {
 
   return (
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden pb-24">
+      <Seo
+        title={blog.title}
+        description={blog.subtitle}
+        path={`/blog/${blog.slug}`}
+        type="article"
+        keywords={blog.tags.slice(0, 5).join(', ')}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: blog.title,
+          description: blog.subtitle,
+          url: `${SITE_URL}/blog/${blog.slug}`,
+          datePublished: new Date(blog.publishDate).toISOString(),
+          dateModified: new Date(blog.publishDate).toISOString(),
+          inLanguage: 'en',
+          keywords: blog.tags.join(', '),
+          author: {
+            '@type': 'Person',
+            name: blog.author.name,
+            jobTitle: blog.author.role,
+            affiliation: { '@type': 'Organization', name: 'Junglans Solutions', url: SITE_URL }
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'Junglans Solutions',
+            url: SITE_URL
+          },
+          mainEntityOfPage: `${SITE_URL}/blog/${blog.slug}`
+        }}
+      />
       {/* Background Ambient Glows */}
       <div className="absolute top-10 left-1/4 w-[600px] h-[600px] bg-[#10B981]/10 rounded-full blur-[150px] pointer-events-none"></div>
 
@@ -477,7 +522,7 @@ export default function BlogDetailPage() {
                   key={index}
                   href={`#${h.id}`}
                   className={`block py-1 hover:text-[#10B981] transition leading-snug ${
-                    h.level === 3 ? 'pl-4 text-slate-500' : 'font-semibold text-slate-700'
+                    h.level >= 3 ? 'pl-4 text-slate-500' : 'font-semibold text-slate-700'
                   }`}
                 >
                   {h.title}
@@ -500,6 +545,24 @@ export default function BlogDetailPage() {
             </p>
           </div>
 
+          {/* Key Takeaways (GEO extraction block) */}
+          {keyTopics.length > 0 && (
+            <div className="mb-8 p-6 rounded-2xl bg-white border-2 border-[#10B981]/40 shadow-sm">
+              <h3 className="font-mono text-xs uppercase font-bold text-[#059669] tracking-wider mb-3 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse flex-shrink-0"></span>
+                Key Takeaways
+              </h3>
+              <ul className="space-y-2.5 font-body text-sm text-slate-700">
+                {keyTopics.map((topic, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-[#10B981] text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
+                    <span>{topic} — covered in depth with practical examples, formulas, and code.</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* Render Markdown Content */}
           <MarkdownContent content={blog.content} />
 
@@ -518,6 +581,66 @@ export default function BlogDetailPage() {
 
         </main>
 
+      </div>
+
+      {/* Author Bio + References (SEO & GEO) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <section className="glass-panel rounded-3xl p-6 sm:p-8 bg-white border border-[#A7F3D0] shadow-md">
+          <div className="font-mono text-xs text-[#059669] mb-4 font-bold uppercase tracking-widest">ABOUT THE AUTHOR</div>
+          <div className="flex items-center gap-4 mb-4">
+            <div
+              className="w-14 h-14 rounded-2xl text-white font-heading font-bold text-lg flex items-center justify-center shadow-md flex-shrink-0"
+              style={{ backgroundColor: blog.author.color || '#10B981' }}
+            >
+              {blog.author.avatar || 'JS'}
+            </div>
+            <div>
+              <h4 className="font-heading font-bold text-lg text-[#08090c]">{blog.author.name}</h4>
+              <p className="font-mono text-xs text-[#059669] font-medium">{blog.author.role}</p>
+            </div>
+          </div>
+          <p className="font-body text-sm text-slate-600 leading-relaxed mb-4">
+            {blog.author.name} is part of the Junglans Solutions engineering team, specializing in {blog.category.toLowerCase()}.
+            Junglans builds a 20-product ecosystem of local-first enterprise software — AI developer tools, encrypted
+            communication, and data infrastructure with zero cloud telemetry.
+          </p>
+          <Link
+            to="/team"
+            className="font-mono text-xs text-[#10B981] font-bold hover:underline inline-flex items-center gap-1"
+          >
+            Meet the full Junglans engineering team ↗
+          </Link>
+        </section>
+
+        <section className="glass-panel rounded-3xl p-6 sm:p-8 bg-white border border-[#A7F3D0] shadow-md">
+          <div className="font-mono text-xs text-[#059669] mb-4 font-bold uppercase tracking-widest">RELATED RESOURCES & REFERENCES</div>
+          <div className="space-y-3 font-body text-sm text-slate-600">
+            <p className="leading-relaxed">
+              This article is part of the Junglans Research knowledge base, produced alongside the engineering teams that
+              build our production AI tools. Explore related product documentation and research:
+            </p>
+            <ul className="space-y-2.5">
+              <li>
+                <Link to="/project/project-18" className="font-bold text-[#059669] hover:text-[#10B981] transition">
+                  Junglans ML Visualizer ↗
+                </Link>
+                <p className="text-xs text-slate-500 mt-0.5">Interactive 22-algorithm machine learning sandbox — see the concepts in action.</p>
+              </li>
+              <li>
+                <Link to="/project/project-12" className="font-bold text-[#059669] hover:text-[#10B981] transition">
+                  JunglasNCode ↗
+                </Link>
+                <p className="text-xs text-slate-500 mt-0.5">Line-by-line code execution and call stack visualizer for algorithm practice.</p>
+              </li>
+              <li>
+                <Link to="/blogs" className="font-bold text-[#059669] hover:text-[#10B981] transition">
+                  All Junglans Research Articles ↗
+                </Link>
+                <p className="text-xs text-slate-500 mt-0.5">More engineering and AI deep-dives from the Junglans team.</p>
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
 
       {/* Related Articles Footer Section */}
