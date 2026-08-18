@@ -8,6 +8,7 @@
     "build": "vite build",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "prerender": "node scripts/prerender.mjs",
+    "indexnow": "node scripts/submit-indexnow.mjs",
     "build:all": "node scripts/generate-sitemap.mjs && node scripts/prerender.mjs",
     "preview": "vite preview"
   },
