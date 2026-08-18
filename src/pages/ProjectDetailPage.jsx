@@ -68,39 +68,39 @@ export default function ProjectDetailPage() {
         </div>
 
         {/* Hero Section of Dedicated Product Page */}
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 md:p-12 mb-8 sm:mb-12 bg-white border border-[#A7F3D0] shadow-xl relative overflow-hidden">
+        <div className="glass-panel rounded-3xl p-5 sm:p-8 md:p-12 mb-6 sm:mb-12 bg-white border border-[#A7F3D0] shadow-xl relative overflow-hidden">
           <div className="relative z-10">
-            <div className="flex flex-wrap items-center gap-4 mb-6">
+            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
               <div
-                className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-white shadow-lg flex-shrink-0 animate-float"
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-white shadow-lg flex-shrink-0 animate-float"
                 style={{ backgroundColor: project.color }}
                 dangerouslySetInnerHTML={{ __html: project.iconSvg }}
               />
 
-              <div>
-                <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] inline-block mb-1">
+              <div className="min-w-0">
+                <span className="font-mono text-[9px] sm:text-xs font-bold uppercase tracking-wider px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] inline-block mb-1">
                   {project.badge}
                 </span>
-                <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-[#08090c]">
+                <h1 className="font-heading text-2xl min-[360px]:text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-[#08090c] truncate">
                   {project.name}
                 </h1>
               </div>
             </div>
 
-            <p className="font-heading text-lg sm:text-xl md:text-2xl text-[#059669] font-medium mb-4 leading-snug">
+            <p className="font-heading text-base sm:text-xl md:text-2xl text-[#059669] font-medium mb-3 sm:mb-4 leading-snug">
               {project.tagline}
             </p>
 
-            <p className="font-body text-sm sm:text-base md:text-lg text-slate-700 max-w-3xl leading-relaxed mb-8">
+            <p className="font-body text-xs sm:text-base md:text-lg text-slate-700 max-w-3xl leading-relaxed mb-6 sm:mb-8">
               {project.summary}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-[#E2E8F0]">
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 pt-4 border-t border-[#E2E8F0]">
               <a
                 href="#highlights"
-                className="font-mono text-xs bg-[#10B981] hover:bg-[#059669] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold transition flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20"
+                className="font-mono text-xs bg-[#10B981] hover:bg-[#059669] text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold transition flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 text-center"
               >
-                Explore Square Feature Cards
+                Explore Feature Cards
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
@@ -108,7 +108,7 @@ export default function ProjectDetailPage() {
               </a>
               <a
                 href="mailto:enterprise@junglans.io"
-                className="font-mono text-xs bg-white text-[#08090c] border border-[#A7F3D0] px-6 py-3.5 sm:py-4 rounded-xl font-bold hover:bg-[#ECFDF5] transition text-center"
+                className="font-mono text-xs bg-white text-[#08090c] border border-[#A7F3D0] px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl font-bold hover:bg-[#ECFDF5] transition text-center"
               >
                 Request Enterprise Pilot
               </a>

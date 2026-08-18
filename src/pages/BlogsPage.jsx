@@ -41,25 +41,27 @@ export default function BlogsPage() {
       <div className="absolute top-[600px] right-1/4 w-[450px] h-[450px] bg-[#34D399]/15 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '2.5s' }}></div>
 
       {/* Hero Header Section */}
-      <section className="relative px-4 sm:px-6 md:px-12 pt-12 sm:pt-20 pb-12 border-b border-[#A7F3D0]/60">
+      <section className="relative px-4 sm:px-6 md:px-12 pt-8 sm:pt-16 md:pt-20 pb-8 sm:pb-12 border-b border-[#A7F3D0]/60">
         <div className="max-w-7xl mx-auto">
           
-          <div className="inline-flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3.5 py-2 rounded-full mb-6 shadow-sm flex-wrap">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse-ring flex-shrink-0"></span>
-            <span className="tracking-widest uppercase font-bold text-[#059669]">JUNGLANS RESEARCH // AI & ENGINEERING BLOGS</span>
-            <span className="px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#10B981] font-bold font-mono text-[10px] border border-[#A7F3D0]">
-              {blogsData.length} TECHNICAL ARTICLES
+          <div className="inline-flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm max-w-full">
+            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#10B981] animate-pulse-ring flex-shrink-0"></span>
+            <span className="tracking-wider sm:tracking-widest uppercase font-bold text-[#059669] truncate">
+              JUNGLANS RESEARCH <span className="hidden sm:inline">// AI & ENGINEERING</span>
+            </span>
+            <span className="px-2 sm:px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#10B981] font-bold font-mono text-[9px] sm:text-[10px] border border-[#A7F3D0] flex-shrink-0">
+              {blogsData.length} ARTICLES
             </span>
           </div>
 
-          <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl font-bold leading-[0.95] tracking-tighter mb-6 text-[#08090c]">
-            Deep-Dive <br />
+          <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.08] sm:leading-[0.95] tracking-tight sm:tracking-tighter mb-4 sm:mb-6 text-[#08090c]">
+            Deep-Dive <br className="hidden min-[480px]:inline" />
             <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
               Engineering Insights & AI Research
             </span>
           </h1>
 
-          <p className="font-body text-base sm:text-xl text-slate-600 mb-8 max-w-3xl leading-relaxed">
+          <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-8 max-w-3xl leading-relaxed">
             In-depth technical guides covering Classical Machine Learning metrics, Large Language Model evaluation, Transformer mechanics, parameter tuning, and production RAG architecture.
           </p>
 
@@ -145,11 +147,12 @@ export default function BlogsPage() {
 
               <div className="flex items-center justify-between pt-6 border-t border-slate-100">
                 <div className="flex items-center gap-3">
-                  <img
-                    src={featuredBlog.author.avatar}
-                    alt={featuredBlog.author.name}
-                    className="w-10 h-10 rounded-full object-cover border border-[#A7F3D0]"
-                  />
+                  <div
+                    className="w-10 h-10 rounded-xl text-white font-heading font-bold text-sm flex items-center justify-center shadow-md flex-shrink-0"
+                    style={{ backgroundColor: featuredBlog.author.color || '#10B981' }}
+                  >
+                    {featuredBlog.author.avatar || 'JS'}
+                  </div>
                   <div>
                     <div className="font-heading font-bold text-xs sm:text-sm text-[#08090c]">{featuredBlog.author.name}</div>
                     <div className="font-mono text-[10px] sm:text-xs text-slate-500">{featuredBlog.author.role}</div>
@@ -254,11 +257,12 @@ export default function BlogsPage() {
                   {/* Card Footer */}
                   <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <img
-                        src={blog.author.avatar}
-                        alt={blog.author.name}
-                        className="w-7 h-7 rounded-full object-cover border border-[#A7F3D0]"
-                      />
+                      <div
+                        className="w-7 h-7 rounded-lg text-white font-heading font-bold text-[10px] flex items-center justify-center shadow-xs flex-shrink-0"
+                        style={{ backgroundColor: blog.author.color || '#10B981' }}
+                      >
+                        {blog.author.avatar || 'JS'}
+                      </div>
                       <div className="flex flex-col">
                         <span className="font-heading font-bold text-xs text-[#08090c]">{blog.author.name}</span>
                         <span className="font-mono text-[9px] text-slate-400">{blog.publishDate}</span>

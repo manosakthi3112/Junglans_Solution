@@ -20,7 +20,7 @@ export default function OurTeamPage() {
       badge: 'FOUNDER',
       avatar: 'MT',
       color: '#10B981',
-      bio: 'B.Tech AI & DS (GPA 8.8). Co-Founder at AscendiaEdu. Architected local-first enterprise software repositories for Junglans Solutions.',
+      bio: 'B.Tech in Artificial Intelligence & Data Science. Co-Founder at AscendiaEdu. Architected local-first enterprise software repositories for Junglans Solutions.',
       skills: ['AI Systems Architecture', 'Rust / C++', 'LLM Quantization', 'Zero-Trust Protocol'],
       email: 'manot6114@gmail.com',
       ascendiaEduUrl: 'https://ascendiaedu.online',
@@ -34,7 +34,7 @@ export default function OurTeamPage() {
       badge: 'CO-FOUNDER',
       avatar: 'SK',
       color: '#059669',
-      bio: 'Co-Founder of Junglans Solutions & ROS Developer. B.Tech AI & DS with Diploma in ROS from iHub School of Learning. Hands-on experience developing robotic software nodes (ROS1/ROS2), hardware automation, and sensor control.',
+      bio: 'Co-Founder of Junglans Solutions & ROS Developer. B.Tech in Artificial Intelligence & Data Science with Diploma in ROS from iHub School of Learning. Hands-on experience developing robotic software nodes (ROS1/ROS2), hardware automation, and sensor control.',
       skills: ['ROS1 / ROS2', 'Robotics & Automation', 'Python / C++', 'Machine Learning', 'Sensor Control', 'Hardware Integration'],
       email: 'kanishpatrick@gmail.com',
       linkedin: 'https://www.linkedin.com/in/srikanish-parthiban-56a783368/',
@@ -48,7 +48,7 @@ export default function OurTeamPage() {
       badge: 'FOUNDER @ ASCENDIA',
       avatar: 'YP',
       color: '#10B981',
-      bio: 'Founder at AscendiaEdu & Lead DevOps Engineer. B.Tech AI & DS (CGPA 9.2). Junior DevOps Engineer Trainee (Mr Intelligence Inc). Specialist in building CI/CD pipelines, Docker, Terraform cloud automation, and data analytics.',
+      bio: 'Founder at AscendiaEdu & Lead DevOps Engineer. B.Tech in Artificial Intelligence & Data Science. Junior DevOps Engineer Trainee (Mr Intelligence Inc). Specialist in building CI/CD pipelines, Docker, Terraform cloud automation, and data analytics.',
       skills: ['DevOps', 'CI/CD Pipelines', 'Docker', 'Terraform', 'Python / Go', 'Cloud Automation'],
       email: 'yashikayash193@gmail.com',
       linkedin: 'https://linkedin.com/in/yashikap21',
@@ -83,67 +83,54 @@ export default function OurTeamPage() {
     },
     {
       id: 'member-6',
-      name: 'Dr. Aris Thorne',
-      role: 'Head of Systems & Security Research',
-      department: 'security',
-      badge: 'SECURITY LEAD',
-      avatar: 'AT',
-      color: '#059669',
-      bio: 'Ex-Defense Systems Cryptographer. Specialist in zero-knowledge proofs, air-gapped security, and memory-safe compiled runtimes.',
-      skills: ['Cryptography', 'SOC 2 Type II', 'Zero-Knowledge Proofs', 'Kernel Hardening'],
-      email: 'security@junglans.io',
+      name: 'Vinoth M',
+      role: 'Full Stack Developer',
+      department: 'engineering',
+      badge: 'FULL STACK',
+      avatar: 'VM',
+      color: '#10B981',
+      bio: 'Full Stack Developer specializing in responsive scalable web applications, RESTful microservices, and database modeling across MERN & PERN stacks.',
+      skills: ['React', 'Node.js', 'Express.js', 'PostgreSQL', 'MongoDB', 'Next.js', 'REST APIs'],
+      email: 'vinoth@junglans.io',
       linkedin: 'https://linkedin.com'
     },
     {
       id: 'member-7',
-      name: 'Elena Rostova',
-      role: 'Principal Multi-Agent AI Engineer',
-      department: 'ai',
-      badge: 'AI RESEARCH',
-      avatar: 'ER',
-      color: '#047857',
-      bio: 'Pioneer in local multi-agent orchestration engines. Designed the Junglans IDE 4-stage agent decomposition pipeline.',
-      skills: ['Agentic Workflows', 'PyTorch', 'C++ Inference', 'RAG Engines'],
-      email: 'ai.research@junglans.io',
+      name: 'Guruprasath C M',
+      role: 'Mobile App Developer',
+      department: 'engineering',
+      badge: 'MOBILE DEV',
+      avatar: 'GC',
+      color: '#059669',
+      bio: 'Mobile Application Developer with expertise in cross-platform development, native device integrations, state management, and high-performance mobile UI.',
+      skills: ['Flutter', 'React Native', 'Android / iOS', 'Dart', 'State Management', 'Mobile UI/UX'],
+      email: 'guruprasath@junglans.io',
       linkedin: 'https://linkedin.com'
     },
     {
       id: 'member-8',
-      name: 'Karthik Subramanian',
-      role: 'Lead Full-Stack Infrastructure Architect',
-      department: 'engineering',
-      badge: 'INFRASTRUCTURE',
-      avatar: 'KS',
-      color: '#34D399',
-      bio: 'Expert in local-first database synchronization, WebAssembly binary compilation, and sub-millisecond query optimization.',
-      skills: ['Wasm', 'React 19', 'SQLite / DuckDB', 'Distributed Systems'],
-      email: 'engineering@junglans.io',
+      name: 'Akshaya Keerthi A V',
+      role: 'UI/UX Developer',
+      department: 'product',
+      badge: 'UI/UX DEV',
+      avatar: 'AK',
+      color: '#10B981',
+      bio: 'UI/UX Developer crafting intuitive design systems, interactive prototypes, user journey workflows, and pixel-perfect responsive web interfaces.',
+      skills: ['UI/UX Design', 'Figma', 'Design Systems', 'TailwindCSS', 'Frontend Architecture', 'Prototyping'],
+      email: 'akshayakeerthi@junglans.io',
       linkedin: 'https://linkedin.com'
     },
     {
       id: 'member-9',
-      name: 'Sarah Chen',
-      role: 'VP of Product & Developer Experience',
-      department: 'product',
-      badge: 'PRODUCT LEAD',
-      avatar: 'SC',
-      color: '#10B981',
-      bio: 'Specializes in high-velocity developer tools, ergonomic CLI design, and enterprise UX systems for technical teams.',
-      skills: ['Product Strategy', 'CLI Design', 'Design Systems', 'Developer Relations'],
-      email: 'product@junglans.io',
-      linkedin: 'https://linkedin.com'
-    },
-    {
-      id: 'member-10',
-      name: 'Vikram Mehta',
-      role: 'Lead Data Infrastructure & NLP Engineer',
+      name: 'Sharmila S',
+      role: 'AI Engineer',
       department: 'ai',
-      badge: 'DATA SYSTEMS',
-      avatar: 'VM',
+      badge: 'AI ENGINEER',
+      avatar: 'SS',
       color: '#059669',
-      bio: 'Lead architect of TalkToDB natural language voice-to-SQL engine. Built guardrail verification algorithms for enterprise data.',
-      skills: ['NLP Pipelines', 'SQL Parsers', 'Vector Indexing', 'Data Governance'],
-      email: 'nlp@junglans.io',
+      bio: 'AI Engineer specialized in machine learning pipelines, deep learning model evaluation, natural language processing, and neural network optimization.',
+      skills: ['Python', 'Deep Learning', 'PyTorch', 'NLP', 'Computer Vision', 'Model Evaluation'],
+      email: 'sharmila@junglans.io',
       linkedin: 'https://linkedin.com'
     }
   ];
@@ -162,10 +149,10 @@ export default function OurTeamPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-10 sm:py-16 relative z-10">
         
         {/* Navigation Breadcrumb */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 sm:mb-12 pb-4 border-b border-[#A7F3D0]/60">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-12 pb-4 border-b border-[#A7F3D0]/60">
           <Link
             to="/"
-            className="font-mono text-xs text-slate-600 hover:text-[#10B981] transition flex items-center gap-2 font-bold cursor-pointer"
+            className="font-mono text-xs text-slate-600 hover:text-[#10B981] transition flex items-center gap-2 font-bold cursor-pointer w-fit"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -173,26 +160,26 @@ export default function OurTeamPage() {
             </svg>
             Back to Home & Products
           </Link>
-          <span className="font-mono text-[10px] sm:text-xs text-[#059669] bg-[#ECFDF5] px-3.5 py-1.5 rounded-full border border-[#A7F3D0] font-bold uppercase tracking-wider">
-            JUNGLANS SOLUTIONS // OUR TEAM & LEADERSHIP
+          <span className="font-mono text-[9px] sm:text-xs text-[#059669] bg-[#ECFDF5] px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-[#A7F3D0] font-bold uppercase tracking-wider w-fit">
+            JUNGLANS SOLUTIONS // OUR TEAM
           </span>
         </div>
 
         {/* Page Hero Header */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 animate-fade-in-up">
-          <div className="inline-flex items-center gap-2.5 font-mono text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-4 py-2 rounded-full mb-6 shadow-sm">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse-ring"></span>
-            <span className="tracking-widest uppercase font-bold text-[#059669]">PEOPLE & INNOVATION</span>
+        <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-16 animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 sm:gap-2.5 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm">
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981] animate-pulse-ring"></span>
+            <span className="tracking-wider sm:tracking-widest uppercase font-bold text-[#059669]">PEOPLE & INNOVATION</span>
           </div>
 
-          <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.05] tracking-tight text-[#08090c] mb-6">
+          <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.08] sm:leading-[1.05] tracking-tight sm:tracking-tight text-[#08090c] mb-4 sm:mb-6">
             Meet the team behind <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
               Junglans Solutions.
             </span>
           </h1>
 
-          <p className="font-body text-base sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Our multi-disciplinary team of AI architects, system engineers, security researchers, and designers work together to build local-first enterprise software.
           </p>
         </div>
@@ -215,10 +202,9 @@ export default function OurTeamPage() {
             {[
               { id: 'all', label: 'All Team Members' },
               { id: 'leadership', label: 'Leadership' },
-              { id: 'ai', label: 'AI Research' },
-              { id: 'security', label: 'Security' },
-              { id: 'engineering', label: 'Engineering' },
-              { id: 'product', label: 'Product & UX' },
+              { id: 'ai', label: 'AI & Data Science' },
+              { id: 'engineering', label: 'Engineering & Mobile' },
+              { id: 'product', label: 'UI/UX & Product' },
             ].map((tab) => (
               <button
                 key={tab.id}

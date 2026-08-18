@@ -447,15 +447,16 @@ export default function BlogDetailPage() {
         </p>
 
         {/* Author Info Bar */}
-        <div className="flex items-center gap-4 p-4 bg-white border border-[#A7F3D0] rounded-2xl shadow-sm mb-10">
-          <img
-            src={blog.author.avatar}
-            alt={blog.author.name}
-            className="w-12 h-12 rounded-full object-cover border-2 border-[#10B981]"
-          />
-          <div>
-            <div className="font-heading font-bold text-base text-[#08090c]">{blog.author.name}</div>
-            <div className="font-mono text-xs text-[#059669] font-medium">{blog.author.role}</div>
+        <div className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 bg-white border border-[#A7F3D0] rounded-2xl shadow-sm mb-8 sm:mb-10 max-w-xl">
+          <div
+            className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl text-white font-heading font-bold text-base sm:text-lg flex items-center justify-center shadow-md flex-shrink-0"
+            style={{ backgroundColor: blog.author.color || '#10B981' }}
+          >
+            {blog.author.avatar || 'JS'}
+          </div>
+          <div className="min-w-0">
+            <div className="font-heading font-bold text-sm sm:text-base text-[#08090c] truncate">{blog.author.name}</div>
+            <div className="font-mono text-xs text-[#059669] font-medium truncate">{blog.author.role}</div>
           </div>
         </div>
       </section>

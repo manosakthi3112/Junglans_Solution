@@ -123,20 +123,20 @@ export default function EnterpriseSecurityPage() {
         </div>
 
         {/* Page Hero Header */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 animate-fade-in-up">
-          <div className="inline-flex items-center gap-2.5 font-mono text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-4 py-2 rounded-full mb-6 shadow-sm">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse-ring"></span>
-            <span className="tracking-widest uppercase font-bold text-[#059669]">ZERO-TRUST ARCHITECTURE</span>
+        <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-16 animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 sm:gap-2.5 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm">
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981] animate-pulse-ring"></span>
+            <span className="tracking-wider sm:tracking-widest uppercase font-bold text-[#059669]">ZERO-TRUST ARCHITECTURE</span>
           </div>
 
-          <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.05] tracking-tight text-[#08090c] mb-6">
+          <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.08] sm:leading-[1.05] tracking-tight text-[#08090c] mb-4 sm:mb-6">
             Enterprise Security & <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
               Zero Telemetry Governance.
             </span>
           </h1>
 
-          <p className="font-body text-base sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             All 20 applications in the Junglans Solutions software suite are engineered from the ground up for high-security enterprise environments, air-gapped networks, and total privacy guarantees.
           </p>
 

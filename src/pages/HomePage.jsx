@@ -55,54 +55,98 @@ export default function HomePage() {
       <div className="absolute top-96 right-1/4 w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-[#34D399]/20 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '2s' }}></div>
 
       {/* Hero Section */}
-      <section className="relative px-4 sm:px-6 md:px-12 pt-12 sm:pt-20 pb-16 sm:pb-24 border-b border-[#A7F3D0]/60 overflow-hidden">
+      <section className="relative px-4 sm:px-6 md:px-12 pt-8 sm:pt-16 md:pt-20 pb-12 sm:pb-20 md:pb-24 border-b border-[#A7F3D0]/60 overflow-hidden">
         <div className="max-w-7xl mx-auto w-full relative z-10 animate-fade-in-up">
           
-          <div className="inline-flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3.5 py-2 rounded-full mb-6 sm:mb-8 shadow-sm flex-wrap max-w-full">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse-ring flex-shrink-0"></span>
-            <span className="tracking-widest uppercase font-bold text-[#059669]">JUNGLANS SOLUTIONS // ENTERPRISE SOFTWARE CONSORTIUM</span>
-            <span className="px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#10B981] font-bold font-mono text-[10px] border border-[#A7F3D0]">
-              PROJECTS
+          {/* Responsive Status Pill */}
+          <div className="inline-flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-8 shadow-sm max-w-full">
+            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#10B981] animate-pulse-ring flex-shrink-0"></span>
+            <span className="tracking-wider sm:tracking-widest uppercase font-bold text-[#059669] truncate">
+              JUNGLANS SOLUTIONS <span className="hidden sm:inline">// ENTERPRISE CONSORTIUM</span>
+            </span>
+            <span className="px-2 sm:px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#10B981] font-bold font-mono text-[9px] sm:text-[10px] border border-[#A7F3D0] flex-shrink-0">
+              20 APPS
             </span>
           </div>
           
-          <h1 className="font-heading text-4xl sm:text-6xl md:text-8xl font-bold leading-[0.95] sm:leading-[0.92] tracking-tighter mb-6 sm:mb-8 text-[#08090c]">
-            Architecting the <br />
+          {/* Main Hero Headline */}
+          <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.08] sm:leading-[0.95] md:leading-[0.92] tracking-tight sm:tracking-tighter mb-4 sm:mb-6 text-[#08090c]">
+            Architecting the <br className="hidden min-[480px]:inline" />
             <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
               future of software.
             </span>
           </h1>
 
-          <p className="font-body text-base sm:text-xl text-slate-600 mb-8 sm:mb-10 max-w-2xl leading-relaxed">
+          {/* Subtitle / Description */}
+          <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-8 max-w-2xl leading-relaxed">
             Junglans Solutions develops specialized tools and applications for global engineering organizations. High-performance compiled binaries, zero cloud telemetry, and total privacy guarantees.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          {/* Mobile-Optimized CTA Cluster */}
+          <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 items-stretch sm:items-center">
             <a
               href="#ecosystem"
-              className="font-mono text-xs sm:text-sm bg-[#10B981] hover:bg-[#059669] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold transition inline-flex items-center justify-center gap-3 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-1 duration-300"
+              className="font-mono text-xs sm:text-sm bg-[#10B981] hover:bg-[#059669] text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold transition flex items-center justify-center gap-2.5 sm:gap-3 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 duration-300 w-full sm:w-auto text-center"
             >
-              Explore Main 5 Flagships
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="animate-bounce-subtle">
+              Explore 5 Flagships
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="animate-bounce-subtle flex-shrink-0">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </a>
 
-            <Link
-              to="/team"
-              className="font-mono text-xs sm:text-sm bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold hover:bg-[#10B981] hover:text-white transition inline-flex items-center justify-center gap-2 shadow-sm hover:-translate-y-1 duration-300"
-            >
-              Our Team Page ↗
-            </Link>
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:gap-3 w-full sm:w-auto">
+              <Link
+                to="/team"
+                className="font-mono text-xs sm:text-sm bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold hover:bg-[#10B981] hover:text-white transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm hover:-translate-y-0.5 duration-300 text-center"
+              >
+                Our Team ↗
+              </Link>
 
-            <a
-              href="#showcase"
-              className="font-mono text-xs sm:text-sm bg-white text-[#08090c] border border-[#A7F3D0] px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold hover:bg-[#ECFDF5] transition inline-flex items-center justify-center gap-3 shadow-sm hover:-translate-y-1 duration-300"
-            >
-              All Projects Catalog
-            </a>
+              <a
+                href="#showcase"
+                className="font-mono text-xs sm:text-sm bg-white text-[#08090c] border border-[#A7F3D0] px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold hover:bg-[#ECFDF5] transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm hover:-translate-y-0.5 duration-300 text-center"
+              >
+                All 20 Projects
+              </a>
+            </div>
           </div>
+
+          {/* Quick Value Metrics Strip for Mobile & Desktop */}
+          <div className="grid grid-cols-2 min-[640px]:grid-cols-4 gap-2 sm:gap-3.5 pt-6 sm:pt-10 mt-6 sm:mt-10 border-t border-[#A7F3D0]/60 max-w-4xl">
+            <div className="flex items-center gap-2 sm:gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/80 border border-[#A7F3D0]/80 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] flex-shrink-0"></span>
+              <div className="min-w-0">
+                <div className="font-mono text-[9px] sm:text-[10px] text-slate-500 uppercase truncate">Architecture</div>
+                <div className="font-heading font-bold text-xs sm:text-sm text-[#08090c] truncate">100% Local-First</div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 sm:gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/80 border border-[#A7F3D0]/80 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <div className="min-w-0">
+                <div className="font-mono text-[9px] sm:text-[10px] text-slate-500 uppercase truncate">Telemetry</div>
+                <div className="font-heading font-bold text-xs sm:text-sm text-[#08090c] truncate">Zero Cloud Log</div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 sm:gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/80 border border-[#A7F3D0]/80 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] flex-shrink-0"></span>
+              <div className="min-w-0">
+                <div className="font-mono text-[9px] sm:text-[10px] text-slate-500 uppercase truncate">Binaries</div>
+                <div className="font-heading font-bold text-xs sm:text-sm text-[#08090c] truncate">Compiled Rust/C++</div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 sm:gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/80 border border-[#A7F3D0]/80 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <div className="min-w-0">
+                <div className="font-mono text-[9px] sm:text-[10px] text-slate-500 uppercase truncate">Portfolio</div>
+                <div className="font-heading font-bold text-xs sm:text-sm text-[#08090c] truncate">20 Enterprise Apps</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -703,11 +747,12 @@ export default function HomePage() {
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <img
-                    src={blog.author.avatar}
-                    alt={blog.author.name}
-                    className="w-6 h-6 rounded-full object-cover border border-[#A7F3D0]"
-                  />
+                  <div
+                    className="w-6 h-6 rounded-md text-white font-heading font-bold text-[9px] flex items-center justify-center shadow-xs flex-shrink-0"
+                    style={{ backgroundColor: blog.author.color || '#10B981' }}
+                  >
+                    {blog.author.avatar || 'JS'}
+                  </div>
                   <span className="font-heading font-bold text-xs text-slate-700">{blog.author.name}</span>
                 </div>
                 <span className="font-mono text-xs text-[#059669] font-bold group-hover:text-[#10B981]">

@@ -23,23 +23,23 @@ export default function Navbar() {
   const isBlogsPage = location.pathname.startsWith('/blog');
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-[#A7F3D0]/60 px-4 sm:px-6 md:px-12 py-3 shadow-sm">
+    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-[#A7F3D0]/60 px-3 sm:px-6 md:px-12 py-2.5 sm:py-3 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* Brand Logo & Name */}
-        <Link to="/" className="flex items-center gap-3 group" onClick={() => setMobileMenuOpen(false)}>
-          <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[#ECFDF5] border-2 border-[#A7F3D0] p-1.5 flex items-center justify-center transform group-hover:rotate-6 group-hover:scale-105 transition-all duration-300 shadow-lg shadow-emerald-500/20 overflow-hidden flex-shrink-0">
+        <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group" onClick={() => setMobileMenuOpen(false)}>
+          <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#ECFDF5] border-2 border-[#A7F3D0] p-1 sm:p-1.5 flex items-center justify-center transform group-hover:rotate-6 group-hover:scale-105 transition-all duration-300 shadow-md shadow-emerald-500/20 overflow-hidden flex-shrink-0">
             <img
               src="/squirrel_logo.png"
               alt="Junglans Squirrel Logo"
-              className="w-full h-full object-contain rounded-xl"
+              className="w-full h-full object-contain rounded-lg sm:rounded-xl"
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-heading font-bold text-xl sm:text-2xl leading-none tracking-tight text-[#08090c] group-hover:text-[#10B981] transition-colors">
+            <span className="font-heading font-bold text-lg sm:text-2xl leading-none tracking-tight text-[#08090c] group-hover:text-[#10B981] transition-colors">
               Junglans
             </span>
-            <span className="font-mono text-[8px] sm:text-[9.5px] text-[#059669] mt-1 tracking-widest uppercase font-semibold">
+            <span className="font-mono text-[7.5px] sm:text-[9.5px] text-[#059669] mt-0.5 sm:mt-1 tracking-wider sm:tracking-widest uppercase font-semibold">
               SOLUTIONS // PORTFOLIO
             </span>
           </div>

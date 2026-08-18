@@ -3,27 +3,56 @@ const AUTHORS = {
   MANOSAKTHI: {
     name: "Manosakthi Thiyagarajan",
     role: "Founder & Lead AI Architect",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80"
+    avatar: "MT",
+    color: "#10B981"
   },
   SRI_KANISH: {
     name: "Sri Kanish P",
     role: "Co-Founder & ROS Developer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80"
+    avatar: "SK",
+    color: "#059669"
   },
   YASHIKA: {
     name: "Yashika P",
     role: "Founder @ AscendiaEdu & Lead DevOps Engineer",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=250&q=80"
+    avatar: "YP",
+    color: "#10B981"
   },
   GOVINDARAJAN: {
     name: "Govindarajan Selvaraj",
     role: "ML Engineer",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80"
+    avatar: "GS",
+    color: "#059669"
   },
   SURYA: {
     name: "Surya N",
     role: "Full Stack Developer",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=250&q=80"
+    avatar: "SN",
+    color: "#10B981"
+  },
+  VINOTH: {
+    name: "Vinoth M",
+    role: "Full Stack Developer",
+    avatar: "VM",
+    color: "#10B981"
+  },
+  GURUPRASATH: {
+    name: "Guruprasath C M",
+    role: "Mobile App Developer",
+    avatar: "GC",
+    color: "#059669"
+  },
+  AKSHAYA: {
+    name: "Akshaya Keerthi A V",
+    role: "UI/UX Developer",
+    avatar: "AK",
+    color: "#10B981"
+  },
+  SHARMILA: {
+    name: "Sharmila S",
+    role: "AI Engineer",
+    avatar: "SS",
+    color: "#059669"
   }
 };
 

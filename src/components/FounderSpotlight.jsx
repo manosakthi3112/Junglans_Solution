@@ -11,7 +11,7 @@ export default function FounderSpotlight() {
       badge: 'FOUNDER',
       avatar: 'MT',
       color: '#10B981',
-      gpa: 'GPA 8.8',
+      domain: 'AI Systems & Zero-Trust Architecture',
       summary: 'Architect of local-first enterprise software suites, zero-trust security protocols, and LLM quantization engines.',
       bioDetail: 'B.Tech in Artificial Intelligence & Data Science from P.A. College of Engineering and Technology. Co-Founder at AscendiaEdu. Has architected local-first software repositories spanning developer tooling, version control attribution, AI workspaces, encrypted communications, and natural language data infrastructure.',
       skills: ['AI Systems Architecture', 'Rust / C++', 'LLM Quantization', 'Zero-Trust Protocol'],
@@ -27,7 +27,7 @@ export default function FounderSpotlight() {
       badge: 'CO-FOUNDER',
       avatar: 'SK',
       color: '#059669',
-      gpa: 'Diploma in ROS',
+      domain: 'Robotic Nodes & Hardware Automation',
       summary: 'Specialist in robotic software nodes (ROS1/ROS2), hardware automation, and intelligent sensor control systems.',
       bioDetail: 'B.Tech in Artificial Intelligence & Data Science with Diploma in ROS from iHub School of Learning. Experienced in developing robotic software nodes, sensor data integration for real-time responsiveness, robotic arm control, and hardware-software simulation.',
       skills: ['ROS1 / ROS2', 'Robotics & Automation', 'Python / C++', 'Sensor Integration', 'Hardware Automation'],
@@ -111,10 +111,10 @@ export default function FounderSpotlight() {
                 </div>
               )}
 
-              {/* Highlight Pill */}
+              {/* Highlight Domain Pill */}
               <div className="mt-3 mb-4">
-                <span className="font-mono text-[11px] bg-[#F4FBF7] text-[#059669] px-3 py-1 rounded-lg border border-[#A7F3D0] font-bold inline-block">
-                  🎓 {founder.gpa}
+                <span className="font-mono text-[11px] bg-[#F4FBF7] text-[#059669] px-3 py-1.5 rounded-lg border border-[#A7F3D0] font-bold inline-block">
+                  ⚡ {founder.domain}
                 </span>
               </div>
             </div>
