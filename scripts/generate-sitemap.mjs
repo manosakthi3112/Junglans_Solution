@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { projectsData } from '../src/data/projectsData.js';
 import { blogsData } from '../src/data/blogsData.js';
 
-const SITE_URL = 'https://junglans.in';
+const SITE_URL = 'https://www.junglans.in';
 const today = new Date().toISOString().split('T')[0];
 
 const paths = [

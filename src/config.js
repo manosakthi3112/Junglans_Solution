@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://junglans.in';
+export const SITE_URL = 'https://www.junglans.in';
 export const SITE_NAME = 'Junglans Solutions';
 export const SITE_TITLE = 'Junglans Solutions — Enterprise Software Ecosystems';
 export const SITE_DESCRIPTION =
