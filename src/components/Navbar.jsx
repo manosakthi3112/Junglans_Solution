@@ -47,11 +47,11 @@ export default function Navbar() {
 
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center gap-6 font-mono text-xs uppercase tracking-widest text-slate-600 font-medium">
-          <button onClick={() => handleNavClick('ecosystem')} className="hover:text-[#10B981] transition cursor-pointer">Ecosystem</button>
-          <button onClick={() => handleNavClick('showcase')} className="hover:text-[#10B981] transition cursor-pointer flex items-center gap-1.5">
+          <a href="/#ecosystem" onClick={(e) => { e.preventDefault(); handleNavClick('ecosystem'); }} className="hover:text-[#10B981] transition cursor-pointer">Ecosystem</a>
+          <a href="/#showcase" onClick={(e) => { e.preventDefault(); handleNavClick('showcase'); }} className="hover:text-[#10B981] transition cursor-pointer flex items-center gap-1.5">
             Showcase
             <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
-          </button>
+          </a>
           <Link
             to="/blogs"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -79,15 +79,16 @@ export default function Navbar() {
           >
             Security
           </Link>
-          <button onClick={() => handleNavClick('founder')} className="hover:text-[#10B981] transition cursor-pointer font-bold text-[#059669]">Founder</button>
-          <button onClick={() => handleNavClick('capabilities')} className="hover:text-[#10B981] transition cursor-pointer">Capabilities</button>
-          <button onClick={() => handleNavClick('enterprise')} className="hover:text-[#10B981] transition cursor-pointer">Enterprise</button>
+          <a href="/#founder" onClick={(e) => { e.preventDefault(); handleNavClick('founder'); }} className="hover:text-[#10B981] transition cursor-pointer font-bold text-[#059669]">Founder</a>
+          <a href="/#capabilities" onClick={(e) => { e.preventDefault(); handleNavClick('capabilities'); }} className="hover:text-[#10B981] transition cursor-pointer">Capabilities</a>
+          <a href="/#enterprise" onClick={(e) => { e.preventDefault(); handleNavClick('enterprise'); }} className="hover:text-[#10B981] transition cursor-pointer">Enterprise</a>
         </div>
 
         {/* Desktop CTA Button */}
         <div className="hidden lg:flex items-center">
-          <button 
-            onClick={() => handleNavClick('enterprise')}
+          <a
+            href="/#enterprise"
+            onClick={(e) => { e.preventDefault(); handleNavClick('enterprise'); }}
             className="font-mono text-xs bg-[#10B981] hover:bg-[#059669] text-white px-5 py-2.5 rounded-xl font-bold transition flex items-center gap-2 shadow-md shadow-emerald-500/20 hover:-translate-y-0.5 cursor-pointer"
           >
             Contact Sales
@@ -95,7 +96,7 @@ export default function Navbar() {
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
-          </button>
+          </a>
         </div>
 
         {/* Mobile Hamburger Toggle Button */}
@@ -125,16 +126,18 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="lg:hidden mt-3 pt-4 pb-6 px-4 border-t border-[#A7F3D0]/60 bg-white/98 rounded-2xl shadow-xl space-y-3 animate-fade-in-up">
           <div className="flex flex-col gap-2 font-mono text-xs uppercase tracking-wider text-slate-700">
-            <button
-              onClick={() => handleNavClick('ecosystem')}
+            <a
+              href="/#ecosystem"
+              onClick={(e) => { e.preventDefault(); handleNavClick('ecosystem'); }}
               className="text-left px-4 py-3 rounded-xl hover:bg-[#ECFDF5] hover:text-[#10B981] font-bold transition flex items-center justify-between"
             >
               <span>Ecosystem</span>
               <span className="text-[10px] text-[#059669]">5 Flagships</span>
-            </button>
+            </a>
 
-            <button
-              onClick={() => handleNavClick('showcase')}
+            <a
+              href="/#showcase"
+              onClick={(e) => { e.preventDefault(); handleNavClick('showcase'); }}
               className="text-left px-4 py-3 rounded-xl hover:bg-[#ECFDF5] hover:text-[#10B981] font-bold transition flex items-center justify-between"
             >
               <span className="flex items-center gap-2">
@@ -142,7 +145,7 @@ export default function Navbar() {
                 <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
               </span>
               <span className="text-[10px] text-[#059669]">Projects</span>
-            </button>
+            </a>
 
             <Link
               to="/team"
@@ -172,32 +175,36 @@ export default function Navbar() {
               <span className="text-[10px] bg-[#059669] text-white px-2 py-0.5 rounded font-bold">ZERO-TRUST</span>
             </Link>
 
-            <button
-              onClick={() => handleNavClick('founder')}
+            <a
+              href="/#founder"
+              onClick={(e) => { e.preventDefault(); handleNavClick('founder'); }}
               className="text-left px-4 py-3 rounded-xl hover:bg-[#ECFDF5] hover:text-[#10B981] font-bold text-[#059669] transition flex items-center justify-between"
             >
               <span>Founder Spotlight</span>
               <span className="text-[10px] text-slate-400">Profile</span>
-            </button>
+            </a>
 
-            <button
-              onClick={() => handleNavClick('capabilities')}
+            <a
+              href="/#capabilities"
+              onClick={(e) => { e.preventDefault(); handleNavClick('capabilities'); }}
               className="text-left px-4 py-3 rounded-xl hover:bg-[#ECFDF5] hover:text-[#10B981] font-bold transition"
             >
               Capabilities
-            </button>
+            </a>
 
-            <button
-              onClick={() => handleNavClick('enterprise')}
+            <a
+              href="/#enterprise"
+              onClick={(e) => { e.preventDefault(); handleNavClick('enterprise'); }}
               className="text-left px-4 py-3 rounded-xl hover:bg-[#ECFDF5] hover:text-[#10B981] font-bold transition"
             >
               Enterprise Solutions
-            </button>
+            </a>
           </div>
 
           <div className="pt-2">
-            <button
-              onClick={() => handleNavClick('enterprise')}
+            <a
+              href="/#enterprise"
+              onClick={(e) => { e.preventDefault(); handleNavClick('enterprise'); }}
               className="w-full font-mono text-xs bg-[#10B981] hover:bg-[#059669] text-white px-5 py-3.5 rounded-xl font-bold transition flex items-center justify-center gap-2 shadow-md"
             >
               Contact Enterprise Sales
@@ -205,7 +212,7 @@ export default function Navbar() {
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
-            </button>
+            </a>
           </div>
         </div>
       )}

@@ -44,8 +44,8 @@ export default function Footer() {
             <li><Link to="/team" className="text-slate-600 hover:text-[#10B981] transition font-bold">Our Team Page ↗</Link></li>
             <li><Link to="/security" className="text-slate-600 hover:text-[#10B981] transition font-bold">Enterprise Security Page ↗</Link></li>
             <li><Link to="/" className="text-slate-600 hover:text-[#10B981] transition">Home Portfolio</Link></li>
-            <li><a href="#founder" className="text-slate-600 hover:text-[#10B981] transition">Founder Spotlight</a></li>
-            <li><a href="#enterprise" className="text-slate-600 hover:text-[#10B981] transition">Contact Sales</a></li>
+            <li><a href="/#founder" className="text-slate-600 hover:text-[#10B981] transition">Founder Spotlight</a></li>
+            <li><a href="/#enterprise" className="text-slate-600 hover:text-[#10B981] transition">Contact Sales</a></li>
           </ul>
         </div>
       </div>
