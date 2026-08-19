@@ -60,10 +60,16 @@ export default function HomePage() {
             '@type': 'Organization',
             name: 'Junglans Solutions',
             url: SITE_URL,
+            logo: `${SITE_URL}/squirrel_logo.png`,
             email: 'enterprise@junglans.io',
             description:
               'Junglans Solutions builds high-performance, secure, local-first enterprise software, AI developer tools, and productivity applications for global organizations.',
             foundingDate: '2024',
+            address: {
+              '@type': 'PostalAddress',
+              addressCountry: 'IN'
+            },
+            areaServed: 'Worldwide',
             knowsAbout: [
               'Local-first enterprise software',
               'AI developer tools',
