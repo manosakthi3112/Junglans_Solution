@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://junglans.in/sitemap.xml
+# Googlebot & Bingbot explicitly allowed
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# XML Sitemap
+Sitemap: https://www.junglans.in/sitemap.xml

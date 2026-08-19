@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { blogsData } from '../data/blogsData';
 import Seo from '../components/Seo';
+import { SITE_URL } from '../config';
 
 export default function BlogsPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -46,10 +47,10 @@ export default function BlogsPage() {
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'Junglans Research — Engineering & AI Blog',
-          url: 'https://junglans.in/blogs',
+          url: `${SITE_URL}/blogs`,
           description:
             'In-depth technical guides covering machine learning metrics, LLM evaluation, transformer mechanics, parameter tuning, and production RAG architecture.',
-          publisher: { '@type': 'Organization', name: 'Junglans Solutions', url: 'https://junglans.in' }
+          publisher: { '@type': 'Organization', name: 'Junglans Solutions', url: SITE_URL }
         }}
       />
       {/* Dynamic Animated Ambient Glow Spheres */}
