@@ -78,10 +78,13 @@ for (const route of routes) {
   for (const tag of headTags) {
     bodyWithoutHeadTags = bodyWithoutHeadTags.replaceAll(tag, '');
   }
-  // Also strip any stray hoisted link/meta tags from body
+  
+  // Clean all metadata/link/title tags from inside root body
   bodyWithoutHeadTags = bodyWithoutHeadTags
-    .replace(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi, '')
-    .replace(/<meta\s+name=["']description["'][^>]*>/gi, '');
+    .replace(/<link\s+[^>]*>/gi, '')
+    .replace(/<meta\s+[^>]*>/gi, '')
+    .replace(/<title>[\s\S]*?<\/title>/gi, '')
+    .replace(/<script\s+type=["']application\/ld\+json["']>[\s\S]*?<\/script>/gi, '');
 
   const headCleaned = cleanHead(template);
   const formattedHeadTags = headTags.join('\n  ');

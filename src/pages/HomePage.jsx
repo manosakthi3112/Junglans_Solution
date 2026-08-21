@@ -47,10 +47,29 @@ export default function HomePage() {
         jsonLd={[
           {
             '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            '@id': `${SITE_URL}/#website`,
+            name: 'Junglans Solutions',
+            alternateName: ['Junglans', 'Junglans Solutions India', 'Junglans Ecosystem'],
+            url: SITE_URL,
+            inLanguage: 'en-US',
+            description:
+              'Junglans Solutions builds high-performance, secure, local-first enterprise software, AI developer tools, and productivity applications for global organizations. 20 products, zero cloud telemetry.',
+            publisher: {
+              '@type': 'Organization',
+              name: 'Junglans Solutions',
+              url: SITE_URL,
+              logo: `${SITE_URL}/squirrel_logo.webp`
+            }
+          },
+          {
+            '@context': 'https://schema.org',
             '@type': 'Organization',
+            '@id': `${SITE_URL}/#organization`,
             name: 'Junglans Solutions',
             url: SITE_URL,
-            logo: `${SITE_URL}/squirrel_logo.png`,
+            logo: `${SITE_URL}/squirrel_logo.webp`,
+            image: `${SITE_URL}/squirrel_logo.webp`,
             email: 'enterprise@junglans.io',
             description:
               'Junglans Solutions builds high-performance, secure, local-first enterprise software, AI developer tools, and productivity applications for global organizations.',
@@ -60,6 +79,10 @@ export default function HomePage() {
               addressCountry: 'IN'
             },
             areaServed: 'Worldwide',
+            sameAs: [
+              'https://github.com/manot6114',
+              'https://www.linkedin.com/company/junglans-solutions'
+            ],
             knowsAbout: [
               'Local-first enterprise software',
               'AI developer tools',
@@ -72,12 +95,59 @@ export default function HomePage() {
           },
           {
             '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'Junglans Solutions',
-            url: SITE_URL,
-            description:
-              'Junglans Solutions — 20 local-first enterprise software products for engineering organizations.',
-            publisher: { '@type': 'Organization', name: 'Junglans Solutions', url: SITE_URL }
+            '@type': 'ItemList',
+            name: 'Junglans Solutions Key Sitelinks',
+            itemListElement: [
+              {
+                '@type': 'SiteNavigationElement',
+                position: 1,
+                name: 'Junglans Project Manager',
+                description: 'Local-first codebase intelligence, automated health scanning, and architecture documentation exporter.',
+                url: `${SITE_URL}/project/project-0`
+              },
+              {
+                '@type': 'SiteNavigationElement',
+                position: 2,
+                name: 'Jung AI Version Control Sidecar',
+                description: 'AI prompt-to-diff attribution, commit lineage tracking, and token expenditure audit dashboard.',
+                url: `${SITE_URL}/project/project-1`
+              },
+              {
+                '@type': 'SiteNavigationElement',
+                position: 3,
+                name: 'Junglans IDE',
+                description: 'AI-native integrated development environment featuring collaborative multi-agent task pipelines.',
+                url: `${SITE_URL}/project/project-2`
+              },
+              {
+                '@type': 'SiteNavigationElement',
+                position: 4,
+                name: 'TalkToDB',
+                description: 'Natural language SQL engine translating voice and text queries into optimized read-only queries with visual charts.',
+                url: `${SITE_URL}/project/project-5`
+              },
+              {
+                '@type': 'SiteNavigationElement',
+                position: 5,
+                name: 'Engineering & AI Research Blogs',
+                description: 'Deep-dive technical guides on machine learning metrics, LLM evaluation, transformer architectures, and RAG systems.',
+                url: `${SITE_URL}/blogs`
+              },
+              {
+                '@type': 'SiteNavigationElement',
+                position: 6,
+                name: 'Our Team & Leadership',
+                description: 'Executive leadership, AI systems architects, robotics engineers, and research background at Junglans.',
+                url: `${SITE_URL}/team`
+              },
+              {
+                '@type': 'SiteNavigationElement',
+                position: 7,
+                name: 'Enterprise Security & Compliance',
+                description: 'Zero-telemetry guarantees, AES-256-GCM encryption, air-gapped readiness, and SOC 2 Type II compliance.',
+                url: `${SITE_URL}/security`
+              }
+            ]
           },
           {
             '@context': 'https://schema.org',
