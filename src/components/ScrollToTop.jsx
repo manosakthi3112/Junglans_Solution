@@ -5,18 +5,19 @@ export default function ScrollToTop() {
   const { pathname, hash, state } = useLocation();
 
   useEffect(() => {
-    if (state?.scrollTo) {
+    const targetId = state?.scrollTo || (hash ? hash.replace(/^#/, '') : null);
+    if (targetId) {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
       return;
     }
-    if (hash) {
-      const el = document.getElementById(hash.slice(1));
-      if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
-        return;
-      }
-    }
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [pathname, hash, state]);
 
   return null;
 }
+

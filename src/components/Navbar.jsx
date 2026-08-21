@@ -30,8 +30,12 @@ export default function Navbar() {
         <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group" onClick={() => setMobileMenuOpen(false)}>
           <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#ECFDF5] border-2 border-[#A7F3D0] p-1 sm:p-1.5 flex items-center justify-center transform group-hover:rotate-6 group-hover:scale-105 transition-all duration-300 shadow-md shadow-emerald-500/20 overflow-hidden flex-shrink-0">
             <img
-              src="/squirrel_logo.png"
-              alt="Junglans Squirrel Logo"
+              src="/squirrel_logo-128.webp"
+              alt="Junglans Squirrel Logo — Enterprise Software Ecosystem"
+              width="56"
+              height="56"
+              loading="eager"
+              decoding="async"
               className="w-full h-full object-contain rounded-lg sm:rounded-xl"
             />
           </div>

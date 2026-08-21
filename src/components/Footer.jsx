@@ -10,8 +10,12 @@ export default function Footer() {
           <div className="flex items-center gap-3.5 mb-4">
             <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#ECFDF5] border-2 border-[#A7F3D0] rounded-2xl p-1.5 flex items-center justify-center shadow-lg shadow-emerald-500/15 overflow-hidden flex-shrink-0">
               <img
-                src="/squirrel_logo.png"
-                alt="Junglans Squirrel Logo"
+                src="/squirrel_logo-128.webp"
+                alt="Junglans Squirrel Logo — Enterprise Software Ecosystem"
+                width="64"
+                height="64"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-contain rounded-xl"
               />
             </div>

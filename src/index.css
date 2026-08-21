@@ -21,6 +21,8 @@ body {
   background-color: #F4FBF7;
   color: #08090c;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, .font-heading {
@@ -44,7 +46,8 @@ h1, h2, h3, h4, .font-heading {
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(16, 185, 129, 0.25);
   box-shadow: 0 4px 20px rgba(16, 185, 129, 0.06);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  contain: layout style;
 }
 
 .glass-panel:hover {
@@ -60,27 +63,32 @@ h1, h2, h3, h4, .font-heading {
   border-radius: 1.5rem;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(16, 185, 129, 0.05);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  contain: layout paint;
+  will-change: transform, box-shadow;
 }
 
-/* Moving Glow Laser Beam on Top Border */
+/* GPU-Accelerated Glow Laser Beam on Top Border (No Reflow) */
 .glow-card::before {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 3px;
   background: linear-gradient(90deg, transparent, #10B981, #34D399, transparent);
-  transition: all 0.6s ease;
+  transform: translateX(-100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  pointer-events: none;
 }
 
 .glow-card:hover::before {
-  left: 100%;
+  transform: translateX(100%);
 }
 
 .glow-card:hover {
-  transform: translateY(-8px) scale(1.015);
+  transform: translateY(-6px) scale(1.01);
   box-shadow: 0 25px 45px -12px rgba(16, 185, 129, 0.22);
   border-color: rgba(16, 185, 129, 0.55);
 }
@@ -100,6 +108,7 @@ h1, h2, h3, h4, .font-heading {
   background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.08), transparent);
   animation: shimmer-slide 3.5s infinite;
   pointer-events: none;
+  will-change: transform;
 }
 
 /* Expandable Pulse Ring Animation */
@@ -121,6 +130,7 @@ h1, h2, h3, h4, .font-heading {
 
 .animate-float {
   animation: float-slow 4s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Ambient Pulse Glow */
@@ -131,6 +141,7 @@ h1, h2, h3, h4, .font-heading {
 
 .animate-pulse-glow {
   animation: pulse-glow-bg 6s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 /* Fade-In Up Slide Animation */
@@ -141,6 +152,7 @@ h1, h2, h3, h4, .font-heading {
 
 .animate-fade-in-up {
   animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
 }
 
 /* Marquee Continuous Ticker Animation */
@@ -156,6 +168,7 @@ h1, h2, h3, h4, .font-heading {
   gap: 4rem;
   animation: marquee-scroll 35s linear infinite;
   padding-right: 4rem;
+  will-change: transform;
 }
 
 @keyframes marquee-scroll {

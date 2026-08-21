@@ -39,38 +39,58 @@ const routes = [
 function extractHeadTags(rendered) {
   const tags = [];
   const patterns = [
-    /<title>[\s\S]*?<\/title>/g,
-    /<meta[^>]*>/g,
-    /<link[^>]*rel="canonical"[^>]*>/g,
-    /<script type="application\/ld\+json">[\s\S]*?<\/script>/g
+    /<title>[\s\S]*?<\/title>/gi,
+    /<meta\s+name=["']description["'][^>]*>/gi,
+    /<meta\s+name=["']keywords["'][^>]*>/gi,
+    /<meta\s+name=["']robots["'][^>]*>/gi,
+    /<link\s+[^>]*rel=["']canonical["'][^>]*>/gi,
+    /<link\s+rel=["']canonical["'][^>]*>/gi,
+    /<meta\s+property=["']og:[^"']*["'][^>]*>/gi,
+    /<meta\s+name=["']twitter:[^"']*["'][^>]*>/gi,
+    /<script\s+type=["']application\/ld\+json["']>[\s\S]*?<\/script>/gi
   ];
   patterns.forEach((re) => {
     let m;
-    while ((m = re.exec(rendered)) !== null) tags.push(m[0]);
+    while ((m = re.exec(rendered)) !== null) {
+      if (!tags.includes(m[0])) tags.push(m[0]);
+    }
   });
   return tags;
 }
 
 function cleanHead(html) {
   return html
-    .replace(/<title>[\s\S]*?<\/title>/, '')
-    .replace(/<meta\s+name="description"[^>]*>/, '')
-    .replace(/<meta\s+name="keywords"[^>]*>/, '')
-    .replace(/<meta\s+name="robots"[^>]*>/, '')
-    .replace(/<link\s+rel="canonical"[^>]*>/, '')
-    .replace(/<meta\s+property="og:[^>]*>/g, '')
-    .replace(/<meta\s+name="twitter:[^>]*>/g, '');
+    .replace(/<title>[\s\S]*?<\/title>/gi, '')
+    .replace(/<meta\s+name=["']description["'][^>]*>/gi, '')
+    .replace(/<meta\s+name=["']keywords["'][^>]*>/gi, '')
+    .replace(/<meta\s+name=["']robots["'][^>]*>/gi, '')
+    .replace(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi, '')
+    .replace(/<link\s+rel=["']canonical["'][^>]*>/gi, '')
+    .replace(/<meta\s+property=["']og:[^"']*["'][^>]*>/gi, '')
+    .replace(/<meta\s+name=["']twitter:[^"']*["'][^>]*>/gi, '')
+    .replace(/<script\s+type=["']application\/ld\+json["']>[\s\S]*?<\/script>/gi, '');
 }
 
 for (const route of routes) {
   const rendered = render(route);
   const headTags = extractHeadTags(rendered);
-  const bodyWithoutHeadTags = headTags.reduce((acc, tag) => acc.replace(tag, ''), rendered);
-  const head = cleanHead(template);
-  const html = head.replace('</head>', `${headTags.join('\n  ')}\n</head>`).replace(
-    '<div id="root"></div>',
-    `<div id="root">${bodyWithoutHeadTags}</div>`
-  );
+  let bodyWithoutHeadTags = rendered;
+  for (const tag of headTags) {
+    bodyWithoutHeadTags = bodyWithoutHeadTags.replaceAll(tag, '');
+  }
+  // Also strip any stray hoisted link/meta tags from body
+  bodyWithoutHeadTags = bodyWithoutHeadTags
+    .replace(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi, '')
+    .replace(/<meta\s+name=["']description["'][^>]*>/gi, '');
+
+  const headCleaned = cleanHead(template);
+  const formattedHeadTags = headTags.join('\n  ');
+  const html = headCleaned
+    .replace('</head>', `  ${formattedHeadTags}\n</head>`)
+    .replace(
+      '<div id="root"></div>',
+      `<div id="root">${bodyWithoutHeadTags}</div>`
+    );
 
   const outPath = route === '/' ? join(distDir, 'index.html') : join(distDir, route, 'index.html');
   mkdirSync(dirname(outPath), { recursive: true });

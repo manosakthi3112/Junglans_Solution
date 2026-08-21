@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { projectsData } from '../data/projectsData';
 import { blogsData } from '../data/blogsData';
 import InteractiveTerminal from '../components/InteractiveTerminal';
@@ -12,7 +12,6 @@ import FaqSection from '../components/FaqSection';
 import { SITE_URL, SITE_NAME } from '../config';
 
 export default function HomePage() {
-  const location = useLocation();
   const [selectedProductTab, setSelectedProductTab] = useState('project-0');
   const [filterCategory, setFilterCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -40,15 +39,6 @@ export default function HomePage() {
       project.highlights.some(h => h.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
-
-  useEffect(() => {
-    if (location.state?.scrollTo) {
-      const el = document.getElementById(location.state.scrollTo);
-      if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
-      }
-    }
-  }, [location]);
 
   return (
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden">
