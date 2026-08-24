@@ -11,7 +11,10 @@ const paths = [
   { path: '/', priority: '1.0', freq: 'weekly' },
   { path: '/blogs', priority: '0.8', freq: 'weekly' },
   { path: '/team', priority: '0.5', freq: 'monthly' },
-  { path: '/security', priority: '0.7', freq: 'monthly' }
+  { path: '/security', priority: '0.7', freq: 'monthly' },
+  { path: '/contact', priority: '0.8', freq: 'monthly' },
+  { path: '/privacy', priority: '0.3', freq: 'yearly' },
+  { path: '/terms', priority: '0.3', freq: 'yearly' }
 ];
 
 projectsData.forEach((p) => {

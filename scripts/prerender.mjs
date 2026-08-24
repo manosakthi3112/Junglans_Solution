@@ -32,6 +32,9 @@ const routes = [
   '/blogs',
   '/team',
   '/security',
+  '/contact',
+  '/privacy',
+  '/terms',
   ...projectsData.map((p) => `/project/${p.id}`),
   ...blogsData.map((b) => `/blog/${b.slug}`)
 ];

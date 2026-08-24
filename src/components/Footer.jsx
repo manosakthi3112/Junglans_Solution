@@ -47,9 +47,11 @@ export default function Footer() {
             <li><Link to="/blogs" className="text-[#10B981] font-bold hover:underline">Engineering Blogs ({blogsData.length || 15}) ↗</Link></li>
             <li><Link to="/team" className="text-slate-600 hover:text-[#10B981] transition font-bold">Our Team Page ↗</Link></li>
             <li><Link to="/security" className="text-slate-600 hover:text-[#10B981] transition font-bold">Enterprise Security Page ↗</Link></li>
-            <li><Link to="/" className="text-slate-600 hover:text-[#10B981] transition">Home Portfolio</Link></li>
+            <li><Link to="/contact" className="text-slate-600 hover:text-[#10B981] transition font-bold">Contact Sales ↗</Link></li>
+            <li><Link to="/privacy" className="text-slate-600 hover:text-[#10B981] transition">Privacy Policy</Link></li>
+            <li><Link to="/terms" className="text-slate-600 hover:text-[#10B981] transition">Terms of Service</Link></li>
             <li><a href="/#founder" className="text-slate-600 hover:text-[#10B981] transition">Founder Spotlight</a></li>
-            <li><a href="/#enterprise" className="text-slate-600 hover:text-[#10B981] transition">Contact Sales</a></li>
+            <li><a href="/#enterprise" className="text-slate-600 hover:text-[#10B981] transition">Enterprise ROI</a></li>
           </ul>
         </div>
       </div>

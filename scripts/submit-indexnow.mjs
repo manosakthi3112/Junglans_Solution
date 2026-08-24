@@ -13,6 +13,9 @@ const urls = [
   `${SITE_URL}/blogs`,
   `${SITE_URL}/team`,
   `${SITE_URL}/security`,
+  `${SITE_URL}/contact`,
+  `${SITE_URL}/privacy`,
+  `${SITE_URL}/terms`,
   ...projectsData.map((p) => `${SITE_URL}/project/${p.id}`),
   ...blogsData.map((b) => `${SITE_URL}/blog/${b.slug}`)
 ];

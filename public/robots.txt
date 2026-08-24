@@ -24,5 +24,10 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
+# Disallow no-value paths
+Disallow: /cdn-cgi/
+
+Host: https://www.junglans.in
+
 # XML Sitemap
 Sitemap: https://www.junglans.in/sitemap.xml

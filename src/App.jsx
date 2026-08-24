@@ -9,6 +9,10 @@ import OurTeamPage from './pages/OurTeamPage';
 import EnterpriseSecurityPage from './pages/EnterpriseSecurityPage';
 import BlogsPage from './pages/BlogsPage';
 import BlogDetailPage from './pages/BlogDetailPage';
+import ContactPage from './pages/ContactPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsPage from './pages/TermsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
   return (
@@ -23,6 +27,10 @@ export default function App() {
           <Route path="/team" element={<OurTeamPage />} />
           <Route path="/security" element={<EnterpriseSecurityPage />} />
           <Route path="/project/:id" element={<ProjectDetailPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

@@ -90,9 +90,8 @@ export default function Navbar() {
 
         {/* Desktop CTA Button */}
         <div className="hidden lg:flex items-center">
-          <a
-            href="/#enterprise"
-            onClick={(e) => { e.preventDefault(); handleNavClick('enterprise'); }}
+          <Link
+            to="/contact"
             className="font-mono text-xs bg-[#10B981] hover:bg-[#059669] text-white px-5 py-2.5 rounded-xl font-bold transition flex items-center gap-2 shadow-md shadow-emerald-500/20 hover:-translate-y-0.5 cursor-pointer"
           >
             Contact Sales
@@ -100,7 +99,7 @@ export default function Navbar() {
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Hamburger Toggle Button */}

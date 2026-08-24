@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SITE_NAME, SITE_URL, SITE_OG_IMAGE, SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import { SITE_NAME, SITE_URL, SITE_OG_IMAGE, SITE_OG_IMAGE_WIDTH, SITE_OG_IMAGE_HEIGHT, SITE_OG_IMAGE_ALT, SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
 function updateOrCreateMeta(attrName, attrVal, content) {
   if (typeof document === 'undefined') return;
@@ -48,6 +48,9 @@ export default function Seo({
   path = '/',
   type = 'website',
   ogImage = SITE_OG_IMAGE,
+  ogImageWidth = SITE_OG_IMAGE_WIDTH,
+  ogImageHeight = SITE_OG_IMAGE_HEIGHT,
+  ogImageAlt = SITE_OG_IMAGE_ALT,
   keywords,
   jsonLd,
 }) {
@@ -64,25 +67,31 @@ export default function Seo({
     // 3. Meta Description (strictly 1 tag)
     updateOrCreateMeta('name', 'description', description);
     if (keywords) updateOrCreateMeta('name', 'keywords', keywords);
-    updateOrCreateMeta('name', 'robots', 'index, follow');
+    updateOrCreateMeta('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
 
     // 4. OpenGraph
     updateOrCreateMeta('property', 'og:type', type);
     updateOrCreateMeta('property', 'og:site_name', SITE_NAME);
+    updateOrCreateMeta('property', 'og:locale', 'en_IN');
     updateOrCreateMeta('property', 'og:title', fullTitle);
     updateOrCreateMeta('property', 'og:description', description);
     updateOrCreateMeta('property', 'og:url', canonical);
     updateOrCreateMeta('property', 'og:image', ogImage);
+    updateOrCreateMeta('property', 'og:image:width', ogImageWidth);
+    updateOrCreateMeta('property', 'og:image:height', ogImageHeight);
+    updateOrCreateMeta('property', 'og:image:alt', ogImageAlt);
+    updateOrCreateMeta('property', 'og:image:type', 'image/png');
 
     // 5. Twitter
     updateOrCreateMeta('name', 'twitter:card', 'summary_large_image');
     updateOrCreateMeta('name', 'twitter:title', fullTitle);
     updateOrCreateMeta('name', 'twitter:description', description);
     updateOrCreateMeta('name', 'twitter:image', ogImage);
+    updateOrCreateMeta('name', 'twitter:image:alt', ogImageAlt);
 
     // 6. JSON-LD Structured Data
     updateOrCreateJsonLd(jsonLd);
-  }, [fullTitle, description, canonical, type, ogImage, keywords, jsonLd]);
+  }, [fullTitle, description, canonical, type, ogImage, ogImageWidth, ogImageHeight, ogImageAlt, keywords, jsonLd]);
 
   // For SSR (prerendering): return elements so renderToString outputs them for extraction into static HTML head
   if (typeof window === 'undefined') {
@@ -91,18 +100,24 @@ export default function Seo({
         <title>{fullTitle}</title>
         <meta name="description" content={description} />
         {keywords && <meta name="keywords" content={keywords} />}
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content={type} />
         <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:locale" content="en_IN" />
         <meta property="og:title" content={fullTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonical} />
         <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content={ogImageWidth} />
+        <meta property="og:image:height" content={ogImageHeight} />
+        <meta property="og:image:alt" content={ogImageAlt} />
+        <meta property="og:image:type" content="image/png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={fullTitle} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:image:alt" content={ogImageAlt} />
         {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
       </>
     );
