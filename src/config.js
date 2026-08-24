@@ -8,5 +8,5 @@ export const SITE_OG_IMAGE_WIDTH = '1200';
 export const SITE_OG_IMAGE_HEIGHT = '630';
 export const SITE_OG_IMAGE_ALT = 'Junglans Solutions — Enterprise Software Ecosystems';
 export const CONTACT_EMAIL = 'enterprise@junglans.io';
-export const GA_MEASUREMENT_ID = 'G-EPXMKQZBGJ';
+export const GA_MEASUREMENT_ID = 'G-RZXHKNWBXN';
 export const GSC_VERIFICATION = 'REPLACE_WITH_GSC_TOKEN';
