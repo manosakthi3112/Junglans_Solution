@@ -20,6 +20,36 @@
       "permanent": true
     },
     {
+      "source": "/products/junglans-project-manager",
+      "destination": "/project/project-0",
+      "permanent": true
+    },
+    {
+      "source": "/products/junglans-ide",
+      "destination": "/project/project-2",
+      "permanent": true
+    },
+    {
+      "source": "/products/junglans-chat",
+      "destination": "/project/project-3",
+      "permanent": true
+    },
+    {
+      "source": "/products/talktodb",
+      "destination": "/project/project-5",
+      "permanent": true
+    },
+    {
+      "source": "/products/botforge",
+      "destination": "/project/project-10",
+      "permanent": true
+    },
+    {
+      "source": "/products/junglans-ai-notes",
+      "destination": "/project/project-6",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
@@ -38,6 +68,15 @@
     }
   ],
   "headers": [
+    {
+      "source": "/404",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
     {
       "source": "/assets/(.*)",
       "headers": [

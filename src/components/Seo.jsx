@@ -53,9 +53,14 @@ export default function Seo({
   ogImageAlt = SITE_OG_IMAGE_ALT,
   keywords,
   jsonLd,
+  noIndex = false,
 }) {
   const canonical = `${SITE_URL}${path === '/' ? '/' : path.replace(/\/+$/, '')}`;
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+  // robots.txt controls crawling; noindex controls indexing — per Google docs, never use Disallow to hide from index
+  const robotsContent = noIndex
+    ? 'noindex, nofollow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 
   useEffect(() => {
     // 1. Title
@@ -67,7 +72,7 @@ export default function Seo({
     // 3. Meta Description (strictly 1 tag)
     updateOrCreateMeta('name', 'description', description);
     if (keywords) updateOrCreateMeta('name', 'keywords', keywords);
-    updateOrCreateMeta('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    updateOrCreateMeta('name', 'robots', robotsContent);
 
     // 4. OpenGraph
     updateOrCreateMeta('property', 'og:type', type);
@@ -91,7 +96,7 @@ export default function Seo({
 
     // 6. JSON-LD Structured Data
     updateOrCreateJsonLd(jsonLd);
-  }, [fullTitle, description, canonical, type, ogImage, ogImageWidth, ogImageHeight, ogImageAlt, keywords, jsonLd]);
+  }, [fullTitle, description, canonical, type, ogImage, ogImageWidth, ogImageHeight, ogImageAlt, keywords, jsonLd, robotsContent, noIndex]);
 
   // For SSR (prerendering): return elements so renderToString outputs them for extraction into static HTML head
   if (typeof window === 'undefined') {
@@ -100,7 +105,7 @@ export default function Seo({
         <title>{fullTitle}</title>
         <meta name="description" content={description} />
         {keywords && <meta name="keywords" content={keywords} />}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="robots" content={robotsContent} />
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content={type} />
         <meta property="og:site_name" content={SITE_NAME} />

@@ -349,6 +349,12 @@ export default function BlogDetailPage() {
   if (!blog) {
     return (
       <div className="min-h-screen bg-[#F4FBF7] flex items-center justify-center p-6 text-center">
+        <Seo
+          path={`/blog/${slug}`}
+          title="Article Not Found — 404"
+          description="The blog article you requested could not be located. Explore Junglans Research engineering guides."
+          noIndex={true}
+        />
         <div className="max-w-md bg-white border border-[#A7F3D0] rounded-2xl p-8 shadow-xl">
           <div className="text-4xl mb-4">📚</div>
           <h1 className="font-heading text-2xl font-bold text-[#08090c] mb-3">Article Not Found</h1>

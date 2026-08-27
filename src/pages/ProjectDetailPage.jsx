@@ -28,6 +28,12 @@ export default function ProjectDetailPage() {
   if (!project) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center text-[#08090c]">
+        <Seo
+          path={`/project/${id}`}
+          title="Project Not Found — 404"
+          description="The project you requested does not exist. Explore Junglans Solutions portfolio of 20 enterprise products."
+          noIndex={true}
+        />
         <h2 className="font-heading text-3xl sm:text-4xl font-bold mb-4">Project Not Found</h2>
         <p className="font-body text-slate-600 mb-8">The project page you requested does not exist in our portfolio catalog.</p>
         <Link to="/" className="font-mono text-xs bg-[#10B981] text-white px-6 py-3 rounded-xl font-bold">

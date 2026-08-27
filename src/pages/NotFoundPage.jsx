@@ -10,6 +10,7 @@ export default function NotFoundPage() {
         path="/404"
         title="Page Not Found — 404"
         description="The page you requested does not exist. Explore Junglans Solutions 20 products, blogs, and team."
+        noIndex={true}
       />
       <div className="glass-panel rounded-3xl p-8 sm:p-12 bg-white border border-[#A7F3D0] shadow-xl max-w-lg w-full">
         <div className="font-mono text-xs text-[#059669] font-bold mb-3">ERROR // 404_NOT_FOUND</div>

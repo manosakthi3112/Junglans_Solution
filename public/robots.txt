@@ -1,3 +1,8 @@
+# Junglans Solutions — robots.txt
+# IMPORTANT: Do NOT use "Disallow: /" here. That blocks ALL crawling and prevents Google from discovering pages.
+# robots.txt controls CRAWLING only. To prevent a URL from appearing in search, use <meta name="robots" content="noindex"> or X-Robots-Tag: noindex (per Google docs).
+# Sitemap must use absolute canonical https://www.junglans.in URLs.
+
 User-agent: *
 Allow: /
 
@@ -24,10 +29,20 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-# Disallow no-value paths
+# Optional: additional AI crawlers
+User-agent: CCBot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: Cohere-AI
+Allow: /
+
+# Disallow no-value / internal paths only (never disallow / )
 Disallow: /cdn-cgi/
 
 Host: https://www.junglans.in
 
-# XML Sitemap
+# XML Sitemap — keep exactly one absolute URL with www canonical
 Sitemap: https://www.junglans.in/sitemap.xml
