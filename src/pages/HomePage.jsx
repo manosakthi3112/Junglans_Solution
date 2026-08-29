@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projectsData } from '../data/projectsData';
 import { blogsData } from '../data/blogsData';
+import { websitesData } from '../data/websitesData';
 import InteractiveTerminal from '../components/InteractiveTerminal';
 import ProductComparisonMatrix from '../components/ProductComparisonMatrix';
 import SecurityComplianceSection from '../components/SecurityComplianceSection';
@@ -646,6 +647,154 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Section 1B: Live Website Projects Showcase — NEW */}
+      <section id="websites" className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-20 mb-16 sm:mb-20 border-t border-[#A7F3D0]/60">
+        <div className="mb-10 sm:mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8">
+          <div>
+            <div className="font-mono text-xs text-[#059669] mb-3 sm:mb-4 font-bold uppercase tracking-widest flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+              SEC_01-B // LIVE_WEBSITE_PORTFOLIO // 5_DEPLOYED
+            </div>
+            <h2 className="font-heading text-3xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[#08090c]">
+              Websites we shipped — <br className="hidden sm:inline" />
+              <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
+                live & production-ready.
+              </span>
+            </h2>
+          </div>
+          <div className="max-w-md">
+            <p className="font-body text-sm sm:text-lg text-slate-600 leading-relaxed">
+              From WebGL luxury fashion to AI workflow automation — 5 fully-deployed, responsive, high-performance websites built by Junglans Solutions. Every link opens live.
+            </p>
+            <div className="flex flex-wrap gap-2 mt-4 font-mono text-[10px]">
+              <span className="px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] font-bold">3D / WEBGL</span>
+              <span className="px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] font-bold">AI WORKFLOWS</span>
+              <span className="px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] font-bold">EDTECH</span>
+              <span className="px-2.5 py-1 rounded-full bg-white text-slate-600 border border-[#A7F3D0] font-bold">LIVE PRODUCTION</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Responsive Website Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+          {websitesData.map((site) => (
+            <a
+              key={site.id}
+              href={site.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group glow-card flex flex-col justify-between p-5 sm:p-6 relative transition-all duration-300 hover:border-[#10B981] bg-white"
+              style={{
+                '--card-accent': site.color,
+                '--card-accent-border': `${site.color}55`,
+                '--card-glow-rgba': `${site.color}18`,
+              }}
+            >
+              <div className="shimmer-line"></div>
+
+              {/* Browser Chrome Mock */}
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]"></span>
+                </div>
+                <div className="flex items-center gap-2 min-w-0 flex-1 ml-3">
+                  <div className="flex-1 min-w-0 bg-slate-50 border border-slate-200 rounded-full px-2.5 py-1 flex items-center gap-1.5">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="text-[#10B981] flex-shrink-0">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span className="font-mono text-[10px] text-slate-500 truncate">{site.domain}</span>
+                  </div>
+                  <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] font-mono text-[9px] font-bold flex-shrink-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse"></span>
+                    LIVE
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-4">
+                  <div
+                    className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-white shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 flex-shrink-0"
+                    style={{ backgroundColor: site.color }}
+                    dangerouslySetInnerHTML={{ __html: site.iconSvg }}
+                  />
+                  <span className="font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] text-center">
+                    {site.badge}
+                  </span>
+                </div>
+
+                <div className="font-mono text-[10px] text-[#059669] tracking-wider uppercase font-bold mb-1">{site.ecosystemTag}</div>
+
+                <h3 className="font-heading text-lg sm:text-xl font-bold text-[#08090c] mb-1.5 group-hover:text-[#10B981] transition-colors">
+                  {site.name}
+                </h3>
+
+                <p className="font-body text-xs text-[#059669] font-semibold mb-3 line-clamp-1">{site.tagline}</p>
+
+                <p className="font-body text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                  {site.summary}
+                </p>
+
+                <div className="space-y-1.5 mb-5">
+                  {site.highlights.map((h, i) => (
+                    <div key={i} className="flex items-center gap-2 font-mono text-[11px] text-slate-700">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] flex-shrink-0 group-hover:scale-150 transition-transform"></span>
+                      <span className="truncate">{h}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Mini Metrics Grid */}
+                <div className="grid grid-cols-2 gap-2 mb-5">
+                  {site.metrics.slice(0, 4).map((m, i) => (
+                    <div key={i} className="bg-[#F4FBF7] border border-[#A7F3D0]/70 rounded-xl px-2.5 py-2">
+                      <div className="font-mono text-[8px] text-slate-500 uppercase tracking-wider font-bold truncate">{m.label}</div>
+                      <div className="font-mono text-[11px] font-bold text-[#08090c] truncate">{m.value}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                <span className="font-mono text-xs font-bold text-[#08090c] group-hover:text-[#10B981] transition-colors flex items-center gap-1.5">
+                  VISIT LIVE SITE
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transform group-hover:translate-x-1.5 group-hover:-translate-y-0.5 transition-transform">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </span>
+                <span className="font-mono text-[10px] px-2.5 py-1 rounded-full bg-[#10B981] text-white font-bold group-hover:bg-[#059669] transition shadow-sm">
+                  ↗ OPEN
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* Bottom CTA Bar for Websites */}
+        <div className="mt-8 sm:mt-10 p-4 sm:p-5 rounded-2xl bg-white border border-[#A7F3D0] shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#10B981] flex items-center justify-center text-white shadow-md flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            </div>
+            <div>
+              <div className="font-heading font-bold text-sm sm:text-base text-[#08090c]">Need a high-performance website like these?</div>
+              <div className="font-mono text-xs text-slate-500">Junglans ships WebGL, AI integrations, e-commerce & ed-tech — live in days.</div>
+            </div>
+          </div>
+          <a
+            href="mailto:enterprise@junglans.io?subject=Website%20Project%20Inquiry%20-%20Junglans%20Solutions"
+            className="font-mono text-xs sm:text-sm bg-[#10B981] hover:bg-[#059669] text-white px-6 py-3 rounded-xl font-bold transition flex items-center justify-center gap-2 shadow-md hover:-translate-y-0.5 duration-200 w-full sm:w-auto flex-shrink-0"
+          >
+            Start Your Website Project
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </section>
+
       {/* Interactive Terminal CLI Simulator */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
         <InteractiveTerminal />
@@ -694,6 +843,18 @@ export default function HomePage() {
                 {cat.label}
               </button>
             ))}
+            {/* Websites — relocated from top navbar to inside showcase */}
+            <a
+              href="#websites"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('websites')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl font-bold border transition cursor-pointer whitespace-nowrap bg-[#ECFDF5] text-[#059669] border-[#10B981] hover:bg-[#10B981] hover:text-white flex items-center gap-1.5 shadow-sm"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+              Websites — 5 Live ↗
+            </a>
           </div>
 
           {/* Interactive Search Box */}
