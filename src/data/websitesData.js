@@ -23,8 +23,8 @@ export const websitesData = [
   {
     id: "web-forge",
     name: "JunglansForge",
-    url: "https://jung-forge-front.vercel.app/",
-    domain: "jung-forge-front.vercel.app",
+    url: "https://jungforge.junglans.in/",
+    domain: "jungforge.junglans.in",
     badge: "AI Workflow Builder",
     category: "ai-tools",
     color: "#0EA5E9",
@@ -44,8 +44,8 @@ export const websitesData = [
   {
     id: "web-jungvis",
     name: "JungVis",
-    url: "https://jung-vis.vercel.app/",
-    domain: "jung-vis.vercel.app",
+    url: "https://jungvis.junglans.in/",
+    domain: "jungvis.junglans.in",
     badge: "ML Education",
     category: "education",
     color: "#7C3AED",
@@ -59,6 +59,27 @@ export const websitesData = [
       { label: "RENDER", value: "REAL-TIME" },
       { label: "DATASETS", value: "SYNTH & CSV" },
       { label: "EXPORT", value: "HI-RES PNG" }
+    ],
+    live: true
+  },
+  {
+    id: "web-jungcode",
+    name: "JungCode",
+    url: "https://jungcode.junglans.in/",
+    domain: "jungcode.junglans.in",
+    badge: "Live Algorithm Tracer",
+    category: "dev-tools",
+    color: "#1E7A4A",
+    ecosystemTag: "LIVE ALGORITHM TRACER",
+    iconSvg: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>`,
+    tagline: "Live Code Execution & Algorithm Tracer",
+    summary: "Interactive live algorithm tracer across 7 languages — step line-by-line, set breakpoints, inspect scope & call stack, visualize memory tape & auto-analyze time & space complexity.",
+    highlights: ["7 Languages — JS, Python, C, C++, Java, Go, Rust", "Live Breakpoints & Step-Through Trace", "Memory Tape, Call Stack & Auto Big-O Analysis"],
+    metrics: [
+      { label: "LANGUAGES", value: "7 SUPPORTED" },
+      { label: "TRACE", value: "BREAKPOINTS" },
+      { label: "MEMORY", value: "LIVE TAPE" },
+      { label: "COMPLEXITY", value: "AUTO BIG-O" }
     ],
     live: true
   },
