@@ -929,5 +929,581 @@ reranker = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
 scores = reranker.predict([[query, chunk] for chunk in candidate_chunks])
 \`\`\`
 `
+  },
+  {
+    id: "blog-16",
+    slug: "physical-ai-vla-humanoid-robotics",
+    title: "Physical AI & Humanoid Robotics: The Convergence of Vision-Language-Action (VLA) Models and End-to-End Motor Control",
+    subtitle: "How Figure 02, Tesla Optimus Gen 2, and DeepMind RT-2 are replacing classical inverse kinematics with multimodal Vision-Language-Action (VLA) transformer models.",
+    category: "Physical AI & Humanoids",
+    publishDate: "September 12, 2026",
+    readTime: "12 min read",
+    author: AUTHORS.SRI_KANISH,
+    tags: ["Physical AI", "Humanoid Robotics", "VLA Models", "RT-2", "Figure 02", "End-to-End Control"],
+    featured: true,
+    summary: "Explore how Vision-Language-Action (VLA) models unify high-level semantic reasoning with low-level torque commands, revolutionizing humanoid bipedal locomotion and dexterous manipulation.",
+    content: `
+# Physical AI & Humanoid Robotics: The Rise of VLA Models
+
+The robotics paradigm is undergoing its most radical transformation since the advent of ROS. Classical robotics relied on a strict pipelined architecture: Perception $\\rightarrow$ State Estimation $\\rightarrow$ Motion Planning $\\rightarrow$ Inverse Kinematics $\\rightarrow$ Motor Control.
+
+Today, **Physical AI** is unifying this entire stack through **Vision-Language-Action (VLA)** models.
+
+\`\`\`
+Classical Pipeline:
+Camera ──> Object Detector ──> Pose Estimator ──> Motion Planner (OMPL) ──> IK Solver ──> Joint Motor
+
+Physical AI (VLA Pipeline):
+Camera + Goal String ──> Multimodal Transformer (VLA) ──> Continuous Joint Velocity/Torque
+\`\`\`
+
+---
+
+## 1. What are Vision-Language-Action (VLA) Models?
+
+Pioneered by Google DeepMind's RT-1, RT-2, and open-source models like OpenVLA and Octo, VLAs treat robotic actions as tokens in an autoregressive language model.
+
+$$\\mathbf{a}_t = f_{\\theta}(\\mathbf{o}_t, \\mathbf{l})$$
+
+Where $\\mathbf{o}_t$ represents the visual observation (RGB-D feed), $\\mathbf{l}$ is the natural language command (e.g., *"Grasp the aluminum bracket and place it in bin 3"*), and $\\mathbf{a}_t$ is the 7-DoF or 14-DoF end-effector trajectory.
+
+### Action Tokenization
+Continuous joint angles $\\theta_i \\in [-180^\\circ, 180^\\circ]$ are discretized into 256 uniform bins:
+
+$$\\text{Token}(\\theta) = \\left\\lfloor \\frac{\\theta - \\theta_{\\min}}{\\theta_{\\max} - \\theta_{\\min}} \\times 255 \\right\\rfloor$$
+
+This allows standard transformer decoders with cross-entropy loss to predict physical robot movements directly.
+
+---
+
+## 2. Real-World Case Studies: Figure 02 & Tesla Optimus Gen 2
+
+- **Figure 02 (BMW Spartanburg Trial):** Running speech-to-speech visual reasoning on custom edge GPUs. The robot recognizes sheet metal placement defects in real time and adjusts hand grasping compliance.
+- **Tesla Optimus Gen 2:** Uses custom 11-DoF hands with integrated tactile sensors on every fingertip. Training is performed using teleoperation datasets collected through VR mocap suits and scaled through neural network imitation learning.
+
+---
+
+## 3. High-Frequency Motor Execution Challenges
+
+While VLAs generate high-level plans at 5 Hz to 10 Hz, joint torque loops demand 500 Hz to 1000 Hz. We resolve this using a **Hierarchical VLA Architecture**:
+
+\`\`\`
+VLA Transformer (5 Hz) ──> Action Chunk (10-step trajectory) ──> Cubic Spline Interpolator ──> Motor Driver (1000 Hz)
+\`\`\`
+
+\`\`\`python
+import numpy as np
+
+def generate_motor_spline(action_chunk, dt_high_level=0.2, dt_low_level=0.001):
+    """Interpolates 5Hz VLA chunk to 1000Hz motor trajectory."""
+    time_high = np.arange(len(action_chunk)) * dt_high_level
+    time_low = np.arange(0, time_high[-1], dt_low_level)
+    
+    smooth_trajectory = np.interp(time_low, time_high, action_chunk)
+    return smooth_trajectory
+\`\`\`
+`
+  },
+  {
+    id: "blog-17",
+    slug: "ros2-realtime-dds-zerocopy-embedded",
+    title: "ROS 2 Humble & Jazzy in Production: Real-Time DDS Middleware, Zero-Copy IPC & Micro-ROS for Joint Actuators",
+    subtitle: "Architectural comparison of CycloneDDS vs FastDDS, iceoryx shared memory zero-copy pipelines, deterministic executors, and micro-ROS on STM32/ESP32 microcontrollers.",
+    category: "Robotics Systems & ROS",
+    publishDate: "September 08, 2026",
+    readTime: "10 min read",
+    author: AUTHORS.SRI_KANISH,
+    tags: ["ROS 2", "DDS Middleware", "Zero-Copy IPC", "Micro-ROS", "Embedded Systems", "Actuators"],
+    featured: false,
+    summary: "A production guide to configuring ROS 2 Humble and Jazzy for real-time robotic control: DDS tuning, iceoryx shared memory, and Micro-ROS bridging microcontrollers to the robot compute brain.",
+    content: `
+# ROS 2 in Production: Real-Time Middleware & Zero-Copy Pipelines
+
+Moving from prototype robotics scripts to high-speed commercial hardware requires absolute determinism. In high-DoF robotic arms or mobile manipulators, serializing heavy sensor feeds (such as 4K stereo cameras and 3D LiDAR point clouds) over standard network stacks introduces unacceptable jitter.
+
+---
+
+## 1. DDS Middleware Comparison: CycloneDDS vs FastDDS
+
+Data Distribution Service (DDS) is the communication backbone of ROS 2.
+
+| Feature | Eclipse CycloneDDS | eProsima FastDDS |
+|---|---|---|
+| **Best Used For** | Real-time determinism & minimal jitter | High-throughput sensor streams & Discovery Server |
+| **Shared Memory** | Integrated iceoryx support | Shared Memory Transport (SHM) built-in |
+| **Configuration** | cyclone_config.xml | USER_QOS_PROFILES.xml |
+| **Multi-Robot Domain Isolation** | Strict Domain IDs | Discovery Server recommended |
+
+### Configuring CycloneDDS for Minimal Latency:
+\`\`\`xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<CycloneDDS xmlns="https://cdds.io/config">
+  <Domain id="any">
+    <General>
+      <NetworkInterfaceAddress>auto</NetworkInterfaceAddress>
+      <AllowMulticast>false</AllowMulticast>
+    </General>
+    <Internal>
+      <Watermarks>
+        <WhcHigh>500kB</WhcHigh>
+      </Watermarks>
+    </Internal>
+  </Domain>
+</CycloneDDS>
+\`\`\`
+
+---
+
+## 2. Zero-Copy IPC with Eclipse iceoryx
+
+Standard ROS 2 inter-process communication copies messages:
+Publisher $\\rightarrow$ Middleware buffer $\\rightarrow$ Socket buffer $\\rightarrow$ Subscriber.
+
+With **iceoryx zero-copy**, both processes share a mapped memory segment. Messages are published by transferring 64-bit memory pointers, achieving **< 15 microseconds transfer latency** regardless of payload size (even for 20MB point clouds).
+
+\`\`\`
+[ Publisher Node ] ──Writes Data──> [ Shared Memory Segment (iceoryx) ]
+                                          ▲
+                                     Direct Pointer
+                                          │
+                               [ Subscriber Node ]
+\`\`\`
+
+---
+
+## 3. Bridging Microcontrollers with Micro-ROS
+
+Micro-ROS brings the ROS 2 ecosystem to bare-metal microcontrollers (STM32, Teensy 4.1, ESP32-S3).
+
+\`\`\`c
+#include <rcl/rcl.h>
+#include <rclc/rclc.h>
+#include <std_msgs/msg/float32.h>
+
+// Micro-ROS Joint Sensor Publisher on STM32
+rcl_publisher_t publisher;
+std_msgs__msg__Float32 msg;
+
+void publish_encoder_angle(float angle) {
+    msg.data = angle;
+    rcl_publish(&publisher, &msg, NULL);
+}
+\`\`\`
+`
+  },
+  {
+    id: "blog-18",
+    slug: "reasoning-models-autonomous-robotics-planning",
+    title: "Reasoning Models in Autonomous Robotics: Combining Test-Time Compute (o1 & DeepSeek-R1) with 100Hz Trajectory Planning",
+    subtitle: "Hierarchical robotic architecture: High-level tree-search reasoning for task decomposition paired with deterministic local trajectory controllers to eliminate kinematic hallucinations.",
+    category: "Robotics & Cognitive AI",
+    publishDate: "September 04, 2026",
+    readTime: "11 min read",
+    author: AUTHORS.MANOSAKTHI,
+    tags: ["Reasoning Models", "Test-Time Compute", "Robotic Planning", "DeepSeek-R1", "Motion Control"],
+    featured: true,
+    summary: "Discover how test-time compute reasoning models solve complex multi-step robotic reasoning without risking catastrophic physical collisions.",
+    content: `
+# Reasoning Models in Robotics: Bridging Cognitive Search and Physical Execution
+
+The arrival of chain-of-thought reasoning models (such as OpenAI o1 and DeepSeek-R1) represents a breakthrough for high-level autonomous planning. However, running a multi-second test-time compute model directly on a robotic actuator loop is disastrous: robots will tip over or crash into obstacles while the model 'thinks'.
+
+The solution is a **Dual-System Cognitive Architecture**.
+
+---
+
+## 1. System 1 vs. System 2 in Autonomous Systems
+
+Borrowing from Kahneman's cognitive framework:
+
+- **System 2 (Slow, Deep Reasoning):** Executes on edge servers or local workstation GPUs. Generates symbolic behavior trees, verifies geometric affordances, and generates task DAGs (Directed Acyclic Graphs).
+- **System 1 (Fast, Reactive Controller):** Runs at 100 Hz on embedded robot hardware. Executes dynamic obstacle avoidance, reactive impedance control, and reflex halts.
+
+\`\`\`
+[ User Request ] ──> System 2 (Reasoning LLM / DeepSeek-R1) ──> Emits JSON Behavior Tree
+                                                                      │
+                                                                      ▼
+[ Reflex Controller (100Hz) ] <── Validates Joint Torques <── System 1 (MPC / OMPL)
+\`\`\`
+
+---
+
+## 2. Preventing Kinematic Hallucinations
+
+Reasoning models often suggest spatially impossible actions (e.g., *"reach through the transparent glass shelf"*). We enforce **Geometric Affordance Validation**:
+
+\`\`\`python
+def validate_robot_task_plan(plan, urdf_model, point_cloud):
+    """
+    Validates model plan against physical kinematics and collision geometries
+    prior to executing any joint motion.
+    """
+    for step in plan.steps:
+        target_pose = step.target_pose
+        ik_solution = urdf_model.inverse_kinematics(target_pose)
+        
+        if not ik_solution.is_valid:
+            return False, f"Kinematic reachability failed at step {step.id}"
+            
+        if point_cloud.check_collision(ik_solution.joint_angles):
+            return False, f"Collision detected at step {step.id}"
+            
+    return True, "Plan physically verified"
+\`\`\`
+
+---
+
+## 3. Real-World Application: Autonomous Lab Chemistry
+
+In automated pharmaceutical laboratories, robots must handle fragile pipettes, centrifuge machines, and reagent vials. System 2 decomposes the scientific protocol, while System 1 executes force-feedback torque limits, guaranteeing zero tube breakage.
+`
+  },
+  {
+    id: "blog-19",
+    slug: "edge-ai-quadruped-locomotion-tensorrt-jetson",
+    title: "Edge AI for Quadruped & Bipedal Locomotion: 500Hz Policy Inference on NVIDIA Jetson Orin with INT8 TensorRT",
+    subtitle: "Deploying reinforcement learning policies directly on Unitree and ANYmal robot dogs: low-latency IMU state estimation, INT8 quantization, and hardware thermal management.",
+    category: "Edge AI & Locomotion",
+    publishDate: "August 30, 2026",
+    readTime: "9 min read",
+    author: AUTHORS.SRI_KANISH,
+    tags: ["Quadruped Robots", "Jetson Orin", "TensorRT", "Reinforcement Learning", "Edge Inference"],
+    featured: false,
+    summary: "Step-by-step guide to compiling and deploying PyTorch RL locomotion policies to NVIDIA Jetson Orin at 500Hz with INT8 TensorRT quantization for dynamic terrain traversal.",
+    content: `
+# Edge AI for Quadruped Locomotion: 500Hz Policy Inference on Jetson Orin
+
+Quadruped robots (such as the Unitree Go2, B2, and ANYmal) rely on Reinforcement Learning (RL) policies trained in massively parallel simulators. However, porting an RL policy trained on an RTX 4090 cluster to an embedded edge computer like the **NVIDIA Jetson Orin Nano** requires strict latency optimization.
+
+---
+
+## 1. The Locomotion Control Loop
+
+To stabilize a robot dog on slippery mud, rocky steps, or stairs, the policy must process:
+- IMU angular velocities $(w_x, w_y, w_z)$
+- Gravity projection vectors $(g_x, g_y, g_z)$
+- Joint positions and velocities $(\\theta_{1..12}, \\dot{\\theta}_{1..12})$
+- Previous action history $(\\mathbf{a}_{t-1}, \\mathbf{a}_{t-2})$
+
+$$\\text{Total State Vector Dimension} \\approx 48 \\text{ dimensions}$$
+
+The policy network outputs 12 target joint positions at **500 Hz (every 2 milliseconds)**.
+
+---
+
+## 2. INT8 Quantization with TensorRT
+
+Standard PyTorch models execute in 32-bit floating point (FP32), consuming ~12ms per forward pass on edge hardware. By compiling to INT8 using NVIDIA TensorRT:
+
+- Latency drops from **11.8 ms $\\rightarrow$ 1.2 ms**
+- Memory footprint drops from **140 MB $\\rightarrow$ 18 MB**
+- Power draw drops from **22W $\\rightarrow$ 9.5W** (extending battery life by 40 minutes)
+
+\`\`\`python
+import tensorrt as trt
+
+def build_engine_int8(onnx_file_path, engine_file_path, calibrator):
+    logger = trt.Logger(trt.Logger.WARNING)
+    builder = trt.Builder(logger)
+    config = builder.create_builder_config()
+    
+    config.set_flag(trt.BuilderFlag.INT8)
+    config.int8_calibrator = calibrator
+    
+    # Enable DLA (Deep Learning Accelerator) cores on Jetson Orin
+    config.default_device_type = trt.DeviceType.DLA
+    config.DLA_core = 0
+    
+    with open(onnx_file_path, 'rb') as f:
+        parser = trt.OnnxParser(builder.create_network(), logger)
+        parser.parse(f.read())
+        
+    engine = builder.build_serialized_network(network, config)
+    with open(engine_file_path, 'wb') as f:
+        f.write(engine)
+\`\`\`
+`
+  },
+  {
+    id: "blog-20",
+    slug: "amr-fleet-navigation-nav2-slam-lidar",
+    title: "Autonomous Mobile Robots (AMRs) in Logistics: Multi-Robot Fleet Navigation with Nav2, FAST-LIO & 3D LiDAR SLAM",
+    subtitle: "Production warehouse automation: lifecycle nodes in Nav2, point cloud filtering, 3D LiDAR odometry using FAST-LIO2, and dynamic obstacle negotiation.",
+    category: "Autonomous Navigation",
+    publishDate: "August 25, 2026",
+    readTime: "10 min read",
+    author: AUTHORS.SRI_KANISH,
+    tags: ["AMRs", "Nav2", "3D LiDAR", "SLAM", "FAST-LIO", "Warehouse Automation"],
+    featured: false,
+    summary: "Mastering warehouse AMR fleets: configuring 3D LiDAR SLAM with FAST-LIO2 and deploying ROS 2 Nav2 lifecycle nodes for industrial logistics.",
+    content: `
+# Autonomous Mobile Robots (AMRs) in Logistics: Nav2 & 3D LiDAR SLAM
+
+E-commerce fulfillment centers require fleets of dozens of AMRs moving pallets at 2.5 m/s without stopping or colliding. Traditional 2D planar LiDAR struggles in dynamic warehouses where pallet heights change continuously. Modern AMRs use **solid-state 3D LiDAR + FAST-LIO2 SLAM**.
+
+---
+
+## 1. FAST-LIO2: Fast LiDAR-Inertial Odometry
+
+FAST-LIO2 direct odometry computes sub-centimeter poses by fusing high-rate IMU measurements (200 Hz) with raw 3D point cloud points (10 Hz) using an iterated extended Kalman filter (iEKF):
+
+\`\`\`
+[ 3D LiDAR (Livox / Ouster) ] ──Raw Points──┐
+                                            ├──> [ iEKF State Estimator (FAST-LIO2) ] ──> 6-DoF Odometry
+[ High-Precision IMU (6-axis) ] ──Delta-V───┘
+\`\`\`
+
+Unlike classic ICP (Iterative Closest Point), FAST-LIO2 maintains an incremental kd-tree (\`ikd-Tree\`), updating point environments in under **12 milliseconds**.
+
+---
+
+## 2. Nav2 Lifecycle Architecture
+
+In production environments, navigation nodes must be deterministically controlled. ROS 2 Nav2 uses managed lifecycle states:
+
+- **Unconfigured $\\rightarrow$ Inactive $\\rightarrow$ Active $\\rightarrow$ Finalized**
+
+If an AMR's emergency bumper triggers, the global planner and controller nodes transition from \`Active\` to \`Inactive\` within 2 milliseconds, cutting motor power safely.
+`
+  },
+  {
+    id: "blog-21",
+    slug: "diffusion-policies-robotic-manipulation-dexterous",
+    title: "Diffusion Policies for Robotic Manipulation: From Multimodal Imitation Learning to Dexterous Multi-Finger Grasping",
+    subtitle: "Why diffusion-based policy networks outperform behavioral cloning in multi-finger dexterous hands, handling multimodal action distributions and teleoperation dataset synthesis.",
+    category: "Robotic Manipulation",
+    publishDate: "August 20, 2026",
+    readTime: "11 min read",
+    author: AUTHORS.MANOSAKTHI,
+    tags: ["Diffusion Policy", "Dexterous Grasping", "Imitation Learning", "Robotic Arms", "Manipulation"],
+    featured: true,
+    summary: "Discover how diffusion policy models overcome the averaging trap in robotic imitation learning, enabling multi-fingered hands to manipulate delicate tools.",
+    content: `
+# Diffusion Policies in Robotic Manipulation
+
+When training robotic arms using classical Behavioral Cloning (BC) with mean-squared error (MSE), the model averages multiple valid demonstrations. If human teleoperators demonstrated grasping a mug by either the handle or the rim, an MSE model predicts grasping thin air in the middle!
+
+**Diffusion Policies** solve this by modeling the entire multimodal probability distribution of actions.
+
+---
+
+## 1. The Mathematical Principle of Action Diffusion
+
+Instead of generating a deterministic action $\\mathbf{a} = f(\\mathbf{s})$, the policy iteratively denoises a random Gaussian action vector:
+
+$$\\mathbf{a}^K \\sim \\mathcal{N}(0, \\mathbf{I})$$
+
+$$\\mathbf{a}^{k-1} = \\alpha_k \\left( \\mathbf{a}^k - \\frac{\\beta_k}{\\sqrt{1 - \\bar{\\alpha}_k}} \\boldsymbol{\\epsilon}_\\theta(\\mathbf{a}^k, \\mathbf{s}, k) \\right) + \\sigma_k \\mathbf{z}$$
+
+Denoising over $K = 16$ to $32$ steps produces sharp, multimodal action choices without averaging artifacts.
+
+---
+
+## 2. Dexterous Multi-Finger Hand Coordination
+
+In hands with 16 to 24 actuated joints (e.g., Shadow Hand, Wonik Allegro), contact forces must be distributed across all fingertips. Diffusion policies predict joint trajectories that adapt naturally to soft and rigid objects alike.
+`
+  },
+  {
+    id: "blog-22",
+    slug: "sim-to-real-transfer-isaac-sim-mujoco",
+    title: "Sim-to-Real Transfer in Robotics: Domain Randomization, GPU Physics, and Bridging the Reality Gap with Isaac Sim & MuJoCo",
+    subtitle: "Overcoming simulation artifacts: massively parallel reinforcement learning in NVIDIA Isaac Lab, contact physics modeling in MuJoCo Menagerie, and domain randomization strategies.",
+    category: "Simulation & Sim-to-Real",
+    publishDate: "August 15, 2026",
+    readTime: "10 min read",
+    author: AUTHORS.SRI_KANISH,
+    tags: ["Sim-to-Real", "Isaac Sim", "MuJoCo", "Domain Randomization", "Physics Engines"],
+    featured: false,
+    summary: "A practical guide to overcoming the sim-to-real gap using GPU-accelerated environments in Isaac Sim and MuJoCo with systematic domain randomization.",
+    content: `
+# Sim-to-Real Transfer: Bridging Simulation and Physical Reality
+
+Training reinforcement learning policies on physical robots causes gear wear, motor overheating, and room destruction. Simulators allow collecting **10,000 hours of robot experience in 20 minutes** on GPU clusters.
+
+However, policies that achieve 100% success in simulation frequently fail on real hardware. This is the **Sim-to-Real Gap**.
+
+---
+
+## 1. The Causes of the Reality Gap
+
+1. **Friction & Contact Non-Linearities:** Real rubber treads on concrete do not follow Coulomb friction models.
+2. **Motor Backlash & Latency:** Real servo actuators suffer from deadbands and command delay (20ms – 50ms).
+3. **Sensor Noise:** IMU drift, camera exposure variations, and lens distortions.
+
+---
+
+## 2. Systematic Domain Randomization (DR)
+
+During training across 4,096 parallel environments in NVIDIA Isaac Lab, we systematically randomize every physical parameter at each reset:
+
+$$\\mu_{\\text{friction}} \\sim \\mathcal{U}(0.2, 1.2)$$
+
+$$m_{\\text{link}} \\sim m_{\\text{nominal}} \\times \\mathcal{U}(0.85, 1.15)$$
+
+$$\\tau_{\\text{delay}} \\sim \\mathcal{U}(0, 30\\text{ ms})$$
+
+By training the policy to succeed across all variations, the physical world simply appears as another randomized instance of the simulator!
+`
+  },
+  {
+    id: "blog-23",
+    slug: "sovereign-edge-ai-robotics-trail-jung",
+    title: "Sovereign Edge AI & Zero-Telemetry Robotics: Running Local-First Swarms with @junglans/trail and jung",
+    subtitle: "Securing industrial robotics fleets and air-gapped automated inspection cells using local event logging in @junglans/trail and autonomous task state machines in Python jung.",
+    category: "Edge AI & Security",
+    publishDate: "August 10, 2026",
+    readTime: "9 min read",
+    author: AUTHORS.MANOSAKTHI,
+    tags: ["Sovereign AI", "Zero Telemetry", "@junglans/trail", "jung", "Robotics Swarms"],
+    featured: false,
+    summary: "How defense and semiconductor manufacturing facilities secure robotic automation using local SQLite WAL event streams and zero-cloud telemetry frameworks.",
+    content: `
+# Sovereign Edge AI & Zero-Telemetry Robotics
+
+In critical environments such as semiconductor cleanrooms, nuclear facilities, and defense fabrication cells, connecting robots to public cloud APIs violates basic security protocols.
+
+At Junglans Solutions, we architect **Sovereign Local-First Robotics** using our open-source ecosystem: \`@junglans/trail\` and \`jung\`.
+
+---
+
+## 1. Local-First Event Journaling with @junglans/trail
+
+Every robot sensor reading, joint fault, and safety stop is recorded directly into a local SQLite Write-Ahead Log (WAL) at microsecond speeds.
+
+\`\`\`javascript
+import { createTrailStore } from '@junglans/trail';
+
+const robotLog = createTrailStore({
+  storage: 'sqlite-wal',
+  databasePath: '/opt/robotics/secure-journal.db',
+  encryption: 'AES-256-GCM'
+});
+
+// Record millisecond joint state event with zero cloud telemetry
+await robotLog.append('robot.arm.joint_state', {
+  robot_id: 'AMR-04',
+  torques: [12.4, 8.2, 4.1, 1.8, 0.9, 0.3],
+  temperature_celsius: 42.1,
+  emergency_stop_tripped: false
+});
+\`\`\`
+
+---
+
+## 2. Autonomous Task Orchestration with Python 'jung'
+
+The \`jung\` framework runs directly on the robot's onboard industrial PC, managing mission state machines without external internet access:
+
+\`\`\`python
+from jung import AgentSwarm, TaskNode
+
+swarm = AgentSwarm(local_only=True)
+
+@swarm.register_tool
+def inspect_weld_seam(camera_frame):
+    # Local ONNX inference on onboard GPU
+    return detect_weld_porosity(camera_frame)
+\`\`\`
+`
+  },
+  {
+    id: "blog-24",
+    slug: "neuromorphic-computing-event-cameras-robotics",
+    title: "Neuromorphic Computing & Event-Based Vision: Microsecond Object Tracking for High-Speed Drones and Agile Robots",
+    subtitle: "Dynamic Vision Sensors (DVS) with Prophesee sensors, Spiking Neural Networks (SNNs), and sub-millisecond obstacle dodging with ultra-low thermal dissipation.",
+    category: "Neuromorphic Robotics",
+    publishDate: "August 05, 2026",
+    readTime: "10 min read",
+    author: AUTHORS.SRI_KANISH,
+    tags: ["Neuromorphic Vision", "Event Cameras", "DVS", "Spiking Neural Networks", "Drones"],
+    featured: false,
+    summary: "Discover how bio-inspired event cameras and Spiking Neural Networks give autonomous drones microsecond reaction speeds with 1/100th the power of frame-based cameras.",
+    content: `
+# Neuromorphic Computing & Event Cameras in Agile Robotics
+
+Standard cameras capture frames at 30 or 60 Hz. When an autonomous drone flies through dense forest branches at 20 m/s (72 km/h), the drone travels over **33 centimeters between frames** — more than enough to cause a fatal crash!
+
+**Neuromorphic Event Cameras** (such as Prophesee and iniVation DVS sensors) discard the concept of frames entirely.
+
+---
+
+## 1. How Event Cameras Work
+
+Each pixel functions asynchronously and independently, emitting an event tuple $(x, y, t, p)$ only when its log-intensity changes:
+
+$$|\\ln I(x, y, t) - \\ln I(x, y, t - \\Delta t)| > C$$
+
+Where $C$ is a contrast threshold, $t$ is timestamped with **1 microsecond precision**, and $p \\in \\{-1, +1\\}$ is the polarity.
+
+\`\`\`
+Frame-Based: [ Empty Frame ] ── 33ms ──> [ Blurry Frame ] ── 33ms ──> [ Crash ]
+Event-Based: [ Continuous stream of microsecond asynchronous spikes ] ──> Immediate reflex
+\`\`\`
+
+---
+
+## 2. Spiking Neural Networks (SNNs)
+
+Event streams are processed natively by Spiking Neural Networks using Leaky Integrate-and-Fire (LIF) neuron models, running on neuromorphic chips (like Intel Loihi 2 or SynSense Speck) consuming **less than 50 milliwatts**.
+`
+  },
+  {
+    id: "blog-25",
+    slug: "compound-ai-systems-mcp-protocol-autonomous-agents",
+    title: "The 2025–2026 AI Agent Revolution: Compound AI Systems, Anthropic's Model Context Protocol (MCP) & Deterministic Tool Orchestration",
+    subtitle: "Why monolithic LLMs are being replaced by compound AI architectures: standardized tool integration via MCP, self-healing state graphs, and structured JSON schemas.",
+    category: "AI Architecture & Agents",
+    publishDate: "August 01, 2026",
+    readTime: "12 min read",
+    author: AUTHORS.MANOSAKTHI,
+    tags: ["Compound AI", "Model Context Protocol", "MCP", "Autonomous Agents", "Tool Calling"],
+    featured: true,
+    summary: "Examine the shift toward Compound AI Systems and Anthropic's Model Context Protocol (MCP) for deterministic enterprise agent automation.",
+    content: `
+# The Compound AI Revolution: Beyond Monolithic Language Models
+
+In early 2024, enterprise teams attempted to solve complex problems by asking single LLMs to generate entire programs in one shot. By 2025 and 2026, the industry consensus shifted definitively toward **Compound AI Systems**.
+
+As Berkeley AI Research (BAIR) notes, state-of-the-art performance is driven by the system architecture around the model, not just model parameter scale.
+
+---
+
+## 1. What is Anthropic's Model Context Protocol (MCP)?
+
+Historically, every AI framework implemented custom tool-calling mechanisms. **MCP (Model Context Protocol)** provides an open, universal standard for exposing data sources, tools, and prompts to AI agents over JSON-RPC:
+
+\`\`\`
+[ AI Agent / Orchestrator ]
+           │ (MCP Client Protocol)
+           ├──> [ PostgreSQL MCP Server ]
+           ├──> [ Git Repository MCP Server ]
+           └──> [ Local Terminal MCP Server ]
+\`\`\`
+
+### Sample MCP Tool Definition:
+\`\`\`json
+{
+  "name": "query_database",
+  "description": "Execute read-only SQL query on production replica",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query": { "type": "string" }
+    },
+    "required": ["query"]
+  }
+}
+\`\`\`
+
+---
+
+## 2. Deterministic State Graphs & Self-Healing Workflows
+
+To prevent infinite loops and runaway agent hallucinations, production systems combine:
+1. **Pydantic / Zod Structured Output Validation:** Every tool output must strictly conform to a typed schema.
+2. **Deterministic State Machine DAGs:** Agents can only transition between explicitly permitted states.
+3. **Local Auditability:** Every decision step is logged through high-speed Write-Ahead Logs via \`@junglans/trail\`.
+`
   }
 ];

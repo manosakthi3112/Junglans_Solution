@@ -568,7 +568,7 @@ export default function ProjectDetailPage() {
             <p>
               {project.name} is part of the 20-product Junglans ecosystem, which means it shares the same engineering
               standards across the portfolio: compiled Rust and C++ binaries, AES-256-GCM encryption, memory-safe
-              execution, and SOC 2 Type II ready compliance. Teams that need air-gapped, zero-trust deployments get the
+              execution, and air-gapped zero-telemetry architecture. Teams that need sovereign, zero-trust deployments get the
               same capabilities they would expect from a cloud suite — without the cloud.
             </p>
           </div>

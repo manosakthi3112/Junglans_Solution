@@ -99,7 +99,7 @@ export const projectsData = [
     ],
     useCases: [
       { title: "Enterprise IP & Compliance Audits", desc: "Prove exactly which lines of code came from AI, who approved them, and what prompt produced them." },
-      { title: "Token Budget Governance", desc: "Track real-time token consumption and financial costs per developer, team, or feature branch." },
+      { title: "Token Budget Controls", desc: "Track real-time token consumption and financial costs per developer, team, or feature branch." },
       { title: "AI ROI Reporting for Executives", desc: "Generate executive analytics on AI tool ROI, developer productivity, and quality trends automatically." }
     ],
     faq: [
@@ -188,7 +188,7 @@ export const projectsData = [
       { title: "Real-Time Streaming & Presence", desc: "Instant message delivery, live typing indicators, presence status, and low-latency channel event streaming." },
       { title: "AI Channel & Meeting Recaps", desc: "Automated AI summaries of long channel discussions, meeting key points, decision records, and assigned action items." },
       { title: "Encrypted Media Vault", desc: "Secure file vault with automated retention rules, file previews, expiration schedules, and access controls." },
-      { title: "Enterprise Governance & Roles", desc: "Granular administrative control over workspace organization, channel visibility, audit logs, and compliance standards." }
+      { title: "Enterprise Access Control & Roles", desc: "Granular administrative control over workspace organization, channel visibility, audit logs, and security policies." }
     ],
     promotions: {
       heroHeadline: "Uncompromised security and intelligence for enterprise communication.",
@@ -201,20 +201,20 @@ export const projectsData = [
     },
     seoKeywords: "encrypted enterprise chat, end to end encrypted messaging app, secure team communication, AI meeting summarizer, zero knowledge encryption chat",
     howItWorks: [
-      { step: "Create a workspace and invite your team.", desc: "Granular roles and channel governance give administrators full control over visibility and compliance." },
+      { step: "Create a workspace and invite your team.", desc: "Granular roles and channel permissions give administrators full control over visibility and compliance." },
       { step: "Message, call, and share with zero-knowledge encryption.", desc: "Direct messages, team channels, document transfers, and 4K HD calls are protected end-to-end." },
       { step: "Get automated AI recaps of every discussion.", desc: "AI summaries capture channel decisions, meeting key points, and assigned action items automatically." }
     ],
     useCases: [
       { title: "Distributed Global Organizations", desc: "Keep confidential communications strictly private across time zones with encrypted messaging and calls." },
-      { title: "Regulated & Security-Conscious Teams", desc: "Zero-knowledge encryption and immutable governance satisfy strict enterprise compliance standards." },
+      { title: "Regulated & Security-Conscious Teams", desc: "Zero-knowledge encryption and immutable audit logs satisfy strict enterprise compliance standards." },
       { title: "Meetings Without Manual Notes", desc: "AI channel and meeting recaps save hours of manual note-taking for fast-moving teams." }
     ],
     faq: [
       { q: "Is JunglansChat end-to-end encrypted?", a: "Yes. JunglansChat uses a zero-knowledge security protocol protecting messages, team channels, and document transfers end-to-end." },
       { q: "Does JunglansChat support video calls?", a: "Yes. It provides high-definition 4K audio and video conferencing with screen sharing, participant controls, and noise suppression." },
       { q: "How do AI meeting recaps work?", a: "AI automatically summarizes long channel discussions and meetings into key points, decisions, and assigned action items." },
-      { q: "Can JunglansChat run air-gapped?", a: "JunglansChat is designed for zero-telemetry enterprise deployment with governance controls suitable for air-gapped environments." }
+      { q: "Can JunglansChat run air-gapped?", a: "JunglansChat is designed for zero-telemetry enterprise deployment with permission controls suitable for air-gapped environments." }
     ]
   },
   {

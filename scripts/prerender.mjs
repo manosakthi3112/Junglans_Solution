@@ -4,6 +4,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { projectsData } from '../src/data/projectsData.js';
 import { blogsData } from '../src/data/blogsData.js';
+import { packagesData } from '../src/data/packagesData.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = join(root, 'dist');
@@ -29,9 +30,13 @@ const template = readFileSync(join(distDir, 'index.html'), 'utf8');
 
 const routes = [
   '/',
+  '/ai-software-development',
+  '/enterprise-ai',
+  '/local-first-software',
+  '/packages',
+  ...packagesData.map((p) => `/packages/${p.slug}`),
   '/blogs',
   '/team',
-  '/security',
   '/contact',
   '/privacy',
   '/terms',

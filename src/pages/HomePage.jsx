@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { projectsData } from '../data/projectsData';
 import { blogsData } from '../data/blogsData';
 import { websitesData } from '../data/websitesData';
+import { packagesData } from '../data/packagesData';
 import InteractiveTerminal from '../components/InteractiveTerminal';
 import ProductComparisonMatrix from '../components/ProductComparisonMatrix';
-import SecurityComplianceSection from '../components/SecurityComplianceSection';
 import EnterpriseCalculator from '../components/EnterpriseCalculator';
 import FounderSpotlight from '../components/FounderSpotlight';
 import Seo from '../components/Seo';
@@ -45,23 +45,75 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden">
       <Seo
         path="/"
+        title="AI Software Development Company in India | Junglans Solutions"
+        description="Junglans Solutions is a premier AI software development company based in Coimbatore, Tamil Nadu, India. We engineer sovereign enterprise AI software, private LLMs, local-first offline-first applications, and 5 open-source libraries on npm and PyPI."
+        keywords="AI software development company, AI software development services India, custom AI development Coimbatore, enterprise AI solutions, local-first software architecture, private LLM deployment, zero telemetry software"
         jsonLd={[
           {
             '@context': 'https://schema.org',
             '@type': 'WebSite',
             '@id': `${SITE_URL}/#website`,
             name: 'Junglans Solutions',
-            alternateName: ['Junglans', 'Junglans Solutions India', 'Junglans Ecosystem'],
+            alternateName: ['Junglans', 'Junglans Solutions India', 'Junglans Ecosystem', 'Junglans AI'],
             url: SITE_URL,
             inLanguage: 'en-US',
             description:
-              'Junglans Solutions builds high-performance, secure, local-first enterprise software, AI developer tools, and productivity applications for global organizations. 20 products, zero cloud telemetry.',
+              'Premier AI software development company and local-first systems laboratory in Coimbatore, India. Enterprise AI, private LLMs, and 5 open-source developer libraries.',
             publisher: {
               '@type': 'Organization',
               name: 'Junglans Solutions',
               url: SITE_URL,
               logo: `${SITE_URL}/squirrel_logo.webp`
-            }
+            },
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: `${SITE_URL}/packages?q={search_term_string}`,
+              'query-input': 'required name=search_term_string'
+            },
+            hasPart: [
+              {
+                '@type': 'WebPage',
+                name: 'AI Software Development Services',
+                description: 'Custom AI software engineering, private on-premise LLMs, autonomous multi-agent systems, and natural language DB querying.',
+                url: `${SITE_URL}/ai-software-development`
+              },
+              {
+                '@type': 'WebPage',
+                name: 'Enterprise AI Solutions',
+                description: 'Sovereign, air-gapped enterprise AI systems, role-based LLM security, and private document retrieval.',
+                url: `${SITE_URL}/enterprise-ai`
+              },
+              {
+                '@type': 'WebPage',
+                name: 'Local-First Software Architecture',
+                description: 'Zero-telemetry, offline-first application development powered by SQLite WAL and the @junglans/trail ecosystem.',
+                url: `${SITE_URL}/local-first-software`
+              },
+              {
+                '@type': 'WebPage',
+                name: 'Developer Packages & Documentation',
+                description: 'Official open-source libraries across npm and PyPI: @junglans/trail, @junglans/trail-server, @junglans/trail-react, jung, and junglans-trail.',
+                url: `${SITE_URL}/packages`
+              },
+              {
+                '@type': 'WebPage',
+                name: 'Engineering Blogs',
+                description: 'Deep-dive technical articles on machine learning, local-first architectures, and AI evaluation.',
+                url: `${SITE_URL}/blogs`
+              },
+              {
+                '@type': 'WebPage',
+                name: 'Our Team & Leadership',
+                description: 'Founding engineers, AI architects, and leadership team behind Junglans Solutions.',
+                url: `${SITE_URL}/team`
+              },
+              {
+                '@type': 'WebPage',
+                name: 'Contact Enterprise Sales',
+                description: 'Direct contact channel for enterprise inquiries, architecture audits, and licensing.',
+                url: `${SITE_URL}/contact`
+              }
+            ]
           },
           {
             '@context': 'https://schema.org',
@@ -73,18 +125,29 @@ export default function HomePage() {
             image: `${SITE_URL}/squirrel_logo.webp`,
             email: 'enterprise@junglans.io',
             description:
-              'Junglans Solutions builds high-performance, secure, local-first enterprise software, AI developer tools, and productivity applications for global organizations.',
+              'Junglans Solutions is an AI software development company and local-first software architecture studio headquartered in Coimbatore, Tamil Nadu, India.',
             foundingDate: '2024',
+            founder: {
+              '@type': 'Person',
+              name: 'Manosakthi Thiyagarajan',
+              jobTitle: 'Founder & Lead AI Architect',
+              url: 'https://github.com/manot6114'
+            },
             address: {
               '@type': 'PostalAddress',
+              addressLocality: 'Coimbatore',
+              addressRegion: 'Tamil Nadu',
+              postalCode: '641001',
               addressCountry: 'IN'
             },
-            areaServed: 'Worldwide',
+            areaServed: ['India', 'Worldwide'],
             sameAs: [
               'https://github.com/manot6114',
               'https://www.linkedin.com/company/junglans-solutions'
             ],
             knowsAbout: [
+              'AI software development',
+              'Enterprise AI solutions',
               'Local-first enterprise software',
               'AI developer tools',
               'Zero-telemetry architecture',
@@ -102,51 +165,44 @@ export default function HomePage() {
               {
                 '@type': 'SiteNavigationElement',
                 position: 1,
-                name: 'Junglans Project Manager',
-                description: 'Local-first codebase intelligence, automated health scanning, and architecture documentation exporter.',
-                url: `${SITE_URL}/project/project-0`
+                name: 'AI Software Development',
+                description: 'Custom AI software engineering, sovereign LLMs, and multi-agent systems built in India.',
+                url: `${SITE_URL}/ai-software-development`
               },
               {
                 '@type': 'SiteNavigationElement',
                 position: 2,
-                name: 'Jung AI Version Control Sidecar',
-                description: 'AI prompt-to-diff attribution, commit lineage tracking, and token expenditure audit dashboard.',
-                url: `${SITE_URL}/project/project-1`
+                name: 'Enterprise AI Solutions',
+                description: 'Air-gapped private LLMs, sovereign RAG, and compliance-ready corporate intelligence.',
+                url: `${SITE_URL}/enterprise-ai`
               },
               {
                 '@type': 'SiteNavigationElement',
                 position: 3,
-                name: 'Junglans IDE',
-                description: 'AI-native integrated development environment featuring collaborative multi-agent task pipelines.',
-                url: `${SITE_URL}/project/project-2`
+                name: 'Local-First Software Architecture',
+                description: 'Zero-telemetry, offline-first applications powered by SQLite WAL and CRDTs.',
+                url: `${SITE_URL}/local-first-software`
               },
               {
                 '@type': 'SiteNavigationElement',
                 position: 4,
-                name: 'TalkToDB',
-                description: 'Natural language SQL engine translating voice and text queries into optimized read-only queries with visual charts.',
-                url: `${SITE_URL}/project/project-5`
+                name: 'Developer Packages & Documentation',
+                description: 'Official open-source libraries across npm and PyPI: @junglans/trail, @junglans/trail-server, @junglans/trail-react, jung, and junglans-trail.',
+                url: `${SITE_URL}/packages`
               },
               {
                 '@type': 'SiteNavigationElement',
                 position: 5,
-                name: 'Engineering & AI Research Blogs',
-                description: 'Deep-dive technical guides on machine learning metrics, LLM evaluation, transformer architectures, and RAG systems.',
+                name: 'Engineering Blogs & AI Research',
+                description: 'Deep-dive technical guides on machine learning metrics, LLM evaluation, and RAG systems.',
                 url: `${SITE_URL}/blogs`
               },
               {
                 '@type': 'SiteNavigationElement',
                 position: 6,
-                name: 'Our Team & Leadership',
-                description: 'Executive leadership, AI systems architects, robotics engineers, and research background at Junglans.',
-                url: `${SITE_URL}/team`
-              },
-              {
-                '@type': 'SiteNavigationElement',
-                position: 7,
-                name: 'Enterprise Security & Compliance',
-                description: 'Zero-telemetry guarantees, AES-256-GCM encryption, air-gapped readiness, and SOC 2 Type II compliance.',
-                url: `${SITE_URL}/security`
+                name: 'Contact Enterprise Sales',
+                description: 'Connect with Junglans Solutions for enterprise licensing, custom deployments, and developer inquiries.',
+                url: `${SITE_URL}/contact`
               }
             ]
           },
@@ -210,15 +266,15 @@ export default function HomePage() {
           
           {/* Main Hero Headline */}
           <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.08] sm:leading-[0.95] md:leading-[0.92] tracking-tight sm:tracking-tighter mb-4 sm:mb-6 text-[#08090c]">
-            Junglans Solutions — <br className="hidden min-[480px]:inline" />
+            AI Software Development <br className="hidden min-[480px]:inline" />
             <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
-              architecting the future of enterprise software.
+              & Enterprise Local-First Solutions.
             </span>
           </h1>
 
           {/* Subtitle / Description */}
           <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-8 max-w-2xl leading-relaxed">
-            Junglans Solutions develops specialized tools and applications for global engineering organizations. High-performance compiled binaries, zero cloud telemetry, and total privacy guarantees.
+            Junglans Solutions engineers sovereign artificial intelligence, private LLM agents, and local-first software applications from Coimbatore, Tamil Nadu, India. Zero cloud telemetry, sub-millisecond execution, and 5 open-source developer libraries on npm and PyPI.
           </p>
 
           {/* Mobile-Optimized CTA Cluster */}
@@ -236,10 +292,10 @@ export default function HomePage() {
 
             <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:gap-3 w-full sm:w-auto">
               <Link
-                to="/team"
+                to="/packages"
                 className="font-mono text-xs sm:text-sm bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold hover:bg-[#10B981] hover:text-white transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm hover:-translate-y-0.5 duration-300 text-center"
               >
-                Our Team ↗
+                Packages & Docs ↗
               </Link>
 
               <a
@@ -330,7 +386,7 @@ export default function HomePage() {
               </div>
               <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
                 <h3 className="font-heading font-bold text-[#08090c] mb-1">Enterprise-Grade Security</h3>
-                <p className="text-xs sm:text-sm">AES-256-GCM encryption, memory-safe compiled runtimes, and SOC 2 Type II ready compliance posture.</p>
+                <p className="text-xs sm:text-sm">AES-256-GCM encryption, memory-safe compiled runtimes, and air-gapped zero-telemetry architecture.</p>
               </div>
               <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
                 <h3 className="font-heading font-bold text-[#08090c] mb-1">AI-Native Engineering</h3>
@@ -361,6 +417,98 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* Core Services & Architecture Pillars Section (SEO & Internal Linking) */}
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-10 sm:py-14 mb-8">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <div className="font-mono text-xs uppercase tracking-widest text-[#059669] font-bold mb-2">
+            CORE SERVICES & ARCHITECTURAL PILLARS
+          </div>
+          <h2 className="font-heading font-extrabold text-2xl sm:text-4xl text-[#08090c]">
+            Custom AI & Local-First Engineering Services
+          </h2>
+          <p className="font-body text-xs sm:text-sm text-slate-600 mt-2">
+            Specialized engineering capabilities tailored for enterprise organizations demanding absolute privacy, sub-millisecond execution, and air-gapped sovereignty.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Service 1 */}
+          <Link
+            to="/ai-software-development"
+            className="bg-white border-2 border-[#A7F3D0] rounded-2xl p-6 sm:p-7 hover:border-[#10B981] hover:shadow-lg transition-all duration-300 group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-mono text-[10px] bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-2 py-0.5 rounded font-bold">
+                  DEVELOPMENT SERVICES
+                </span>
+                <span className="font-mono text-xs text-[#059669] font-bold">INDIA</span>
+              </div>
+              <h3 className="font-heading font-bold text-lg sm:text-xl text-[#08090c] group-hover:text-[#059669] transition mb-2">
+                AI Software Development
+              </h3>
+              <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Custom enterprise AI software, sovereign on-premise LLMs, autonomous multi-agent systems with Python 'jung', and natural language database querying.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-[#A7F3D0]/40 flex items-center justify-between text-xs font-mono font-bold text-[#059669]">
+              <span>Explore AI Services</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </Link>
+
+          {/* Service 2 */}
+          <Link
+            to="/enterprise-ai"
+            className="bg-white border-2 border-[#A7F3D0] rounded-2xl p-6 sm:p-7 hover:border-[#10B981] hover:shadow-lg transition-all duration-300 group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-mono text-[10px] bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-2 py-0.5 rounded font-bold">
+                  SOVEREIGN INFRASTRUCTURE
+                </span>
+                <span className="font-mono text-xs text-[#059669] font-bold">AIR-GAPPED</span>
+              </div>
+              <h3 className="font-heading font-bold text-lg sm:text-xl text-[#08090c] group-hover:text-[#059669] transition mb-2">
+                Enterprise AI Solutions
+              </h3>
+              <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Air-gapped LLM deployments, role-based access security, zero external data leakage, private RAG vaults, and deterministic multi-agent workflows.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-[#A7F3D0]/40 flex items-center justify-between text-xs font-mono font-bold text-[#059669]">
+              <span>Explore Enterprise AI</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </Link>
+
+          {/* Service 3 */}
+          <Link
+            to="/local-first-software"
+            className="bg-white border-2 border-[#A7F3D0] rounded-2xl p-6 sm:p-7 hover:border-[#10B981] hover:shadow-lg transition-all duration-300 group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-mono text-[10px] bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-2 py-0.5 rounded font-bold">
+                  ZERO TELEMETRY
+                </span>
+                <span className="font-mono text-xs text-[#059669] font-bold">CRDT / WAL</span>
+              </div>
+              <h3 className="font-heading font-bold text-lg sm:text-xl text-[#08090c] group-hover:text-[#059669] transition mb-2">
+                Local-First Software Architecture
+              </h3>
+              <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Zero-spinner offline applications, sub-millisecond SQLite WAL writes, multi-device peer synchronization with the @junglans/trail open-source ecosystem.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-[#A7F3D0]/40 flex items-center justify-between text-xs font-mono font-bold text-[#059669]">
+              <span>Explore Local-First</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </Link>
+        </div>
+      </section>
 
       {/* Section 1: Main 5 Products Ecosystem Stage */}
       <section id="ecosystem" className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12 mb-16 sm:mb-20">
@@ -795,6 +943,125 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Section 1C: Open-Source Developer Packages Showcase — NEW */}
+      <section id="packages" className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-20 mb-16 sm:mb-20 border-t border-[#A7F3D0]/60">
+        <div className="mb-10 sm:mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8">
+          <div>
+            <div className="font-mono text-xs text-[#059669] mb-3 sm:mb-4 font-bold uppercase tracking-widest flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+              SEC_01-C // DEVELOPER_PACKAGES // NPM & PYPI
+            </div>
+            <h2 className="font-heading text-3xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[#08090c]">
+              Official open-source libraries & sidecars.
+            </h2>
+          </div>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <Link
+              to="/packages"
+              className="font-mono text-xs bg-[#10B981] hover:bg-[#059669] text-white px-5 py-3 rounded-xl font-bold transition flex items-center gap-2 shadow-md hover:-translate-y-0.5"
+            >
+              <span>Explore All Documentation & APIs</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </Link>
+          </div>
+        </div>
+
+        {/* Packages Cards Grid on Home */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {packagesData.slice(0, 3).map((pkg) => (
+            <div
+              key={pkg.id}
+              className="p-6 rounded-3xl bg-white border border-[#A7F3D0] shadow-sm hover:shadow-xl hover:border-[#10B981] transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-mono text-[10px] uppercase font-black px-2 py-0.5 rounded bg-red-50 text-red-700 border border-red-200">
+                    {pkg.registry}
+                  </span>
+                  <span className="font-mono text-[11px] text-[#059669] font-bold">
+                    v{pkg.version}
+                  </span>
+                </div>
+                <h3 className="font-heading font-black text-xl text-[#08090c] group-hover:text-[#10B981] transition-colors mb-2">
+                  <Link to={`/packages/${pkg.slug}`}>{pkg.name}</Link>
+                </h3>
+                <p className="font-body text-xs text-slate-600 line-clamp-3 mb-4">
+                  {pkg.summary}
+                </p>
+                <div className="p-2.5 rounded-xl bg-[#F8FAFC] border border-[#A7F3D0] text-slate-800 font-mono text-[11px] mb-4 overflow-x-auto whitespace-nowrap shadow-inner">
+                  <span className="text-[#059669] font-bold">$ </span>
+                  {pkg.installCommands.npm}
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-[#A7F3D0]/60 flex items-center justify-between font-mono text-xs">
+                <a
+                  href={pkg.registryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-500 hover:text-[#10B981] transition"
+                >
+                  npm page ↗
+                </a>
+                <Link
+                  to={`/packages/${pkg.slug}`}
+                  className="text-[#059669] font-bold hover:underline"
+                >
+                  Docs & Guide →
+                </Link>
+              </div>
+            </div>
+          ))}
+
+          {/* PyPI Packages Card (jung & junglans-trail) - 100% Light Theme */}
+          <div className="p-6 sm:p-8 rounded-3xl bg-white text-[#08090c] border border-[#A7F3D0] shadow-xl flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-3">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#A7F3D0]/60">
+              <div>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="font-mono text-[10px] uppercase font-black px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+                    PyPI
+                  </span>
+                  <span className="font-mono text-xs text-[#059669] font-bold">
+                    Python 3.8+ & 3.11+
+                  </span>
+                </div>
+                <h3 className="font-heading font-black text-2xl text-[#08090c]">
+                  Python Ecosystem: <code>jung</code> & <code>junglans-trail</code>
+                </h3>
+                <p className="font-body text-xs sm:text-sm text-slate-600 max-w-2xl mt-1">
+                  AI-assisted development Git sidecar (prompt-to-diff attribution) and embedded local-first FastAPI telemetry middleware.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Link
+                  to="/packages/jung"
+                  className="font-mono text-xs bg-[#10B981] hover:bg-[#059669] text-white px-4 py-2.5 rounded-xl font-bold transition shadow-md"
+                >
+                  jung Docs ↗
+                </Link>
+                <Link
+                  to="/packages/junglans-trail"
+                  className="font-mono text-xs bg-[#ECFDF5] hover:bg-[#A7F3D0]/50 text-[#059669] border border-[#A7F3D0] px-4 py-2.5 rounded-xl font-bold transition"
+                >
+                  junglans-trail Docs ↗
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-5 font-mono text-xs">
+              <div className="p-3.5 bg-[#F8FAFC] rounded-2xl border border-[#A7F3D0]">
+                <span className="text-slate-600 font-sans text-xs">Install jung sidecar:</span>
+                <div className="text-[#059669] font-bold mt-1">$ pip install jung</div>
+              </div>
+              <div className="p-3.5 bg-[#F8FAFC] rounded-2xl border border-[#A7F3D0]">
+                <span className="text-slate-600 font-sans text-xs">Install FastAPI middleware:</span>
+                <div className="text-[#059669] font-bold mt-1">$ pip install junglans-trail</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Interactive Terminal CLI Simulator */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
         <InteractiveTerminal />
@@ -1032,23 +1299,18 @@ export default function HomePage() {
           <div className="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between bg-white border border-[#A7F3D0] shadow-md hover:border-[#10B981] transition-all">
             <div>
               <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-wider">05 // ZERO-TRUST SECURITY</div>
-              <h3 className="font-heading text-xl font-bold mb-2 text-[#08090c]">Air-Gapped & SOC 2 Type II Ready.</h3>
-              <p className="font-body text-xs sm:text-sm text-slate-600 mb-3">AES-256-GCM encryption, memory-safe execution, and full regulatory compliance.</p>
-              <Link to="/security" className="font-mono text-xs text-[#10B981] font-bold hover:underline flex items-center gap-1">
-                Explore Enterprise Security Page ↗
+              <h3 className="font-heading text-xl font-bold mb-2 text-[#08090c]">Air-Gapped & Zero-Telemetry Architecture.</h3>
+              <p className="font-body text-xs sm:text-sm text-slate-600 mb-3">AES-256-GCM encryption, memory-safe execution, and full sovereign data privacy.</p>
+              <Link to="/contact" className="font-mono text-xs text-[#10B981] font-bold hover:underline flex items-center gap-1">
+                Inquire About Enterprise Deployments ↗
               </Link>
             </div>
             <div className="flex gap-2 mt-4 font-mono text-[10px]">
-              <span className="bg-[#10B981] text-white px-3 py-1 rounded-full font-bold">SOC 2 AUDITED</span>
+              <span className="bg-[#10B981] text-white px-3 py-1 rounded-full font-bold">AIR-GAPPED VERIFIED</span>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Security & Compliance Credentials Matrix */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
-        <SecurityComplianceSection />
-      </div>
 
       {/* Interactive Enterprise ROI & Cost Calculator (Indian Rupee ₹) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
@@ -1103,11 +1365,11 @@ export default function HomePage() {
                 <div className="flex items-center gap-2">
                   <div
                     className="w-6 h-6 rounded-md text-white font-heading font-bold text-[9px] flex items-center justify-center shadow-xs flex-shrink-0"
-                    style={{ backgroundColor: blog.author.color || '#10B981' }}
+                    style={{ backgroundColor: blog.author?.color || '#10B981' }}
                   >
-                    {blog.author.avatar || 'JS'}
+                    {blog.author?.avatar || 'JS'}
                   </div>
-                  <span className="font-heading font-bold text-xs text-slate-700">{blog.author.name}</span>
+                  <span className="font-heading font-bold text-xs text-slate-700">{blog.author?.name || 'Junglans Architect'}</span>
                 </div>
                 <span className="font-mono text-xs text-[#059669] font-bold group-hover:text-[#10B981]">
                   Read ↗

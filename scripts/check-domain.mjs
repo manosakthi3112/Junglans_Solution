@@ -98,7 +98,7 @@ async function runAudit() {
     'https://www.junglans.in/index.html',
     'https://www.junglans.in/blogs',
     'https://www.junglans.in/team',
-    'https://www.junglans.in/security',
+    'https://www.junglans.in/packages',
     'https://www.junglans.in/project/project-0',
     'https://www.junglans.in/blog/classification-metrics-guide'
   ];

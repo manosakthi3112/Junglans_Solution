@@ -6,9 +6,9 @@ export default function SecurityComplianceSection() {
 
   const complianceBadges = [
     {
-      title: "SOC 2 Type II Audited",
-      tag: "COMPLIANCE",
-      desc: "Independently audited controls guaranteeing data privacy, operational security, and confidentiality."
+      title: "Air-Gapped & Zero-Telemetry",
+      tag: "ARCHITECTURE",
+      desc: "Independently verifiable controls guaranteeing data privacy, operational security, and confidentiality."
     },
     {
       title: "Zero-Trust Architecture",
@@ -27,7 +27,7 @@ export default function SecurityComplianceSection() {
     },
     {
       title: "HIPAA & GDPR Compliant",
-      tag: "GOVERNANCE",
+      tag: "AUDITABILITY",
       desc: "Designed to meet global regulatory standards for personal health information and privacy laws."
     }
   ];
@@ -35,7 +35,7 @@ export default function SecurityComplianceSection() {
   return (
     <div className="glass-panel rounded-3xl p-6 sm:p-8 md:p-12 bg-white border border-[#A7F3D0] shadow-xl my-10 sm:my-16">
       <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-        <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-widest">ENTERPRISE SECURITY & GOVERNANCE</div>
+        <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-widest">ENTERPRISE SECURITY & AUDITABILITY</div>
         <h2 className="font-heading text-2xl sm:text-4xl font-bold text-[#08090c] tracking-tight">Built for Mission-Critical Defense & Enterprise Security</h2>
         <p className="font-body text-xs sm:text-base text-slate-600 mt-3">
           Our 20 software products adhere to strict enterprise security standards with zero external telemetry.
@@ -77,10 +77,10 @@ export default function SecurityComplianceSection() {
 
       <div className="text-center">
         <Link
-          to="/security"
+          to="/contact"
           className="inline-flex items-center gap-2 font-mono text-xs bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-6 py-3 rounded-xl font-bold hover:bg-[#10B981] hover:text-white transition shadow-sm"
         >
-          Explore Complete Enterprise Security Documentation Page ↗
+          Inquire About Enterprise Compliance Audits ↗
         </Link>
       </div>
     </div>

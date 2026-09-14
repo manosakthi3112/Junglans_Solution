@@ -103,7 +103,7 @@ export default function ContactPage() {
                 <li>We reply within 1 business day with pilot scope & NDA.</li>
                 <li>Air-gapped installer + docs shared (no cloud required).</li>
                 <li>7-14 day pilot with your team, weekly check-ins.</li>
-                <li>Enterprise license + SOC 2 pack on success.</li>
+                <li>Enterprise license + deployment & verification pack on success.</li>
               </ol>
             </div>
           </div>

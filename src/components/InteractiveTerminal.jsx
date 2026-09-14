@@ -26,7 +26,7 @@ export default function InteractiveTerminal() {
     } else if (cmdKey === 'sidecar') {
       newLogs = [
         '$ junglans sidecar --audit-lineage',
-        '-> Connecting to local version control sidecar...',
+        '-> Connecting to local version control sidecar (jung PyPI)...',
         '-> 1,420 AI prompts matched to resulting commit diffs.',
         '-> Human vs AI Attribution Ratio: 42% Human / 58% AI Assisted.',
         '-> Total Token Expenditure Logged: ₹350',
@@ -51,14 +51,14 @@ export default function InteractiveTerminal() {
         '-> Generated 3 visual chart representations (Bar, Line, Pie).',
         '✔ QUERY COMPLETE: Q3 Revenue ₹4.82 Crores (Up +14.2% YoY).'
       ];
-    } else if (cmdKey === 'security') {
+    } else if (cmdKey === 'trail') {
       newLogs = [
-        '$ junglans security --verify-compliance',
-        '-> Auditing data encryption & network boundaries...',
-        '-> Zero External Server Connections Detected [PASSED]',
-        '-> End-to-End Encryption Key Rotation: ACTIVE',
-        '-> Biometric Vault Status: HARDENED',
-        '✔ COMPLIANCE VERIFIED: SOC2 Type II & Zero-Trust Compliant.'
+        '$ junglans trail --audit-telemetry',
+        '-> Connecting to SQLite WAL telemetry engine (/api/jungtrail)...',
+        '-> 104 native capabilities active & verified.',
+        '-> Zero external third-party tracker connections detected [PASSED]',
+        '-> Database size: 8.4 MB | Write latency: 0.38ms',
+        '✔ LOCAL-FIRST AUDIT COMPLETE: 100% data sovereignty guaranteed.'
       ];
     }
 
@@ -69,7 +69,7 @@ export default function InteractiveTerminal() {
   };
 
   return (
-    <div className="glass-panel rounded-3xl p-5 sm:p-8 bg-white border border-[#A7F3D0] shadow-xl my-10 sm:my-16">
+    <div className="glass-panel rounded-3xl p-5 sm:p-8 bg-white border border-[#A7F3D0] shadow-xl my-10 sm:my-16 text-left">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6 pb-4 border-b border-[#E2E8F0]">
         <div>
           <div className="font-mono text-xs text-[#059669] font-bold uppercase tracking-widest">INTERACTIVE DEMO WIDGET</div>
@@ -77,7 +77,7 @@ export default function InteractiveTerminal() {
         </div>
         <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs text-[#059669] bg-[#ECFDF5] px-3.5 py-1.5 rounded-full border border-[#A7F3D0] w-fit">
           <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping"></span>
-          <span className="font-bold">INTERACTIVE TERMINAL</span>
+          <span className="font-bold">LOCAL-FIRST CLI</span>
         </div>
       </div>
 
@@ -88,15 +88,15 @@ export default function InteractiveTerminal() {
           { key: 'sidecar', label: '▶ junglans sidecar' },
           { key: 'ide', label: '▶ junglans ide' },
           { key: 'talktodb', label: '▶ junglans talktodb' },
-          { key: 'security', label: '▶ junglans security' },
+          { key: 'trail', label: '▶ junglans trail' },
         ].map((cmd) => (
           <button
             key={cmd.key}
             onClick={() => runCommand(cmd.key)}
             className={`px-3 py-2 rounded-xl font-bold border transition cursor-pointer ${
               activeCommand === cmd.key
-                ? 'bg-[#10B981] text-white border-transparent shadow-md'
-                : 'bg-[#F4FBF7] text-slate-700 border-[#A7F3D0] hover:bg-[#ECFDF5]'
+                ? 'bg-[#10B981] text-white border-[#10B981] shadow-md'
+                : 'bg-[#F4FBF7] text-slate-700 border-[#A7F3D0] hover:bg-[#ECFDF5] hover:text-[#059669]'
             }`}
           >
             {cmd.label}
@@ -104,33 +104,37 @@ export default function InteractiveTerminal() {
         ))}
       </div>
 
-      {/* Terminal Screen Container */}
-      <div className="bg-[#08090c] text-emerald-400 rounded-2xl p-4 sm:p-6 font-mono text-xs shadow-2xl relative border border-slate-800 min-h-[220px] overflow-x-auto">
+      {/* Light Terminal Screen Container */}
+      <div className="bg-[#F8FAFC] text-slate-800 rounded-2xl p-4 sm:p-6 font-mono text-xs shadow-inner relative border border-[#A7F3D0] min-h-[220px] overflow-x-auto">
         {/* Terminal Header Dots */}
-        <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-slate-500">
+        <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#A7F3D0]/60 text-slate-500">
           <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-            <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-            <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-            <span className="ml-2 text-[10px] sm:text-[11px] text-slate-400 font-bold truncate max-w-[140px] sm:max-w-none">bash - junglans-cli</span>
+            <span className="w-3 h-3 rounded-full bg-rose-400 inline-block"></span>
+            <span className="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+            <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+            <span className="ml-2 text-[10px] sm:text-[11px] text-slate-600 font-bold truncate max-w-[140px] sm:max-w-none font-mono">bash — junglans-cli</span>
           </div>
-          <span className="text-[10px] text-slate-400 font-bold">OFFLINE</span>
+          <span className="text-[10px] text-[#059669] font-bold bg-[#ECFDF5] px-2 py-0.5 rounded border border-[#A7F3D0]">
+            LOCAL-FIRST EXECUTION
+          </span>
         </div>
 
         {/* Console Logs */}
-        <div className="space-y-1.5 whitespace-pre-wrap break-all sm:break-normal">
+        <div className="space-y-1.5 whitespace-pre-wrap break-all sm:break-normal font-mono leading-relaxed">
           {isRunning ? (
-            <div className="text-amber-400 animate-pulse">Executing command across 20 projects...</div>
+            <div className="text-amber-600 font-semibold animate-pulse">Executing command across local workspace...</div>
           ) : (
             terminalOutput.map((line, idx) => (
               <div
                 key={idx}
                 className={
                   line.startsWith('✔')
-                    ? 'text-emerald-400 font-bold'
+                    ? 'text-emerald-700 font-bold'
                     : line.startsWith('$')
-                    ? 'text-white font-bold'
-                    : 'text-slate-300'
+                    ? 'text-[#059669] font-bold'
+                    : line.startsWith('->')
+                    ? 'text-slate-700 font-medium'
+                    : 'text-slate-800'
                 }
               >
                 {line}

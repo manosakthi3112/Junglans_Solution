@@ -4,15 +4,21 @@ import { fileURLToPath } from 'node:url';
 import { projectsData } from '../src/data/projectsData.js';
 import { blogsData } from '../src/data/blogsData.js';
 
+import { packagesData } from '../src/data/packagesData.js';
+
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE_URL = 'https://www.junglans.in';
 const key = readFileSync(join(root, 'public', `${process.env.INDEXNOW_KEY || 'e8156172fd9e962f4ec405c46afb398e'}.txt`), 'utf8').trim();
 
 const urls = [
   `${SITE_URL}/`,
+  `${SITE_URL}/ai-software-development`,
+  `${SITE_URL}/enterprise-ai`,
+  `${SITE_URL}/local-first-software`,
+  `${SITE_URL}/packages`,
+  ...packagesData.map((p) => `${SITE_URL}/packages/${p.slug}`),
   `${SITE_URL}/blogs`,
   `${SITE_URL}/team`,
-  `${SITE_URL}/security`,
   `${SITE_URL}/contact`,
   `${SITE_URL}/privacy`,
   `${SITE_URL}/terms`,

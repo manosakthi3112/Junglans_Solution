@@ -107,9 +107,9 @@ function renderFormattedInline(text) {
   // 1. Process math display block $$ formula $$
   let processed = text.replace(/\$\$(.*?)\$\$/g, (match, formula) => {
     const cleanMath = convertLatexToReadableMath(formula);
-    return `<div class="my-4 p-4 rounded-xl bg-[#08090c] text-emerald-300 font-mono text-sm sm:text-base border-2 border-[#10B981] shadow-lg flex flex-col items-center justify-center gap-1 overflow-x-auto text-center">
-      <span class="text-[10px] uppercase font-bold tracking-widest text-[#10B981]/80 font-mono">MATHEMATICAL FORMULA</span>
-      <span class="font-bold tracking-wide text-white text-base sm:text-lg">${cleanMath}</span>
+    return `<div class="my-4 p-4 rounded-xl bg-[#F8FAFC] text-slate-800 font-mono text-sm sm:text-base border-2 border-[#A7F3D0] shadow-sm flex flex-col items-center justify-center gap-1 overflow-x-auto text-center">
+      <span class="text-[10px] uppercase font-bold tracking-widest text-[#059669] font-mono">MATHEMATICAL FORMULA</span>
+      <span class="font-bold tracking-wide text-[#08090c] text-base sm:text-lg">${cleanMath}</span>
     </div>`;
   });
 
@@ -372,9 +372,9 @@ export default function BlogDetailPage() {
     );
   }
 
-  // Related articles
+  // Related articles with safe comparison
   const relatedArticles = blogsData
-    .filter((b) => b.id !== blog.id && (b.category === blog.category || b.author.name === blog.author.name))
+    .filter((b) => b.id !== blog.id && (b.category === blog.category || b.author?.name === blog.author?.name))
     .slice(0, 3);
 
   // Key topics covered — first three ## headings (GEO extraction source)
@@ -409,6 +409,15 @@ export default function BlogDetailPage() {
     setTimeout(() => setCopiedLink(false), 2000);
   };
 
+  const getIsoDate = (dateStr) => {
+    try {
+      const d = new Date(dateStr);
+      return isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString();
+    } catch {
+      return new Date().toISOString();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden pb-24">
       <Seo
@@ -416,21 +425,21 @@ export default function BlogDetailPage() {
         description={blog.subtitle}
         path={`/blog/${blog.slug}`}
         type="article"
-        keywords={blog.tags.slice(0, 5).join(', ')}
+        keywords={(blog.tags || []).slice(0, 5).join(', ')}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'Article',
           headline: blog.title,
           description: blog.subtitle,
           url: `${SITE_URL}/blog/${blog.slug}`,
-          datePublished: new Date(blog.publishDate).toISOString(),
-          dateModified: new Date(blog.publishDate).toISOString(),
+          datePublished: getIsoDate(blog.publishDate),
+          dateModified: getIsoDate(blog.publishDate),
           inLanguage: 'en',
-          keywords: blog.tags.join(', '),
+          keywords: (blog.tags || []).join(', '),
           author: {
             '@type': 'Person',
-            name: blog.author.name,
-            jobTitle: blog.author.role,
+            name: blog.author?.name || 'Junglans Team',
+            jobTitle: blog.author?.role || 'Engineer',
             affiliation: { '@type': 'Organization', name: 'Junglans Solutions', url: SITE_URL }
           },
           publisher: {
@@ -501,13 +510,13 @@ export default function BlogDetailPage() {
         <div className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 bg-white border border-[#A7F3D0] rounded-2xl shadow-sm mb-8 sm:mb-10 max-w-xl">
           <div
             className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl text-white font-heading font-bold text-base sm:text-lg flex items-center justify-center shadow-md flex-shrink-0"
-            style={{ backgroundColor: blog.author.color || '#10B981' }}
+            style={{ backgroundColor: blog.author?.color || '#10B981' }}
           >
-            {blog.author.avatar || 'JS'}
+            {blog.author?.avatar || 'JS'}
           </div>
           <div className="min-w-0">
-            <div className="font-heading font-bold text-sm sm:text-base text-[#08090c] truncate">{blog.author.name}</div>
-            <div className="font-mono text-xs text-[#059669] font-medium truncate">{blog.author.role}</div>
+            <div className="font-heading font-bold text-sm sm:text-base text-[#08090c] truncate">{blog.author?.name || 'Junglans Team'}</div>
+            <div className="font-mono text-xs text-[#059669] font-medium truncate">{blog.author?.role || 'Engineer'}</div>
           </div>
         </div>
       </section>
@@ -596,17 +605,17 @@ export default function BlogDetailPage() {
           <div className="flex items-center gap-4 mb-4">
             <div
               className="w-14 h-14 rounded-2xl text-white font-heading font-bold text-lg flex items-center justify-center shadow-md flex-shrink-0"
-              style={{ backgroundColor: blog.author.color || '#10B981' }}
+              style={{ backgroundColor: blog.author?.color || '#10B981' }}
             >
-              {blog.author.avatar || 'JS'}
+              {blog.author?.avatar || 'JS'}
             </div>
             <div>
-              <h4 className="font-heading font-bold text-lg text-[#08090c]">{blog.author.name}</h4>
-              <p className="font-mono text-xs text-[#059669] font-medium">{blog.author.role}</p>
+              <h4 className="font-heading font-bold text-lg text-[#08090c]">{blog.author?.name || 'Junglans Team'}</h4>
+              <p className="font-mono text-xs text-[#059669] font-medium">{blog.author?.role || 'Engineer'}</p>
             </div>
           </div>
           <p className="font-body text-sm text-slate-600 leading-relaxed mb-4">
-            {blog.author.name} is part of the Junglans Solutions engineering team, specializing in {blog.category.toLowerCase()}.
+            {blog.author?.name || 'Junglans Team'} is part of the Junglans Solutions engineering team, specializing in {blog.category?.toLowerCase() || 'engineering'}.
             Junglans builds a 20-product ecosystem of local-first enterprise software — AI developer tools, encrypted
             communication, and data infrastructure with zero cloud telemetry.
           </p>

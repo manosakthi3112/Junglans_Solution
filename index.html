@@ -70,9 +70,104 @@
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
   </noscript>
+  <!-- Google Sitelinks & WebSite Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.junglans.in/#website",
+        "url": "https://www.junglans.in/",
+        "name": "Junglans Solutions",
+        "alternateName": ["Junglans", "Junglans Ecosystem", "junglans.in"],
+        "description": "Junglans Solutions builds high-performance, secure, local-first enterprise software, AI developer tools, and productivity applications.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Junglans Solutions",
+          "url": "https://www.junglans.in/",
+          "logo": "https://www.junglans.in/squirrel_logo.webp"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.junglans.in/packages?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        },
+        "hasPart": [
+          {
+            "@type": "WebPage",
+            "name": "Developer Packages & Documentation",
+            "description": "Official open-source libraries across npm and PyPI: @junglans/trail, @junglans/trail-server, @junglans/trail-react, jung, and junglans-trail.",
+            "url": "https://www.junglans.in/packages"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Engineering Blogs",
+            "description": "Deep-dive technical research articles on local-first architecture, ML evaluation, and zero-trust engineering.",
+            "url": "https://www.junglans.in/blogs"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Our Team",
+            "description": "Meet the founding engineers, AI systems architects, and leadership team behind Junglans Solutions.",
+            "url": "https://www.junglans.in/team"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Contact Enterprise Sales",
+            "description": "Connect with Junglans Solutions for enterprise licensing, custom local-first deployments, and developer inquiries.",
+            "url": "https://www.junglans.in/contact"
+          }
+        ]
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": "https://www.junglans.in/#nav-packages",
+        "name": "Developer Packages & Documentation",
+        "description": "Official open-source libraries across npm and PyPI with 104 built-in capabilities.",
+        "url": "https://www.junglans.in/packages"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": "https://www.junglans.in/#nav-blogs",
+        "name": "Engineering Blogs",
+        "description": "Deep-dive technical guides on machine learning metrics, LLM evaluation, and RAG systems.",
+        "url": "https://www.junglans.in/blogs"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": "https://www.junglans.in/#nav-team",
+        "name": "Our Team",
+        "description": "Executive leadership, AI systems architects, and robotics engineers at Junglans.",
+        "url": "https://www.junglans.in/team"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": "https://www.junglans.in/#nav-contact",
+        "name": "Contact Sales",
+        "description": "Inquire about enterprise software solutions and custom local-first deployments.",
+        "url": "https://www.junglans.in/contact"
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body class="bg-[#F8F9FB] text-[#08090c] font-sans antialiased overflow-x-hidden">
+  <noscript>
+    <header>
+      <h1>Junglans Solutions — Enterprise Software Ecosystems</h1>
+      <p>Junglans Solutions builds high-performance, secure, local-first enterprise software, AI developer tools, and productivity applications.</p>
+      <nav aria-label="Main Navigation">
+        <ul>
+          <li><a href="/packages">Developer Packages &amp; Documentation</a></li>
+          <li><a href="/blogs">Engineering Blogs</a></li>
+          <li><a href="/team">Our Team</a></li>
+          <li><a href="/contact">Contact Sales</a></li>
+        </ul>
+      </nav>
+    </header>
+  </noscript>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>

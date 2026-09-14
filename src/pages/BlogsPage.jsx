@@ -8,14 +8,15 @@ export default function BlogsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = [
-    'All',
-    'Machine Learning Foundations',
-    'LLM Evaluation & Benchmarking',
-    'Model Architectures',
-    'LLM Engineering',
-    'RAG & Knowledge Retrieval'
-  ];
+  const categories = useMemo(() => {
+    const cats = ['All'];
+    blogsData.forEach(b => {
+      if (b.category && !cats.includes(b.category)) {
+        cats.push(b.category);
+      }
+    });
+    return cats;
+  }, []);
 
   // Filtered blogs logic
   const filteredBlogs = useMemo(() => {
@@ -24,11 +25,11 @@ export default function BlogsPage() {
       const query = searchQuery.toLowerCase().trim();
       const matchesSearch =
         query === '' ||
-        blog.title.toLowerCase().includes(query) ||
-        blog.subtitle.toLowerCase().includes(query) ||
-        blog.summary.toLowerCase().includes(query) ||
-        blog.tags.some(tag => tag.toLowerCase().includes(query)) ||
-        blog.author.name.toLowerCase().includes(query);
+        blog.title?.toLowerCase().includes(query) ||
+        blog.subtitle?.toLowerCase().includes(query) ||
+        blog.summary?.toLowerCase().includes(query) ||
+        (blog.tags || []).some(tag => tag?.toLowerCase().includes(query)) ||
+        blog.author?.name?.toLowerCase().includes(query);
 
       return matchesCategory && matchesSearch;
     });
@@ -40,16 +41,16 @@ export default function BlogsPage() {
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden pb-24">
       <Seo
         path="/blogs"
-        title="Engineering & AI Research Blog — ML, LLM & RAG Guides"
-        description="Deep-dive engineering guides and AI research from Junglans Solutions: machine learning metrics, LLM evaluation, transformer architectures, parameter tuning, and production RAG systems."
-        keywords="machine learning blog, LLM evaluation guide, transformer architecture explained, RAG architecture, AI engineering research"
+        title="Engineering, Robotics & AI Research Blogs | Junglans Solutions"
+        description="Deep-dive engineering guides and cutting-edge research from Junglans Solutions: Robotics systems, ROS 2, Physical AI, VLA models, machine learning metrics, LLM evaluation, and production RAG."
+        keywords="robotics blog, physical AI, ROS 2 guide, humanoid robotics, machine learning blog, LLM evaluation, RAG architecture"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
-          name: 'Junglans Research — Engineering & AI Blog',
+          name: 'Junglans Research — Engineering, Robotics & AI Blog',
           url: `${SITE_URL}/blogs`,
           description:
-            'In-depth technical guides covering machine learning metrics, LLM evaluation, transformer mechanics, parameter tuning, and production RAG architecture.',
+            'In-depth technical guides covering robotics systems, ROS 2, physical AI, machine learning metrics, LLM evaluation, and production RAG architecture.',
           publisher: { '@type': 'Organization', name: 'Junglans Solutions', url: SITE_URL }
         }}
       />
@@ -57,11 +58,11 @@ export default function BlogsPage() {
       <div className="absolute top-20 left-1/3 w-[500px] h-[500px] bg-[#10B981]/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow"></div>
       <div className="absolute top-[600px] right-1/4 w-[450px] h-[450px] bg-[#34D399]/15 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '2.5s' }}></div>
 
-      {/* Hero Header Section */}
-      <section className="relative px-4 sm:px-6 md:px-12 pt-8 sm:pt-16 md:pt-20 pb-8 sm:pb-12 border-b border-[#A7F3D0]/60">
-        <div className="max-w-7xl mx-auto">
+      {/* Hero Header Section (Center Aligned) */}
+      <section className="relative px-4 sm:px-6 md:px-12 pt-10 sm:pt-14 md:pt-16 pb-8 sm:pb-12 border-b border-[#A7F3D0]/60">
+        <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
           
-          <div className="inline-flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm max-w-full">
+          <div className="inline-flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm max-w-full mx-auto">
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#10B981] animate-pulse-ring flex-shrink-0"></span>
             <span className="tracking-wider sm:tracking-widest uppercase font-bold text-[#059669] truncate">
               JUNGLANS RESEARCH <span className="hidden sm:inline">// AI & ENGINEERING</span>
@@ -71,19 +72,19 @@ export default function BlogsPage() {
             </span>
           </div>
 
-          <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.08] sm:leading-[0.95] tracking-tight sm:tracking-tighter mb-4 sm:mb-6 text-[#08090c]">
+          <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.08] sm:leading-[0.95] tracking-tight sm:tracking-tighter mb-4 sm:mb-6 text-[#08090c] text-center mx-auto">
             Deep-Dive <br className="hidden min-[480px]:inline" />
             <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
               Engineering Insights & AI Research
             </span>
           </h1>
 
-          <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-8 max-w-3xl leading-relaxed">
+          <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-8 max-w-3xl leading-relaxed text-center mx-auto">
             In-depth technical guides covering Classical Machine Learning metrics, Large Language Model evaluation, Transformer mechanics, parameter tuning, and production RAG architecture.
           </p>
 
           {/* Search Bar & Category Filters Container */}
-          <div className="bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-[#A7F3D0] shadow-sm max-w-4xl">
+          <div className="bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-[#A7F3D0] shadow-sm max-w-4xl w-full mx-auto text-left">
             
             {/* Search Input */}
             <div className="relative mb-5">
@@ -107,8 +108,8 @@ export default function BlogsPage() {
               )}
             </div>
 
-            {/* Category Chips */}
-            <div className="flex flex-wrap gap-2 items-center">
+            {/* Category Chips (Centered) */}
+            <div className="flex flex-wrap gap-2 items-center justify-center">
               <span className="font-mono text-xs text-slate-400 font-bold uppercase tracking-wider mr-2">Category:</span>
               {categories.map((cat) => (
                 <button
@@ -166,13 +167,13 @@ export default function BlogsPage() {
                 <div className="flex items-center gap-3">
                   <div
                     className="w-10 h-10 rounded-xl text-white font-heading font-bold text-sm flex items-center justify-center shadow-md flex-shrink-0"
-                    style={{ backgroundColor: featuredBlog.author.color || '#10B981' }}
+                    style={{ backgroundColor: featuredBlog?.author?.color || '#10B981' }}
                   >
-                    {featuredBlog.author.avatar || 'JS'}
+                    {featuredBlog?.author?.avatar || 'JS'}
                   </div>
                   <div>
-                    <div className="font-heading font-bold text-xs sm:text-sm text-[#08090c]">{featuredBlog.author.name}</div>
-                    <div className="font-mono text-[10px] sm:text-xs text-slate-500">{featuredBlog.author.role}</div>
+                    <div className="font-heading font-bold text-xs sm:text-sm text-[#08090c]">{featuredBlog?.author?.name || 'Junglans Team'}</div>
+                    <div className="font-mono text-[10px] sm:text-xs text-slate-500">{featuredBlog?.author?.role || 'Engineer'}</div>
                   </div>
                 </div>
 
@@ -276,12 +277,12 @@ export default function BlogsPage() {
                     <div className="flex items-center gap-2.5">
                       <div
                         className="w-7 h-7 rounded-lg text-white font-heading font-bold text-[10px] flex items-center justify-center shadow-xs flex-shrink-0"
-                        style={{ backgroundColor: blog.author.color || '#10B981' }}
+                        style={{ backgroundColor: blog.author?.color || '#10B981' }}
                       >
-                        {blog.author.avatar || 'JS'}
+                        {blog.author?.avatar || 'JS'}
                       </div>
                       <div className="flex flex-col">
-                        <span className="font-heading font-bold text-xs text-[#08090c]">{blog.author.name}</span>
+                        <span className="font-heading font-bold text-xs text-[#08090c]">{blog.author?.name || 'Junglans Architect'}</span>
                         <span className="font-mono text-[9px] text-slate-400">{blog.publishDate}</span>
                       </div>
                     </div>
