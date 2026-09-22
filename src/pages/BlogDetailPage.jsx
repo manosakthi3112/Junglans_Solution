@@ -356,7 +356,12 @@ export default function BlogDetailPage() {
           noIndex={true}
         />
         <div className="max-w-md bg-white border border-[#A7F3D0] rounded-2xl p-8 shadow-xl">
-          <div className="text-4xl mb-4">📚</div>
+          <div className="w-12 h-12 rounded-2xl bg-[#ECFDF5] text-[#059669] flex items-center justify-center mx-auto mb-4 border border-[#A7F3D0]">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
           <h1 className="font-heading text-2xl font-bold text-[#08090c] mb-3">Article Not Found</h1>
           <p className="font-body text-slate-600 text-sm mb-6">
             The blog article you requested could not be located. It may have been moved or renamed.
@@ -553,7 +558,7 @@ export default function BlogDetailPage() {
           {/* Summary Box */}
           <div className="mb-8 p-6 rounded-2xl bg-gradient-to-br from-[#ECFDF5] to-[#D1FAE5] border border-[#A7F3D0]">
             <h3 className="font-mono text-xs uppercase font-bold text-[#059669] tracking-wider mb-2 flex items-center gap-2">
-              ⚡ Executive Summary
+              Executive Summary
             </h3>
             <p className="font-body text-slate-700 text-sm leading-relaxed">
               {blog.summary}

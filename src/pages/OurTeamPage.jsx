@@ -163,7 +163,7 @@ export default function OurTeamPage() {
             Back to Home & Products
           </Link>
           <span className="font-mono text-[9px] sm:text-xs text-[#059669] bg-[#ECFDF5] px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-[#A7F3D0] font-bold uppercase tracking-wider w-fit">
-            JUNGLANS SOLUTIONS // OUR TEAM
+            TAMIL NADU TECH COMMUNITY // BUILDERS &amp; ARCHITECTS
           </span>
         </div>
 
@@ -171,16 +171,16 @@ export default function OurTeamPage() {
         <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-16 animate-fade-in-up">
           <Seo
             path="/team"
-            title="Our Team — Engineers Behind Junglans Solutions"
-            description="Meet the Junglans Solutions team: AI architects, ROS robotics developers, ML engineers, and full-stack engineers building local-first enterprise software with zero cloud telemetry."
-            keywords="Junglans team, software engineers India, AI architect, ROS developer, enterprise software team"
+            title="Our Builders &amp; Team — Junglans Tamil Nadu Tech Community"
+            description="Meet the builders and architects behind Junglans: AI architects, ROS robotics developers, ML engineers, and full-stack builders fostering knowledge and product sharing across Tamil Nadu."
+            keywords="Junglans team, Tamil Nadu developers, software engineers Coimbatore, AI architect, ROS developer, tech community builders"
             jsonLd={{
               '@context': 'https://schema.org',
               '@type': 'AboutPage',
-              name: 'Junglans Solutions — Our Team',
+              name: 'Junglans — Our Builders & Team',
               url: `${SITE_URL}/team`,
               description:
-                'The Junglans Solutions team of AI architects, ROS robotics developers, ML engineers, and full-stack engineers.',
+                'The Junglans community builders: AI architects, ROS robotics developers, ML engineers, and software creators across Tamil Nadu.',
               mainEntity: teamMembers
                 .filter((m) => m.isFounder)
                 .map((m) => ({
@@ -188,24 +188,24 @@ export default function OurTeamPage() {
                   name: m.name,
                   jobTitle: m.role,
                   email: m.email,
-                  worksFor: { '@type': 'Organization', name: 'Junglans Solutions', url: SITE_URL }
+                  worksFor: { '@type': 'Organization', name: 'Junglans', url: SITE_URL }
                 }))
             }}
           />
           <div className="inline-flex items-center gap-2 sm:gap-2.5 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm">
             <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981] animate-pulse-ring"></span>
-            <span className="tracking-wider sm:tracking-widest uppercase font-bold text-[#059669]">PEOPLE & INNOVATION</span>
+            <span className="tracking-wider sm:tracking-widest uppercase font-bold text-[#059669]">TAMIL NADU BUILDERS &amp; CREATORS</span>
           </div>
 
           <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.08] sm:leading-[1.05] tracking-tight sm:tracking-tight text-[#08090c] mb-4 sm:mb-6">
-            Meet the team behind <br className="hidden sm:inline" />
+            Meet the builders behind <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
-              Junglans Solutions.
+              the Junglans Community.
             </span>
           </h1>
 
           <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Our multi-disciplinary team of AI architects, system engineers, security researchers, and designers work together to build local-first enterprise software.
+            Our multi-disciplinary team of AI architects, robotics developers, and software makers from across Tamil Nadu working together to advance knowledge sharing and open-source innovation.
           </p>
         </div>
 

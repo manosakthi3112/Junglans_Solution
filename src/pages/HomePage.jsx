@@ -26,6 +26,21 @@ export default function HomePage() {
   ]);
   const [sqlQueryExecuted, setSqlQueryExecuted] = useState(false);
 
+  // Tamil Nadu Tech Community - Share Your Project Form State
+  const [submissionForm, setSubmissionForm] = useState({
+    name: '',
+    email: '',
+    githubLink: '',
+    projectTitle: '',
+  });
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
+
+  const handleProjectSubmit = (e) => {
+    e.preventDefault();
+    if (!submissionForm.name.trim() || !submissionForm.email.trim()) return;
+    setSubmissionSuccess(true);
+  };
+
   // Filter 5 main products for Ecosystem Stage
   const mainProducts = projectsData.filter(p => p.isMainProduct);
   const currentStageProduct = projectsData.find(p => p.id === selectedProductTab) || mainProducts[0];
@@ -45,9 +60,9 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden">
       <Seo
         path="/"
-        title="AI Software Development Company in India | Junglans Solutions"
-        description="Junglans Solutions is a premier AI software development company based in Coimbatore, Tamil Nadu, India. We engineer sovereign enterprise AI software, private LLMs, local-first offline-first applications, and 5 open-source libraries on npm and PyPI."
-        keywords="AI software development company, AI software development services India, custom AI development Coimbatore, enterprise AI solutions, local-first software architecture, private LLM deployment, zero telemetry software"
+        title="Junglans Solutions — AI Software Development & Tamil Nadu Tech Community"
+        description="Junglans Solutions delivers local-first AI software and fosters an open tech community in Tamil Nadu for knowledge sharing, product sharing, and collaborative engineering."
+        keywords="Junglans Solutions, Tamil Nadu tech community, tech community Tamil Nadu, knowledge sharing Tamil Nadu, share tech projects India, local-first software, AI software development"
         jsonLd={[
           {
             '@context': 'https://schema.org',
@@ -250,6 +265,7 @@ export default function HomePage() {
       <div className="absolute top-96 right-1/4 w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-[#34D399]/20 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '2s' }}></div>
 
       {/* Hero Section */}
+      {/* Hero Section */}
       <section className="relative px-4 sm:px-6 md:px-12 pt-8 sm:pt-16 md:pt-20 pb-12 sm:pb-20 md:pb-24 border-b border-[#A7F3D0]/60 overflow-hidden">
         <div className="max-w-7xl mx-auto w-full relative z-10 animate-fade-in-up">
           
@@ -257,7 +273,7 @@ export default function HomePage() {
           <div className="inline-flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-8 shadow-sm max-w-full">
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#10B981] animate-pulse-ring flex-shrink-0"></span>
             <span className="tracking-wider sm:tracking-widest uppercase font-bold text-[#059669] truncate">
-              JUNGLANS SOLUTIONS <span className="hidden sm:inline">// ENTERPRISE CONSORTIUM</span>
+              JUNGLANS SOLUTIONS <span className="hidden sm:inline">// ENTERPRISE SOLUTIONS &amp; TECH COMMUNITY</span>
             </span>
             <span className="px-2 sm:px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#10B981] font-bold font-mono text-[9px] sm:text-[10px] border border-[#A7F3D0] flex-shrink-0">
               20 APPS
@@ -268,13 +284,13 @@ export default function HomePage() {
           <h1 className="font-heading text-3xl min-[360px]:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.08] sm:leading-[0.95] md:leading-[0.92] tracking-tight sm:tracking-tighter mb-4 sm:mb-6 text-[#08090c]">
             AI Software Development <br className="hidden min-[480px]:inline" />
             <span className="bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857] bg-clip-text text-transparent">
-              & Enterprise Local-First Solutions.
+              &amp; Enterprise Local-First Solutions.
             </span>
           </h1>
 
           {/* Subtitle / Description */}
-          <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-8 max-w-2xl leading-relaxed">
-            Junglans Solutions engineers sovereign artificial intelligence, private LLM agents, and local-first software applications from Coimbatore, Tamil Nadu, India. Zero cloud telemetry, sub-millisecond execution, and 5 open-source developer libraries on npm and PyPI.
+          <p className="font-body text-sm sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-8 max-w-3xl leading-relaxed">
+            Junglans Solutions engineers sovereign artificial intelligence, private LLM agents, and local-first software applications from Coimbatore, Tamil Nadu, India. More than a company, we are an open tech community in Tamil Nadu for knowledge sharing and product sharing — where developers, students, and creators can share projects, present ideas, and build high-performance software together.
           </p>
 
           {/* Mobile-Optimized CTA Cluster */}
@@ -291,12 +307,12 @@ export default function HomePage() {
             </a>
 
             <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:gap-3 w-full sm:w-auto">
-              <Link
-                to="/packages"
+              <a
+                href="#share-project"
                 className="font-mono text-xs sm:text-sm bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold hover:bg-[#10B981] hover:text-white transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm hover:-translate-y-0.5 duration-300 text-center"
               >
-                Packages & Docs ↗
-              </Link>
+                Share Project / Ideas ↗
+              </a>
 
               <a
                 href="#showcase"
@@ -320,8 +336,8 @@ export default function HomePage() {
             <div className="flex items-center gap-2 sm:gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/80 border border-[#A7F3D0]/80 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
               <div className="min-w-0">
-                <div className="font-mono text-[9px] sm:text-[10px] text-slate-500 uppercase truncate">Telemetry</div>
-                <div className="font-heading font-bold text-xs sm:text-sm text-[#08090c] truncate">Zero Cloud Log</div>
+                <div className="font-mono text-[9px] sm:text-[10px] text-slate-500 uppercase truncate">Community</div>
+                <div className="font-heading font-bold text-xs sm:text-sm text-[#08090c] truncate">Tamil Nadu Tech</div>
               </div>
             </div>
 
@@ -345,57 +361,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* About / Company Intro Section (SEO & GEO) */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16">
+      {/* About / Community Manifesto Section (SEO & GEO) */}
+      <section id="community" className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start">
           <div>
-            <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-widest">WHO WE ARE // ABOUT JUNGLANS</div>
+            <div className="font-mono text-xs text-[#059669] mb-3 font-bold uppercase tracking-widest">WHO WE ARE // JUNGLANS SOLUTIONS &amp; TECH COMMUNITY</div>
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-[#08090c] mb-5">
-              A local-first enterprise software company built for privacy and performance.
+              Enterprise software solutions and an open tech community in Tamil Nadu built for knowledge sharing, product launches &amp; local-first engineering.
             </h2>
             <div className="font-body text-sm sm:text-base text-slate-600 leading-relaxed space-y-4 max-w-2xl">
               <p>
-                Junglans Solutions is a software development company designing high-performance enterprise software
-                ecosystems for global engineering organizations and developers. Our portfolio spans 20 products across
-                AI developer tools, secure communication, data infrastructure, finance, and productivity.
+                <strong className="text-[#08090c]">Junglans Solutions is both enterprise engineering and community.</strong> We are an enterprise software solutions provider and an open technology community established in Coimbatore, Tamil Nadu, to unite engineers, makers, and innovators across our state.
               </p>
               <p>
-                Every Junglans application is built on a local-first architecture: native compiled binaries in Rust and
-                C++, zero cloud telemetry, and total privacy guarantees. Cloud sync — when present — is optional,
-                end-to-end encrypted, and auditable. We specialize in multi-agent AI systems, natural language data
-                access, end-to-end encrypted communication, and ROS robotics software.
+                Our mission is straightforward: deliver sovereign local-first software solutions, share deep technical knowledge freely, and provide an open stage for builders in Tamil Nadu to showcase their products. From AI agent architectures to offline-first enterprise systems, we champion high-performance engineering and open collaboration.
               </p>
               <p>
-                From enterprise codebase intelligence with Junglans Project Manager to natural language database
-                querying with TalkToDB, our products are engineered for compliance-ready, air-gapped, and
-                zero-trust deployments.
+                You can also be part of Junglans. Share your project, review code with peers, pitch new ideas, and help build Tamil Nadu into a global powerhouse for sovereign technology and high-performance software.
               </p>
             </div>
           </div>
 
           <div className="glass-panel rounded-3xl p-6 sm:p-8 bg-white border border-[#A7F3D0] shadow-md">
-            <div className="font-mono text-xs text-[#059669] mb-4 font-bold uppercase tracking-widest">WHY ENTERPRISES CHOOSE US</div>
+            <div className="font-mono text-xs text-[#059669] mb-4 font-bold uppercase tracking-widest">COMMUNITY PILLARS &amp; ARCHITECTURE</div>
             <div className="space-y-4 font-body text-sm text-slate-700">
               <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
-                <h3 className="font-heading font-bold text-[#08090c] mb-1">Local-First Architecture</h3>
-                <p className="text-xs sm:text-sm">All 20 applications operate on-device by default — your data stays strictly under your control.</p>
+                <h3 className="font-heading font-bold text-[#08090c] mb-1">Knowledge Sharing Culture</h3>
+                <p className="text-xs sm:text-sm">Deep-dive technical blogs, architectural blueprints, and peer-to-peer discussions open to every learner.</p>
               </div>
               <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
-                <h3 className="font-heading font-bold text-[#08090c] mb-1">Zero-Telemetry Guarantee</h3>
-                <p className="text-xs sm:text-sm">No cloud logging, no user tracking, no silent data collection — verified and auditable.</p>
+                <h3 className="font-heading font-bold text-[#08090c] mb-1">Product Sharing &amp; Launchpad</h3>
+                <p className="text-xs sm:text-sm">Tamil Nadu developers can showcase their products, get initial testers, and collaborate with like-minded makers.</p>
               </div>
               <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
-                <h3 className="font-heading font-bold text-[#08090c] mb-1">Enterprise-Grade Security</h3>
-                <p className="text-xs sm:text-sm">AES-256-GCM encryption, memory-safe compiled runtimes, and air-gapped zero-telemetry architecture.</p>
+                <h3 className="font-heading font-bold text-[#08090c] mb-1">Local-First &amp; Zero Telemetry</h3>
+                <p className="text-xs sm:text-sm">All 20 community applications operate on-device by default — championing user privacy and offline independence.</p>
               </div>
               <div className="p-4 rounded-2xl bg-[#F4FBF7] border border-[#A7F3D0]">
-                <h3 className="font-heading font-bold text-[#08090c] mb-1">AI-Native Engineering</h3>
-                <p className="text-xs sm:text-sm">Multi-agent AI pipelines, natural language SQL, and local LLM inference built into the ecosystem.</p>
+                <h3 className="font-heading font-bold text-[#08090c] mb-1">Open-Source Ecosystem</h3>
+                <p className="text-xs sm:text-sm">5 published libraries on npm &amp; PyPI, freely available for developers worldwide to study, fork, and build upon.</p>
               </div>
             </div>
-            <p className="font-mono text-xs text-slate-500 mt-6 pt-4 border-t border-[#A7F3D0]">
-              Enterprise licensing and custom integrations available for all 20 products. Contact us at enterprise@junglans.io
-            </p>
+            <div className="font-mono text-xs text-emerald-700 mt-6 pt-4 border-t border-[#A7F3D0] flex items-center justify-between">
+              <span>Connect with our builders &amp; creators:</span>
+              <a href="#share-project" className="font-bold underline text-[#059669]">Share Project ↗</a>
+            </div>
           </div>
         </div>
       </section>
@@ -404,16 +414,20 @@ export default function HomePage() {
       <div className="py-4 sm:py-5 border-b border-[#A7F3D0]/60 bg-white mb-12 sm:mb-16 overflow-hidden shadow-sm">
         <div className="marquee">
           <div className="marquee-content font-heading text-lg sm:text-2xl font-bold text-[#059669]/30 tracking-wider">
-            <span>JUNGLANS SOLUTIONS</span> <span>/</span>
-            <span>ENTERPRISE PRODUCTS</span> <span>/</span>
+            <span>TAMIL NADU TECH COMMUNITY</span> <span>/</span>
+            <span>KNOWLEDGE SHARING</span> <span>/</span>
+            <span>PRODUCT SHARING</span> <span>/</span>
+            <span>SHARE YOUR PROJECTS</span> <span>/</span>
             <span>LOCAL-FIRST ARCHITECTURE</span> <span>/</span>
-            <span>ZERO-TRUST SECURITY</span> <span>/</span>
+            <span>OPEN ECOSYSTEM</span> <span>/</span>
           </div>
           <div className="marquee-content font-heading text-lg sm:text-2xl font-bold text-[#059669]/30 tracking-wider" aria-hidden="true">
-            <span>JUNGLANS SOLUTIONS</span> <span>/</span>
-            <span>ENTERPRISE PRODUCTS</span> <span>/</span>
+            <span>TAMIL NADU TECH COMMUNITY</span> <span>/</span>
+            <span>KNOWLEDGE SHARING</span> <span>/</span>
+            <span>PRODUCT SHARING</span> <span>/</span>
+            <span>SHARE YOUR PROJECTS</span> <span>/</span>
             <span>LOCAL-FIRST ARCHITECTURE</span> <span>/</span>
-            <span>ZERO-TRUST SECURITY</span> <span>/</span>
+            <span>OPEN ECOSYSTEM</span> <span>/</span>
           </div>
         </div>
       </div>
@@ -615,18 +629,18 @@ export default function HomePage() {
                           onClick={() => setStageScanActive(!stageScanActive)}
                           className="px-3.5 py-1.5 bg-[#10B981] hover:bg-[#059669] text-white text-xs rounded-lg transition cursor-pointer font-bold shadow-md hover:scale-105 active:scale-95 w-full sm:w-auto"
                         >
-                          {stageScanActive ? 'Stop Scanner' : '▶ Trigger Deep Scan'}
+                          {stageScanActive ? 'Stop Scanner' : 'Trigger Deep Scan'}
                         </button>
                       </div>
                       <div className="space-y-2 text-slate-700 text-xs">
                         <div className="flex flex-col sm:flex-row justify-between p-2.5 bg-white rounded-xl border border-[#E2E8F0] gap-1">
-                          <span>📁 /src/core/services</span>
+                          <span className="font-mono">/src/core/services</span>
                           <span className={stageScanActive ? "text-[#10B981] font-bold animate-pulse" : "text-[#10B981] font-bold"}>
                             {stageScanActive ? 'SCANNING 4,832 LOC...' : '4,832 LOC VERIFIED'}
                           </span>
                         </div>
                         <div className="flex justify-between p-2.5 bg-white rounded-xl border border-[#E2E8F0]">
-                          <span>📄 HealthCheck.ts</span>
+                          <span className="font-mono">HealthCheck.ts</span>
                           <span className="text-[#10B981] font-bold">100% HEALTH SCORE</span>
                         </div>
                       </div>
@@ -1388,21 +1402,21 @@ export default function HomePage() {
       {/* FAQ Section (SEO & GEO) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
         <FaqSection
-          heading="Junglans Solutions — Frequently Asked Questions"
-          intro="Answers to the most common questions about Junglans Solutions, our local-first architecture, enterprise products, and deployment options."
+          heading="Junglans — Frequently Asked Questions"
+          intro="Answers to common questions about Junglans, our Tamil Nadu tech community, how to share your projects and ideas, and our local-first software ecosystem."
           items={[
-            { q: 'What is Junglans Solutions?', a: 'Junglans Solutions is a software company building a 20-product ecosystem of local-first enterprise applications — AI developer tools, encrypted communication, data infrastructure, finance, and productivity software engineered for privacy, performance, and zero cloud telemetry.' },
+            { q: 'What is Junglans?', a: 'Junglans is not a traditional company — it is an open tech community to build the tech community in Tamil Nadu for better knowledge sharing and product sharing. We build and maintain a 20-product ecosystem of local-first software, open-source libraries, and an open stage for builders across Tamil Nadu.' },
+            { q: 'Can I be part of Junglans and share my project or ideas?', a: 'Yes, absolutely! You can also be part of Junglans and share your projects and ideas through our community submission stage. Whether you are building an AI tool, a web app, a mobile utility, or an open-source library, you can showcase your work, receive feedback, and collaborate with creators across Tamil Nadu.' },
             { q: 'Are Junglans products cloud-based?', a: 'No. Every Junglans product operates on-device by default with a local-first architecture. Cloud sync is optional, end-to-end encrypted, and never includes telemetry or logging.' },
             { q: 'Is JunglansChat end-to-end encrypted?', a: 'Yes. JunglansChat uses a zero-knowledge security protocol that encrypts direct messages, team channels, document transfers, and video calls end-to-end.' },
             { q: 'What is TalkToDB?', a: 'TalkToDB is a natural language SQL assistant that lets anyone query enterprise databases with plain English or voice commands, converting questions into SQL, charts, and spoken recaps automatically.' },
-            { q: 'How does local-first architecture work?', a: 'Local-first means all processing, storage, and analysis happens on the user\'s device. Compiled Rust and C++ binaries execute natively with zero latency and zero mandatory network calls, keeping sensitive data under your control.' },
-            { q: 'Do you offer enterprise licensing in India?', a: 'Yes. Junglans Solutions provides enterprise licensing for all 20 products, team onboarding, and custom feature integrations for organizations globally, including India. Contact enterprise@junglans.io for a pilot.' }
+            { q: 'How does local-first architecture work?', a: 'Local-first means all processing, storage, and analysis happens on the user\'s device. Compiled Rust and C++ binaries execute natively with zero latency and zero mandatory network calls, keeping sensitive data under your control.' }
           ]}
         />
       </div>
 
       {/* Enterprise Deployment CTA (SEC_04) */}
-      <section id="enterprise" className="relative max-w-5xl mx-auto px-4 sm:px-6 md:px-12 py-16 sm:py-24 text-center">
+      <section id="enterprise" className="relative max-w-5xl mx-auto px-4 sm:px-6 md:px-12 py-16 sm:py-20 text-center">
         <div className="glass-panel rounded-3xl p-8 sm:p-12 md:p-16 border border-[#A7F3D0] shadow-xl bg-white hover:border-[#10B981] transition-all duration-300">
           <div className="font-mono text-xs text-[#059669] mb-4 sm:mb-6 font-bold uppercase tracking-widest">SEC_04 // ENTERPRISE_DEPLOYMENT</div>
           <h2 className="font-heading text-3xl sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-8 tracking-tighter text-[#08090c]">
@@ -1425,6 +1439,126 @@ export default function HomePage() {
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </a>
+        </div>
+      </section>
+
+      {/* Community Project Submission Section — Very Last Section Before Footer */}
+      <section id="share-project" className="relative max-w-4xl mx-auto px-4 sm:px-6 md:px-12 pb-20 sm:pb-28">
+        <div className="glass-panel rounded-3xl p-6 sm:p-10 md:p-12 border-2 border-[#10B981]/40 shadow-xl bg-white relative overflow-hidden">
+          {/* Subtle ambient glow */}
+          <div className="absolute -top-24 -right-24 w-80 h-80 bg-[#10B981]/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 relative z-10">
+            <div className="inline-flex items-center gap-2 font-mono text-xs font-bold text-[#059669] bg-[#ECFDF5] border border-[#A7F3D0] px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-3">
+              <span className="w-2 h-2 rounded-full bg-[#10B981]"></span>
+              TAMIL NADU TECH COMMUNITY // PRODUCT &amp; KNOWLEDGE SHARING
+            </div>
+            <h2 className="font-heading text-2xl sm:text-4xl font-bold tracking-tight text-[#08090c] mb-3">
+              Share Your Project &amp; Ideas
+            </h2>
+            <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Junglans is not just a company — it is an open community to build the tech community in Tamil Nadu for better knowledge sharing and product sharing. You can also be part of Junglans: share your project, present your ideas, and collaborate with fellow developers and builders across Tamil Nadu.
+            </p>
+          </div>
+
+          {submissionSuccess ? (
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#ECFDF5] border border-[#A7F3D0] text-center relative z-10 animate-fade-in-up">
+              <div className="w-12 h-12 rounded-full bg-[#10B981] text-white flex items-center justify-center mx-auto mb-3">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <h3 className="font-heading font-bold text-lg sm:text-xl text-[#08090c] mb-1">
+                Project Submitted Successfully
+              </h3>
+              <p className="font-body text-xs sm:text-sm text-slate-600 max-w-md mx-auto mb-5">
+                Thank you, <strong className="text-[#08090c]">{submissionForm.name}</strong>. Your submission has been received by the Junglans Community. We will review your GitHub project and connect with you at <strong className="text-[#08090c]">{submissionForm.email}</strong>.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSubmissionSuccess(false);
+                  setSubmissionForm({ name: '', email: '', githubLink: '', projectTitle: '' });
+                }}
+                className="font-mono text-xs font-bold text-[#059669] bg-white border border-[#A7F3D0] px-4 py-2.5 rounded-xl hover:bg-[#ECFDF5] transition cursor-pointer"
+              >
+                Submit Another Project
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleProjectSubmit} className="space-y-4 sm:space-y-5 max-w-xl mx-auto relative z-10">
+              <div>
+                <label className="block font-mono text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Name <span className="text-[#10B981]">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={submissionForm.name}
+                  onChange={(e) => setSubmissionForm({ ...submissionForm, name: e.target.value })}
+                  placeholder="e.g. Karthi / Anand"
+                  className="w-full font-body text-sm px-4 py-3 rounded-xl bg-[#F4FBF7] border border-[#A7F3D0] focus:border-[#10B981] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 transition"
+                />
+              </div>
+
+              <div>
+                <label className="block font-mono text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Email ID <span className="text-[#10B981]">*</span>
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={submissionForm.email}
+                  onChange={(e) => setSubmissionForm({ ...submissionForm, email: e.target.value })}
+                  placeholder="e.g. yourname@example.com"
+                  className="w-full font-body text-sm px-4 py-3 rounded-xl bg-[#F4FBF7] border border-[#A7F3D0] focus:border-[#10B981] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 transition"
+                />
+              </div>
+
+              <div>
+                <label className="block font-mono text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  GitHub Link <span className="text-slate-400 font-normal">(e.g. Repository or Profile)</span>
+                </label>
+                <input
+                  type="url"
+                  value={submissionForm.githubLink}
+                  onChange={(e) => setSubmissionForm({ ...submissionForm, githubLink: e.target.value })}
+                  placeholder="https://github.com/username/project"
+                  className="w-full font-body text-sm px-4 py-3 rounded-xl bg-[#F4FBF7] border border-[#A7F3D0] focus:border-[#10B981] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 transition"
+                />
+              </div>
+
+              <div>
+                <label className="block font-mono text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Project Title / Brief Idea <span className="text-slate-400 font-normal">(Optional)</span>
+                </label>
+                <input
+                  type="text"
+                  value={submissionForm.projectTitle}
+                  onChange={(e) => setSubmissionForm({ ...submissionForm, projectTitle: e.target.value })}
+                  placeholder="e.g. Local-First Real-time Sync for Tamil Nadu Farmers"
+                  className="w-full font-body text-sm px-4 py-3 rounded-xl bg-[#F4FBF7] border border-[#A7F3D0] focus:border-[#10B981] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 transition"
+                />
+              </div>
+
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  className="w-full font-mono text-sm bg-[#10B981] hover:bg-[#059669] text-white py-3.5 px-6 rounded-xl font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:-translate-y-0.5 duration-200 cursor-pointer"
+                >
+                  <span>Submit Project to Community</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+
+              <p className="font-mono text-[11px] text-center text-slate-500 pt-1">
+                Free &amp; Open · Built by Tamil Nadu Developers, For Tamil Nadu Developers
+              </p>
+            </form>
+          )}
         </div>
       </section>
 

@@ -208,8 +208,11 @@ export default function BlogsPage() {
 
         {filteredBlogs.length === 0 ? (
           <div className="bg-white border-2 border-dashed border-[#A7F3D0] rounded-2xl p-12 text-center my-8">
-            <div className="w-16 h-16 rounded-full bg-[#ECFDF5] text-[#10B981] mx-auto flex items-center justify-center mb-4 text-2xl font-bold">
-              🔍
+            <div className="w-16 h-16 rounded-full bg-[#ECFDF5] text-[#10B981] mx-auto flex items-center justify-center mb-4 border border-[#A7F3D0]">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
             </div>
             <h3 className="font-heading text-xl font-bold text-[#08090c] mb-2">No matching articles found</h3>
             <p className="font-body text-slate-500 text-sm max-w-md mx-auto mb-6">

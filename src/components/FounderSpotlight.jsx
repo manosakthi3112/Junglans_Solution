@@ -114,7 +114,7 @@ export default function FounderSpotlight() {
               {/* Highlight Domain Pill */}
               <div className="mt-3 mb-4">
                 <span className="font-mono text-[11px] bg-[#F4FBF7] text-[#059669] px-3 py-1.5 rounded-lg border border-[#A7F3D0] font-bold inline-block">
-                  ⚡ {founder.domain}
+                  {founder.domain}
                 </span>
               </div>
             </div>
@@ -125,7 +125,7 @@ export default function FounderSpotlight() {
                 href={`mailto:${founder.email}`}
                 className="hover:text-[#10B981] transition flex items-center gap-1.5"
               >
-                ✉ Email
+                Email ↗
               </a>
 
               {founder.ascendiaEduUrl ? (

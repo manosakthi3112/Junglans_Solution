@@ -11,7 +11,7 @@ export default function Footer() {
             <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#ECFDF5] border-2 border-[#A7F3D0] rounded-2xl p-1.5 flex items-center justify-center shadow-lg shadow-emerald-500/15 overflow-hidden flex-shrink-0">
               <img
                 src="/squirrel_logo-128.webp"
-                alt="Junglans Squirrel Logo — Enterprise Software Ecosystem"
+                alt="Junglans — Tamil Nadu Tech Community Logo"
                 width="64"
                 height="64"
                 loading="lazy"
@@ -22,7 +22,7 @@ export default function Footer() {
             <span className="font-heading font-bold text-xl sm:text-2xl text-[#08090c]">Junglans Solutions</span>
           </div>
           <p className="font-body text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-            Pioneering local-first software architecture, sovereign private LLMs, and zero-telemetry enterprise systems.
+            An open tech community in Tamil Nadu dedicated to knowledge sharing, open product sharing, and empowering builders to ship ambitious software.
           </p>
           <div className="font-mono text-[11px] text-slate-600 space-y-1 mb-4">
             <div className="flex items-center gap-1.5 font-bold text-slate-800">
@@ -30,32 +30,32 @@ export default function Footer() {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
-              <span>Coimbatore, Tamil Nadu, India</span>
+              <span>Coimbatore &amp; Across Tamil Nadu, India</span>
             </div>
-            <div className="text-[10px] text-slate-500">Serving global enterprises & dev teams</div>
+            <div className="text-[10px] text-emerald-700 font-semibold">Open to all students, developers &amp; founders</div>
           </div>
           <div className="flex items-center gap-3 font-mono text-[11px] sm:text-xs text-[#059669]">
             <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
-            <span className="font-bold">5 LIBRARIES ON NPM & PYPI</span>
+            <span className="font-bold">5 OPEN SOURCE LIBRARIES // 20 APPS</span>
           </div>
         </div>
 
         <div>
           <div className="font-mono text-xs text-[#059669] uppercase tracking-widest mb-4 font-bold flex items-center gap-1.5">
-            <span>Core Services</span>
-            <span className="text-[9px] bg-[#ECFDF5] text-[#10B981] border border-[#A7F3D0] px-1 rounded">PILLARS</span>
+            <span>Core Pillars</span>
+            <span className="text-[9px] bg-[#ECFDF5] text-[#10B981] border border-[#A7F3D0] px-1 rounded">TECH</span>
           </div>
           <ul className="space-y-2 text-xs sm:text-sm font-medium">
             <li><Link to="/ai-software-development" className="text-slate-600 hover:text-[#10B981] transition flex items-center justify-between"><span>AI Software Development</span><span className="text-[10px] font-mono text-[#059669]">IN</span></Link></li>
             <li><Link to="/enterprise-ai" className="text-slate-600 hover:text-[#10B981] transition flex items-center justify-between"><span>Enterprise AI Solutions</span><span className="text-[10px] font-mono text-[#059669]">LLM</span></Link></li>
             <li><Link to="/local-first-software" className="text-slate-600 hover:text-[#10B981] transition flex items-center justify-between"><span>Local-First Software</span><span className="text-[10px] font-mono text-[#059669]">WAL</span></Link></li>
-            <li className="pt-2"><Link to="/contact" className="text-[#10B981] font-bold hover:underline">Architecture Consultation ↗</Link></li>
+            <li className="pt-2"><a href="/#share-project" className="text-[#10B981] font-bold hover:underline">Submit Your Project ↗</a></li>
           </ul>
         </div>
 
         <div>
           <div className="font-mono text-xs text-[#059669] uppercase tracking-widest mb-4 font-bold flex items-center gap-1.5">
-            <span>Developer Packages</span>
+            <span>Open Packages</span>
             <span className="text-[9px] bg-[#ECFDF5] text-[#10B981] border border-[#A7F3D0] px-1 rounded">NPM & PYPI</span>
           </div>
           <ul className="space-y-2 text-xs sm:text-sm font-medium">
@@ -69,7 +69,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <div className="font-mono text-xs text-[#059669] uppercase tracking-widest mb-4 font-bold">Flagship Products</div>
+          <div className="font-mono text-xs text-[#059669] uppercase tracking-widest mb-4 font-bold">Community Showcase</div>
           <ul className="space-y-2 text-xs sm:text-sm font-medium">
             <li><Link to="/project/project-0" className="text-slate-600 hover:text-[#10B981] transition">Junglans Project Manager</Link></li>
             <li><Link to="/project/project-1" className="text-slate-600 hover:text-[#10B981] transition">Jung AI Sidecar</Link></li>
@@ -80,20 +80,20 @@ export default function Footer() {
         </div>
 
         <div>
-          <div className="font-mono text-xs text-[#059669] uppercase tracking-widest mb-4 font-bold">Company & Info</div>
+          <div className="font-mono text-xs text-[#059669] uppercase tracking-widest mb-4 font-bold">Community & Builders</div>
           <ul className="space-y-2 text-xs sm:text-sm font-medium">
-            <li><Link to="/packages" className="text-[#10B981] font-bold hover:underline">Packages & Docs ↗</Link></li>
-            <li><Link to="/blogs" className="text-[#10B981] font-bold hover:underline">Engineering Blogs ({blogsData.length || 15}) ↗</Link></li>
-            <li><Link to="/team" className="text-slate-600 hover:text-[#10B981] transition font-bold">Our Team Page ↗</Link></li>
-            <li><Link to="/contact" className="text-slate-600 hover:text-[#10B981] transition font-bold">Contact Sales ↗</Link></li>
+            <li><a href="/#share-project" className="text-[#10B981] font-bold hover:underline">Share Your Project / Ideas ↗</a></li>
+            <li><a href="/#community" className="text-slate-600 hover:text-[#10B981] transition font-bold">About TN Tech Community ↗</a></li>
+            <li><Link to="/team" className="text-slate-600 hover:text-[#10B981] transition font-bold">Our Builders & Team ↗</Link></li>
+            <li><Link to="/blogs" className="text-[#10B981] font-bold hover:underline">Knowledge Blogs ({blogsData.length || 15}) ↗</Link></li>
+            <li><Link to="/contact" className="text-slate-600 hover:text-[#10B981] transition">Connect With Us</Link></li>
             <li><Link to="/privacy" className="text-slate-600 hover:text-[#10B981] transition">Privacy Policy</Link></li>
-            <li><Link to="/terms" className="text-slate-600 hover:text-[#10B981] transition">Terms of Service</Link></li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-[#A7F3D0]/40 py-6 sm:py-8 text-center font-mono text-[10px] sm:text-xs text-slate-500 bg-[#ECFDF5]/50 px-4">
-        © 2026 JUNGLANS_SOLUTIONS // ALL_RIGHTS_RESERVED // COIMBATORE, TAMIL NADU, INDIA
+        © 2026 JUNGLANS // TAMIL NADU TECH COMMUNITY // FOR BETTER KNOWLEDGE & PRODUCT SHARING
       </div>
     </footer>
   );
