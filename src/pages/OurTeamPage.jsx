@@ -98,16 +98,44 @@ export default function OurTeamPage() {
     },
     {
       id: 'member-7',
-      name: 'Guruprasath C M',
-      role: 'Mobile App Developer',
-      department: 'engineering',
-      badge: 'MOBILE DEV',
-      avatar: 'GC',
-      color: '#059669',
-      bio: 'Mobile Application Developer with expertise in cross-platform development, native device integrations, state management, and high-performance mobile UI.',
-      skills: ['Flutter', 'React Native', 'Android / iOS', 'Dart', 'State Management', 'Mobile UI/UX'],
-      email: 'guruprasath@junglans.io',
+      name: 'Sri Sakthi Sivani',
+      role: 'HRIT Specialist',
+      department: 'operations',
+      badge: 'HRIT',
+      avatar: 'SI',
+      color: '#10B981',
+      bio: 'M.Sc in Clinical Psychology. Specializes in Human Resources Information Technology (HRIT), behavioral dynamics, workplace wellness, talent development, and people analytics.',
+      skills: ['HR Information Systems (HRIT)', 'Clinical Psychology', 'People Analytics', 'Talent Development', 'Organizational Psychology', 'Workplace Wellness'],
+      email: 'srisakthisivani@junglans.io',
       linkedin: 'https://linkedin.com'
+    },
+    {
+      id: 'member-aishwarya',
+      name: 'Aishwarya S',
+      role: 'AI & Machine Learning Engineer',
+      department: 'ai',
+      badge: 'ML & VISION',
+      avatar: 'AS',
+      color: '#059669',
+      bio: 'M.Tech in Artificial Intelligence (Amrita Vishwa Vidyapeetham) & B.Tech in AI & Data Science (PACET). Specialist in deep learning, computer vision, video stream analytics, and predictive modeling.',
+      skills: ['Python / C', 'PyTorch / TensorFlow', 'Computer Vision', 'Deep Learning', 'Predictive Modeling', 'OpenCV / Scikit-learn'],
+      email: 'aishusenthilkumar09@gmail.com',
+      linkedin: 'https://linkedin.com',
+      github: 'https://github.com'
+    },
+    {
+      id: 'member-siva',
+      name: 'Siva S',
+      role: 'AI & Automation Engineer',
+      department: 'ai',
+      badge: 'DATA & AUTOMATION',
+      avatar: 'SV',
+      color: '#10B981',
+      bio: 'B.Tech in Artificial Intelligence & Data Science (PACET). Specialist in building automated ETL pipelines, Claude AI LLM workflows, REST API integrations, and Power BI interactive analytics dashboards.',
+      skills: ['Python & Automation', 'ETL Pipelines', 'Claude AI / LLMs', 'Power BI / SQL', 'FastAPI', 'AWS / CI/CD'],
+      email: 'sivavpy2005@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/siva-sankaravel-400145323',
+      github: 'https://github.com/Siva-S-05'
     },
     {
       id: 'member-8',
@@ -228,8 +256,9 @@ export default function OurTeamPage() {
               { id: 'all', label: 'All Team Members' },
               { id: 'leadership', label: 'Leadership' },
               { id: 'ai', label: 'AI & Data Science' },
-              { id: 'engineering', label: 'Engineering & Mobile' },
+              { id: 'engineering', label: 'Engineering' },
               { id: 'product', label: 'UI/UX & Product' },
+              { id: 'operations', label: 'HRIT & Operations' },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -308,25 +337,37 @@ export default function OurTeamPage() {
                   </svg>
                   Email
                 </a>
-                {member.ascendiaEduUrl ? (
-                  <a
-                    href={member.ascendiaEduUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[#10B981] hover:underline flex items-center gap-1"
-                  >
-                    AscendiaEdu ↗
-                  </a>
-                ) : (
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-slate-500 hover:text-[#10B981] transition"
-                  >
-                    LinkedIn ↗
-                  </a>
-                )}
+                <div className="flex items-center gap-3">
+                  {member.github && (
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-slate-500 hover:text-[#10B981] transition"
+                    >
+                      GitHub ↗
+                    </a>
+                  )}
+                  {member.ascendiaEduUrl ? (
+                    <a
+                      href={member.ascendiaEduUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#10B981] hover:underline flex items-center gap-1"
+                    >
+                      AscendiaEdu ↗
+                    </a>
+                  ) : (
+                    <a
+                      href={member.linkedin || 'https://linkedin.com'}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-slate-500 hover:text-[#10B981] transition"
+                    >
+                      LinkedIn ↗
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}

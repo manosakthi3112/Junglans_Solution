@@ -36,11 +36,23 @@ const AUTHORS = {
     avatar: "VM",
     color: "#10B981"
   },
-  GURUPRASATH: {
-    name: "Guruprasath C M",
-    role: "Mobile App Developer",
-    avatar: "GC",
+  AISHWARYA: {
+    name: "Aishwarya S",
+    role: "AI & ML Engineer",
+    avatar: "AS",
     color: "#059669"
+  },
+  SIVA: {
+    name: "Siva S",
+    role: "AI & Automation Engineer",
+    avatar: "SV",
+    color: "#10B981"
+  },
+  SIVANI: {
+    name: "Sri Sakthi Sivani",
+    role: "HRIT Specialist",
+    avatar: "SI",
+    color: "#10B981"
   },
   AKSHAYA: {
     name: "Akshaya Keerthi A V",
