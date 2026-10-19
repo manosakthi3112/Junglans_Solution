@@ -59,7 +59,7 @@ export default function BlogsPage() {
       <div className="absolute top-[600px] right-1/4 w-[450px] h-[450px] bg-[#34D399]/15 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '2.5s' }}></div>
 
       {/* Hero Header Section (Center Aligned) */}
-      <section className="relative px-4 sm:px-6 md:px-12 pt-10 sm:pt-14 md:pt-16 pb-8 sm:pb-12 border-b border-[#A7F3D0]/60">
+      <section className="relative px-4 sm:px-6 md:px-12 pt-5 sm:pt-8 md:pt-10 pb-6 sm:pb-8 border-b border-[#A7F3D0]/60">
         <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
           
           <div className="inline-flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs text-[#08090c] bg-white border border-[#A7F3D0] px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm max-w-full mx-auto">

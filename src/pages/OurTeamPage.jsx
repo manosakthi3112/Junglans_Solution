@@ -176,7 +176,7 @@ export default function OurTeamPage() {
       <div className="absolute top-20 left-1/3 w-[500px] sm:w-[650px] h-[500px] sm:h-[650px] bg-[#10B981]/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow"></div>
       <div className="absolute top-[600px] right-1/4 w-[400px] sm:w-[550px] h-[400px] sm:h-[550px] bg-[#34D399]/20 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '2s' }}></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-10 sm:py-16 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-2 sm:px-4 md:px-6 py-6 sm:py-10 relative z-10">
         
         {/* Navigation Breadcrumb */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-12 pb-4 border-b border-[#A7F3D0]/60">
@@ -276,11 +276,11 @@ export default function OurTeamPage() {
         </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-12">
           {filteredMembers.map((member) => (
             <div
               key={member.id}
-              className="glow-card p-6 sm:p-7 rounded-3xl bg-white border border-[#A7F3D0] shadow-lg flex flex-col justify-between hover:border-[#10B981] transition-all duration-300 group"
+              className="glow-card p-4 sm:p-5 rounded-2xl bg-white border border-[#A7F3D0] shadow-lg flex flex-col justify-between hover:border-[#10B981] transition-all duration-300 group"
             >
               <div>
                 {/* Header Badge & Avatar */}
@@ -374,7 +374,7 @@ export default function OurTeamPage() {
         </div>
 
         {/* Culture & Hiring CTA Section */}
-        <div className="glass-panel rounded-3xl p-8 sm:p-12 bg-white border border-[#A7F3D0] shadow-xl text-center relative overflow-hidden mb-12">
+        <div className="glass-panel rounded-3xl p-6 sm:p-8 bg-white border border-[#A7F3D0] shadow-xl text-center relative overflow-hidden mb-10">
           <div className="max-w-3xl mx-auto relative z-10">
             <span className="font-mono text-xs text-[#059669] font-bold uppercase tracking-widest bg-[#ECFDF5] px-3.5 py-1.5 rounded-full border border-[#A7F3D0] inline-block mb-4">
               JOIN OUR ENGINEERING TEAM

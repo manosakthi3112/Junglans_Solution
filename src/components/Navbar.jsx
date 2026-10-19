@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { blogsData } from '../data/blogsData';
 
 export default function Navbar() {
   const location = useLocation();
@@ -290,7 +291,7 @@ export default function Navbar() {
             }`}
           >
             <span>Blogs</span>
-            <span className="text-[9px] bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-1.5 py-0.5 rounded font-bold">25</span>
+            <span className="text-[9px] bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-1.5 py-0.5 rounded font-bold">{blogsData.length}</span>
           </Link>
 
           {/* 5. Community Dropdown (Updated from Company) */}
@@ -516,7 +517,7 @@ export default function Navbar() {
               }`}
             >
               <span>Engineering & AI Blogs</span>
-              <span className="text-[10px] bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-2 py-0.5 rounded font-bold">25 ARTICLES</span>
+              <span className="text-[10px] bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-2 py-0.5 rounded font-bold">{blogsData.length} ARTICLES</span>
             </Link>
 
             {/* 5. Community & Builders (Updated from Company) */}

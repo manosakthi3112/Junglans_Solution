@@ -37,7 +37,7 @@ export default function FounderSpotlight() {
   ];
 
   return (
-    <div id="founder" className="glass-panel rounded-3xl p-5 sm:p-7 bg-white border border-[#A7F3D0] shadow-xl my-6 sm:my-10 relative overflow-hidden transition-all duration-300">
+    <div id="founder" className="glass-panel rounded-3xl p-4 sm:p-6 bg-white border border-[#A7F3D0] shadow-xl my-4 sm:my-6 relative overflow-hidden transition-all duration-300">
       
       {/* Background Glow */}
       <div className="absolute -top-24 -right-24 w-72 sm:w-96 h-72 sm:h-96 bg-[#10B981]/10 rounded-full blur-[90px] pointer-events-none"></div>
@@ -59,11 +59,11 @@ export default function FounderSpotlight() {
       </div>
 
       {/* Founder Cards Grid (2 Columns: Manosakthi & Sri Kanish) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 relative z-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
         {founders.map((founder) => (
           <div
             key={founder.id}
-            className="p-6 rounded-2xl bg-white border border-[#A7F3D0] shadow-md hover:border-[#10B981] transition-all duration-300 flex flex-col justify-between group"
+            className="p-4 sm:p-5 rounded-2xl bg-white border border-[#A7F3D0] shadow-md hover:border-[#10B981] transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
               {/* Header Badge & Initial Avatar */}

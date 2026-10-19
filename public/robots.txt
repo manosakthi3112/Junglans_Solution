@@ -1,23 +1,38 @@
 # Junglans Solutions — robots.txt
-# IMPORTANT: Do NOT use "Disallow: /" here. That blocks ALL crawling and prevents Google from discovering pages.
-# robots.txt controls CRAWLING only. To prevent a URL from appearing in search, use <meta name="robots" content="noindex"> or X-Robots-Tag: noindex (per Google docs).
-# Sitemap must use absolute canonical https://www.junglans.in URLs.
+# IMPORTANT: Do NOT use "Disallow: /" here. That blocks ALL crawling and prevents search engines & AI engines from discovering pages.
+# robots.txt controls CRAWLING only.
+# Sitemap uses absolute canonical https://www.junglans.in URLs.
 
 User-agent: *
 Allow: /
 
-# Search Engine Crawlers
+# General Search Engine Crawlers
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-# AI & Generative Search Crawlers (GEO Optimization)
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# AI, Search Engine & Generative Retrieval Crawlers (GEO / Answer Engine Optimization)
 User-agent: GPTBot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: ClaudeBot
+Allow: /
+
+User-agent: Anthropic-AI
 Allow: /
 
 User-agent: PerplexityBot
@@ -26,23 +41,29 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Applebot
+Allow: /
+
 User-agent: Applebot-Extended
 Allow: /
 
-# Optional: additional AI crawlers
-User-agent: CCBot
-Allow: /
-
-User-agent: Anthropic-AI
+User-agent: Meta-ExternalAgent
 Allow: /
 
 User-agent: Cohere-AI
 Allow: /
 
-# Disallow no-value / internal paths only (never disallow / )
+User-agent: CCBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+# Disallow internal assets or system endpoints only (never disallow /)
 Disallow: /cdn-cgi/
 
 Host: https://www.junglans.in
 
-# XML Sitemap — keep exactly one absolute URL with www canonical
+# Canonical XML Sitemap
 Sitemap: https://www.junglans.in/sitemap.xml
+

@@ -339,12 +339,32 @@ export default function BlogDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [copiedLink, setCopiedLink] = useState(false);
+  const [readingProgress, setReadingProgress] = useState(0);
 
   const blog = blogsData.find((b) => b.slug === slug || b.id === slug);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [slug]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setReadingProgress(Math.min(100, Math.max(0, progress)));
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToContent = () => {
+    const el = document.getElementById('article-content');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   if (!blog) {
     return (
@@ -425,6 +445,14 @@ export default function BlogDetailPage() {
 
   return (
     <div className="min-h-screen bg-[#F4FBF7] text-[#08090c] bg-precision-grid relative overflow-hidden pb-24">
+      {/* Real-Time Reading Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 h-1 bg-transparent z-50 pointer-events-none">
+        <div
+          className="h-full bg-gradient-to-r from-[#10B981] via-[#059669] to-[#34D399] transition-all duration-150 ease-out shadow-sm shadow-[#10B981]/50"
+          style={{ width: `${readingProgress}%` }}
+        />
+      </div>
+
       <Seo
         title={blog.title}
         description={blog.subtitle}
@@ -455,23 +483,39 @@ export default function BlogDetailPage() {
           mainEntityOfPage: `${SITE_URL}/blog/${blog.slug}`
         }}
       />
+
       {/* Background Ambient Glows */}
-      <div className="absolute top-10 left-1/4 w-[600px] h-[600px] bg-[#10B981]/10 rounded-full blur-[150px] pointer-events-none"></div>
+      <div className="absolute top-10 left-1/4 w-[700px] h-[700px] bg-[#10B981]/10 rounded-full blur-[160px] pointer-events-none"></div>
+      <div className="absolute top-96 right-10 w-[500px] h-[500px] bg-[#34D399]/10 rounded-full blur-[140px] pointer-events-none"></div>
 
-      {/* Top Header / Breadcrumb Bar */}
-      <section className="px-4 sm:px-6 md:px-12 pt-8 pb-6 border-b border-[#A7F3D0]/60 bg-white/70 backdrop-blur-md sticky top-[65px] z-30 shadow-sm">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <button
-            onClick={() => navigate('/blogs')}
-            className="font-mono text-xs text-[#059669] font-bold hover:text-[#10B981] transition flex items-center gap-2 cursor-pointer bg-[#ECFDF5] border border-[#A7F3D0] px-3.5 py-1.5 rounded-lg"
+      {/* Article Hero Section */}
+      <section className="px-4 sm:px-6 md:px-12 pt-5 sm:pt-7 pb-8 max-w-7xl mx-auto">
+        
+        {/* Subtle Top Breadcrumbs & Actions Row (Non-Sticky, Natural Flow) */}
+        <div className="flex items-center justify-between gap-4 mb-4 sm:mb-5">
+          <Link
+            to="/blogs"
+            className="font-mono text-xs text-[#059669] font-bold hover:text-[#10B981] transition inline-flex items-center gap-2 group bg-white/90 hover:bg-[#ECFDF5] border border-[#A7F3D0] px-3.5 py-1.5 rounded-xl shadow-2xs"
           >
-            ← All Articles
-          </button>
+            <span className="group-hover:-translate-x-1 transition-transform">←</span>
+            <span>All Articles</span>
+            <span className="text-[10px] bg-[#ECFDF5] text-[#059669] px-1.5 py-0.5 rounded-md font-mono border border-[#A7F3D0]/70 ml-0.5">
+              {blogsData.length}
+            </span>
+          </Link>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <span className="font-mono text-xs text-slate-500 hidden sm:inline-flex items-center gap-1.5 bg-white/90 border border-slate-200/80 px-3 py-1.5 rounded-xl shadow-2xs">
+              <svg className="w-3.5 h-3.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" strokeWidth="2"></circle>
+                <polyline points="12 6 12 12 16 14" strokeWidth="2"></polyline>
+              </svg>
+              <span>{blog.readTime}</span>
+            </span>
+
             <button
               onClick={handleShare}
-              className="font-mono text-xs bg-white text-slate-700 border border-[#A7F3D0] px-3 py-1.5 rounded-lg font-semibold hover:bg-[#ECFDF5] hover:text-[#059669] transition cursor-pointer flex items-center gap-1.5"
+              className="font-mono text-xs bg-white text-slate-700 hover:text-[#059669] border border-[#A7F3D0] hover:border-[#10B981] px-3.5 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 shadow-2xs hover:bg-[#ECFDF5]"
             >
               {copiedLink ? (
                 <>
@@ -482,7 +526,7 @@ export default function BlogDetailPage() {
                 </>
               ) : (
                 <>
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 100-5.368 3 3 0 000 5.368zm0 7.158a3 3 0 100-5.368 3 3 0 000 5.368z" />
                   </svg>
                   <span>Share Article</span>
@@ -491,43 +535,172 @@ export default function BlogDetailPage() {
             </button>
           </div>
         </div>
-      </section>
 
-      {/* Main Article Hero */}
-      <section className="px-4 sm:px-6 md:px-12 pt-10 pb-8 max-w-5xl mx-auto">
-        <div className="flex items-center gap-3 mb-4 flex-wrap">
-          <span className="font-mono text-xs bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-3 py-1 rounded-full font-bold">
-            {blog.category}
-          </span>
-          <span className="font-mono text-xs text-slate-400">{blog.readTime}</span>
-          <span className="font-mono text-xs text-slate-400">• Published {blog.publishDate}</span>
-        </div>
+        {/* Grand Hero Showcase Card */}
+        <div className="relative rounded-3xl sm:rounded-[32px] overflow-hidden bg-gradient-to-br from-white/95 via-white/95 to-[#F0FDF4]/90 backdrop-blur-2xl border-2 border-[#A7F3D0] shadow-[0_20px_50px_-15px_rgba(16,185,129,0.12)] p-6 sm:p-10 md:p-12 transition-all">
+          
+          {/* Subtle Top Glowing Laser */}
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#10B981] to-transparent"></div>
+          
+          {/* Ambient Inner Glow Orbs */}
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#10B981]/12 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold text-[#08090c] leading-[1.05] tracking-tight mb-6">
-          {blog.title}
-        </h1>
+          {/* Top Meta & Badges Strip */}
+          <div className="relative z-10 flex items-center justify-between flex-wrap gap-3 mb-5">
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] shadow-2xs">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span>{blog.category}</span>
+              </span>
 
-        <p className="font-body text-slate-600 text-base sm:text-xl leading-relaxed mb-8 border-l-4 border-[#10B981] pl-4">
-          {blog.subtitle}
-        </p>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-bold bg-white text-slate-700 border border-slate-200 shadow-2xs">
+                <svg className="w-3.5 h-3.5 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>PEER-REVIEWED SPEC</span>
+              </span>
 
-        {/* Author Info Bar */}
-        <div className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 bg-white border border-[#A7F3D0] rounded-2xl shadow-sm mb-8 sm:mb-10 max-w-xl">
-          <div
-            className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl text-white font-heading font-bold text-base sm:text-lg flex items-center justify-center shadow-md flex-shrink-0"
-            style={{ backgroundColor: blog.author?.color || '#10B981' }}
-          >
-            {blog.author?.avatar || 'JS'}
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-slate-500 bg-slate-50 border border-slate-200/80">
+                <span>SPEC-{(blog.id || '').toUpperCase()}</span>
+              </span>
+            </div>
+
+            <div className="inline-flex items-center gap-3 text-xs font-mono text-slate-500">
+              <span className="flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" strokeWidth="2"></circle>
+                  <polyline points="12 6 12 12 16 14" strokeWidth="2"></polyline>
+                </svg>
+                <span>{blog.readTime}</span>
+              </span>
+              <span className="text-slate-300">•</span>
+              <span className="flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" strokeWidth="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6" strokeWidth="2"></line>
+                  <line x1="8" y1="2" x2="8" y2="6" strokeWidth="2"></line>
+                  <line x1="3" y1="10" x2="21" y2="10" strokeWidth="2"></line>
+                </svg>
+                <span>Published {blog.publishDate}</span>
+              </span>
+            </div>
           </div>
-          <div className="min-w-0">
-            <div className="font-heading font-bold text-sm sm:text-base text-[#08090c] truncate">{blog.author?.name || 'Junglans Team'}</div>
-            <div className="font-mono text-xs text-[#059669] font-medium truncate">{blog.author?.role || 'Engineer'}</div>
+
+          {/* Main Title */}
+          <h1 className="relative z-10 font-heading text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-[#08090c] leading-[1.12] tracking-tight mb-6 mt-3">
+            {blog.title}
+          </h1>
+
+          {/* Executive Abstract & Architectural Scope Callout */}
+          <div className="relative z-10 overflow-hidden rounded-2xl bg-gradient-to-r from-[#ECFDF5] via-white to-[#F0FDF4]/70 border border-[#A7F3D0] p-5 sm:p-6 mb-6 shadow-xs">
+            <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#10B981] via-[#059669] to-[#34D399]"></div>
+            <div className="flex items-center gap-2 mb-2 font-mono text-[11px] font-bold text-[#059669] uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+              <span>Executive Abstract & Architectural Scope</span>
+            </div>
+            <p className="font-body text-slate-700 text-base sm:text-lg leading-relaxed pl-1">
+              {blog.subtitle}
+            </p>
           </div>
+
+          {/* Tags Chips */}
+          <div className="relative z-10 flex items-center gap-2 flex-wrap mb-8">
+            <span className="font-mono text-xs text-slate-400 font-bold uppercase tracking-wider mr-1">Core Domains:</span>
+            {(blog.tags || []).map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center font-mono text-xs bg-white text-slate-700 hover:text-[#059669] hover:bg-[#ECFDF5] border border-slate-200/90 hover:border-[#A7F3D0] px-3 py-1 rounded-lg font-medium transition-all shadow-2xs"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Subtle Tech Separator */}
+          <div className="relative z-10 w-full h-px bg-gradient-to-r from-transparent via-[#A7F3D0] to-transparent mb-6"></div>
+
+          {/* Author & Editorial Trust Strip */}
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 pt-2">
+            {/* Author Profile */}
+            <div className="flex items-center gap-4">
+              <div className="relative flex-shrink-0">
+                <div
+                  className="w-14 h-14 rounded-2xl text-white font-heading font-bold text-lg flex items-center justify-center shadow-md ring-4 ring-[#ECFDF5]"
+                  style={{ backgroundColor: blog.author?.color || '#10B981' }}
+                >
+                  {blog.author?.avatar || 'JS'}
+                </div>
+                <div
+                  className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#10B981] text-white flex items-center justify-center text-[10px] font-bold ring-2 ring-white shadow-xs"
+                  title="Verified Junglans Researcher"
+                >
+                  ✓
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-heading font-bold text-base sm:text-lg text-[#08090c]">
+                    {blog.author?.name || 'Junglans Team'}
+                  </h3>
+                  <span className="inline-flex items-center gap-1 font-mono text-[10px] bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] px-2 py-0.5 rounded-full font-bold">
+                    RESEARCH AUTHOR
+                  </span>
+                </div>
+                <p className="font-mono text-xs text-[#059669] font-medium mt-0.5">
+                  {blog.author?.role || 'Lead AI Architect'}
+                </p>
+                <p className="font-body text-[11px] text-slate-500 mt-0.5 flex items-center gap-1.5">
+                  <span>Junglans Solutions</span>
+                  <span>•</span>
+                  <span>AI & Automation Engineering Group</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Actions Deck */}
+            <div className="flex items-center gap-3 flex-wrap sm:flex-nowrap">
+              <button
+                onClick={handleShare}
+                className="font-mono text-xs bg-white text-slate-800 border-2 border-[#A7F3D0] hover:border-[#10B981] px-4 py-2.5 rounded-xl font-bold hover:bg-[#ECFDF5] hover:text-[#059669] transition cursor-pointer flex items-center gap-2 shadow-sm"
+              >
+                {copiedLink ? (
+                  <>
+                    <svg className="w-4 h-4 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-[#10B981]">Link Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 100-5.368 3 3 0 000 5.368zm0 7.158a3 3 0 100-5.368 3 3 0 000 5.368z" />
+                    </svg>
+                    <span>Share Spec</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                onClick={scrollToContent}
+                className="font-mono text-xs bg-gradient-to-r from-[#10B981] to-[#059669] text-white px-5 py-2.5 rounded-xl font-bold hover:from-[#059669] hover:to-[#047857] transition shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2 group"
+              >
+                <span>Read Technical Guide</span>
+                <svg className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
         </div>
       </section>
 
       {/* Content Layout Grid (Table of Contents + Article Body) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div id="article-content" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 scroll-mt-24">
         
         {/* Sidebar Table of Contents (Desktop) */}
         <aside className="hidden lg:block lg:col-span-3">
